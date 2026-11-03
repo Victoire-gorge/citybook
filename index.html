@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Map · citybook</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bowlby+One&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Caveat:wght@500;700&family=DM+Serif+Display:ital@0;1&display=swap"
+    />
+  </head>
+  <body data-palette="green-yellow" class="page-map">
+    <nav class="topbar" data-nav></nav>
+    <main class="map-page">
+      <div id="map" class="map" role="application" aria-label="Map of Paris"></div>
+
+      <aside class="legend card taped" aria-labelledby="legend-title">
+        <div class="legend__head gingham torn">
+          <h1 id="legend-title" class="legend__title" data-title></h1>
+        </div>
+        <fieldset class="legend__layers">
+          <legend class="hand" data-i18n="map.layers"></legend>
+          <div data-layers></div>
+          <label class="toggle toggle--fav">
+            <input type="checkbox" data-favourites />
+            <span data-i18n="map.favourites"></span>
+          </label>
+        </fieldset>
+      </aside>
+
+      <article class="place-card" data-card hidden></article>
+      <p class="map-status hand" data-status data-i18n="map.loading"></p>
+    </main>
+    <script type="module" src="/src/pages/map.js"></script>
+  </body>
+</html>

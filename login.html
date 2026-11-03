@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in · citybook</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bowlby+One&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Caveat:wght@500;700&family=DM+Serif+Display:ital@0;1&display=swap"
+    />
+  </head>
+  <body data-palette="green-yellow" class="page-login">
+    <main class="login">
+      <form class="login__card card taped" data-form>
+        <div class="login__head gingham torn"><h1 data-title></h1></div>
+        <div class="login__fields">
+          <label><span data-i18n="login.email"></span><input name="email" type="email" autocomplete="username" required /></label>
+          <label><span data-i18n="login.password"></span><input name="password" type="password" autocomplete="current-password" required /></label>
+          <p class="form-error" data-error role="alert" hidden></p>
+          <button class="btn" type="submit" data-i18n="login.submit"></button>
+        </div>
+      </form>
+    </main>
+    <script type="module" src="/src/pages/login.js"></script>
+  </body>
+</html>
