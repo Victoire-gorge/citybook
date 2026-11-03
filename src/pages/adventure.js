@@ -4,7 +4,7 @@ import '../styles/adventures.css';
 import { api } from '../lib/api.js';
 import { t, formatRange, formatDay } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
-import { icon, picto } from '../lib/icons.js';
+import { icon } from '../lib/icons.js';
 import { daysBetween, itemsOf, dayTab, miniMap } from '../lib/trip.js';
 import { openAdventureForm } from '../lib/adventure-form.js';
 import { downloadIcs } from '../lib/ics.js';
@@ -19,6 +19,8 @@ let adventure;
 let days = [];
 let current = null; // selected day, or '' for ideas
 let updateMap;
+let editing = null; // id of the step whose editor is open
+let shareOpen = false;
 
 async function load() {
   adventure = await api(`/api/adventures/${encodeURIComponent(id)}`);
@@ -33,7 +35,7 @@ async function load() {
 const count = (n, one, many) => (n === 1 ? t(one) : t(many, { n }));
 
 function shareBox() {
-  if (!adventure.share_token) return '';
+  if (!adventure.share_token || !shareOpen) return '';
   const link = `${location.origin}/share?t=${adventure.share_token}`;
   return `<div class="share-box">
     <p>${icon('lock', { size: 16 })} ${esc(t('adventure.shareOn'))}</p>
@@ -45,35 +47,34 @@ function shareBox() {
   </div>`;
 }
 
+/** One step of the day: a box to tick, the text, and a small editor that opens on demand. */
 function itemHtml(item, index, total) {
   const title = item.place_id
     ? `<a href="/#${esc(item.place_id)}">${esc(item.title)}</a>`
     : item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a>` : esc(item.title);
-  return `<li class="stop" data-item="${esc(item.id)}">
-    <label class="stop__time"><span class="visually-hidden">${esc(t('adventure.time'))}</span>
-      <input type="time" value="${esc(item.start_time || '')}" data-field="start_time" /></label>
-    <div class="stop__main">
-      <p class="stop__title">${item.layer_id ? `${picto(layerIcon(item.layer_id), layerColor(item.layer_id), 14)} ` : ''}${title}</p>
-      ${item.summary ? `<p class="stop__summary">${esc(item.summary)}</p>` : ''}
-      <input class="stop__note" value="${esc(item.note)}" maxlength="1000" data-field="note" placeholder="${esc(t('adventure.note'))}…" aria-label="${esc(t('adventure.note'))}" />
+  const open = editing === item.id;
+  return `<li class="todo ${item.done ? 'is-done' : ''} ${open ? 'is-editing' : ''}" data-item="${esc(item.id)}">
+    <label class="todo__check"><input type="checkbox" data-field="done" ${item.done ? 'checked' : ''} /><span class="visually-hidden">${esc(item.title)}</span></label>
+    <div class="todo__text">
+      <p>${title}${item.start_time ? ` <span class="todo__time">(${esc(item.start_time)})</span>` : ''}</p>
+      ${item.note ? `<p class="todo__note">${esc(item.note)}</p>` : ''}
     </div>
-    <div class="stop__tools">
-      <button class="icon-button" type="button" data-move="-1" ${index === 0 ? 'disabled' : ''} aria-label="${esc(t('adventure.moveUp'))}">${icon('arrowUp', { size: 16 })}</button>
-      <button class="icon-button" type="button" data-move="1" ${index === total - 1 ? 'disabled' : ''} aria-label="${esc(t('adventure.moveDown'))}">${icon('arrowDown', { size: 16 })}</button>
-      <label class="stop__day"><span class="visually-hidden">${esc(t('adventure.moveTo'))}</span>
-        <select data-field="day">
+    <button class="icon-button todo__edit" type="button" data-toggle-edit aria-expanded="${open}" aria-label="${esc(t('adventure.edit'))}">${icon('edit', { size: 15 })}</button>
+    ${open ? `<div class="todo__editor">
+      <label>${esc(t('adventure.time'))}<input type="time" value="${esc(item.start_time || '')}" data-field="start_time" /></label>
+      <label class="todo__editor-note">${esc(t('adventure.note'))}<input value="${esc(item.note)}" maxlength="1000" data-field="note" /></label>
+      <label>${esc(t('adventure.moveTo'))}<select data-field="day">
           <option value="">${esc(t('adventure.ideas'))}</option>
           ${days.map((d, i) => `<option value="${d}" ${d === item.day ? 'selected' : ''}>${esc(t('adventure.day', { n: i + 1 }))}</option>`).join('')}
         </select></label>
-      <button class="icon-button" type="button" data-remove aria-label="${esc(t('adventure.remove'))}">${icon('trash', { size: 16 })}</button>
-    </div>
+      <div class="todo__editor-tools">
+        <button class="icon-button" type="button" data-move="-1" ${index === 0 ? 'disabled' : ''} aria-label="${esc(t('adventure.moveUp'))}">${icon('arrowUp', { size: 16 })}</button>
+        <button class="icon-button" type="button" data-move="1" ${index === total - 1 ? 'disabled' : ''} aria-label="${esc(t('adventure.moveDown'))}">${icon('arrowDown', { size: 16 })}</button>
+        <button class="icon-button" type="button" data-remove aria-label="${esc(t('adventure.remove'))}">${icon('trash', { size: 16 })}</button>
+      </div>
+    </div>` : ''}
   </li>`;
 }
-
-// Layer look-up for the small pictograms next to places (same values as the map).
-const LAYERS = { passages: ['arch', '#365748'], museums: ['museum', '#C67B51'], buildings: ['facade', '#202521'], streets: ['wave', '#A58AA6'], squares: ['tree', '#5E8C4A'] };
-const layerIcon = (l) => LAYERS[l]?.[0] || 'dot';
-const layerColor = (l) => LAYERS[l]?.[1] || '#202521';
 
 function dayPanel() {
   const isIdeas = current === '';
@@ -88,7 +89,7 @@ function dayPanel() {
     <div class="day__list">
       ${heading}
       ${items.length
-        ? `<ol class="stops">${items.map((it, i) => itemHtml(it, i, items.length)).join('')}</ol>`
+        ? `<ul class="todos">${items.map((it, i) => itemHtml(it, i, items.length)).join('')}</ul>`
         : `<p class="day__empty">${esc(isIdeas ? t('adventure.emptyIdeas') : t('adventure.emptyDay'))}</p>`}
       <form class="day__add" data-add>
         <input name="title" maxlength="200" placeholder="${esc(t('adventure.addPlaceholder'))}" aria-label="${esc(t('adventure.addLabel'))}" />
@@ -97,8 +98,7 @@ function dayPanel() {
       <a class="day__map-link" href="/">${icon('pin', { size: 16 })} ${esc(t('adventure.openMap'))}</a>
     </div>
     <aside class="day__aside">
-      ${photo ? `<figure class="print day__photo"><img src="${esc(photo.src)}" alt="" /></figure>` : ''}
-      <div class="mini-map" data-mini-map aria-label="${esc(t('adventure.mapTitle'))}"></div>
+      ${photo ? `<figure class="print taped day__photo"><img src="${esc(photo.src)}" alt="" /></figure>` : ''}
     </aside>
   </div>`;
 }
@@ -120,9 +120,14 @@ function render() {
         </ul>
         ${a.notes ? `<p class="trip__notes">${esc(a.notes)}</p>` : ''}
         <div class="trip__actions">
-          ${a.share_token ? '' : `<button class="btn btn--line" type="button" data-share>${icon('share', { size: 16 })} ${esc(t('adventure.share'))}</button>`}
-          <button class="btn btn--line" type="button" data-ics>${icon('calendarAdd', { size: 16 })} ${esc(t('adventure.calendar'))}</button>
-          <button class="btn btn--line btn--square" type="button" data-edit aria-label="${esc(t('adventure.edit'))}" title="${esc(t('adventure.edit'))}">${icon('more')}</button>
+          <button class="btn btn--line btn--small" type="button" data-share aria-expanded="${shareOpen}">${icon('share', { size: 16 })} ${esc(t('adventure.share'))}</button>
+          <div class="menu">
+            <button class="btn btn--line btn--small btn--square" type="button" data-menu aria-expanded="false" aria-label="${esc(t('adventure.more'))}">${icon('more')}</button>
+            <div class="menu__list" hidden>
+              <button type="button" data-edit>${icon('edit', { size: 16 })} ${esc(t('adventure.editDetails'))}</button>
+              <button type="button" data-ics>${icon('calendarAdd', { size: 16 })} ${esc(t('adventure.calendar'))}</button>
+            </div>
+          </div>
         </div>
         ${shareBox()}
       </div>
@@ -138,6 +143,10 @@ function render() {
         </div>
       </div>
       <div class="itinerary__panel" role="tabpanel">${dayPanel()}</div>
+    </section>
+    <section class="trip__map" aria-labelledby="map-title">
+      <h2 id="map-title" class="trip__map-title">${esc(t('adventure.mapTitle'))}</h2>
+      <div class="mini-map" data-mini-map></div>
     </section>`;
   updateMap = miniMap(root.querySelector('[data-mini-map]'));
   updateMap(itemsOf(adventure, current === '' ? null : current));
@@ -155,17 +164,34 @@ root.addEventListener('click', async (e) => {
   const el = e.target.closest('button');
   if (!el) return;
   try {
-    if (el.matches('[data-day]')) {
+    if (el.matches('[data-menu]')) {
+      const list = el.nextElementSibling;
+      list.hidden = !list.hidden;
+      el.setAttribute('aria-expanded', String(!list.hidden));
+      return;
+    }
+    root.querySelectorAll('.menu__list').forEach((m) => (m.hidden = true));
+    if (el.matches('[data-toggle-edit]')) {
+      const id = el.closest('[data-item]').dataset.item;
+      editing = editing === id ? null : id;
+      render();
+      root.querySelector(`[data-item="${id}"] [data-toggle-edit]`)?.focus();
+    } else if (el.matches('[data-day]')) {
       current = el.dataset.day;
+      editing = null;
       render();
       root.querySelector(`[data-day="${current}"]`)?.focus();
     } else if (el.matches('[data-edit]')) {
       openAdventureForm(dialog, { adventure, onSaved: reload, onDeleted: () => (location.href = '/adventures') });
+    } else if (el.matches('[data-share]') && adventure.share_token) {
+      shareOpen = !shareOpen; // the link already exists: just show or hide it
+      render();
     } else if (el.matches('[data-share], [data-unshare]')) {
       const { share_token } = await api(`/api/adventures/${adventure.id}/share`, {
         method: 'POST', body: { enabled: el.matches('[data-share]') },
       });
       adventure.share_token = share_token;
+      shareOpen = Boolean(share_token);
       render();
     } else if (el.matches('[data-copy]')) {
       await navigator.clipboard.writeText(root.querySelector('.share-box input').value);
@@ -176,7 +202,7 @@ root.addEventListener('click', async (e) => {
       await api(`/api/adventures/${adventure.id}/items/${el.closest('[data-item]').dataset.item}`, { method: 'DELETE' });
       await reload();
     } else if (el.matches('[data-move]')) {
-      const ids = [...root.querySelectorAll('.stops [data-item]')].map((li) => li.dataset.item);
+      const ids = [...root.querySelectorAll('.todos [data-item]')].map((li) => li.dataset.item);
       const from = ids.indexOf(el.closest('[data-item]').dataset.item);
       const to = from + Number(el.dataset.move);
       [ids[from], ids[to]] = [ids[to], ids[from]];
@@ -207,9 +233,10 @@ root.addEventListener('change', async (e) => {
     const field = e.target.dataset.field;
     const itemEl = e.target.closest('[data-item]');
     if (!field || !itemEl) return;
-    const value = e.target.value || (field === 'note' ? '' : null);
+    const value = field === 'done' ? e.target.checked : e.target.value || (field === 'note' ? '' : null);
     await api(`/api/adventures/${adventure.id}/items/${itemEl.dataset.item}`, { method: 'PATCH', body: { [field]: value } });
-    if (field === 'day') await reload();
+    if (field === 'done') itemEl.classList.toggle('is-done', value);
+    else await reload(); // time, note and day change the text or the order shown
   } catch (err) {
     toast(err.message || t('error.generic'));
   }

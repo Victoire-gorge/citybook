@@ -59,7 +59,8 @@ const layerOf = (place) => state.layers.find((l) => l.id === place.layer_id);
 
 /** A black-and-white photo of one of my favourite places, like a magazine cover. */
 function renderEditionPhoto() {
-  const candidates = state.places.filter((p) => p.photos.length && p.layer_id === 'passages');
+  // Street scenes read best as an etching on the cover.
+  const candidates = state.places.filter((p) => p.photos.length && ['streets', 'buildings'].includes(p.layer_id));
   const place = candidates[new Date().getDate() % Math.max(candidates.length, 1)];
   if (!place) return;
   const photo = place.photos[0];

@@ -8,7 +8,7 @@ export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 /** Masthead: wordmark, sections, sign out, and the issue line. `current` is 'map' or 'adventures'. */
-export function mountMasthead(current, { issue = t('issue.paris'), signedIn = true } = {}) {
+export function mountMasthead(current, { issue = t('issue.paris'), signedIn = true, readOnly = false } = {}) {
   const el = document.querySelector('[data-masthead]');
   if (!el) return;
   el.className = 'masthead';
@@ -21,9 +21,10 @@ export function mountMasthead(current, { issue = t('issue.paris'), signedIn = tr
       </nav>` : ''}
       <div class="masthead__tools" data-tools>
         ${signedIn ? `<button class="icon-button" type="button" data-signout title="${esc(t('nav.signout'))}" aria-label="${esc(t('nav.signout'))}">${icon('user', { size: 22 })}</button>` : ''}
+        ${readOnly ? `<span class="pill">${icon('lock', { size: 14 })} ${esc(t('share.readOnly'))}</span>` : ''}
       </div>
     </div>
-    <div class="issue">${esc(issue)}</div>`;
+    ${issue ? `<div class="issue">${esc(issue)}</div>` : ''}`;
   el.querySelector('[data-signout]')?.addEventListener('click', async () => {
     await api('/api/logout', { method: 'POST' });
     location.href = '/login';

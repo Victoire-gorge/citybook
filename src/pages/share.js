@@ -15,13 +15,13 @@ function stopHtml(item) {
   const name = item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a>` : esc(item.title);
   const practical = [item.price, item.website ? `<a href="${esc(item.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : '']
     .filter(Boolean).join(' · ');
-  return `<li class="stop stop--read">
-    <span class="stop__time mono">${esc(item.start_time || '')}</span>
-    <div class="stop__main">
-      <p class="stop__title">${name}</p>
-      ${item.summary ? `<p class="stop__summary">${esc(item.summary)}</p>` : ''}
-      ${item.note ? `<p class="stop__note-read">${esc(item.note)}</p>` : ''}
-      ${practical ? `<p class="stop__practical mono">${practical}</p>` : ''}
+  return `<li class="todo todo--read ${item.done ? 'is-done' : ''}">
+    <span class="todo__box" aria-hidden="true"></span>
+    <div class="todo__text">
+      <p>${name}${item.start_time ? ` <span class="todo__time">(${esc(item.start_time)})</span>` : ''}</p>
+      ${item.summary ? `<p class="todo__summary">${esc(item.summary)}</p>` : ''}
+      ${item.note ? `<p class="todo__note">${esc(item.note)}</p>` : ''}
+      ${practical ? `<p class="todo__practical">${practical}</p>` : ''}
     </div>
   </li>`;
 }
@@ -29,7 +29,7 @@ function stopHtml(item) {
 function render(a) {
   setLanguage(a.language);
   document.title = `${a.title} · citybook`;
-  mountMasthead(null, { signedIn: false, issue: `${t('share.readOnly')} — ${formatRange(a.starts_on, a.ends_on)}` });
+  mountMasthead(null, { signedIn: false, readOnly: true, issue: '' });
   const days = daysBetween(a.starts_on, a.ends_on);
   const nights = days.length - 1;
   const ideas = itemsOf(a, null);
@@ -53,18 +53,19 @@ function render(a) {
     <div class="shared__days">
       ${days.map((d, i) => {
         const items = itemsOf(a, d);
+        if (!items.length && !a.days?.[d]) return ''; // guests only see days with a plan
         const photo = items.find((x) => x.photo)?.photo;
         return `<section class="shared-day" id="d-${d}">
           <div class="shared-day__badge"><b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(formatTab(d))}</span></div>
           <div class="shared-day__body">
             ${a.days?.[d] ? `<h2 class="shared-day__theme">${esc(a.days[d])}</h2>` : ''}
-            ${items.length ? `<ol class="stops">${items.map(stopHtml).join('')}</ol>` : '<p class="muted">—</p>'}
+            ${items.length ? `<ul class="todos">${items.map(stopHtml).join('')}</ul>` : '<p class="muted">—</p>'}
           </div>
-          ${photo ? `<figure class="print shared-day__photo"><img src="${esc(photo.src)}" alt="" loading="lazy" /></figure>` : '<span></span>'}
+          ${photo ? `<figure class="print taped shared-day__photo"><img src="${esc(photo.src)}" alt="" loading="lazy" /></figure>` : '<span></span>'}
         </section>`;
       }).join('')}
       ${ideas.length ? `<section class="shared-day"><div class="shared-day__badge shared-day__badge--ideas"><b>${esc(t('adventure.ideas'))}</b></div>
-        <div class="shared-day__body"><ol class="stops">${ideas.map(stopHtml).join('')}</ol></div><span></span></section>` : ''}
+        <div class="shared-day__body"><ul class="todos">${ideas.map(stopHtml).join('')}</ul></div><span></span></section>` : ''}
     </div>
     <section class="shared__map">
       <h2>${esc(t('adventure.mapTitle'))}</h2>
@@ -77,6 +78,6 @@ fetch(`/api/share/${encodeURIComponent(token)}`)
   .then((r) => (r.ok ? r.json() : Promise.reject(r)))
   .then(render)
   .catch(() => {
-    mountMasthead(null, { signedIn: false });
+    mountMasthead(null, { signedIn: false, issue: '' });
     root.innerHTML = `<p class="trip__missing">${esc(t('share.missing'))}</p>`;
   });

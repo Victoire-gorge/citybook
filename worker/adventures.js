@@ -123,6 +123,7 @@ async function items(db, adventureId) {
     end_time: i.end_time,
     title: i.title || i.place_name || i.event_title || '',
     note: i.note,
+    done: Boolean(i.done),
     place_id: i.place_id,
     layer_id: i.layer_id,
     lat: i.lat,
@@ -206,6 +207,7 @@ const ITEM_RULES = {
   event_id: optional(text(80)),
   title: text(200),
   note: text(1000),
+  done: (v) => typeof v === 'boolean',
 };
 
 export async function addItem(db, userId, adventureId, body) {
@@ -237,7 +239,7 @@ export async function updateItem(db, userId, adventureId, itemId, body) {
   const moveToEnd = 'day' in f ? ', sort = (select coalesce(max(sort), 0) + 1 from adventure_items where adventure_id = ?)' : '';
   const res = await db
     .prepare(`update adventure_items set ${keys.map((k) => `${k} = ?`).join(', ')}${moveToEnd} where id = ? and adventure_id = ?`)
-    .bind(...Object.values(f), ...(moveToEnd ? [adventureId] : []), itemId, adventureId)
+    .bind(...Object.values(f).map((v) => (typeof v === 'boolean' ? Number(v) : v)), ...(moveToEnd ? [adventureId] : []), itemId, adventureId)
     .run();
   if (!res.meta.changes) throw new HttpError(404, 'Unknown item');
 }

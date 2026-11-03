@@ -92,6 +92,8 @@ export default {
   'adventure.time': 'Time',
   'adventure.note': 'Note',
   'adventure.edit': 'Edit',
+  'adventure.more': 'More options',
+  'adventure.editDetails': 'Edit details',
   'adventure.share': 'Share',
   'adventure.shareOn': 'Anyone with this link can read the plan, not edit it.',
   'adventure.shareCopy': 'Copy link',
