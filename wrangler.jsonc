@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "citybook",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  // The front end is built by Vite into dist/ and served as static assets.
+  // Only API, photo and media requests go through the Worker code first.
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/photos/*", "/media/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "citybook",
+      "database_id": "f47f603e-934a-4f9c-a3a6-1d7ec0a92d19",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "PHOTOS",
+      "bucket_name": "citybook-photos"
+    }
+  ],
+  "observability": { "enabled": true }
+}
