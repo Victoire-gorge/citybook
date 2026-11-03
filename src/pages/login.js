@@ -2,10 +2,10 @@ import '../styles/base.css';
 import '../styles/adventures.css';
 import { api } from '../lib/api.js';
 import { t } from '../lib/i18n.js';
-import { cutout, startPage } from '../lib/ui.js';
+import { mountMasthead, startPage } from '../lib/ui.js';
 
 startPage();
-document.querySelector('[data-title]').append(cutout(t('login.title'), { size: 'l' }));
+mountMasthead(null, { signedIn: false });
 
 const form = document.querySelector('[data-form]');
 const error = document.querySelector('[data-error]');

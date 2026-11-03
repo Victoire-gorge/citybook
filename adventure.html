@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Adventure · citybook</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bowlby+One&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Caveat:wght@500;700&family=DM+Serif+Display:ital@0;1&display=swap"
-    />
   </head>
-  <body data-palette="blue-yellow" class="page-adventure">
-    <nav class="topbar" data-nav></nav>
+  <body class="page-adventure">
+    <header data-masthead></header>
     <main class="trip" data-trip></main>
-    <dialog class="sheet card" data-dialog>
-      <form method="dialog" class="adventure-form" data-form></form>
+    <dialog class="sheet" data-dialog aria-label="Adventure">
+      <form method="dialog" class="adventure-form"></form>
     </dialog>
     <script type="module" src="/src/pages/adventure.js"></script>
   </body>

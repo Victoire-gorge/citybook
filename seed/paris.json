@@ -2,11 +2,11 @@
   "_about": "Initial import only. Once loaded, places live in the D1 database and are edited from the site. Coordinates, photos and credits come from Wikidata, Wikimedia Commons and OpenStreetMap (ODbL). Opening hours are a starting point and must be checked (hours_verified = 0).",
   "city": { "id": "paris", "name": "Paris", "lat": 48.8625, "lng": 2.3425, "zoom": 14 },
   "layers": [
-    { "id": "passages", "name": "Covered passages", "color": "#E2A62B", "shape": "line", "icon": "arch", "sort": 1 },
-    { "id": "museums", "name": "Museums", "color": "#1E6B52", "shape": "point", "icon": "frame", "sort": 2 },
-    { "id": "buildings", "name": "Remarkable buildings", "color": "#2F5DA8", "shape": "point", "icon": "star", "sort": 3 },
-    { "id": "streets", "name": "Pretty streets", "color": "#D4513A", "shape": "line", "icon": "heart", "sort": 4 },
-    { "id": "squares", "name": "Squares & gardens", "color": "#7A9E4E", "shape": "point", "icon": "leaf", "sort": 5 }
+    { "id": "passages", "name": "Covered passages", "color": "#365748", "shape": "line", "icon": "arch", "sort": 1 },
+    { "id": "museums", "name": "Museums", "color": "#C67B51", "shape": "point", "icon": "museum", "sort": 2 },
+    { "id": "buildings", "name": "Remarkable buildings", "color": "#202521", "shape": "point", "icon": "facade", "sort": 3 },
+    { "id": "streets", "name": "Pretty streets", "color": "#A58AA6", "shape": "line", "icon": "wave", "sort": 4 },
+    { "id": "squares", "name": "Squares & gardens", "color": "#5E8C4A", "shape": "point", "icon": "tree", "sort": 5 }
   ],
   "places": [
     { "id": "galerie-vivienne", "layer": "passages", "name": "Galerie Vivienne", "wikidata": "Q1314020", "lat": 48.866667, "lng": 2.339722,

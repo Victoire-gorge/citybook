@@ -1,5 +1,6 @@
 import { HttpError, pick, text, isDate, isTime, optional } from './http.js';
 import { randomToken } from './auth.js';
+import { photoView } from './places.js';
 
 const PALETTES = ['blue-yellow', 'green-yellow', 'red-green', 'blue-orange'];
 const LANGUAGES = ['en', 'fr'];
@@ -46,12 +47,13 @@ async function own(db, userId, id) {
 export async function listAdventures(db, userId) {
   const { results } = await db
     .prepare(
-      `select a.*, (select count(*) from adventure_items i where i.adventure_id = a.id) as item_count
+      `select a.*, (select count(*) from adventure_items i where i.adventure_id = a.id) as item_count,
+              (select count(distinct place_id) from adventure_items i where i.adventure_id = a.id) as place_count
        from adventures a where owner_id = ? order by starts_on desc`,
     )
     .bind(userId)
     .all();
-  return results.map((a) => ({ ...view(a), item_count: a.item_count }));
+  return results.map((a) => ({ ...view(a), item_count: a.item_count, place_count: a.place_count }));
 }
 
 export async function createAdventure(db, userId, body) {
@@ -102,11 +104,15 @@ export async function deleteAdventure(db, bucket, userId, id) {
 async function items(db, adventureId) {
   const { results } = await db
     .prepare(
-      `select i.*, p.name as place_name, p.layer_id, p.lat, p.lng, e.title as event_title, e.url as event_url
+      `select i.*, p.name as place_name, p.summary as place_summary, p.price as place_price, p.website as place_website, p.layer_id, p.lat, p.lng,
+              e.title as event_title, e.url as event_url,
+              ph.id as photo_id, ph.source as photo_source, ph.file as photo_file,
+              ph.author as photo_author, ph.license as photo_license, ph.source_url as photo_source_url
        from adventure_items i
        left join places p on p.id = i.place_id
        left join events e on e.id = i.event_id
-       where i.adventure_id = ? order by i.day is null, i.day, i.start_time is null, i.start_time, i.sort`,
+       left join photos ph on ph.id = (select id from photos where place_id = i.place_id order by sort limit 1)
+       where i.adventure_id = ? order by i.day is null, i.day, i.sort`,
     )
     .bind(adventureId)
     .all();
@@ -123,12 +129,59 @@ async function items(db, adventureId) {
     lng: i.lng,
     event_id: i.event_id,
     url: i.event_url,
+    summary: i.place_summary || '',
+    price: i.place_price || '',
+    website: i.place_website || null,
+    photo: i.photo_id
+      ? photoView({ id: i.photo_id, source: i.photo_source, file: i.photo_file, author: i.photo_author,
+          license: i.photo_license, source_url: i.photo_source_url })
+      : null,
   }));
+}
+
+async function days(db, adventureId) {
+  const { results } = await db
+    .prepare('select day, theme from adventure_days where adventure_id = ?')
+    .bind(adventureId)
+    .all();
+  return Object.fromEntries(results.map((d) => [d.day, d.theme]));
+}
+
+/** Title of one day of the adventure ("First steps in Paris"). Empty text removes it. */
+export async function setDayTheme(db, userId, adventureId, day, body) {
+  const a = await own(db, userId, adventureId);
+  if (!isDate(day) || day < a.starts_on || day > a.ends_on) throw new HttpError(400, 'This day is outside the adventure');
+  const { theme } = pick(body, { theme: text(120) });
+  if (theme === undefined) throw new HttpError(400, 'Nothing to update');
+  if (theme.trim()) {
+    await db
+      .prepare(`insert into adventure_days (adventure_id, day, theme) values (?, ?, ?)
+                on conflict (adventure_id, day) do update set theme = excluded.theme`)
+      .bind(adventureId, day, theme.trim())
+      .run();
+  } else {
+    await db.prepare('delete from adventure_days where adventure_id = ? and day = ?').bind(adventureId, day).run();
+  }
+}
+
+/** New order of the items of one day (or of the ideas when day is null). */
+export async function reorderItems(db, userId, adventureId, body) {
+  await own(db, userId, adventureId);
+  const ids = body?.ids;
+  if (!Array.isArray(ids) || ids.length > 200 || !ids.every((x) => typeof x === 'string')) {
+    throw new HttpError(400, 'ids must be a list of item ids');
+  }
+  if (ids.length === 0) return;
+  await db.batch(
+    ids.map((id, i) =>
+      db.prepare('update adventure_items set sort = ? where id = ? and adventure_id = ?').bind(i + 1, id, adventureId),
+    ),
+  );
 }
 
 export async function getAdventure(db, userId, id) {
   const a = await own(db, userId, id);
-  return { ...view(a), items: await items(db, id) };
+  return { ...view(a), days: await days(db, id), items: await items(db, id) };
 }
 
 /** Read-only view for people with the share link. No owner data, no token echo. */
@@ -136,8 +189,13 @@ export async function getSharedAdventure(db, token) {
   if (!token || token.length < 16) throw new HttpError(404, 'Unknown link');
   const a = await db.prepare('select * from adventures where share_token = ?').bind(token).first();
   if (!a) throw new HttpError(404, 'Unknown link');
-  const { share_token, notes, ...publicView } = view(a);
-  return { ...publicView, cover: a.cover_key ? `/media/${a.cover_key}?share=${token}` : null, items: await items(db, a.id) };
+  const { share_token, shared, ...publicView } = view(a);
+  return {
+    ...publicView,
+    cover: a.cover_key ? `/media/${a.cover_key}?share=${token}` : null,
+    days: await days(db, a.id),
+    items: await items(db, a.id),
+  };
 }
 
 const ITEM_RULES = {
@@ -175,9 +233,11 @@ export async function updateItem(db, userId, adventureId, itemId, body) {
   if (f.day && (f.day < a.starts_on || f.day > a.ends_on)) throw new HttpError(400, 'This day is outside the adventure');
   const keys = Object.keys(f);
   if (!keys.length) throw new HttpError(400, 'Nothing to update');
+  // An item moved to another day goes to the end of that day.
+  const moveToEnd = 'day' in f ? ', sort = (select coalesce(max(sort), 0) + 1 from adventure_items where adventure_id = ?)' : '';
   const res = await db
-    .prepare(`update adventure_items set ${keys.map((k) => `${k} = ?`).join(', ')} where id = ? and adventure_id = ?`)
-    .bind(...Object.values(f), itemId, adventureId)
+    .prepare(`update adventure_items set ${keys.map((k) => `${k} = ?`).join(', ')}${moveToEnd} where id = ? and adventure_id = ?`)
+    .bind(...Object.values(f), ...(moveToEnd ? [adventureId] : []), itemId, adventureId)
     .run();
   if (!res.meta.changes) throw new HttpError(404, 'Unknown item');
 }

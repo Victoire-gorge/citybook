@@ -35,6 +35,11 @@ const fmt = (opts) => new Intl.DateTimeFormat(current === 'fr' ? 'fr-FR' : 'en-G
 const asDate = (iso) => new Date(`${iso}T00:00:00Z`);
 export const formatDay = (iso) => fmt({ weekday: 'long', day: 'numeric', month: 'long' }).format(asDate(iso));
 export const formatShort = (iso) => fmt({ day: 'numeric', month: 'short' }).format(asDate(iso));
+export const formatTab = (iso) => fmt({ weekday: 'short', day: 'numeric', month: 'short' }).format(asDate(iso));
+/** "15 – 22 Nov", or "28 Nov – 3 Dec" across months. */
 export function formatRange(a, b) {
-  return a === b ? formatShort(a) : `${formatShort(a)} – ${formatShort(b)}`;
+  if (a === b) return formatShort(a);
+  const sameMonth = a.slice(0, 7) === b.slice(0, 7);
+  const start = sameMonth ? fmt({ day: 'numeric' }).format(asDate(a)) : formatShort(a);
+  return `${start} – ${formatShort(b)}`;
 }

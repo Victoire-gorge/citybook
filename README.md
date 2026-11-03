@@ -8,7 +8,7 @@ The site is in English for now; every interface text lives in `src/i18n/en.js`, 
 
 | Part | Where | What |
 |---|---|---|
-| Pages | `*.html`, `src/` | Plain JavaScript built by Vite. Map with Leaflet and OpenStreetMap tiles (no API key). |
+| Pages | `*.html`, `src/` | Plain JavaScript built by Vite. Map with Leaflet and OpenStreetMap tiles (no API key). Fonts self-hosted with Fontsource. |
 | API | `worker/` | One Cloudflare Worker: JSON API, sign-in, photos. |
 | Data | D1 database `citybook` | Places, opening hours, photos, events, adventures, users. **Editable data lives here, not in the code.** |
 | Files | R2 bucket `citybook-photos` | Cached Wikimedia photos (public) and adventure covers (private). |
@@ -26,7 +26,7 @@ tests/           node --test
 
 ### Design
 
-A tidy scrapbook: gingham and dotted paper, cut-out letter titles, polaroids held by washi tape. Decoration stays in headers and margins; content always sits on calm paper. Each page has its own palette (`data-palette` on `<body>`): map green & yellow, adventures blue & yellow.
+"The City Edition": an independent city magazine. Ivory paper, ink rules, forest green, Bodoni Moda titles, Archivo text, IBM Plex Mono for practical details. Decoration stays in the masthead and rules; content sits on calm paper. Tokens are CSS variables in `src/styles/base.css`.
 
 ### Security
 

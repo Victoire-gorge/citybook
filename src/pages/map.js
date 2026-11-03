@@ -2,17 +2,19 @@ import L from 'leaflet';
 import '../styles/base.css';
 import '../styles/map.css';
 import { api } from '../lib/api.js';
-import { t, tr, formatShort } from '../lib/i18n.js';
-import { cutout, esc, mountNav, startPage, toast } from '../lib/ui.js';
-import { stickerSvg } from '../lib/stickers.js';
+import { t, tr, formatShort, formatTab } from '../lib/i18n.js';
+import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
+import { icon, picto } from '../lib/icons.js';
 import { openStatus, parisClock, hoursForDay } from '../lib/hours.js';
+import { daysBetween } from '../lib/trip.js';
 
 startPage();
-mountNav('map');
+mountMasthead('map');
 
 const statusEl = document.querySelector('[data-status]');
 const card = document.querySelector('[data-card]');
-const canHover = matchMedia('(hover: hover) and (min-width: 701px)').matches;
+const layersPanel = document.querySelector('#layers');
+const canHover = matchMedia('(hover: hover) and (min-width: 901px)').matches;
 
 const state = {
   layers: [],
@@ -24,8 +26,9 @@ const state = {
   objects: new Map(), // place id -> { marker, lines }
 };
 
-const map = L.map('map', { zoomControl: false, attributionControl: true }).setView([48.8625, 2.3425], 14);
+const map = L.map('map', { zoomControl: false }).setView([48.8625, 2.3425], 14);
 L.control.zoom({ position: 'bottomright' }).addTo(map);
+L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
 // OpenStreetMap's own tiles: open data, free, no API key. Fine for a personal site
 // (usage policy: https://operations.osmfoundation.org/policies/tiles/).
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -45,75 +48,83 @@ async function load() {
   state.places = data.places;
   state.visible = new Set(data.layers.filter((l) => l.visible_by_default).map((l) => l.id));
   map.setView([data.city.lat, data.city.lng], data.city.zoom);
-  document.querySelector('[data-title]').append(cutout(tr(data.city, 'name')));
-  renderLegend();
+  document.querySelector('[data-count]').textContent = t('map.places', { n: data.places.length });
+  renderEditionPhoto();
+  renderLayers();
   drawPlaces();
   openFromHash();
 }
 
 const layerOf = (place) => state.layers.find((l) => l.id === place.layer_id);
 
-function renderLegend() {
+/** A black-and-white photo of one of my favourite places, like a magazine cover. */
+function renderEditionPhoto() {
+  const candidates = state.places.filter((p) => p.photos.length && p.layer_id === 'passages');
+  const place = candidates[new Date().getDate() % Math.max(candidates.length, 1)];
+  if (!place) return;
+  const photo = place.photos[0];
+  const fig = document.querySelector('[data-edition-photo]');
+  fig.innerHTML = `<img src="${esc(photo.src)}" alt="${esc(tr(place, 'name'))}" />
+    <figcaption><a href="#${esc(place.id)}">${esc(tr(place, 'name'))}</a> — ${esc(t('place.photoCredit', { author: photo.author || '?', license: photo.license || '' }))}</figcaption>`;
+  fig.hidden = false;
+}
+
+function renderLayers() {
   const box = document.querySelector('[data-layers]');
   box.innerHTML = state.layers
     .map((l) => {
       const count = state.places.filter((p) => p.layer_id === l.id).length;
-      return `<label class="toggle">
+      return `<label class="layer-row">
         <input type="checkbox" value="${esc(l.id)}" ${state.visible.has(l.id) ? 'checked' : ''} />
-        ${stickerSvg(l.icon, l.color, { size: 26 })}
+        <span class="check" aria-hidden="true"></span>
+        ${picto(l.icon, l.color, 20)}
         <span>${esc(tr(l, 'name'))}</span>
-        <span class="toggle__count">${count}</span>
+        <span class="layer-row__count">${count}</span>
       </label>`;
     })
     .join('');
   box.addEventListener('change', (e) => {
-    const id = e.target.value;
-    if (e.target.checked) state.visible.add(id);
-    else state.visible.delete(id);
+    if (e.target.checked) state.visible.add(e.target.value);
+    else state.visible.delete(e.target.value);
     applyFilters();
   });
   document.querySelector('[data-favourites]').addEventListener('change', (e) => {
     state.favouritesOnly = e.target.checked;
     applyFilters();
   });
+  const toggle = document.querySelector('[data-layers-toggle]');
+  toggle.addEventListener('click', () => {
+    const open = layersPanel.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
 }
 
 function drawPlaces() {
   for (const place of state.places) {
     const layer = layerOf(place);
-    const icon = L.divIcon({
-      className: 'marker',
-      html: stickerSvg(layer.icon, layer.color, { favourite: place.favourite }) + (place.favourite ? '<span class="marker__fav">♥</span>' : ''),
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
+    const marker = L.marker([place.lat, place.lng], {
+      icon: L.divIcon({
+        className: 'marker',
+        html: picto(layer.icon, layer.color, 26) + (place.favourite ? '<span class="marker__fav"></span>' : ''),
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+      }),
+      title: tr(place, 'name'),
+      alt: tr(place, 'name'),
+      keyboard: true,
+      riseOnHover: true,
     });
-    const marker = L.marker([place.lat, place.lng], { icon, title: tr(place, 'name'), keyboard: true, riseOnHover: true });
     const lines = (place.path || []).map((coords) =>
-      L.layerGroup([
-        // white casing under the coloured line: a strip of paper tape on the map
-        L.polyline(coords, { color: '#fff', weight: 10, opacity: 0.9, lineCap: 'round', interactive: false }),
-        L.polyline(coords, {
-          color: layer.color,
-          weight: 6,
-          lineCap: 'round',
-          dashArray: layer.id === 'streets' ? '1 10' : null,
-        }),
-      ]),
+      L.polyline(coords, { color: layer.color, weight: layer.id === 'streets' ? 4 : 5, opacity: 0.9, lineCap: 'round' }),
     );
-    const show = () => showCard(place, marker, false);
-    marker.on('click', () => pin(place, marker));
-    if (canHover) {
-      marker.on('mouseover', show);
-      marker.on('mouseout', hideUnpinned);
-    }
-    for (const group of lines) {
-      group.eachLayer((pl) => {
-        pl.on('click', () => pin(place, marker));
-        if (canHover) {
-          pl.on('mouseover', show);
-          pl.on('mouseout', hideUnpinned);
-        }
-      });
+    marker.on('click', () => pin(place));
+    marker.on('keypress', (e) => e.originalEvent.key === 'Enter' && pin(place));
+    for (const obj of [marker, ...lines]) {
+      if (obj !== marker) obj.on('click', () => pin(place));
+      if (canHover) {
+        obj.on('mouseover', () => preview(place));
+        obj.on('mouseout', hidePreview);
+      }
     }
     state.objects.set(place.id, { marker, lines });
   }
@@ -132,93 +143,84 @@ function applyFilters() {
   }
 }
 
-// ---------- The polaroid ----------
+// ---------- Place card ----------
 
-function statusFacts(place) {
-  const facts = [];
+function hoursFacts(place) {
   const clock = parisClock();
   const status = openStatus(place.hours, clock);
-  if (status.state === 'open') facts.push(['open', t('place.open', { time: status.until })]);
-  else if (status.state === 'closed') {
+  if (status.state === 'open') return [['clock', t('place.open', { time: status.until }), 'is-open']];
+  if (status.state === 'closed') {
     const today = hoursForDay(place.hours, clock.weekday);
-    facts.push(['closed', today.length ? `${t('place.closed')} · ${t('place.today', { hours: today.join(', ') })}` : t('place.closedToday')]);
+    return [['clock', today.length ? t('place.opensToday', { hours: today.join(', ') }) : t('place.closedToday')]];
   }
-  if (place.booking_required) facts.push(['warn', t('place.booking')]);
-  if (place.price) facts.push(['', place.price]);
-  return facts;
+  return [['clock', place.hours_note ? tr(place, 'hours_note') : t('place.hoursUnknown')]];
 }
 
 function cardHtml(place) {
-  const photo = place.photos[0];
   const layer = layerOf(place);
-  const facts = statusFacts(place)
-    .map(([kind, label]) => `<li class="fact ${kind ? `fact--${kind}` : ''}">${esc(label)}</li>`)
-    .join('');
+  const photo = place.photos[0];
+  const facts = [
+    ...hoursFacts(place),
+    ...(place.price ? [['ticket', place.price]] : []),
+    ...(place.booking_required ? [['calendar', t('place.booking')]] : []),
+  ];
+  const note = [
+    place.hours.length && place.hours_note ? tr(place, 'hours_note') : '',
+    place.hours.length && !place.hours_verified ? t('place.hoursUnchecked') : '',
+  ].filter(Boolean).join(' ');
   const events = place.events.length
     ? `<div class="place-card__events"><h3>${esc(t('place.onNow'))}</h3><ul>${place.events
         .map((e) => `<li>${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : esc(e.title)}${e.ends_on ? ` <span class="muted">${esc(t('place.until', { date: formatShort(e.ends_on) }))}</span>` : ''}</li>`)
         .join('')}</ul></div>`
     : '';
-  const media = photo
-    ? `<img class="place-card__photo" src="${esc(photo.src)}" alt="" loading="lazy" />
-       <p class="place-card__credit">${photo.source_url ? `<a href="${esc(photo.source_url)}" target="_blank" rel="noopener">` : ''}${esc(t('place.photoCredit', { author: photo.author || '?', license: photo.license || '' }))}${photo.source_url ? '</a>' : ''}</p>`
-    : `<div class="place-card__nophoto">${stickerSvg(layer.icon, layer.color, { size: 64 })}</div>`;
-  const hoursNote = [tr(place, 'hours_note'), place.hours.length && !place.hours_verified ? t('place.hoursUnchecked') : '']
-    .filter(Boolean)
-    .join(' ');
   return `
-    <button class="place-card__close" type="button" aria-label="${esc(t('place.close'))}">×</button>
-    <div class="place-card__body">
-      <div class="place-card__media taped">${media}</div>
-      <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
-      <div>
+    <button class="place-card__close" type="button" data-close aria-label="${esc(t('place.close'))}">${icon('close', { size: 18 })}</button>
+    <div class="place-card__inner">
+      <div class="place-card__media">
+        ${photo
+          ? `<div class="place-card__photo"><img src="${esc(photo.src)}" alt="" /></div>
+             <p class="place-card__credit">${photo.source_url ? `<a href="${esc(photo.source_url)}" target="_blank" rel="noopener">` : ''}${esc(t('place.photoCredit', { author: photo.author || '?', license: photo.license || '' }))}${photo.source_url ? '</a>' : ''}</p>`
+          : `<div class="place-card__photo place-card__photo--empty">${picto(layer.icon, layer.color, 56)}</div>`}
+      </div>
+      <div class="place-card__body">
+        <p class="place-card__layer">${picto(layer.icon, layer.color, 14)} ${esc(tr(layer, 'name'))}</p>
+        <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
         <p class="place-card__summary">${esc(tr(place, 'summary'))}</p>
-        ${facts ? `<ul class="place-card__facts">${facts}</ul>` : ''}
-        ${hoursNote ? `<p class="place-card__hours-note">${esc(hoursNote)}</p>` : ''}
+        <ul class="facts">${facts.map(([ic, label, cls]) => `<li class="${cls || ''}">${icon(ic)}<span>${esc(label)}</span></li>`).join('')}</ul>
+        ${note ? `<p class="place-card__note">${esc(note)}</p>` : ''}
         ${place.tip ? `<p class="place-card__tip">${esc(tr(place, 'tip'))}</p>` : ''}
         ${events}
-        <div class="place-card__actions" data-actions></div>
-        <div class="place-card__links">
-          ${place.website ? `<a href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
-        </div>
+      </div>
+      <div class="place-card__actions">
+        <button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
+        <form class="place-card__add" data-add-form hidden></form>
+        ${place.website ? `<a class="place-card__website" href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
       </div>
     </div>`;
 }
 
-function showCard(place, marker, pinned) {
-  if (state.pinned && !pinned) return; // a pinned card stays until closed
+function render(place, pinned) {
   card.innerHTML = cardHtml(place);
   card.hidden = false;
   card.classList.toggle('is-pinned', pinned);
-  card.style.setProperty('--tilt', `${((place.id.length % 5) - 2) * 0.8}deg`);
-  position(marker);
-  card.querySelector('.place-card__close').addEventListener('click', closeCard);
-  if (pinned) renderActions(place);
+  card.querySelector('[data-close]').addEventListener('click', closeCard);
+  card.querySelector('[data-add-open]').addEventListener('click', () => openAddForm(place));
 }
 
-function position(marker) {
-  if (!canHover) return; // the phone layout docks the card at the bottom
-  const pt = map.latLngToContainerPoint(marker.getLatLng());
-  const size = map.getSize();
-  const w = card.offsetWidth;
-  const h = card.offsetHeight;
-  let x = pt.x + 26;
-  let y = pt.y - h / 2;
-  if (x + w > size.x - 12) x = pt.x - w - 26;
-  y = Math.max(12, Math.min(y, size.y - h - 12));
-  card.style.left = `${x}px`;
-  card.style.top = `${y}px`;
+function preview(place) {
+  if (state.pinned) return; // a selected place stays until it is closed
+  render(place, false);
 }
 
-function hideUnpinned() {
+function hidePreview() {
   if (!state.pinned) card.hidden = true;
 }
 
-function pin(place, marker) {
+function pin(place) {
   state.pinned = place.id;
-  for (const { marker: m } of state.objects.values()) m.getElement()?.classList.remove('is-active');
-  marker.getElement()?.classList.add('is-active');
-  showCard(place, marker, true);
+  for (const { marker } of state.objects.values()) marker.getElement()?.classList.remove('is-active');
+  state.objects.get(place.id).marker.getElement()?.classList.add('is-active');
+  render(place, true);
   history.replaceState(null, '', `#${place.id}`);
 }
 
@@ -231,44 +233,57 @@ function closeCard() {
 }
 
 function openFromHash() {
-  const id = decodeURIComponent(location.hash.slice(1));
-  const place = state.places.find((p) => p.id === id);
+  const place = state.places.find((p) => p.id === decodeURIComponent(location.hash.slice(1)));
   if (!place) return;
-  const { marker } = state.objects.get(id);
-  map.setView(marker.getLatLng(), Math.max(map.getZoom(), 16));
-  pin(place, marker);
+  map.setView([place.lat, place.lng], Math.max(map.getZoom(), 16));
+  pin(place);
 }
 
 window.addEventListener('hashchange', openFromHash);
 map.on('click', closeCard);
-map.on('move', () => {
-  if (state.pinned) position(state.objects.get(state.pinned).marker);
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeCard();
-});
+document.addEventListener('keydown', (e) => e.key === 'Escape' && closeCard());
 
-// ---------- Add to an adventure ----------
+// ---------- Add to a day of an adventure ----------
 
-async function renderActions(place) {
-  const box = card.querySelector('[data-actions]');
+async function openAddForm(place) {
+  const form = card.querySelector('[data-add-form]');
   state.adventures ??= await api('/api/adventures').catch(() => []);
-  if (!state.adventures.length || state.pinned !== place.id) return;
-  box.innerHTML = `
-    <label class="visually-hidden" for="adv-select">${esc(t('place.addTo'))}</label>
-    <select id="adv-select">${state.adventures.map((a) => `<option value="${esc(a.id)}">${esc(a.title)}</option>`).join('')}</select>
-    <button class="btn" type="button">${esc(t('place.addTo'))}</button>`;
-  box.querySelector('button').addEventListener('click', async (e) => {
-    const select = box.querySelector('select');
-    const adventure = state.adventures.find((a) => a.id === select.value);
-    e.target.disabled = true;
+  if (!state.adventures.length) {
+    form.innerHTML = `<p>${esc(t('place.noAdventure'))} <a href="/adventures">${esc(t('nav.adventures'))}</a></p>`;
+    form.hidden = false;
+    return;
+  }
+  const upcoming = state.adventures.filter((a) => a.ends_on >= new Date().toISOString().slice(0, 10));
+  const list = upcoming.length ? upcoming : state.adventures;
+  form.innerHTML = `
+    <div class="row">
+      <label>${esc(t('place.chooseAdventure'))}<select name="adventure">${list.map((a) => `<option value="${esc(a.id)}">${esc(a.title)}</option>`).join('')}</select></label>
+      <label>${esc(t('place.chooseDay'))}<select name="day"></select></label>
+    </div>
+    <button class="btn" type="submit">${esc(t('place.add'))}</button>`;
+  const fillDays = () => {
+    const a = list.find((x) => x.id === form.elements.adventure.value);
+    form.elements.day.innerHTML = `<option value="">${esc(t('adventure.ideas'))}</option>` +
+      daysBetween(a.starts_on, a.ends_on).map((d, i) => `<option value="${d}">${esc(t('adventure.day', { n: i + 1 }))} · ${esc(formatTab(d))}</option>`).join('');
+  };
+  form.elements.adventure.addEventListener('change', fillDays);
+  fillDays();
+  form.hidden = false;
+  card.querySelector('[data-add-open]').hidden = true;
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const a = list.find((x) => x.id === form.elements.adventure.value);
+    const button = form.querySelector('button');
+    button.disabled = true;
     try {
-      await api(`/api/adventures/${adventure.id}/items`, { method: 'POST', body: { place_id: place.id } });
-      toast(t('place.added', { title: adventure.title }));
+      await api(`/api/adventures/${a.id}/items`, { method: 'POST', body: { place_id: place.id, day: form.elements.day.value || null } });
+      toast(t('place.added', { title: a.title }));
+      form.hidden = true;
+      card.querySelector('[data-add-open]').hidden = false;
     } catch {
       toast(t('error.generic'));
     } finally {
-      e.target.disabled = false;
+      button.disabled = false;
     }
-  });
+  };
 }

@@ -3,36 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Map · citybook</title>
+    <title>Paris · citybook</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bowlby+One&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Caveat:wght@500;700&family=DM+Serif+Display:ital@0;1&display=swap"
-    />
   </head>
-  <body data-palette="green-yellow" class="page-map">
-    <nav class="topbar" data-nav></nav>
+  <body class="page-map">
+    <header data-masthead></header>
     <main class="map-page">
-      <div id="map" class="map" role="application" aria-label="Map of Paris"></div>
+      <aside class="edition" aria-labelledby="edition-title">
+        <h1 id="edition-title" class="edition__title" data-i18n="map.title"></h1>
+        <p class="edition__subtitle" data-i18n="map.subtitle"></p>
+        <figure class="edition__photo" data-edition-photo hidden></figure>
+        <p class="edition__lead" data-i18n="map.lead"></p>
+        <div class="transit" aria-hidden="true"></div>
+        <p class="edition__count mono" data-count></p>
+      </aside>
 
-      <aside class="legend card taped" aria-labelledby="legend-title">
-        <div class="legend__head gingham torn">
-          <h1 id="legend-title" class="legend__title" data-title></h1>
-        </div>
-        <fieldset class="legend__layers">
-          <legend class="hand" data-i18n="map.layers"></legend>
+      <section class="map-frame">
+        <div id="map" class="map" role="application" aria-label="Map of Paris"></div>
+
+        <button class="layers-toggle btn btn--line" type="button" data-layers-toggle aria-expanded="false" aria-controls="layers">
+          <span data-i18n="map.layers"></span>
+        </button>
+        <fieldset class="layers" id="layers">
+          <legend class="layers__title" data-i18n="map.layers"></legend>
           <div data-layers></div>
-          <label class="toggle toggle--fav">
+          <label class="layer-row layer-row--fav">
             <input type="checkbox" data-favourites />
+            <span class="check" aria-hidden="true"></span>
+            <span class="layer-row__fav" aria-hidden="true">♥</span>
             <span data-i18n="map.favourites"></span>
           </label>
         </fieldset>
-      </aside>
 
-      <article class="place-card" data-card hidden></article>
-      <p class="map-status hand" data-status data-i18n="map.loading"></p>
+        <article class="place-card" data-card hidden aria-live="polite"></article>
+        <p class="map-status" data-status data-i18n="map.loading"></p>
+      </section>
     </main>
     <script type="module" src="/src/pages/map.js"></script>
   </body>
