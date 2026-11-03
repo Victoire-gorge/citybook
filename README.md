@@ -8,7 +8,7 @@ The site is in English for now; every interface text lives in `src/i18n/en.js`, 
 
 | Part | Where | What |
 |---|---|---|
-| Pages | `*.html`, `src/` | Plain JavaScript built by Vite. Map with Leaflet and CARTO/OpenStreetMap tiles. |
+| Pages | `*.html`, `src/` | Plain JavaScript built by Vite. Map with Leaflet and OpenStreetMap tiles (no API key). |
 | API | `worker/` | One Cloudflare Worker: JSON API, sign-in, photos. |
 | Data | D1 database `citybook` | Places, opening hours, photos, events, adventures, users. **Editable data lives here, not in the code.** |
 | Files | R2 bucket `citybook-photos` | Cached Wikimedia photos (public) and adventure covers (private). |

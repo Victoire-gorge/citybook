@@ -5,7 +5,7 @@
 .map { position: absolute; inset: 0; background: #efeadd; }
 
 /* Paper-toned map tiles, so the stickers carry the colour */
-.map .leaflet-tile-pane { filter: sepia(0.28) saturate(0.85) brightness(1.02); }
+.map .leaflet-tile-pane { filter: sepia(0.3) saturate(0.7) brightness(1.03); }
 .leaflet-container { font-family: var(--font-body); }
 .leaflet-control-attribution { font-size: 11px; }
 
