@@ -117,6 +117,28 @@
 .todo__editor-tools .icon-button[disabled] { opacity: 0.25; cursor: default; background: none; }
 
 .trip__map { margin-top: 34px; }
+
+/* The whole trip at a glance */
+.glance { margin-top: 40px; }
+.glance__title { font-style: italic; font-weight: 400; font-size: 1.7rem; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--rule); }
+.glance__days { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+.glance__day { display: grid; grid-template-columns: 74px 1fr; gap: 12px; padding: 12px; border: 1px solid var(--hair); border-radius: 8px; background: var(--card); }
+.glance__day.is-current { border-color: var(--forest); box-shadow: inset 0 0 0 1px var(--forest); }
+.glance__badge {
+  align-self: start; display: grid; gap: 1px; padding: 6px 4px; border: none; border-radius: 4px; cursor: pointer;
+  background: var(--forest); color: var(--card); font: inherit; text-align: center;
+}
+.glance__badge:hover { background: var(--forest-dark); }
+.glance__badge b { font-size: 0.8rem; font-weight: 700; }
+.glance__badge span { font-size: 0.66rem; color: var(--forest-light); }
+.glance__day:last-child .glance__badge:not(:has(span)) { background: var(--copper); }
+.glance__body { min-width: 0; }
+.glance__theme { font-style: italic; font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; }
+.glance__items { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; font-size: 0.86rem; }
+.glance__item { display: grid; grid-template-columns: 40px 1fr; gap: 6px; }
+.glance__item.is-done span:last-child { color: var(--muted); text-decoration: line-through; }
+.glance__time { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); padding-top: 2px; }
+.glance__empty { font-size: 0.84rem; color: var(--muted); }
 .trip__map-title, .shared__map h2 { font-style: italic; font-weight: 400; font-size: 1.7rem; margin-bottom: 12px; }
 .mini-map { height: 320px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper-2); }
 .mini-map--wide { height: 380px; }

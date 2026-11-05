@@ -102,6 +102,9 @@ export default {
   'adventure.calendar': 'Add to calendar',
   'adventure.openMap': 'Add places from the map',
   'adventure.mapTitle': 'On the map',
+  'adventure.overview': 'The whole trip',
+  'adventure.nothingYet': 'Nothing planned yet.',
+  'adventure.openDay': 'Open {day}',
 
   'share.readOnly': 'Read-only link',
   'share.nights': '{n} nights',

@@ -103,6 +103,28 @@ function dayPanel() {
   </div>`;
 }
 
+/** The whole adventure at a glance: every day in a row, below the selected day. */
+function overview() {
+  const ideas = itemsOf(adventure, null);
+  const line = (item) => `<li class="glance__item ${item.done ? 'is-done' : ''}">
+      <span class="glance__time">${esc(item.start_time || '')}</span><span>${esc(item.title)}</span></li>`;
+  const block = (key, badge, date, theme, items) => `<article class="glance__day ${key === current ? 'is-current' : ''}">
+      <button class="glance__badge" type="button" data-pick="${key}" aria-label="${esc(t('adventure.openDay', { day: badge }))}">
+        <b>${esc(badge)}</b>${date ? `<span>${esc(date)}</span>` : ''}</button>
+      <div class="glance__body">
+        ${theme ? `<h3 class="glance__theme">${esc(theme)}</h3>` : ''}
+        ${items.length ? `<ul class="glance__items">${items.map(line).join('')}</ul>` : `<p class="glance__empty">${esc(t('adventure.nothingYet'))}</p>`}
+      </div>
+    </article>`;
+  return `<section class="glance" aria-labelledby="glance-title">
+      <h2 id="glance-title" class="glance__title">${esc(t('adventure.overview'))}</h2>
+      <div class="glance__days">
+        ${days.map((d, i) => block(d, t('adventure.day', { n: i + 1 }), dayTab(d), adventure.days?.[d], itemsOf(adventure, d))).join('')}
+        ${ideas.length ? block('', t('adventure.ideas'), '', '', ideas) : ''}
+      </div>
+    </section>`;
+}
+
 function render() {
   const a = adventure;
   document.title = `${a.title} · citybook`;
@@ -144,6 +166,7 @@ function render() {
       </div>
       <div class="itinerary__panel" role="tabpanel">${dayPanel()}</div>
     </section>
+    ${overview()}
     <section class="trip__map" aria-labelledby="map-title">
       <h2 id="map-title" class="trip__map-title">${esc(t('adventure.mapTitle'))}</h2>
       <div class="mini-map" data-mini-map></div>
@@ -171,6 +194,14 @@ root.addEventListener('click', async (e) => {
       return;
     }
     root.querySelectorAll('.menu__list').forEach((m) => (m.hidden = true));
+    if (el.matches('[data-pick]')) {
+      current = el.dataset.pick;
+      editing = null;
+      render();
+      root.querySelector('.itinerary').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      root.querySelector(`[data-day="${current}"]`)?.focus({ preventScroll: true });
+      return;
+    }
     if (el.matches('[data-toggle-edit]')) {
       const id = el.closest('[data-item]').dataset.item;
       editing = editing === id ? null : id;
