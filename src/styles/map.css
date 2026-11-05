@@ -175,3 +175,14 @@
 .like[aria-pressed='true'] svg, .like--static svg { fill: currentColor; }
 .like--static { border: none; background: none; cursor: default; }
 .layer-row__fav { color: var(--copper); }
+
+/* Arrondissement boundaries and numbers */
+.arr-label { pointer-events: none; }
+.arr-label span {
+  display: block; text-align: center; font-family: var(--display); font-style: italic; font-weight: 700; font-size: 1.15rem; line-height: 24px;
+  color: rgba(32, 37, 33, 0.42); text-shadow: 0 0 3px var(--paper), 0 0 3px var(--paper);
+}
+.arr-label sup { font-size: 0.6em; }
+.layer-row--arr { border-top: 1px solid var(--hair); margin-top: 4px; padding-top: 9px; }
+.layer-row--arr + .layer-row--fav { border-top: none; margin-top: 0; }
+.layer-row__arr { width: 20px; height: 14px; border: 1.5px dashed var(--ink); border-radius: 2px; flex: none; }
