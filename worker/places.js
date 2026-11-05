@@ -32,8 +32,9 @@ export async function getMap(db, cityId, today) {
       .bind(cityId),
     db
       .prepare(
-        `select e.* from events e join places p on p.id = e.place_id join layers l on l.id = p.layer_id
-         where l.city_id = ? and (e.ends_on is null or e.ends_on >= ?) order by e.starts_on`,
+        `select e.* from events e left join places p on p.id = e.place_id left join layers l on l.id = p.layer_id
+         where (e.place_id is null or l.city_id = ?) and (e.ends_on is null or e.ends_on >= ?)
+         order by e.starts_on is null, e.starts_on, e.ends_on`,
       )
       .bind(cityId, today),
   ]);
@@ -50,10 +51,19 @@ export async function getMap(db, cityId, today) {
   const photosBy = byPlace(photos);
   const eventsBy = byPlace(events);
 
+  const eventView = (e) => ({
+    id: e.id, place_id: e.place_id, title: e.title, kind: e.kind, category: e.category, starts_on: e.starts_on,
+    ends_on: e.ends_on, date_note: e.date_note, url: e.url, image_url: e.image_url, price: e.price, summary: e.summary,
+    translations: parseJson(e.translations, {}),
+  });
+  // Seasonal places (a Christmas market square) only appear while something is on there.
+  const keep = (p) => p.layer_id !== 'seasonal' || eventsBy.has(p.id);
+
   return {
     city: { ...city, translations: parseJson(city.translations, {}) },
+    events: events.results.map(eventView),
     layers: layers.results.map((l) => ({ ...l, translations: parseJson(l.translations, {}) })),
-    places: places.results.map((p) => ({
+    places: places.results.filter(keep).map((p) => ({
       ...p,
       path: parseJson(p.path, null),
       translations: parseJson(p.translations, {}),
@@ -62,9 +72,7 @@ export async function getMap(db, cityId, today) {
       favourite: Boolean(p.favourite),
       hours: (hoursBy.get(p.id) || []).map(({ weekday, opens, closes }) => ({ weekday, opens, closes })),
       photos: (photosBy.get(p.id) || []).map(photoView),
-      events: (eventsBy.get(p.id) || []).map(({ id, title, kind, starts_on, ends_on, url, image_url, price }) => ({
-        id, title, kind, starts_on, ends_on, url, image_url, price,
-      })),
+      events: (eventsBy.get(p.id) || []).map(eventView),
     })),
   };
 }

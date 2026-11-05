@@ -80,6 +80,14 @@
       "shape": "point",
       "icon": "ticket",
       "sort": 6
+    },
+    {
+      "id": "seasonal",
+      "name": "Limited time",
+      "color": "#A63D3D",
+      "shape": "point",
+      "icon": "sparkle",
+      "sort": 5
     }
   ],
   "places": [
@@ -2555,6 +2563,42 @@
       "hours_note": "Book ahead.",
       "booking_required": true,
       "photo": "Moulin Rouge, 17 April 2011.jpg"
+    },
+    {
+      "id": "parvis-la-defense",
+      "layer": "seasonal",
+      "name": "Parvis de La Défense",
+      "lat": 48.892,
+      "lng": 2.238,
+      "address": "Parvis de La Défense, Puteaux",
+      "summary": "The big esplanade among the towers of La Défense."
+    },
+    {
+      "id": "avenue-des-champs-elysees",
+      "layer": "seasonal",
+      "name": "Avenue des Champs-Élysées",
+      "lat": 48.8698,
+      "lng": 2.3076,
+      "address": "Avenue des Champs-Élysées, 8th",
+      "summary": "The famous avenue, lit up for Christmas."
+    },
+    {
+      "id": "square-rene-viviani",
+      "layer": "seasonal",
+      "name": "Square René-Viviani",
+      "lat": 48.8521,
+      "lng": 2.3471,
+      "address": "Square René-Viviani, 5th",
+      "summary": "A small garden facing Notre-Dame, home to the oldest tree in Paris."
+    },
+    {
+      "id": "parvis-gare-de-l-est",
+      "layer": "seasonal",
+      "name": "Parvis de la Gare de l'Est",
+      "lat": 48.8763,
+      "lng": 2.3592,
+      "address": "Place du 11-Novembre-1918, 10th",
+      "summary": "The forecourt of the Gare de l'Est."
     }
   ],
   "photos": {
@@ -3202,7 +3246,165 @@
       "title": "Renaissance: Da Vinci, Raphael, Michelangelo",
       "kind": "exhibition",
       "ends_on": "2026-12-17",
-      "url": "https://www.atelier-lumieres.com/"
+      "url": "https://www.atelier-lumieres.com/",
+      "category": "exhibition",
+      "summary": "Da Vinci, Raphael and Michelangelo projected in an immersive show."
+    },
+    {
+      "id": "xmas-la-defense",
+      "place": "parvis-la-defense",
+      "title": "Christmas market at La Défense",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": "2026-11-12",
+      "ends_on": "2026-12-31",
+      "date_note": "Some areas stay open until 3 January.",
+      "url": "https://xmasparisladefense.com/",
+      "summary": "The biggest Christmas market in the Paris region, with hundreds of chalets among the towers."
+    },
+    {
+      "id": "xmas-tuileries",
+      "place": "jardin-des-tuileries",
+      "title": "Christmas magic at the Tuileries",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": "2026-11-14",
+      "ends_on": "2027-01-03",
+      "date_note": "",
+      "url": "https://parisjetaime.com/article/les-marches-de-noel-paris-a018",
+      "summary": "Food chalets, crafts and a funfair in the Tuileries Garden."
+    },
+    {
+      "id": "xmas-champs-elysees",
+      "place": "avenue-des-champs-elysees",
+      "title": "Christmas market on the Champs-Élysées",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": "2026-11-22",
+      "ends_on": "2027-01-04",
+      "date_note": "",
+      "url": "https://www.paris.fr/evenements/marches-de-noel-2026-le-calendrier-complet-126813",
+      "summary": "Back after several years, under the avenue's Christmas lights."
+    },
+    {
+      "id": "xmas-notre-dame",
+      "place": "square-rene-viviani",
+      "title": "Notre-Dame Christmas market",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": "2026-11-26",
+      "ends_on": "2026-12-27",
+      "date_note": "",
+      "url": "https://www.paris.fr/evenements/marches-de-noel-2026-le-calendrier-complet-126813",
+      "summary": "French crafts and artists in the garden facing the cathedral."
+    },
+    {
+      "id": "xmas-gare-de-l-est",
+      "place": "parvis-gare-de-l-est",
+      "title": "Alsatian Christmas market",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": "2026-12-02",
+      "ends_on": "2026-12-18",
+      "date_note": "",
+      "url": "https://www.offi.fr/a-travers-paris/marches-de-noel.html",
+      "summary": "Alsace specialities and local produce under a heated marquee."
+    },
+    {
+      "id": "xmas-abbesses",
+      "place": "place-des-abbesses-musicians",
+      "title": "Montmartre Christmas market",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": null,
+      "ends_on": null,
+      "date_note": "Late November to early January",
+      "url": "https://www.experiencegift.com/fr/blog/marche-de-noel-paris/",
+      "summary": "Chalets on the Place des Abbesses, at the foot of Montmartre."
+    },
+    {
+      "id": "festival-of-lights",
+      "place": "jardin-des-plantes",
+      "title": "Festival of Lights at the Jardin des Plantes",
+      "kind": "other",
+      "category": "festival",
+      "starts_on": null,
+      "ends_on": null,
+      "date_note": "Mid-November to mid-December, in the evening",
+      "url": "https://www.jardindesplantesdeparis.fr/",
+      "summary": "Giant illuminated sculptures across the botanical garden after dark."
+    },
+    {
+      "id": "beaujolais-nouveau-2026",
+      "place": null,
+      "title": "Beaujolais Nouveau night",
+      "kind": "other",
+      "category": "food",
+      "starts_on": "2026-11-19",
+      "ends_on": "2026-11-19",
+      "date_note": "",
+      "url": null,
+      "summary": "The new Beaujolais is released on the third Thursday of November: wine bars and bistros celebrate all evening."
+    },
+    {
+      "id": "monet-orangerie",
+      "place": "musee-de-l-orangerie",
+      "title": "Monet: Painting Time",
+      "kind": "exhibition",
+      "category": "exhibition",
+      "starts_on": null,
+      "ends_on": "2027-01-25",
+      "date_note": "",
+      "url": "https://www.musee-orangerie.fr",
+      "summary": "An exhibition around Monet, next to the Water Lilies."
+    },
+    {
+      "id": "bartholdi-orsay",
+      "place": "musee-d-orsay",
+      "title": "Auguste Bartholdi: Liberty Enlightening the World",
+      "kind": "exhibition",
+      "category": "exhibition",
+      "starts_on": null,
+      "ends_on": "2027-01-31",
+      "date_note": "",
+      "url": "https://www.musee-orsay.fr",
+      "summary": "The sculptor of the Statue of Liberty, at the Musée d'Orsay."
+    },
+    {
+      "id": "tintoretto-jacquemart",
+      "place": "musee-jacquemart-andre",
+      "title": "The Eternal Tintoretto",
+      "kind": "exhibition",
+      "category": "exhibition",
+      "starts_on": null,
+      "ends_on": "2027-01-27",
+      "date_note": "",
+      "url": "https://www.musee-jacquemart-andre.com",
+      "summary": "Venetian painting in the setting of a Parisian mansion."
+    },
+    {
+      "id": "remember-me-bourse",
+      "place": "bourse-de-commerce",
+      "title": "Remember Me",
+      "kind": "exhibition",
+      "category": "exhibition",
+      "starts_on": null,
+      "ends_on": "2026-12-31",
+      "date_note": "",
+      "url": "https://www.pinaultcollection.com/en/boursedecommerce",
+      "summary": "Contemporary art under the painted dome."
+    },
+    {
+      "id": "belmondo-cinematheque",
+      "place": null,
+      "title": "Belmondo: Le Magnifique (Cinémathèque française)",
+      "kind": "exhibition",
+      "category": "exhibition",
+      "starts_on": null,
+      "ends_on": "2027-01-31",
+      "date_note": "",
+      "url": "https://www.cinematheque.fr",
+      "summary": "An exhibition on Jean-Paul Belmondo, with screenings."
     }
   ]
 }

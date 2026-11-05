@@ -9,6 +9,7 @@ import { openStatus, parisClock, hoursForDay } from '../lib/hours.js';
 import { daysBetween } from '../lib/trip.js';
 import { guestName } from '../lib/guest.js';
 import { starsHtml } from '../lib/stars.js';
+import { eventDates } from '../lib/events.js';
 
 // Guests arrive with ?share=<token> from a shared adventure: read-only map, no sign-in.
 const shareToken = new URLSearchParams(location.search).get('share');
@@ -235,7 +236,7 @@ function cardHtml(place) {
   ].filter(Boolean).join(' ');
   const events = place.events.length
     ? `<div class="place-card__events"><h3>${esc(t('place.onNow'))}</h3><ul>${place.events
-        .map((e) => `<li>${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : esc(e.title)}${e.ends_on ? ` <span class="muted">${esc(t('place.until', { date: formatShort(e.ends_on) }))}</span>` : ''}</li>`)
+        .map((e) => `<li>${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : esc(e.title)} <span class="muted">${esc(eventDates(e))}</span></li>`)
         .join('')}</ul></div>`
     : '';
   return `

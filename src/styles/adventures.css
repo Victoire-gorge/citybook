@@ -282,3 +282,16 @@
 .day__list .wx { margin: -8px 0 14px; }
 .shared-day__body .wx { margin-bottom: 8px; }
 .shared > .wx-credit { margin: 10px 0 0; }
+
+/* Activities sub-tabs and limited-time cards */
+.subtabs { display: flex; gap: 28px; margin: -8px 0 18px; border-bottom: 1px solid var(--hair); }
+.subtab {
+  padding: 8px 0 10px; border: none; border-bottom: 3px solid transparent; background: none; cursor: pointer;
+  font: italic 700 1.35rem var(--display); color: var(--muted); margin-bottom: -1px;
+}
+.subtab[aria-selected='true'] { color: var(--ink); border-bottom-color: var(--forest); }
+.activity__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.activity__when { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.85rem; font-weight: 500; }
+.activity__photo--blank { display: grid; place-items: center; background: var(--forest); }
+.activity__date-big { font: italic 700 1.6rem var(--display); color: var(--card); padding: 0 20px; text-align: center; }
+.activity--event .tag--now { text-transform: none; letter-spacing: 0; }

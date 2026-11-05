@@ -76,7 +76,7 @@ for (const p of data.places) {
 
 for (const e of data.events ?? []) {
   lines.push(
-    `insert or ignore into events (id, place_id, title, kind, starts_on, ends_on, url) values (${[e.id, e.place, e.title, e.kind, e.starts_on ?? null, e.ends_on ?? null, e.url ?? null].map(sql).join(', ')});`,
+    `insert or ignore into events (id, place_id, title, kind, category, starts_on, ends_on, date_note, url, summary) values (${[e.id, e.place ?? null, e.title, e.kind, e.category ?? null, e.starts_on ?? null, e.ends_on ?? null, e.date_note ?? '', e.url ?? null, e.summary ?? ''].map(sql).join(', ')});`,
   );
 }
 
