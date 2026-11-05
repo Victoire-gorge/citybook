@@ -72,6 +72,14 @@
       "shape": "point",
       "icon": "house",
       "sort": 0
+    },
+    {
+      "id": "activities",
+      "name": "Activities",
+      "color": "#B5852A",
+      "shape": "point",
+      "icon": "ticket",
+      "sort": 6
     }
   ],
   "places": [
@@ -2146,6 +2154,407 @@
       "lng": 2.322222,
       "website": "https://www.legrandpointvirgule.com",
       "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "bateaux-mouches-cruise",
+      "layer": "activities",
+      "name": "Seine cruise on a Bateau-Mouche",
+      "wikidata": "Q8405",
+      "lat": 48.864014,
+      "lng": 2.306112,
+      "summary": "The classic boat ride past Notre-Dame, the Louvre and the Eiffel Tower, leaving from the Pont de l'Alma.",
+      "category": "classic",
+      "duration": "1 h 10",
+      "best_time": "At dusk",
+      "price": "Paid",
+      "website": "https://www.bateaux-mouches.fr",
+      "hours_note": "In winter, departures run from mid-morning until about 21:30.",
+      "photo": "Bateaux Mouches Paris 2011.jpg"
+    },
+    {
+      "id": "palace-of-versailles",
+      "layer": "activities",
+      "name": "Palace of Versailles",
+      "wikidata": "Q2946",
+      "lat": 48.804722,
+      "lng": 2.120278,
+      "summary": "The Hall of Mirrors, the royal apartments and huge gardens. Take the RER C to Versailles Château Rive Gauche.",
+      "category": "daytrip",
+      "duration": "A full day",
+      "best_time": "Arrive at opening",
+      "price": "Paid (gardens free in winter)",
+      "website": "https://en.chateauversailles.fr/",
+      "hours_note": "Closed on Mondays.",
+      "booking_required": true,
+      "photo": "Vue aérienne du domaine de Versailles par ToucanWings - Creative Commons By Sa 3.0 - 083.jpg"
+    },
+    {
+      "id": "eiffel-tower",
+      "layer": "activities",
+      "name": "Eiffel Tower",
+      "wikidata": "Q243",
+      "lat": 48.858296,
+      "lng": 2.294479,
+      "summary": "Go up for the view, or just watch it sparkle for five minutes at the start of every hour after dark.",
+      "category": "classic",
+      "duration": "2 h",
+      "best_time": "At night",
+      "price": "Paid to go up",
+      "website": "https://www.toureiffel.paris",
+      "booking_required": true,
+      "photo": "Tour Eiffel Wikimedia Commons.jpg"
+    },
+    {
+      "id": "arc-de-triomphe-rooftop",
+      "layer": "activities",
+      "name": "Arc de Triomphe rooftop",
+      "wikidata": "Q64436",
+      "lat": 48.87378,
+      "lng": 2.29504,
+      "summary": "Climb the stairs to the terrace and watch the twelve avenues fan out from the Étoile.",
+      "category": "classic",
+      "duration": "1 h",
+      "best_time": "Sunset",
+      "price": "Paid",
+      "website": "https://www.paris-arc-de-triomphe.fr",
+      "photo": "Arc de Triomphe - Août 2026.jpg"
+    },
+    {
+      "id": "notre-dame-de-paris",
+      "layer": "activities",
+      "name": "Notre-Dame de Paris",
+      "wikidata": "Q2981",
+      "lat": 48.853,
+      "lng": 2.3498,
+      "summary": "The cathedral reopened after the fire, its stone and windows bright again. Point Zero of French roads is on the square.",
+      "category": "classic",
+      "duration": "1 h",
+      "best_time": "Morning",
+      "price": "Free",
+      "website": "https://www.notredamedeparis.fr/",
+      "photo": "Notre-Dame de Paris 2013-07-24.jpg"
+    },
+    {
+      "id": "sacre-coeur",
+      "layer": "activities",
+      "name": "Sacré-Cœur and its dome",
+      "wikidata": "Q28785",
+      "lat": 48.88665,
+      "lng": 2.34295,
+      "summary": "The white basilica on top of Montmartre. Climb the dome for one of the highest views over Paris.",
+      "category": "classic",
+      "duration": "1 h 30",
+      "best_time": "Late afternoon",
+      "price": "Free (dome paid)",
+      "website": "https://www.sacre-coeur-montmartre.com",
+      "photo": "Le sacre coeur.jpg"
+    },
+    {
+      "id": "catacombs",
+      "layer": "activities",
+      "name": "Catacombs of Paris",
+      "wikidata": "Q28924",
+      "lat": 48.83397,
+      "lng": 2.33245,
+      "summary": "Old quarry tunnels lined with the bones of millions of Parisians. Strange, quiet and unforgettable.",
+      "category": "offbeat",
+      "duration": "1 h",
+      "best_time": "Any time",
+      "price": "Paid",
+      "website": "https://www.catacombes.paris.fr",
+      "hours_note": "Book a time slot online: tickets sell out.",
+      "booking_required": true,
+      "photo": "Catacumbas, París, Francia, 2022-11-01, DD 117-119 HDR.jpg"
+    },
+    {
+      "id": "pere-lachaise",
+      "layer": "activities",
+      "name": "Père-Lachaise cemetery",
+      "wikidata": "Q311",
+      "lat": 48.861111,
+      "lng": 2.394167,
+      "summary": "A romantic hillside of tombs and trees: Oscar Wilde, Édith Piaf, Chopin, Jim Morrison. Beautiful in autumn.",
+      "category": "outdoors",
+      "duration": "2 h",
+      "best_time": "Autumn afternoon",
+      "price": "Free",
+      "website": "https://www.paris.fr/perelachaise",
+      "photo": "Main gate of the Père-Lachaise Cemetery, Paris 13 June 2014.jpg"
+    },
+    {
+      "id": "sewer-museum",
+      "layer": "activities",
+      "name": "Paris Sewer Museum",
+      "wikidata": "Q2654419",
+      "lat": 48.862611,
+      "lng": 2.302528,
+      "summary": "Walk through real sewer galleries under the Quai d'Orsay and learn how the city works underground.",
+      "category": "offbeat",
+      "duration": "1 h",
+      "best_time": "Rainy day",
+      "price": "Paid",
+      "website": "https://musee-egouts.paris.fr/en/",
+      "photo": "Exterieur du musée des égouts.jpg"
+    },
+    {
+      "id": "deyrolle",
+      "layer": "activities",
+      "name": "Deyrolle",
+      "wikidata": "Q3025643",
+      "lat": 48.85654,
+      "lng": 2.32646,
+      "summary": "A cabinet-of-curiosities shop on rue du Bac: stuffed lions, butterflies and old school charts.",
+      "category": "offbeat",
+      "duration": "30 min",
+      "best_time": "Any time",
+      "price": "Free to browse",
+      "photo": "Deyrolle, 46 Rue du Bac, 75007 Paris 2013.jpg"
+    },
+    {
+      "id": "studio-28",
+      "layer": "activities",
+      "name": "Studio 28 cinema",
+      "wikidata": "Q3500949",
+      "lat": 48.886167,
+      "lng": 2.335395,
+      "summary": "A tiny historic cinema in Montmartre, open since 1928, with a little garden bar.",
+      "category": "evening",
+      "duration": "2 h",
+      "best_time": "Evening",
+      "price": "Paid",
+      "website": "https://www.cinema-studio28.fr",
+      "photo": "Studio 28 nuit.jpg"
+    },
+    {
+      "id": "piscine-des-amiraux",
+      "layer": "activities",
+      "name": "Swim at the Piscine des Amiraux",
+      "wikidata": "Q3149084",
+      "lat": 48.8943,
+      "lng": 2.35086,
+      "summary": "A 1920s Art Deco public pool with two floors of changing cabins, seen in Amélie.",
+      "category": "offbeat",
+      "duration": "1 h",
+      "best_time": "Weekday",
+      "price": "Paid",
+      "hours_note": "Bring a swimsuit.",
+      "photo": "Immeuble Sauvage - piscine des amiraux - rue des amiraux 2.JPG"
+    },
+    {
+      "id": "le-train-bleu",
+      "layer": "activities",
+      "name": "Le Train Bleu",
+      "wikidata": "Q1810254",
+      "lat": 48.845,
+      "lng": 2.373333,
+      "summary": "A Belle Époque dining room inside the Gare de Lyon, all gold and painted ceilings. Or just a drink at the bar.",
+      "category": "food",
+      "duration": "1 h 30",
+      "best_time": "Lunch or dinner",
+      "price": "€€€",
+      "website": "http://www.le-train-bleu.com",
+      "hours_note": "Book ahead for a table.",
+      "booking_required": true,
+      "photo": "Train bleu 01.jpg"
+    },
+    {
+      "id": "coulee-verte",
+      "layer": "activities",
+      "name": "Coulée verte René-Dumont",
+      "wikidata": "Q2060889",
+      "lat": 48.849572,
+      "lng": 2.3711,
+      "summary": "A garden walk on an old railway viaduct, starting near Bastille and heading east above the streets.",
+      "category": "outdoors",
+      "duration": "1 h 30",
+      "best_time": "Morning",
+      "price": "Free",
+      "website": "https://www.paris.fr/lieux/coulee-verte-rene-dumont-1772",
+      "photo": "Promenade plantée, Paris August 2009 (10).jpg"
+    },
+    {
+      "id": "canal-saint-martin",
+      "layer": "activities",
+      "name": "Canal Saint-Martin",
+      "wikidata": "Q860172",
+      "lat": 48.8717,
+      "lng": 2.365,
+      "summary": "Iron footbridges, locks and plane trees. Walk along the water, then stop in one of the cafés.",
+      "category": "outdoors",
+      "duration": "1 h 30",
+      "best_time": "Sunday afternoon",
+      "price": "Free",
+      "photo": "Paris Canal St-Martin écluses Récollets 2013.jpg"
+    },
+    {
+      "id": "marche-des-enfants-rouges",
+      "layer": "activities",
+      "name": "Marché des Enfants Rouges",
+      "wikidata": "Q3289922",
+      "lat": 48.862806,
+      "lng": 2.362,
+      "summary": "The oldest covered market in Paris, in the Marais: Moroccan, Japanese and Italian stalls for lunch.",
+      "category": "food",
+      "duration": "1 h",
+      "best_time": "Lunch",
+      "price": "€",
+      "hours_note": "Closed on Mondays.",
+      "photo": "Paris III-Marché des Enfants-Rouges.jpg"
+    },
+    {
+      "id": "puces-de-saint-ouen",
+      "layer": "activities",
+      "name": "Saint-Ouen flea market",
+      "wikidata": "Q56309501",
+      "lat": 48.9023,
+      "lng": 2.3394,
+      "summary": "A maze of antique dealers, vintage clothes and odd objects just north of Paris.",
+      "category": "offbeat",
+      "duration": "Half a day",
+      "best_time": "Weekend morning",
+      "price": "Free to browse",
+      "website": "https://www.pucesdeparissaintouen.com/",
+      "hours_note": "Open from Saturday to Monday.",
+      "photo": "Marche Malassis4.jpg"
+    },
+    {
+      "id": "shakespeare-and-company",
+      "layer": "activities",
+      "name": "Shakespeare and Company",
+      "wikidata": "Q1503157",
+      "lat": 48.8525,
+      "lng": 2.346944,
+      "summary": "The famous English bookshop facing Notre-Dame, with a reading room upstairs and a café next door.",
+      "category": "offbeat",
+      "duration": "45 min",
+      "best_time": "Any time",
+      "price": "Free to browse",
+      "website": "http://www.shakespeareandcompany.com",
+      "photo": "Shakespeare and Company, Paris.jpg"
+    },
+    {
+      "id": "atelier-des-lumieres",
+      "layer": "activities",
+      "name": "Atelier des Lumières",
+      "wikidata": "Q56255196",
+      "lat": 48.861623,
+      "lng": 2.380835,
+      "summary": "Immersive digital art shows projected on every wall of a former foundry.",
+      "category": "offbeat",
+      "duration": "1 h",
+      "best_time": "Rainy day",
+      "price": "Paid",
+      "website": "https://www.atelier-lumieres.com/",
+      "booking_required": true,
+      "photo": "Atelier des Lumières Klimt.jpg"
+    },
+    {
+      "id": "jardin-des-plantes",
+      "layer": "activities",
+      "name": "Jardin des Plantes",
+      "wikidata": "Q730948",
+      "lat": 48.843889,
+      "lng": 2.359722,
+      "summary": "Botanical gardens, glasshouses and the Grande Galerie de l'Évolution. From mid-November, the Festival of Lights fills it at night.",
+      "category": "outdoors",
+      "duration": "2 h",
+      "best_time": "Afternoon, or evening for the lights",
+      "price": "Free (galleries and lights paid)",
+      "website": "https://www.jardindesplantesdeparis.fr/",
+      "photo": "Paris 75005 Grande Galerie de l'Evolution 20070804.jpg"
+    },
+    {
+      "id": "jardin-des-tuileries",
+      "layer": "activities",
+      "name": "Tuileries Garden",
+      "wikidata": "Q818517",
+      "lat": 48.863889,
+      "lng": 2.326111,
+      "summary": "The royal garden between the Louvre and Concorde. In November its Christmas market opens with a big wheel.",
+      "category": "outdoors",
+      "duration": "1 h",
+      "best_time": "Afternoon",
+      "price": "Free",
+      "photo": "Grande Roue de Paris - Louvre et Jardins des Tuileries.jpg"
+    },
+    {
+      "id": "jardin-du-luxembourg",
+      "layer": "activities",
+      "name": "Jardin du Luxembourg",
+      "wikidata": "Q309458",
+      "lat": 48.846944,
+      "lng": 2.337222,
+      "summary": "Green chairs, the Medici fountain and the Senate palace: the Parisians' favourite garden.",
+      "category": "outdoors",
+      "duration": "1 h",
+      "best_time": "Sunny afternoon",
+      "price": "Free",
+      "website": "https://jardin.senat.fr",
+      "photo": "LuxembourgMontparnasse 2.jpg"
+    },
+    {
+      "id": "tour-montparnasse",
+      "layer": "activities",
+      "name": "Montparnasse Tower viewpoint",
+      "wikidata": "Q323767",
+      "lat": 48.84211,
+      "lng": 2.32198,
+      "summary": "A rooftop view over all of Paris, with the Eiffel Tower in the picture.",
+      "category": "classic",
+      "duration": "1 h",
+      "best_time": "Sunset",
+      "price": "Paid",
+      "website": "https://www.tourmontparnasse56.com",
+      "photo": "Remote view of the Tour Montparnasse & Eiffel Tower in 2005.jpg"
+    },
+    {
+      "id": "chateau-de-fontainebleau",
+      "layer": "activities",
+      "name": "Château de Fontainebleau",
+      "wikidata": "Q201428",
+      "lat": 48.402222,
+      "lng": 2.700556,
+      "summary": "Eight centuries of kings in one palace, then a walk in the forest. Trains leave from the Gare de Lyon.",
+      "category": "daytrip",
+      "duration": "A full day",
+      "best_time": "Weekday",
+      "price": "Paid",
+      "website": "https://www.chateaudefontainebleau.fr/",
+      "photo": "Le Grand Escalier à Fer de Cheval.jpg"
+    },
+    {
+      "id": "giverny",
+      "layer": "activities",
+      "name": "Monet's house and gardens, Giverny",
+      "wikidata": "Q1473446",
+      "lat": 49.075,
+      "lng": 1.535556,
+      "summary": "The water lilies, the Japanese bridge and Monet's pink house in Normandy.",
+      "category": "daytrip",
+      "duration": "A full day",
+      "best_time": "Spring",
+      "price": "Paid",
+      "website": "http://www.fondation-monet.com",
+      "hours_note": "Closed in winter: reopens in spring.",
+      "booking_required": true,
+      "photo": "La Maison vue du Clos Normand.jpg"
+    },
+    {
+      "id": "moulin-rouge",
+      "layer": "activities",
+      "name": "Moulin Rouge",
+      "wikidata": "Q151030",
+      "lat": 48.884167,
+      "lng": 2.332222,
+      "summary": "The red windmill and its cabaret revue, feathers and French cancan included.",
+      "category": "evening",
+      "duration": "2 h",
+      "best_time": "Evening",
+      "price": "€€€",
+      "website": "https://www.moulinrouge.fr/",
+      "hours_note": "Book ahead.",
+      "booking_required": true,
+      "photo": "Moulin Rouge, 17 April 2011.jpg"
     }
   ],
   "photos": {
@@ -2664,6 +3073,110 @@
     "Paris Théâtre de Passy 2022 02.jpg": [
       "Anvilaquarius",
       "CC0"
+    ],
+    "Bateaux Mouches Paris 2011.jpg": [
+      "Daniel Stockman",
+      "CC BY-SA 2.0"
+    ],
+    "Vue aérienne du domaine de Versailles par ToucanWings - Creative Commons By Sa 3.0 - 083.jpg": [
+      "ToucanWings",
+      "CC BY-SA 3.0"
+    ],
+    "Tour Eiffel Wikimedia Commons.jpg": [
+      "Benh LIEU SONG",
+      "Public domain"
+    ],
+    "Arc de Triomphe - Août 2026.jpg": [
+      "ZeusUpsistos",
+      "CC BY-SA 4.0"
+    ],
+    "Notre-Dame de Paris 2013-07-24.jpg": [
+      "P e z i",
+      "CC BY-SA 3.0"
+    ],
+    "Le sacre coeur.jpg": [
+      "Tonchino",
+      "CC BY-SA 3.0"
+    ],
+    "Catacumbas, París, Francia, 2022-11-01, DD 117-119 HDR.jpg": [
+      "Diego Delso",
+      "CC BY-SA 4.0"
+    ],
+    "Main gate of the Père-Lachaise Cemetery, Paris 13 June 2014.jpg": [
+      "Connie Ma",
+      "CC BY-SA 2.0"
+    ],
+    "Exterieur du musée des égouts.jpg": [
+      "Romain91",
+      "CC BY-SA 4.0"
+    ],
+    "Deyrolle, 46 Rue du Bac, 75007 Paris 2013.jpg": [
+      "flightlog",
+      "CC BY 2.0"
+    ],
+    "Studio 28 nuit.jpg": [
+      "Tatvam",
+      "CC BY-SA 4.0"
+    ],
+    "Immeuble Sauvage - piscine des amiraux - rue des amiraux 2.JPG": [
+      "Remi Mathis",
+      "CC BY-SA 3.0"
+    ],
+    "Train bleu 01.jpg": [
+      "Arnaud 25",
+      "Public domain"
+    ],
+    "Promenade plantée, Paris August 2009 (10).jpg": [
+      "Jean-Louis Zimmermann",
+      "CC BY 2.0"
+    ],
+    "Paris Canal St-Martin écluses Récollets 2013.jpg": [
+      "JLPC",
+      "CC BY-SA 3.0"
+    ],
+    "Paris III-Marché des Enfants-Rouges.jpg": [
+      "Popolon",
+      "CC BY-SA 3.0"
+    ],
+    "Marche Malassis4.jpg": [
+      "Alpenhexe",
+      "CC0"
+    ],
+    "Shakespeare and Company, Paris.jpg": [
+      "Mike Peel",
+      "CC BY-SA 4.0"
+    ],
+    "Atelier des Lumières Klimt.jpg": [
+      "Caroline Léna Becker",
+      "CC BY 3.0"
+    ],
+    "Paris 75005 Grande Galerie de l'Evolution 20070804.jpg": [
+      "Benh LIEU SONG",
+      "CC BY 3.0"
+    ],
+    "Grande Roue de Paris - Louvre et Jardins des Tuileries.jpg": [
+      "Tangopaso",
+      "Public domain"
+    ],
+    "LuxembourgMontparnasse 2.jpg": [
+      "Kirua",
+      "Public domain"
+    ],
+    "Remote view of the Tour Montparnasse & Eiffel Tower in 2005.jpg": [
+      "Thbz",
+      "CC BY-SA 3.0"
+    ],
+    "Le Grand Escalier à Fer de Cheval.jpg": [
+      "Carolus",
+      "CC BY 2.5"
+    ],
+    "La Maison vue du Clos Normand.jpg": [
+      "Fondation Monet",
+      "CC BY-SA 3.0"
+    ],
+    "Moulin Rouge, 17 April 2011.jpg": [
+      "Juanedc",
+      "CC BY 2.0"
     ]
   },
   "adventures": [
@@ -2680,6 +3193,16 @@
       ],
       "language": "en",
       "palette": "blue-yellow"
+    }
+  ],
+  "events": [
+    {
+      "id": "atelier-lumieres-renaissance",
+      "place": "atelier-des-lumieres",
+      "title": "Renaissance: Da Vinci, Raphael, Michelangelo",
+      "kind": "exhibition",
+      "ends_on": "2026-12-17",
+      "url": "https://www.atelier-lumieres.com/"
     }
   ]
 }

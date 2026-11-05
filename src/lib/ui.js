@@ -18,6 +18,7 @@ export function mountMasthead(current, { issue = t('issue.paris'), signedIn = tr
       <a class="wordmark" href="/">${esc(t('site.name'))}</a>
       ${signedIn ? `<nav class="sections" aria-label="${esc(t('nav.label'))}">
         <a href="/" ${current === 'map' ? 'aria-current="page"' : ''}>${esc(t('nav.map'))}</a>
+        <a href="/activities" ${current === 'activities' ? 'aria-current="page"' : ''}>${esc(t('nav.activities'))}</a>
         <a href="/adventures" ${current === 'adventures' ? 'aria-current="page"' : ''}>${esc(t('nav.adventures'))}</a>
       </nav>` : ''}
       ${shareToken ? `<nav class="sections" aria-label="${esc(t('nav.label'))}">

@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         map: resolve(import.meta.dirname, 'index.html'),
+        activities: resolve(import.meta.dirname, 'activities.html'),
         adventures: resolve(import.meta.dirname, 'adventures.html'),
         adventure: resolve(import.meta.dirname, 'adventure.html'),
         share: resolve(import.meta.dirname, 'share.html'),

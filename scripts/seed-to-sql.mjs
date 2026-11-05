@@ -52,6 +52,9 @@ for (const p of data.places) {
     hours_note: p.hours_note ?? '',
     wikidata_id: p.wikidata ?? null,
     favourite: Boolean(p.favourite),
+    category: p.category ?? null,
+    duration: p.duration ?? null,
+    best_time: p.best_time ?? null,
   };
   lines.push(
     `insert or ignore into places (${Object.keys(cols).join(', ')}) values (${Object.values(cols).map(sql).join(', ')});`,
@@ -69,6 +72,12 @@ for (const p of data.places) {
       `insert or ignore into photos (id, place_id, source, file, author, license, source_url) values (${[`${p.id}-1`, p.id, 'commons', p.photo, credit[0], credit[1], page].map(sql).join(', ')});`,
     );
   }
+}
+
+for (const e of data.events ?? []) {
+  lines.push(
+    `insert or ignore into events (id, place_id, title, kind, starts_on, ends_on, url) values (${[e.id, e.place, e.title, e.kind, e.starts_on ?? null, e.ends_on ?? null, e.url ?? null].map(sql).join(', ')});`,
+  );
 }
 
 // Adventures belong to the first user: create your account (scripts/create-user.mjs) before seeding.
