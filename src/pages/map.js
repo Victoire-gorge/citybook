@@ -42,13 +42,46 @@ L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
 // (usage policy: https://operations.osmfoundation.org/policies/tiles/).
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · Arrondissements © <a href="https://opendata.paris.fr/explore/dataset/arrondissements/">Ville de Paris</a> (ODbL)',
 }).addTo(map);
 
 load().catch((err) => {
   console.error(err);
   statusEl.textContent = t('map.error');
 });
+
+// ---------- Arrondissement boundaries (Paris Data, ODbL), drawn under the places ----------
+
+const arrondissements = L.layerGroup();
+// Label spots for the two arrondissements whose woods pull the centre outside Paris.
+const LABEL_AT = { 12: [48.8405, 2.3880], 16: [48.8610, 2.2760] };
+const ordinal = (n) => (n === 1 ? '1<sup>er</sup>' : `${n}<sup>e</sup>`);
+
+async function drawArrondissements() {
+  try {
+    const { arrondissements: list } = await fetch('/data/paris-arrondissements.json').then((r) => r.json());
+    for (const [n, , ring] of list) {
+      L.polygon(ring, { color: '#202521', weight: 1.2, opacity: 0.55, dashArray: '2 5', fill: false, interactive: false }).addTo(arrondissements);
+      const at = LABEL_AT[n] || [ring.reduce((s, p) => s + p[0], 0) / ring.length, ring.reduce((s, p) => s + p[1], 0) / ring.length];
+      L.marker(at, {
+        icon: L.divIcon({ className: 'arr-label', html: `<span>${ordinal(n)}</span>`, iconSize: [40, 24], iconAnchor: [20, 12] }),
+        interactive: false, keyboard: false,
+      }).addTo(arrondissements);
+    }
+  } catch { /* the map works without them */ }
+}
+
+let showArr = true;
+try { showArr = localStorage.getItem('citybook.arrondissements') !== 'off'; } catch { /* default on */ }
+const arrBox = document.querySelector('[data-arrondissements]');
+arrBox.checked = showArr;
+if (showArr) arrondissements.addTo(map);
+arrBox.addEventListener('change', (e) => {
+  if (e.target.checked) arrondissements.addTo(map);
+  else arrondissements.remove();
+  try { localStorage.setItem('citybook.arrondissements', e.target.checked ? 'on' : 'off'); } catch { /* not remembered */ }
+});
+drawArrondissements();
 
 async function fetchMap() {
   if (!shareToken) return api('/api/map/paris');

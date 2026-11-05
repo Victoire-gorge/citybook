@@ -28,6 +28,7 @@ export default {
   'map.error': 'The map could not load. Check your connection and reload the page.',
   'map.places': '{n} places',
   'map.saved': 'Saved for {title}',
+  'map.arrondissements': 'Arrondissements',
   'map.savedHelp': 'The star marks places already in our plan.',
   'map.onlySaved': 'Only saved places',
   'map.ownerFavourites': 'Only {name}’s favourites',
