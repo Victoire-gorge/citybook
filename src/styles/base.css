@@ -108,6 +108,7 @@ p { margin: 0; }
   font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
 }
 .tag { border-radius: 3px; font-weight: 500; }
+.tag--off { background: #f6e6e2; border-color: #b25a45; color: #7a2f1f; text-transform: none; letter-spacing: 0; }
 .tag--now { background: var(--tag); border-color: #b49a3c; color: var(--ink); }
 .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--rule); border-radius: var(--radius); font-size: 0.78rem; font-weight: 500; }
 .page-share .masthead { border-bottom: 1px solid var(--rule); }

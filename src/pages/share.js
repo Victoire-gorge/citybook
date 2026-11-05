@@ -28,6 +28,7 @@ function stopHtml(item) {
         ${item.added_by ? `<span class="suggested">★ ${esc(t('share.suggestedBy', { name: item.added_by }))}</span>` : ''}
         ${mine ? `<button class="link-button todo__unsuggest" type="button" data-unsuggest="${esc(item.id)}">${esc(t('share.removeSuggestion'))}</button>` : ''}</p>
       ${item.summary ? `<p class="todo__summary">${esc(item.summary)}</p>` : ''}
+      ${item.day && !daysBetween(adventure.starts_on, adventure.ends_on).includes(item.day) ? `<p><span class="tag tag--off">${esc(t('adventure.outside', { date: formatTab(item.day) }))}</span></p>` : ''}
       ${item.note ? `<p class="todo__note">${esc(item.note)}</p>` : ''}
       ${practical ? `<p class="todo__practical">${practical}</p>` : ''}
     </div>

@@ -58,6 +58,12 @@ export function openAdventureForm(dialog, { adventure = null, onSaved, onDeleted
       guests: f.guests.value.split(',').map((s) => s.trim()).filter(Boolean),
       notes: f.notes.value.trim(),
     };
+    // Things planned on dates the trip no longer covers are kept (with their date) in Ideas: say so first.
+    if (adventure) {
+      const outside = (adventure.items || []).filter((i) => i.day && (i.day < body.starts_on || i.day > body.ends_on)).length;
+      const before = (adventure.items || []).filter((i) => i.day && (i.day < adventure.starts_on || i.day > adventure.ends_on)).length;
+      if (outside > before && !confirm(outside === 1 ? t('form.outsideOne') : t('form.outsideConfirm', { n: outside }))) return;
+    }
     const submit = form.querySelector('[type=submit]');
     submit.disabled = true;
     try {

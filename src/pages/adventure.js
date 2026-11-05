@@ -57,6 +57,7 @@ function itemHtml(item, index, total) {
     <label class="todo__check"><input type="checkbox" data-field="done" ${item.done ? 'checked' : ''} /><span class="visually-hidden">${esc(item.title)}</span></label>
     <div class="todo__text">
       <p>${title}${item.start_time ? ` <span class="todo__time">(${esc(item.start_time)})</span>` : ''}${item.added_by ? ` <span class="suggested">★ ${esc(t('share.suggestedBy', { name: item.added_by }))}</span>` : ''}</p>
+      ${item.day && !days.includes(item.day) ? `<p><span class="tag tag--off">${esc(t('adventure.outside', { date: formatDay(item.day) }))}</span></p>` : ''}
       ${item.note ? `<p class="todo__note">${esc(item.note)}</p>` : ''}
     </div>
     <button class="icon-button todo__edit" type="button" data-toggle-edit aria-expanded="${open}" aria-label="${esc(t('adventure.edit'))}">${icon('edit', { size: 15 })}</button>
