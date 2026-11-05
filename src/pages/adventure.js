@@ -56,7 +56,7 @@ function itemHtml(item, index, total) {
   return `<li class="todo ${item.done ? 'is-done' : ''} ${open ? 'is-editing' : ''}" data-item="${esc(item.id)}">
     <label class="todo__check"><input type="checkbox" data-field="done" ${item.done ? 'checked' : ''} /><span class="visually-hidden">${esc(item.title)}</span></label>
     <div class="todo__text">
-      <p>${title}${item.start_time ? ` <span class="todo__time">(${esc(item.start_time)})</span>` : ''}</p>
+      <p>${title}${item.start_time ? ` <span class="todo__time">(${esc(item.start_time)})</span>` : ''}${item.added_by ? ` <span class="suggested">★ ${esc(t('share.suggestedBy', { name: item.added_by }))}</span>` : ''}</p>
       ${item.note ? `<p class="todo__note">${esc(item.note)}</p>` : ''}
     </div>
     <button class="icon-button todo__edit" type="button" data-toggle-edit aria-expanded="${open}" aria-label="${esc(t('adventure.edit'))}">${icon('edit', { size: 15 })}</button>
@@ -107,7 +107,7 @@ function dayPanel() {
 function overview() {
   const ideas = itemsOf(adventure, null);
   const line = (item) => `<li class="glance__item ${item.done ? 'is-done' : ''}">
-      <span class="glance__time">${esc(item.start_time || '')}</span><span>${esc(item.title)}</span></li>`;
+      <span class="glance__time">${esc(item.start_time || '')}</span><span>${esc(item.title)}${item.added_by ? ' <span class="star" title="' + esc(t('share.suggestedBy', { name: item.added_by })) + '">★</span>' : ''}</span></li>`;
   const block = (key, badge, date, theme, items) => `<article class="glance__day ${key === current ? 'is-current' : ''}">
       <button class="glance__badge" type="button" data-pick="${key}" aria-label="${esc(t('adventure.openDay', { day: badge }))}">
         <b>${esc(badge)}</b>${date ? `<span>${esc(date)}</span>` : ''}</button>

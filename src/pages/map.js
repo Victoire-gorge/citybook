@@ -7,6 +7,7 @@ import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { icon, picto } from '../lib/icons.js';
 import { openStatus, parisClock, hoursForDay } from '../lib/hours.js';
 import { daysBetween } from '../lib/trip.js';
+import { guestName } from '../lib/guest.js';
 
 // Guests arrive with ?share=<token> from a shared adventure: read-only map, no sign-in.
 const shareToken = new URLSearchParams(location.search).get('share');
@@ -77,9 +78,10 @@ function setupGuest(data) {
   const a = data.adventure;
   setLanguage(a.language);
   state.adventure = a;
-  for (const { place_id, day } of data.saved) {
-    if (!state.saved.has(place_id)) state.saved.set(place_id, []);
-    state.saved.get(place_id).push(day || '');
+  state.me = guestName(a, a.owner);
+  for (const item of data.saved) {
+    if (!state.saved.has(item.place_id)) state.saved.set(item.place_id, []);
+    state.saved.get(item.place_id).push(item);
   }
   document.title = `${a.title} · Map · citybook`;
   document.querySelector('[data-favourites-label]').textContent = t('map.ownerFavourites', { name: a.owner });
@@ -99,7 +101,7 @@ function setupGuest(data) {
 function savedWhen(place) {
   const days = daysBetween(state.adventure.starts_on, state.adventure.ends_on);
   return state.saved.get(place.id)
-    .map((d) => (days.includes(d) ? `${t('adventure.day', { n: days.indexOf(d) + 1 })}, ${formatTab(d)}` : t('adventure.ideas')))
+    .map(({ day: d }) => (days.includes(d) ? `${t('adventure.day', { n: days.indexOf(d) + 1 })}, ${formatTab(d)}` : t('adventure.ideas')))
     .filter((v, i, all) => all.indexOf(v) === i)
     .join(' · ');
 }
@@ -245,7 +247,7 @@ function cardHtml(place) {
       </div>
       <div class="place-card__body">
         <p class="place-card__layer">${picto(layer.icon, layer.color, 14)} ${esc(tr(layer, 'name'))}</p>
-        ${isSaved(place) ? `<p class="place-card__saved"><span class="star" aria-hidden="true">★</span> ${esc(t('place.savedOn', { when: savedWhen(place) }))}</p>` : ''}
+        ${isSaved(place) ? `<p class="place-card__saved"><span class="star" aria-hidden="true">★</span> ${esc(t('place.savedOn', { when: savedWhen(place) }))}${suggestedBy(place)}</p>` : ''}
         <div class="place-card__title-row">
           <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
           ${shareToken
@@ -259,7 +261,7 @@ function cardHtml(place) {
         ${events}
       </div>
       <div class="place-card__actions">
-        ${shareToken ? '' : `<button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
+        ${shareToken ? starButton(place) : `<button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
         <form class="place-card__add" data-add-form hidden></form>`}
         ${place.website ? `<a class="place-card__website" href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
       </div>
@@ -272,7 +274,59 @@ function render(place, pinned) {
   card.classList.toggle('is-pinned', pinned);
   card.querySelector('[data-close]').addEventListener('click', closeCard);
   card.querySelector('[data-like]')?.addEventListener('click', () => toggleLike(place, pinned));
+  card.querySelector('[data-star]')?.addEventListener('click', () => toggleStar(place, pinned));
   card.querySelector('[data-add-open]')?.addEventListener('click', () => openAddForm(place));
+}
+
+// ---------- Guests: star a place to put it in the trip's Ideas ----------
+
+const guestItems = (place) => (state.saved.get(place.id) || []).filter((i) => i.added_by);
+function suggestedBy(place) {
+  const names = [...new Set(guestItems(place).map((i) => i.added_by))];
+  return names.length ? ` · ${esc(t('share.suggestedBy', { name: names.join(', ') }))}` : '';
+}
+
+/** Star a place (adds it to Ideas) or take back your own star. Places the owner planned stay starred. */
+function starButton(place) {
+  const mine = guestItems(place).filter((i) => i.added_by === state.me);
+  if (isSaved(place) && !mine.length) return '';
+  const on = mine.length > 0;
+  return `<button class="btn ${on ? 'btn--line' : ''} btn--cta" type="button" data-star aria-pressed="${on}">
+    ${esc(t(on ? 'map.unstar' : 'map.star'))} <span class="star" aria-hidden="true">★</span></button>`;
+}
+
+async function toggleStar(place, pinned) {
+  const base = `/api/share/${encodeURIComponent(shareToken)}/items`;
+  const mine = guestItems(place).filter((i) => i.added_by === state.me);
+  try {
+    if (mine.length) {
+      for (const item of mine) {
+        const res = await fetch(`${base}/${encodeURIComponent(item.id)}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error();
+      }
+      const left = state.saved.get(place.id).filter((i) => !mine.includes(i));
+      if (left.length) state.saved.set(place.id, left);
+      else state.saved.delete(place.id);
+      toast(t('map.unstarred'));
+    } else {
+      const res = await fetch(base, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ place_id: place.id, by: state.me }),
+      });
+      if (!res.ok) throw new Error();
+      const item = await res.json();
+      if (!item.existed) state.saved.set(place.id, [...(state.saved.get(place.id) || []), { id: item.id, place_id: place.id, day: null, added_by: item.added_by }]);
+      toast(t('map.starred'));
+    }
+    const { marker } = state.objects.get(place.id);
+    marker.setIcon(markerIcon(place));
+    marker.getElement()?.classList.add('is-active');
+    render(place, pinned);
+    card.querySelector('[data-star]')?.focus();
+    applyFilters();
+  } catch {
+    toast(t('error.generic'));
+  }
 }
 
 /** Like or unlike a place: saved in the database, heart updated on the map and the card. */

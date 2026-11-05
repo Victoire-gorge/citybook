@@ -225,3 +225,19 @@
   .shared__intro, .stats { margin-left: 0; margin-right: 0; }
   .stats li { font-size: 0.82rem; }
 }
+
+/* ---------- Guest suggestions on the shared page ---------- */
+.shared__guest { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin: 0 4% 24px; }
+.shared__guest .shared__map-link { margin: 0; }
+.shared__help { font-size: 0.88rem; color: var(--muted); }
+.guest-id { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 500; margin-top: 4px; }
+.guest-id select { padding: 4px 8px; font-size: 0.85rem; }
+.suggested {
+  display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 3px; vertical-align: 1px;
+  background: var(--tag); border: 1px solid #b49a3c; font-family: var(--mono); font-size: 0.66rem; color: var(--ink);
+}
+.todo__unsuggest { margin-left: 8px; font-size: 0.78rem; }
+.suggest { display: flex; gap: 8px; margin-top: 10px; max-width: 520px; }
+.suggest input { flex: 1; font-size: 0.88rem; padding: 7px 10px; border-color: var(--hair); }
+.suggest input:focus { border-color: var(--ink); }
+@media (max-width: 820px) { .shared__guest { margin: 0 0 20px; } .suggest { flex-wrap: wrap; } }

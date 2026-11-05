@@ -8,6 +8,7 @@ import { getMap, updatePlace } from './places.js';
 import {
   listAdventures, createAdventure, getAdventure, updateAdventure, deleteAdventure,
   addItem, updateItem, deleteItem, setShare, setDayTheme, reorderItems, setCover, getSharedAdventure, getSharedMap, canSeeCover,
+  addGuestItem, deleteGuestItem,
 } from './adventures.js';
 import { commonsPhoto, imageResponse } from './photos.js';
 
@@ -59,6 +60,12 @@ const routes = [
     await reorderItems(env.DB, user.id, m[1], await readJson(request));
     return json({ ok: true });
   }, true],
+  ['POST', /^\/api\/share\/([\w-]+)\/items$/, async ({ env, m, request }) =>
+    json(await addGuestItem(env.DB, m[1], await readJson(request)), { status: 201 }), false],
+  ['DELETE', /^\/api\/share\/([\w-]+)\/items\/([\w-]+)$/, async ({ env, m }) => {
+    await deleteGuestItem(env.DB, m[1], m[2]);
+    return json({ ok: true });
+  }, false],
   ['GET', /^\/api\/share\/([\w-]+)\/map$/, async ({ env, m }) => json(await getSharedMap(env.DB, m[1], parisToday())), false],
   ['GET', /^\/api\/share\/([\w-]+)$/, async ({ env, m }) => json(await getSharedAdventure(env.DB, m[1])), false],
   ['GET', /^\/photos\/commons\/(.+)$/, async ({ env, m, ctx }) =>

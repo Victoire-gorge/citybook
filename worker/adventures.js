@@ -124,6 +124,7 @@ async function items(db, adventureId) {
     title: i.title || i.place_name || i.event_title || '',
     note: i.note,
     done: Boolean(i.done),
+    added_by: i.added_by || null,
     place_id: i.place_id,
     layer_id: i.layer_id,
     lat: i.lat,
@@ -193,7 +194,7 @@ export async function getSharedMap(db, token, today) {
   if (!token || token.length < 16) throw new HttpError(404, 'Unknown link');
   const a = await db
     .prepare(
-      `select a.id, a.title, a.city_id, a.starts_on, a.ends_on, a.language, u.name as owner_name
+      `select a.id, a.title, a.city_id, a.starts_on, a.ends_on, a.language, a.guests, u.name as owner_name
        from adventures a join users u on u.id = a.owner_id where a.share_token = ?`,
     )
     .bind(token)
@@ -202,13 +203,13 @@ export async function getSharedMap(db, token, today) {
   const [map, saved] = await Promise.all([
     getMap(db, a.city_id, today),
     db.prepare(
-      `select place_id, day from adventure_items
+      `select id, place_id, day, added_by from adventure_items
        where adventure_id = ? and place_id is not null order by day is null, day, sort`,
     ).bind(a.id).all(),
   ]);
   return {
     ...map,
-    adventure: { title: a.title, starts_on: a.starts_on, ends_on: a.ends_on, language: a.language, owner: a.owner_name },
+    adventure: { id: a.id, title: a.title, starts_on: a.starts_on, ends_on: a.ends_on, language: a.language, owner: a.owner_name, guests: JSON.parse(a.guests || '[]') },
     saved: saved.results,
   };
 }
@@ -219,8 +220,10 @@ export async function getSharedAdventure(db, token) {
   const a = await db.prepare('select * from adventures where share_token = ?').bind(token).first();
   if (!a) throw new HttpError(404, 'Unknown link');
   const { share_token, shared, ...publicView } = view(a);
+  const owner = await db.prepare('select name from users where id = ?').bind(a.owner_id).first();
   return {
     ...publicView,
+    owner: owner?.name || '',
     cover: a.cover_key ? `/media/${a.cover_key}?share=${token}` : null,
     days: await days(db, a.id),
     items: await items(db, a.id),
@@ -317,4 +320,67 @@ export async function canSeeCover(db, key, user, shareToken) {
   if (!a) return false;
   if (user && user.id === a.owner_id) return true;
   return Boolean(shareToken && a.share_token && shareToken === a.share_token);
+}
+
+// ---------- Suggestions from guests holding the share link ----------
+
+const MAX_GUEST_ITEMS = 200;
+const GUEST_RULES = {
+  place_id: optional(text(80)),
+  title: text(200),
+  day: optional(isDate),
+  by: text(40),
+};
+
+async function sharedAdventure(db, token) {
+  if (!token || token.length < 16) throw new HttpError(404, 'Unknown link');
+  const a = await db.prepare('select id, starts_on, ends_on from adventures where share_token = ?').bind(token).first();
+  if (!a) throw new HttpError(404, 'Unknown link');
+  return a;
+}
+
+/**
+ * A guest adds an idea (free text) or saves a place. It lands in the plan marked with their name.
+ * Saving a place already in the plan does nothing and returns the existing item.
+ */
+export async function addGuestItem(db, token, body) {
+  const a = await sharedAdventure(db, token);
+  const f = pick(body, GUEST_RULES);
+  const by = (f.by || '').trim() || 'Guest';
+  const title = (f.title || '').trim();
+  if (!f.place_id && !title) throw new HttpError(400, 'Write an idea or pick a place');
+  if (f.day && (f.day < a.starts_on || f.day > a.ends_on)) throw new HttpError(400, 'This day is outside the adventure');
+  if (f.place_id) {
+    const place = await db.prepare('select 1 from places where id = ?').bind(f.place_id).first();
+    if (!place) throw new HttpError(404, 'Unknown place');
+    const existing = await db
+      .prepare('select id, added_by from adventure_items where adventure_id = ? and place_id = ? limit 1')
+      .bind(a.id, f.place_id)
+      .first();
+    if (existing) return { id: existing.id, added_by: existing.added_by, existed: true };
+  }
+  const { n } = await db
+    .prepare('select count(*) as n from adventure_items where adventure_id = ? and added_by is not null')
+    .bind(a.id)
+    .first();
+  if (n >= MAX_GUEST_ITEMS) throw new HttpError(429, 'Too many suggestions on this trip');
+  const id = randomToken(9);
+  await db
+    .prepare(
+      `insert into adventure_items (id, adventure_id, day, place_id, title, added_by, sort)
+       values (?, ?, ?, ?, ?, ?, (select coalesce(max(sort), 0) + 1 from adventure_items where adventure_id = ?))`,
+    )
+    .bind(id, a.id, f.day ?? null, f.place_id ?? null, f.place_id ? '' : title, by, a.id)
+    .run();
+  return { id, added_by: by, existed: false };
+}
+
+/** Guests can only take back what a guest added, never the owner's plan. */
+export async function deleteGuestItem(db, token, itemId) {
+  const a = await sharedAdventure(db, token);
+  const res = await db
+    .prepare('delete from adventure_items where id = ? and adventure_id = ? and added_by is not null')
+    .bind(itemId, a.id)
+    .run();
+  if (!res.meta.changes) throw new HttpError(403, 'Only suggestions from the share link can be removed here');
 }
