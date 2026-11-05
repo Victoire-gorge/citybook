@@ -7,9 +7,12 @@ import { guestName, setGuestName, guestPicker } from '../lib/guest.js';
 import { forecast, hourlyForecast, hourlyStrip, weatherLine, weatherCredit } from '../lib/weather.js';
 let weather = new Map();
 let hourly = new Map();
-let hourlyDay = null; // the day shown hour by hour
+let focusDay = null; // the day shown in "Day by day": its plan, map and hour-by-hour weather move together
+let city = { places: [], layers: [], areas: [] };
+const HIDDEN = new Set(['home', 'seasonal', 'theatres']);
 import { icon } from '../lib/icons.js';
-import { daysBetween, itemsOf, miniMap } from '../lib/trip.js';
+import { daysBetween, itemsOf, dayMap } from '../lib/trip.js';
+import { picto } from '../lib/icons.js';
 
 // Page for guests: no sign-in. They read the plan and can add suggestions,
 // and remove only the suggestions made through the link.
@@ -94,23 +97,53 @@ function render(a) {
         <div class="shared-day__body">${ideas.length ? `<ul class="todos">${ideas.map(stopHtml).join('')}</ul>` : ''}${suggestForm('')}</div><span></span></section>
     </div>
     ${days.some((d) => weather.has(d)) ? weatherCredit() : ''}
-    <section class="shared__map">
-      <h2>${esc(t('adventure.mapTitle'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}">${esc(t('share.openMap'))}</a></h2>
-      <div class="mini-map mini-map--wide" data-mini-map></div>
-      ${hourlyHtml(days)}
-    </section>`;
-  miniMap(root.querySelector('[data-mini-map]'))(a.items.filter((x) => x.day));
+    ${focusHtml(days)}`;
+  dayMap(root.querySelector('[data-mini-map]'))({
+    items: itemsOf(a, focusDay),
+    extras: hoodPlaces(focusDay),
+    home: city.places.find((p) => p.layer_id === 'home'),
+    layers: city.layers,
+    addLabel: t('share.suggestForDay'),
+  });
 }
 
-/** Hour by hour for one day of the trip, with buttons to switch days. */
-function hourlyHtml(days) {
-  const open = days.filter((d) => hourly.has(d));
-  if (!open.length) return '';
-  if (!open.includes(hourlyDay)) hourlyDay = open.includes(new Date().toISOString().slice(0, 10)) ? new Date().toISOString().slice(0, 10) : open[0];
-  return `<div class="hourly-days" role="group" aria-label="${esc(t('adventure.itinerary'))}">${open
-    .map((d) => `<button class="chip" type="button" data-hourly-day="${d}" aria-pressed="${d === hourlyDay}">${esc(formatTab(d))}</button>`)
-    .join('')}</div>
-    ${hourlyStrip(hourly.get(hourlyDay), t('weather.hourly', { day: formatTab(hourlyDay) }))}`;
+const areaOf = (day) => adventure.day_areas?.[day] || '';
+function hoodPlaces(day) {
+  const area = areaOf(day);
+  if (!area) return [];
+  const planned = new Set(itemsOf(adventure, day).map((i) => i.place_id));
+  return city.places.filter((p) => p.area === area && !HIDDEN.has(p.layer_id) && !planned.has(p.id))
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0));
+}
+
+/** One day at a time: pick a day and its plan, map and hour-by-hour weather all change together. */
+function focusHtml(days) {
+  if (!days.includes(focusDay)) {
+    const today = new Date().toISOString().slice(0, 10);
+    focusDay = days.includes(today) ? today : days[0];
+  }
+  const items = itemsOf(adventure, focusDay);
+  const n = days.indexOf(focusDay) + 1;
+  const picks = hoodPlaces(focusDay);
+  const layerOf = (p) => city.layers.find((l) => l.id === p.layer_id) || {};
+  return `<section class="shared__map" id="day-by-day">
+    <h2>${esc(t('share.dayByDay'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}${areaOf(focusDay) ? `&area=${encodeURIComponent(areaOf(focusDay))}` : ''}">${esc(t('share.openMap'))}</a></h2>
+    <div class="focus-days" role="tablist">${days.map((d, i) => `<button class="day-tab" role="tab" type="button" data-focus-day="${d}" aria-selected="${d === focusDay}">
+      <b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(formatTab(d))}</span>${areaOf(d) ? `<i class="day-tab__area">${esc(areaOf(d))}</i>` : ''}</button>`).join('')}</div>
+    <div class="focus">
+      <div class="focus__plan">
+        <h3 class="focus__title">${esc(t('adventure.day', { n }))}${adventure.days?.[focusDay] ? ` — ${esc(adventure.days[focusDay])}` : ''}</h3>
+        ${areaOf(focusDay) ? `<p class="glance__area">${icon('pin', { size: 12 })} ${esc(areaOf(focusDay))}</p>` : ''}
+        ${weatherLine(weather.get(focusDay))}
+        ${items.length ? `<ol class="focus__items">${items.map((it) => `<li class="${it.done ? 'is-done' : ''}">${it.start_time ? `<span class="todo__time">${esc(it.start_time)}</span> ` : ''}${esc(it.title)}</li>`).join('')}</ol>`
+          : `<p class="glance__empty">${esc(t('adventure.nothingYet'))}</p>`}
+      </div>
+      <div class="mini-map focus__map" data-mini-map></div>
+    </div>
+    ${picks.length ? `<div class="hood-picks"><h3>${esc(t('share.suggestFromArea', { area: areaOf(focusDay) }))}</h3>
+      <ul>${picks.map((p) => `<li><button class="hood-pick" type="button" data-add-place="${esc(p.id)}">${picto(layerOf(p).icon, layerOf(p).color, 14)} ${esc(p.name)} <span class="star" aria-hidden="true">★</span></button></li>`).join('')}</ul></div>` : ''}
+    ${hourlyStrip(hourly.get(focusDay), t('weather.hourly', { day: formatTab(focusDay) })) || `<p class="hourly__later">${esc(t('weather.later'))}</p>`}
+  </section>`;
 }
 
 async function reload(focusDay) {
@@ -136,14 +169,27 @@ root.addEventListener('submit', async (e) => {
 });
 
 root.addEventListener('click', async (e) => {
-  const hd = e.target.closest('[data-hourly-day]');
-  if (hd) {
-    hourlyDay = hd.dataset.hourlyDay;
+  const fd = e.target.closest('[data-focus-day]');
+  if (fd) {
+    focusDay = fd.dataset.focusDay;
     const y = scrollY;
     render(adventure);
     scrollTo(0, y);
-    return root.querySelector(`[data-hourly-day="${hourlyDay}"]`)?.focus();
+    return root.querySelector(`[data-focus-day="${focusDay}"]`)?.focus();
   }
+  const add = e.target.closest('[data-add-place]');
+  if (add) {
+    const res = await fetch(`${shareApi}/items`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ place_id: add.dataset.addPlace, day: focusDay, by: me }),
+    });
+    if (!res.ok) return toast(t('error.generic'));
+    toast(t('share.added'));
+    return reload();
+  }
+  // The day list: jumping to a day also shows it in "Day by day".
+  const jumpTo = e.target.closest('.day-jump a[href^="#d-2"]');
+  if (jumpTo) focusDay = jumpTo.getAttribute('href').slice(3);
   const el = e.target.closest('[data-unsuggest]');
   if (!el) return;
   const res = await fetch(`${shareApi}/items/${encodeURIComponent(el.dataset.unsuggest)}`, { method: 'DELETE' });
@@ -167,9 +213,14 @@ Promise.all([forecast(), hourlyForecast()]).then(([w, h]) => {
   }
 });
 
-fetch(shareApi)
-  .then((r) => (r.ok ? r.json() : Promise.reject(r)))
-  .then(render)
+Promise.all([
+  fetch(shareApi).then((r) => (r.ok ? r.json() : Promise.reject(r))),
+  fetch(`${shareApi}/map`).then((r) => (r.ok ? r.json() : city)).catch(() => city),
+])
+  .then(([a, m]) => {
+    city = m;
+    render(a);
+  })
   .catch(() => {
     mountMasthead(null, { signedIn: false, issue: '' });
     root.innerHTML = `<p class="trip__missing">${esc(t('share.missing'))}</p>`;

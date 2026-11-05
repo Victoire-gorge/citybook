@@ -4,8 +4,8 @@ import '../styles/adventures.css';
 import { api } from '../lib/api.js';
 import { t, formatRange, formatDay } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
-import { icon } from '../lib/icons.js';
-import { daysBetween, itemsOf, dayTab, miniMap } from '../lib/trip.js';
+import { icon, picto } from '../lib/icons.js';
+import { daysBetween, itemsOf, dayTab, dayMap } from '../lib/trip.js';
 import { openAdventureForm } from '../lib/adventure-form.js';
 import { downloadIcs } from '../lib/ics.js';
 import { forecast, hourlyForecast, hourlyStrip, weatherMini, weatherLine, weatherCredit } from '../lib/weather.js';
@@ -24,9 +24,16 @@ let editing = null; // id of the step whose editor is open
 let shareOpen = false;
 let weather = new Map(); // date -> forecast, filled in when it arrives
 let hourly = new Map(); // date -> hour-by-hour forecast
+let city = { places: [], areas: [], layers: [] }; // the map's places, for neighbourhood days and Home
+const HIDDEN = new Set(['home', 'seasonal', 'theatres']);
 
 async function load() {
-  adventure = await api(`/api/adventures/${encodeURIComponent(id)}`);
+  const [a, m] = await Promise.all([
+    api(`/api/adventures/${encodeURIComponent(id)}`),
+    city.places.length ? city : api('/api/map/paris').catch(() => city),
+  ]);
+  adventure = a;
+  city = m;
   days = daysBetween(adventure.starts_on, adventure.ends_on);
   if (current === null || (current && !days.includes(current))) {
     const today = new Date().toISOString().slice(0, 10);
@@ -34,6 +41,19 @@ async function load() {
   }
   render();
 }
+
+const areaOf = (day) => adventure.day_areas?.[day] || '';
+const home = () => city.places.find((p) => p.layer_id === 'home');
+/** Places of the day's neighbourhood not yet in that day, best rated first. */
+function hoodPlaces(day) {
+  const area = areaOf(day);
+  if (!area) return [];
+  const planned = new Set(itemsOf(adventure, day).map((i) => i.place_id));
+  return city.places
+    .filter((p) => p.area === area && !HIDDEN.has(p.layer_id) && !planned.has(p.id))
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0) || Number(b.favourite) - Number(a.favourite));
+}
+const layerOf = (p) => city.layers.find((l) => l.id === p.layer_id) || {};
 
 const count = (n, one, many) => (n === 1 ? t(one) : t(many, { n }));
 
@@ -89,6 +109,11 @@ function dayPanel() {
     ? `<h3 class="day__title">${esc(t('adventure.ideasTitle'))}</h3>`
     : `<h3 class="day__title">${esc(t('adventure.day', { n }))} — <input class="day__theme" value="${esc(adventure.days?.[current] || '')}" maxlength="120" placeholder="${esc(t('adventure.themePlaceholder'))}" aria-label="${esc(t('adventure.themePlaceholder'))}" data-theme /></h3>
        <p class="day__date mono">${esc(formatDay(current))}</p>
+       <label class="day__area">${icon('pin', { size: 15 })} ${esc(t('adventure.neighbourhood'))}
+         <select data-day-area>
+           <option value="">${esc(t('adventure.noNeighbourhood'))}</option>
+           ${city.areas.map((z) => `<option ${z.name === areaOf(current) ? 'selected' : ''}>${esc(z.name)}</option>`).join('')}
+         </select></label>
        ${weatherLine(weather.get(current))}`;
   return `<div class="day">
     <div class="day__list">
@@ -100,7 +125,7 @@ function dayPanel() {
         <input name="title" maxlength="200" placeholder="${esc(t('adventure.addPlaceholder'))}" aria-label="${esc(t('adventure.addLabel'))}" />
         <button class="btn btn--line" type="submit">${icon('plus', { size: 16 })} ${esc(t('adventure.add'))}</button>
       </form>
-      <a class="day__map-link" href="/">${icon('pin', { size: 16 })} ${esc(t('adventure.openMap'))}</a>
+      <a class="day__map-link" href="/${!isIdeas && areaOf(current) ? `?area=${encodeURIComponent(areaOf(current))}` : ''}">${icon('pin', { size: 16 })} ${esc(t('adventure.openMap'))}</a>
     </div>
     <aside class="day__aside">
       ${photo ? `<figure class="print taped day__photo"><img src="${esc(photo.src)}" alt="" /></figure>` : ''}
@@ -117,6 +142,7 @@ function overview() {
       <button class="glance__badge" type="button" data-pick="${key}" aria-label="${esc(t('adventure.openDay', { day: badge }))}">
         <b>${esc(badge)}</b>${date ? `<span>${esc(date)}</span>` : ''}${key ? weatherMini(weather.get(key)) : ''}</button>
       <div class="glance__body">
+        ${key && areaOf(key) ? `<p class="glance__area">${icon('pin', { size: 12 })} ${esc(areaOf(key))}</p>` : ''}
         ${theme ? `<h3 class="glance__theme">${esc(theme)}</h3>` : ''}
         ${items.length ? `<ul class="glance__items">${items.map(line).join('')}</ul>` : `<p class="glance__empty">${esc(t('adventure.nothingYet'))}</p>`}
       </div>
@@ -166,7 +192,7 @@ function render() {
         <h2 id="itinerary-title" class="itinerary__title">${esc(t('adventure.itinerary'))}</h2>
         <div class="day-tabs" role="tablist">
           ${days.map((d, i) => `<button class="day-tab" role="tab" type="button" data-day="${d}" aria-selected="${d === current}">
-              <b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(dayTab(d))}</span>${weatherMini(weather.get(d))}</button>`).join('')}
+              <b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(dayTab(d))}</span>${areaOf(d) ? `<i class="day-tab__area">${esc(areaOf(d))}</i>` : ''}${weatherMini(weather.get(d))}</button>`).join('')}
           <button class="day-tab day-tab--ideas" role="tab" type="button" data-day="" aria-selected="${current === ''}">
             <b>${esc(t('adventure.ideas'))}</b><span>${itemsOf(a, null).length}</span></button>
         </div>
@@ -175,12 +201,31 @@ function render() {
     </section>
     ${overview()}
     <section class="trip__map" aria-labelledby="map-title">
-      <h2 id="map-title" class="trip__map-title">${esc(t('adventure.mapTitle'))}</h2>
+      <h2 id="map-title" class="trip__map-title">${esc(t('adventure.mapTitle'))}
+        <span class="trip__map-day">${esc(current ? `${t('adventure.day', { n: days.indexOf(current) + 1 })} · ${formatDay(current)}${areaOf(current) ? ` · ${areaOf(current)}` : ''}` : t('adventure.ideas'))}</span></h2>
       <div class="mini-map" data-mini-map></div>
-      ${current ? hourlyStrip(hourly.get(current), t('weather.hourly', { day: formatDay(current) })) : ''}
+      ${current ? hoodPicks() : ''}
+      ${current ? hourlyStrip(hourly.get(current), t('weather.hourly', { day: formatDay(current) })) || `<p class="hourly__later">${esc(t('weather.later'))}</p>` : ''}
     </section>`;
-  updateMap = miniMap(root.querySelector('[data-mini-map]'));
-  updateMap(itemsOf(adventure, current === '' ? null : current));
+  updateMap = dayMap(root.querySelector('[data-mini-map]'));
+  updateMap({
+    items: itemsOf(adventure, current === '' ? null : current),
+    extras: current ? hoodPlaces(current) : [],
+    home: home(),
+    layers: city.layers,
+    addLabel: current ? t('adventure.addToThisDay') : '',
+  });
+}
+
+/** The day's neighbourhood: its places not planned yet, one tap to add them to the day. */
+function hoodPicks() {
+  const picks = hoodPlaces(current);
+  if (!picks.length) return '';
+  return `<div class="hood-picks">
+    <h3>${esc(t('adventure.inArea', { area: areaOf(current) }))}</h3>
+    <ul>${picks.map((p) => `<li><button class="hood-pick" type="button" data-add-place="${esc(p.id)}" title="${esc(t('adventure.addToThisDay'))}">
+      ${picto(layerOf(p).icon, layerOf(p).color, 14)} ${esc(p.name)} ${icon('plus', { size: 13 })}</button></li>`).join('')}</ul>
+  </div>`;
 }
 
 const reload = async () => {
@@ -202,6 +247,14 @@ root.addEventListener('click', async (e) => {
       return;
     }
     root.querySelectorAll('.menu__list').forEach((m) => (m.hidden = true));
+    if (el.matches('[data-add-place]')) {
+      await api(`/api/adventures/${adventure.id}/items`, { method: 'POST', body: { place_id: el.dataset.addPlace, day: current } });
+      const y = scrollY;
+      await reload();
+      scrollTo(0, y);
+      toast(t('adventure.addedToDay'));
+      return;
+    }
     if (el.matches('[data-pick]')) {
       current = el.dataset.pick;
       editing = null;
@@ -263,6 +316,14 @@ root.addEventListener('keydown', (e) => {
 
 root.addEventListener('change', async (e) => {
   try {
+    if (e.target.matches('[data-day-area]')) {
+      await api(`/api/adventures/${adventure.id}/days/${current}`, { method: 'PUT', body: { area: e.target.value } });
+      adventure.day_areas = { ...adventure.day_areas, [current]: e.target.value };
+      if (!e.target.value) delete adventure.day_areas[current];
+      render();
+      toast(t('form.saved'));
+      return;
+    }
     if (e.target.matches('[data-theme]')) {
       await api(`/api/adventures/${adventure.id}/days/${current}`, { method: 'PUT', body: { theme: e.target.value } });
       adventure.days = { ...adventure.days, [current]: e.target.value.trim() };

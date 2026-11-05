@@ -98,6 +98,7 @@ const PLACE_RULES = {
   favourite: (v) => typeof v === 'boolean',
   hours_verified: (v) => typeof v === 'boolean',
   rating: (v) => Number.isInteger(v) && v >= 0 && v <= 5,
+  area: optional(text(80)),
 };
 
 /** Edit the parts of a place that are meant to be changed from the site. */
@@ -105,7 +106,7 @@ export async function updatePlace(db, id, body) {
   const fields = pick(body, PLACE_RULES);
   const keys = Object.keys(fields);
   if (keys.length === 0) throw new HttpError(400, 'Nothing to update');
-  const values = keys.map((k) => (typeof fields[k] === 'boolean' ? Number(fields[k]) : fields[k]));
+  const values = keys.map((k) => (typeof fields[k] === 'boolean' ? Number(fields[k]) : k === 'area' ? fields[k] || null : fields[k]));
   const res = await db
     .prepare(
       `update places set ${keys.map((k) => `${k} = ?`).join(', ')},

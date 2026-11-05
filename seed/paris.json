@@ -100,7 +100,8 @@
       "lng": 2.339722,
       "summary": "The most elegant of the passages: mosaic floors, a glass roof and an old bookshop.",
       "hours_note": "Open daily, roughly 8:30 to 20:30.",
-      "photo": "P1040471 Paris II galerie Vivienne rwk.JPG"
+      "photo": "P1040471 Paris II galerie Vivienne rwk.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "galerie-colbert",
@@ -126,7 +127,8 @@
           ]
         ]
       ],
-      "photo": "Galerie Colbert.jpg"
+      "photo": "Galerie Colbert.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-des-panoramas",
@@ -164,7 +166,8 @@
           ]
         ]
       ],
-      "photo": "Passage Panoramas - Paris II (FR75) - 2022-05-27 - 1.jpg"
+      "photo": "Passage Panoramas - Paris II (FR75) - 2022-05-27 - 1.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-jouffroy",
@@ -186,7 +189,8 @@
           ]
         ]
       ],
-      "photo": "P1020618 Paris IX Passage Jouffroy rwk.JPG"
+      "photo": "P1020618 Paris IX Passage Jouffroy rwk.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-verdeau",
@@ -212,7 +216,8 @@
           ]
         ]
       ],
-      "photo": "Passage Verdeau - Paris IX (FR75) - 2022-05-27 - 3.jpg"
+      "photo": "Passage Verdeau - Paris IX (FR75) - 2022-05-27 - 3.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "galerie-vero-dodat",
@@ -222,7 +227,8 @@
       "lat": 48.862816,
       "lng": 2.340217,
       "summary": "Black and white floor, dark wood shopfronts: the most theatrical passage.",
-      "photo": "Galerie Vero-Dodat, 16 May 2013.jpg"
+      "photo": "Galerie Vero-Dodat, 16 May 2013.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "passage-du-grand-cerf",
@@ -252,7 +258,8 @@
           ]
         ]
       ],
-      "photo": "Paris passage du grand cerf.jpg"
+      "photo": "Paris passage du grand cerf.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-choiseul",
@@ -282,7 +289,8 @@
           ]
         ]
       ],
-      "photo": "Passage Choiseul.JPG"
+      "photo": "Passage Choiseul.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-des-princes",
@@ -312,7 +320,8 @@
           ]
         ]
       ],
-      "photo": "Paris - Passage des Princes 01.jpg"
+      "photo": "Paris - Passage des Princes 01.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-du-caire",
@@ -322,7 +331,8 @@
       "lat": 48.868333,
       "lng": 2.349722,
       "summary": "The longest passage, with Egyptian-style faces on its façade.",
-      "photo": "Paris passage du caire.jpg"
+      "photo": "Paris passage du caire.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "passage-brady",
@@ -348,7 +358,8 @@
           ]
         ]
       ],
-      "photo": "Passage Brady.jpg"
+      "photo": "Passage Brady.jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "passage-moliere",
@@ -370,7 +381,8 @@
           ]
         ]
       ],
-      "photo": "Paris passage moliere.jpg"
+      "photo": "Paris passage moliere.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "musee-de-montmartre",
@@ -399,7 +411,8 @@
       "price": "Free (permanent collection)",
       "summary": "A green-shuttered house at the end of a cobbled lane, with a tea room in the garden.",
       "hours": "Tu-Su 10:00-18:00",
-      "photo": "Paris Musée vie romantique 2012.jpg"
+      "photo": "Paris Musée vie romantique 2012.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "musee-du-louvre",
@@ -414,7 +427,8 @@
       "summary": "The biggest museum in the world. Pick two or three rooms rather than everything.",
       "hours": "Mo,Th,Sa,Su 09:00-18:00; We,Fr 09:00-21:00",
       "hours_note": "Closed on Tuesdays. Book a time slot online.",
-      "photo": "Cour Napoléon at night - Louvre.jpg"
+      "photo": "Cour Napoléon at night - Louvre.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "musee-jacquemart-andre",
@@ -426,7 +440,8 @@
       "website": "https://www.musee-jacquemart-andre.com",
       "summary": "A sumptuous 19th-century mansion, and one of the prettiest cafés in Paris.",
       "hours": "Mo-Su 10:00-18:00",
-      "photo": "Musée Jacquemart André 2007 - Recoura.jpg"
+      "photo": "Musée Jacquemart André 2007 - Recoura.jpg",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "musee-nissim-de-camondo",
@@ -438,7 +453,8 @@
       "website": "https://madparis.fr/Musee-Nissim-de-Camondo-125",
       "summary": "A collector's home frozen in the 1930s, down to the kitchens.",
       "hours": "We-Su 10:00-17:30",
-      "photo": "Paris (75008) Hôtel Moïse de Camondo 05.JPG"
+      "photo": "Paris (75008) Hôtel Moïse de Camondo 05.JPG",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "musee-gustave-moreau",
@@ -450,7 +466,8 @@
       "website": "http://www.musee-moreau.fr",
       "summary": "The painter's studio, walls covered in paintings, and a famous spiral staircase.",
       "hours": "Mo,We,Th,Fr,Sa,Su 10:00-18:00",
-      "photo": "Paris musée Gustave-Moreau, 19 mai 2013.jpg"
+      "photo": "Paris musée Gustave-Moreau, 19 mai 2013.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "maison-de-victor-hugo",
@@ -463,7 +480,8 @@
       "price": "Free (permanent collection)",
       "summary": "Victor Hugo's flat on the Place des Vosges, with his astonishing Chinese room.",
       "hours": "Tu-Su 10:00-18:00",
-      "photo": "PARIS Place des Vosges, Maison de Victor Hugo 2.jpg"
+      "photo": "PARIS Place des Vosges, Maison de Victor Hugo 2.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "musee-delacroix",
@@ -475,7 +493,8 @@
       "website": "https://www.musee-delacroix.fr",
       "summary": "Delacroix's last studio, hidden behind a small secret garden.",
       "hours": "Mo,We,Th,Fr,Sa,Su 09:30-17:30",
-      "photo": "Musée Delacroix, Paris 29 May 2017 001.jpg"
+      "photo": "Musée Delacroix, Paris 29 May 2017 001.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "musee-cognacq-jay",
@@ -488,7 +507,8 @@
       "price": "Free (permanent collection)",
       "summary": "18th-century art in a Marais mansion, calm and rarely crowded.",
       "hours": "Tu-Su 10:00-18:00",
-      "photo": "Jardin Lazare-Rachline, Paris 9 June 2017 001.jpg"
+      "photo": "Jardin Lazare-Rachline, Paris 9 June 2017 001.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "musee-zadkine",
@@ -501,7 +521,8 @@
       "price": "Free (permanent collection)",
       "summary": "A sculptor's house and garden, two minutes from the Luxembourg.",
       "hours": "Tu-Su 10:00-18:00",
-      "photo": "Musée Zadkine.jpg"
+      "photo": "Musée Zadkine.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "musee-marmottan-monet",
@@ -513,7 +534,8 @@
       "website": "https://www.marmottan.fr",
       "summary": "The world's largest Monet collection, including Impression, Sunrise.",
       "hours": "Tu,We,Fr,Sa,Su 10:00-18:00; Th 10:00-21:00",
-      "photo": "Paris.- Musée Marmottan Monet.jpg"
+      "photo": "Paris.- Musée Marmottan Monet.jpg",
+      "area": "Passy"
     },
     {
       "id": "musee-d-orsay",
@@ -526,7 +548,8 @@
       "booking_required": true,
       "summary": "Impressionists in a former railway station. Don't miss the clock window.",
       "hours": "Tu,We,Fr,Sa,Su 09:30-18:00; Th 09:30-21:45",
-      "photo": "MuseeDOrsay.jpg"
+      "photo": "MuseeDOrsay.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "musee-de-l-orangerie",
@@ -538,7 +561,8 @@
       "website": "https://www.musee-orangerie.fr",
       "summary": "Monet's Water Lilies in two oval rooms lit by daylight.",
       "hours": "Mo,We,Th,Fr,Sa,Su 09:00-18:00",
-      "photo": "2011-12-Musee de lorangerie.jpg"
+      "photo": "2011-12-Musee de lorangerie.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "musee-rodin",
@@ -550,7 +574,8 @@
       "website": "https://www.musee-rodin.fr",
       "summary": "The Thinker in a rose garden, and a mansion full of marble.",
       "hours": "Tu-Su 10:00-18:30",
-      "photo": "L'hôtel Biron (musée Rodin) à Paris, 13 juin 2021 01.jpg"
+      "photo": "L'hôtel Biron (musée Rodin) à Paris, 13 juin 2021 01.jpg",
+      "area": "Eiffel Tower & Invalides"
     },
     {
       "id": "petit-palais",
@@ -564,7 +589,8 @@
       "summary": "A golden palace with a hidden garden courtyard and café.",
       "hours": "Tu-Su 10:00-18:00",
       "hours_note": "Late opening on some evenings for exhibitions.",
-      "photo": "Petit Palais Paris 2.jpg"
+      "photo": "Petit Palais Paris 2.jpg",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "musee-carnavalet",
@@ -577,7 +603,8 @@
       "price": "Free (permanent collection)",
       "summary": "The history of Paris, from old shop signs to Proust's bedroom.",
       "hours": "Tu-Su 10:00-18:00",
-      "photo": "Carnavalet París 10.JPG"
+      "photo": "Carnavalet París 10.JPG",
+      "area": "Le Marais"
     },
     {
       "id": "musee-de-cluny",
@@ -589,7 +616,8 @@
       "website": "https://www.musee-moyenage.fr/",
       "summary": "Medieval treasures and The Lady and the Unicorn tapestries.",
       "hours": "Tu-Su 09:30-18:15",
-      "photo": "Hôtel de Cluny, Paris 24 April 2012.jpg"
+      "photo": "Hôtel de Cluny, Paris 24 April 2012.jpg",
+      "area": "Latin Quarter"
     },
     {
       "id": "musee-des-arts-forains",
@@ -602,7 +630,8 @@
       "booking_required": true,
       "summary": "Old fairground rides you can actually ride, in Bercy's wine warehouses.",
       "hours_note": "Guided visits on booking only.",
-      "photo": "Musée des Arts forains Paris 12e 001.jpg"
+      "photo": "Musée des Arts forains Paris 12e 001.jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "musee-de-la-chasse",
@@ -614,7 +643,8 @@
       "website": "https://www.chassenature.org",
       "summary": "A cabinet of curiosities mixing stuffed animals and contemporary art.",
       "hours": "Tu,Th,Fr,Sa,Su 11:00-18:00; We 11:00-21:30",
-      "photo": "P1000961 Paris III Rue des Archives Musée de la chasse reductwk.JPG"
+      "photo": "P1000961 Paris III Rue des Archives Musée de la chasse reductwk.JPG",
+      "area": "Le Marais"
     },
     {
       "id": "bourse-de-commerce",
@@ -626,7 +656,8 @@
       "website": "https://www.pinaultcollection.com/en/boursedecommerce",
       "summary": "Contemporary art under a painted dome, redesigned by Tadao Ando.",
       "hours": "Mo,We,Th,Sa,Su 11:00-19:00; Fr 11:00-21:00",
-      "photo": "Bourse Commerce - Paris I (FR75) - 2021-06-05 - 1.jpg"
+      "photo": "Bourse Commerce - Paris I (FR75) - 2021-06-05 - 1.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "sainte-chapelle",
@@ -640,7 +671,8 @@
       "summary": "Walls made of stained glass. Go on a sunny day.",
       "hours": "Mo-Su 09:00-17:00",
       "hours_note": "Until 19:00 from April to September.",
-      "photo": "Szensapel.jpg"
+      "photo": "Szensapel.jpg",
+      "area": "The islands"
     },
     {
       "id": "palais-garnier",
@@ -653,7 +685,8 @@
       "summary": "The opera house of The Phantom of the Opera: gold, marble and a Chagall ceiling.",
       "hours": "Mo-Su 10:00-17:00",
       "hours_note": "Visits can close for rehearsals and matinées.",
-      "photo": "Paris Opera full frontal architecture, May 2009.jpg"
+      "photo": "Paris Opera full frontal architecture, May 2009.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "castel-beranger",
@@ -664,7 +697,8 @@
       "lng": 2.27458,
       "summary": "Hector Guimard's Art Nouveau masterpiece. Look at the entrance gate.",
       "hours_note": "Private flats: façade only.",
-      "photo": "Paris 16 - Castel Béranger -1.JPG"
+      "photo": "Paris 16 - Castel Béranger -1.JPG",
+      "area": "Passy"
     },
     {
       "id": "immeuble-lavirotte",
@@ -675,7 +709,8 @@
       "lng": 2.30094,
       "summary": "The wildest Art Nouveau door in Paris, a short walk from the Eiffel Tower.",
       "hours_note": "Private flats: façade only.",
-      "photo": "Immeuble Lavirotte - Paris - France - Facade.jpg"
+      "photo": "Immeuble Lavirotte - Paris - France - Facade.jpg",
+      "area": "Eiffel Tower & Invalides"
     },
     {
       "id": "grande-mosquee",
@@ -688,7 +723,8 @@
       "summary": "Moorish courtyards and gardens, and mint tea on the terrace next door.",
       "hours": "Mo,Tu,We,Th,Sa,Su 09:00-18:00",
       "hours_note": "Closed to visitors on Fridays.",
-      "photo": "Grande Mosquée de Paris.JPG"
+      "photo": "Grande Mosquée de Paris.JPG",
+      "area": "Latin Quarter"
     },
     {
       "id": "hotel-de-sully",
@@ -699,7 +735,8 @@
       "lng": 2.363778,
       "summary": "A Renaissance courtyard and garden, and a secret shortcut to the Place des Vosges.",
       "hours_note": "Courtyard and garden open during the day.",
-      "photo": "Hôtel de Sully 07-2.jpg"
+      "photo": "Hôtel de Sully 07-2.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "bibliotheque-sainte-genevieve",
@@ -710,7 +747,8 @@
       "lng": 2.345833,
       "summary": "A breathtaking iron-vaulted reading room, opposite the Panthéon.",
       "hours_note": "Reading room on access card; check visit conditions.",
-      "photo": "Salle de lecture Bibliotheque Sainte-Genevieve n11.jpg"
+      "photo": "Salle de lecture Bibliotheque Sainte-Genevieve n11.jpg",
+      "area": "Latin Quarter"
     },
     {
       "id": "la-samaritaine",
@@ -721,7 +759,8 @@
       "lng": 2.34208,
       "summary": "An Art Nouveau department store with a peacock fresco under its glass roof.",
       "hours": "Mo-Su 10:00-20:00",
-      "photo": "La Samaritaine and Statue of Henri IV.jpg"
+      "photo": "La Samaritaine and Statue of Henri IV.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "hotel-de-ville",
@@ -732,7 +771,8 @@
       "lng": 2.352222,
       "website": "https://www.paris.fr/dossiers/tout-savoir-sur-l-hotel-de-ville-de-paris-63",
       "summary": "The city hall, a neo-Renaissance wedding cake with free exhibitions.",
-      "photo": "Paris, Hôtel de Ville -- 2014 -- 1714.jpg"
+      "photo": "Paris, Hôtel de Ville -- 2014 -- 1714.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "galeries-lafayette-rooftop",
@@ -750,7 +790,8 @@
       "photo": "Opéra Garnier vu de la terrasse des Galeries Lafayette.jpg",
       "category": "classic",
       "duration": "30 min",
-      "best_time": "Sunset or after dark"
+      "best_time": "Sunset or after dark",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "rue-cremieux",
@@ -780,7 +821,8 @@
           ]
         ]
       ],
-      "photo": "Rue Crémieux, Paris 12.jpg"
+      "photo": "Rue Crémieux, Paris 12.jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "rue-de-l-abreuvoir",
@@ -892,7 +934,8 @@
           ]
         ]
       ],
-      "photo": "Rue des Thermopyles, Paris 14 June 2017 003.jpg"
+      "photo": "Rue des Thermopyles, Paris 14 June 2017 003.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "rue-berton",
@@ -930,7 +973,8 @@
           ]
         ]
       ],
-      "photo": "Rue Berton.JPG"
+      "photo": "Rue Berton.JPG",
+      "area": "Passy"
     },
     {
       "id": "cour-du-commerce-saint-andre",
@@ -960,7 +1004,8 @@
           ]
         ]
       ],
-      "photo": "P1020083 Paris VI Cour du Commerce-Saint-André reductwk.JPG"
+      "photo": "P1020083 Paris VI Cour du Commerce-Saint-André reductwk.JPG",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "rue-de-furstemberg",
@@ -990,7 +1035,8 @@
           ]
         ]
       ],
-      "photo": "Rue de Furstemberg, Paris 6e 1.jpg"
+      "photo": "Rue de Furstemberg, Paris 6e 1.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "cite-florale",
@@ -1095,7 +1141,8 @@
             2.34588
           ]
         ]
-      ]
+      ],
+      "area": "Butte-aux-Cailles"
     },
     {
       "id": "place-dauphine",
@@ -1104,7 +1151,8 @@
       "wikidata": "Q1810430",
       "lat": 48.856539,
       "lng": 2.342428,
-      "summary": "A secret triangle on the Île de la Cité, with chestnut trees and pétanque."
+      "summary": "A secret triangle on the Île de la Cité, with chestnut trees and pétanque.",
+      "area": "The islands"
     },
     {
       "id": "place-des-vosges",
@@ -1114,7 +1162,8 @@
       "lat": 48.855556,
       "lng": 2.365556,
       "summary": "The oldest planned square in Paris: red brick arcades and lawns to sit on.",
-      "photo": "Place des Vosges vue aérienne.png"
+      "photo": "Place des Vosges vue aérienne.png",
+      "area": "Le Marais"
     },
     {
       "id": "jardin-du-palais-royal",
@@ -1126,7 +1175,8 @@
       "summary": "Lime tree alleys, arcades and the striped Buren columns.",
       "hours": "Mo-Su 08:30-20:30",
       "hours_note": "Until 22:30 in summer.",
-      "photo": "Jardins du Palais Royal.JPG"
+      "photo": "Jardins du Palais Royal.JPG",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "square-du-vert-galant",
@@ -1136,7 +1186,8 @@
       "lat": 48.8575,
       "lng": 2.34,
       "summary": "The tip of the Île de la Cité, at water level. Picnic at sunset.",
-      "photo": "Square du Vert-Galant 003.jpg"
+      "photo": "Square du Vert-Galant 003.jpg",
+      "area": "The islands"
     },
     {
       "id": "quai-saint-bernard-dancing",
@@ -1150,7 +1201,8 @@
       "tip": "Go in the evening, after dinner.",
       "price": "Free",
       "hours_note": "Mostly on fine evenings in the warmer months.",
-      "photo": "Dancing along the River Seine.jpg"
+      "photo": "Dancing along the River Seine.jpg",
+      "area": "Latin Quarter"
     },
     {
       "id": "place-des-abbesses-musicians",
@@ -1184,7 +1236,8 @@
       "lng": 2.345,
       "website": "http://www.foliesbergere.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Folies Bergère, Paris 6 February 2016.jpg"
+      "photo": "Folies Bergère, Paris 6 February 2016.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-des-champs-elysees",
@@ -1195,7 +1248,8 @@
       "lng": 2.303056,
       "website": "https://www.theatrechampselysees.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Le théâtre des Champs-Élysées à Paris, 2022.jpg"
+      "photo": "Le théâtre des Champs-Élysées à Paris, 2022.jpg",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "theatre-des-bouffes-du-nord",
@@ -1217,7 +1271,8 @@
       "lng": 2.33333,
       "website": "https://www.ivt.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "International Visual Theater Paris P1050914.JPG"
+      "photo": "International Visual Theater Paris P1050914.JPG",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-bobino",
@@ -1228,7 +1283,8 @@
       "lng": 2.323589,
       "website": "https://bobino.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Bobino.JPG"
+      "photo": "Théâtre Bobino.JPG",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-national-de-chaillot",
@@ -1238,7 +1294,8 @@
       "lat": 48.862292,
       "lng": 2.288156,
       "website": "http://www.theatre-chaillot.fr",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Passy"
     },
     {
       "id": "theatre-du-chatelet",
@@ -1249,7 +1306,8 @@
       "lng": 2.346389,
       "website": "https://www.chatelet.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre du Châtelet Façade (cropped).jpg"
+      "photo": "Théâtre du Châtelet Façade (cropped).jpg",
+      "area": "The islands"
     },
     {
       "id": "theatre-comedie-italienne",
@@ -1260,7 +1318,8 @@
       "lng": 2.323882,
       "website": "http://www.comedie-italienne.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Comédie Italienne.JPG"
+      "photo": "Comédie Italienne.JPG",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-comedie-francaise-salle-richelieu",
@@ -1271,7 +1330,8 @@
       "lng": 2.335833,
       "website": "http://www.comedie-francaise.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris Comedie-Francaise.jpg"
+      "photo": "Paris Comedie-Francaise.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "theatre-de-paris",
@@ -1282,7 +1342,8 @@
       "lng": 2.331389,
       "website": "http://www.theatredeparis.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de Paris, 15 rue Blanche, Paris 9.jpg"
+      "photo": "Théâtre de Paris, 15 rue Blanche, Paris 9.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-des-varietes",
@@ -1293,7 +1354,8 @@
       "lng": 2.341944,
       "website": "http://www.theatre-des-varietes.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris Theatre des Varietes.jpg"
+      "photo": "Paris Theatre des Varietes.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-du-marais",
@@ -1304,7 +1366,8 @@
       "lng": 2.357778,
       "website": "https://theatredumarais.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1200707 Paris III rue Volta n37 rwk.jpg"
+      "photo": "P1200707 Paris III rue Volta n37 rwk.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "theatre-de-la-madeleine",
@@ -1314,7 +1377,8 @@
       "lat": 48.8709,
       "lng": 2.32038,
       "website": "https://www.theatre-madeleine.com/",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "theatre-opera-bastille",
@@ -1324,7 +1388,8 @@
       "lat": 48.851944,
       "lng": 2.370556,
       "website": "https://www.operadeparis.fr",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "theatre-des-nouveautes",
@@ -1335,7 +1400,8 @@
       "lng": 2.345,
       "website": "http://theatredesnouveautes.efilprod.net",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre des Nouveautés.JPG"
+      "photo": "Théâtre des Nouveautés.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-du-vieux-colombier",
@@ -1346,7 +1412,8 @@
       "lng": 2.330294,
       "website": "https://www.comedie-francaise.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre du Vieux-Colombier, 21 rue du Vieux-Colombier, Paris 6e.jpg"
+      "photo": "Théâtre du Vieux-Colombier, 21 rue du Vieux-Colombier, Paris 6e.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "theatre-de-l-odeon",
@@ -1357,7 +1424,8 @@
       "lng": 2.33875,
       "website": "https://www.theatre-odeon.eu",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de l'Odéon - facade - photo Thierry Depagne.jpg"
+      "photo": "Théâtre de l'Odéon - facade - photo Thierry Depagne.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "theatre-cafe-de-la-gare",
@@ -1368,7 +1436,8 @@
       "lng": 2.352466,
       "website": "http://www.cdlg.org/w/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Café de la Gare Paris.jpg"
+      "photo": "Café de la Gare Paris.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "theatre-le-ranelagh",
@@ -1379,7 +1448,8 @@
       "lng": 2.27786,
       "website": "http://www.theatre-ranelagh.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Le Ranelagh, Paris 16e 1-3.jpg"
+      "photo": "Théâtre Le Ranelagh, Paris 16e 1-3.jpg",
+      "area": "Passy"
     },
     {
       "id": "theatre-artistic-theatre",
@@ -1390,7 +1460,8 @@
       "lng": 2.38098,
       "website": "http://artistictheatre.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1100792 Paris XI rue Richard Lenoir Théâtre Artistic Athevains rwk.JPG"
+      "photo": "P1100792 Paris XI rue Richard Lenoir Théâtre Artistic Athevains rwk.JPG",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "theatre-ateliers-berthier-odeon",
@@ -1412,7 +1483,8 @@
       "lng": 2.335444,
       "website": "http://www.bouffesparisiens.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1090591 Paris II rue Monsigny theatre des Bouffes-Parisiens rwk.JPG"
+      "photo": "P1090591 Paris II rue Monsigny theatre des Bouffes-Parisiens rwk.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-de-l-oeuvre",
@@ -1423,7 +1495,8 @@
       "lng": 2.3285,
       "website": "https://www.theatredeloeuvre.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de l'Œuvre, Paris.jpg"
+      "photo": "Théâtre de l'Œuvre, Paris.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-de-la-ville",
@@ -1434,7 +1507,8 @@
       "lng": 2.348056,
       "website": "https://www.theatredelaville-paris.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Sarah-Bernhardt 1.jpg"
+      "photo": "Théâtre Sarah-Bernhardt 1.jpg",
+      "area": "The islands"
     },
     {
       "id": "theatre-don-camilo",
@@ -1445,7 +1519,8 @@
       "lng": 2.332084,
       "website": "https://doncamilo.net",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Café-théâtre Don Camillo, 10 rue des Saints-Pères, Paris 7e.jpg"
+      "photo": "Café-théâtre Don Camillo, 10 rue des Saints-Pères, Paris 7e.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "theatre-lepic",
@@ -1456,7 +1531,8 @@
       "lng": 2.33723,
       "website": "https://theatrelepic.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Lepic.jpg"
+      "photo": "Théâtre Lepic.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-libre",
@@ -1467,7 +1543,8 @@
       "lng": 2.35489,
       "website": "https://le-theatrelibre.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Theatrecomedia.jpg"
+      "photo": "Theatrecomedia.jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-comedie-bastille",
@@ -1478,7 +1555,8 @@
       "lng": 2.3703,
       "website": "http://www.comedie-bastille.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Comédie Bastille.JPG"
+      "photo": "Comédie Bastille.JPG",
+      "area": "Le Marais"
     },
     {
       "id": "theatre-comedie-caumartin",
@@ -1488,7 +1566,8 @@
       "lat": 48.871628,
       "lng": 2.32816,
       "website": "http://www.comedie-caumartin.com",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-comedie-de-paris",
@@ -1499,7 +1578,8 @@
       "lng": 2.333194,
       "website": "https://www.comediedeparis.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris Comédie de Paris 2022 01.jpg"
+      "photo": "Paris Comédie de Paris 2022 01.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-antoine-simone-berriau",
@@ -1510,7 +1590,8 @@
       "lng": 2.35537,
       "website": "http://www.theatre-antoine.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris Théâtre Antoine 112.JPG"
+      "photo": "Paris Théâtre Antoine 112.JPG",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-la-cartoucherie",
@@ -1532,7 +1613,8 @@
       "lng": 2.36825,
       "website": "http://www.palaisdesglaces.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris FaubTemple-PalaisDesGlaces.JPG"
+      "photo": "Paris FaubTemple-PalaisDesGlaces.JPG",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-lucernaire",
@@ -1543,7 +1625,8 @@
       "lng": 2.33045,
       "website": "http://www.lucernaire.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Le Lucernaire.JPG"
+      "photo": "Le Lucernaire.JPG",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-la-pepiniere-theatre",
@@ -1554,7 +1637,8 @@
       "lng": 2.33237,
       "website": "http://www.theatrelapepiniere.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1040998 Paris II rue Louis-le-Grand théâtre La Pépinière rwk.JPG"
+      "photo": "P1040998 Paris II rue Louis-le-Grand théâtre La Pépinière rwk.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-laurette-theatre",
@@ -1564,7 +1648,8 @@
       "lat": 48.8715,
       "lng": 2.36817,
       "website": "http://www.laurette-theatre.fr",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-silvia-monfort",
@@ -1586,7 +1671,8 @@
       "lng": 2.343333,
       "website": "http://www.theatrelepalace.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Le Palace façade.jpg"
+      "photo": "Théâtre Le Palace façade.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-le-zebre",
@@ -1597,7 +1683,8 @@
       "lng": 2.378693,
       "website": "http://www.lezebre.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris - Le Zèbre - 5 December 2015.jpg"
+      "photo": "Paris - Le Zèbre - 5 December 2015.jpg",
+      "area": "Belleville & Ménilmontant"
     },
     {
       "id": "theatre-les-cinq-diamants",
@@ -1608,7 +1695,8 @@
       "lng": 2.351667,
       "website": "http://www.theatre-5-diamants.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1010768 Paris XIII rue des cinq diamants théâtre des 5 diamants reductwk.JPG"
+      "photo": "P1010768 Paris XIII rue des cinq diamants théâtre des 5 diamants reductwk.JPG",
+      "area": "Butte-aux-Cailles"
     },
     {
       "id": "theatre-du-rond-point",
@@ -1619,7 +1707,8 @@
       "lng": 2.311,
       "website": "http://www.theatredurondpoint.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris theatre du rond point batiment entier.jpg"
+      "photo": "Paris theatre du rond point batiment entier.jpg",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "theatre-des-abbesses",
@@ -1630,7 +1719,8 @@
       "lng": 2.33717,
       "website": "http://theatredelaville-paris.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de la Ville - Les Abbesses.JPG"
+      "photo": "Théâtre de la Ville - Les Abbesses.JPG",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-de-la-bastille",
@@ -1641,7 +1731,8 @@
       "lng": 2.37562,
       "website": "http://www.theatre-bastille.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de la Bastille.JPG"
+      "photo": "Théâtre de la Bastille.JPG",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "theatre-de-la-gaite-montparnasse",
@@ -1652,7 +1743,8 @@
       "lng": 2.32306,
       "website": "http://www.gaite.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de la Gaîté-Montparnasse 01.jpg"
+      "photo": "Théâtre de la Gaîté-Montparnasse 01.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-de-la-huchette",
@@ -1663,7 +1755,8 @@
       "lng": 2.3453,
       "website": "http://www.theatre-huchette.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Theatre Huchette.jpg"
+      "photo": "Theatre Huchette.jpg",
+      "area": "The islands"
     },
     {
       "id": "theatre-de-la-manufacture-des-abbesses",
@@ -1673,7 +1766,8 @@
       "lat": 48.8844,
       "lng": 2.33664,
       "website": "http://manufacturedesabbesses.com",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-de-la-michodiere",
@@ -1684,7 +1778,8 @@
       "lng": 2.334722,
       "website": "http://www.michodiere.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1190900 Paris II theatre de la Michodiere rwk.jpg"
+      "photo": "P1190900 Paris II theatre de la Michodiere rwk.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-de-la-renaissance",
@@ -1695,7 +1790,8 @@
       "lng": 2.356389,
       "website": "http://www.theatredelarenaissance.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris theatre de la Renaissance.jpg"
+      "photo": "Paris theatre de la Renaissance.jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-de-la-tempete",
@@ -1717,7 +1813,8 @@
       "lng": 2.3535,
       "website": "http://www.vieillegrille.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de la Vieille-Grille.jpg"
+      "photo": "Théâtre de la Vieille-Grille.jpg",
+      "area": "Latin Quarter"
     },
     {
       "id": "theatre-des-artisans",
@@ -1738,7 +1835,8 @@
       "lng": 2.35738,
       "website": "http://www.blancsmanteaux.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris theatre des blancs manteaux.jpg"
+      "photo": "Paris theatre des blancs manteaux.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "theatre-des-deux-anes",
@@ -1749,7 +1847,8 @@
       "lng": 2.33167,
       "website": "http://www.2anes.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1060367 Paris XVIII théâtre des deux ânes rwk.JPG"
+      "photo": "P1060367 Paris XVIII théâtre des deux ânes rwk.JPG",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-des-mathurins",
@@ -1781,7 +1880,8 @@
       "lng": 2.34299,
       "website": "http://theatredunordouest.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Facade-theatre-nord- ouest-paris.JPG"
+      "photo": "Facade-theatre-nord- ouest-paris.JPG",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-du-petit-saint-martin",
@@ -1792,7 +1892,8 @@
       "lng": 2.356944,
       "website": "https://www.petitstmartin.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1220772 Paris X rue Rene-Boulanger theatre petit st-Martin rwk.jpg"
+      "photo": "P1220772 Paris X rue Rene-Boulanger theatre petit st-Martin rwk.jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-du-point-virgule",
@@ -1803,7 +1904,8 @@
       "lng": 2.356861,
       "website": "https://www.lepointvirgule.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Point virgule.jpg"
+      "photo": "Point virgule.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "theatre-du-temps",
@@ -1814,7 +1916,8 @@
       "lng": 2.381641,
       "website": "http://www.theatredutemps.net",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Le Théâtre du Temps.jpg"
+      "photo": "Le Théâtre du Temps.jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "theatre-edouard-vii",
@@ -1825,7 +1928,8 @@
       "lng": 2.3294,
       "website": "https://www.theatreedouard7.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1190871 Paris IX theatre Edouard VII rwk.jpg"
+      "photo": "P1190871 Paris IX theatre Edouard VII rwk.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-trevise",
@@ -1835,7 +1939,8 @@
       "lat": 48.873477,
       "lng": 2.345335,
       "website": "https://theatre-trevise.com/",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-de-dix-heures",
@@ -1845,7 +1950,8 @@
       "lat": 48.8829,
       "lng": 2.33648,
       "website": "http://www.theatrededixheures.fr",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-13",
@@ -1855,7 +1961,8 @@
       "lat": 48.8287,
       "lng": 2.34469,
       "website": "http://www.theatre13.com",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Butte-aux-Cailles"
     },
     {
       "id": "theatre-dejazet",
@@ -1866,7 +1973,8 @@
       "lng": 2.36444,
       "website": "http://www.dejazet.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Plafond Théâtre Dejazet.jpg"
+      "photo": "Plafond Théâtre Dejazet.jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-essaion",
@@ -1876,7 +1984,8 @@
       "lat": 48.8597,
       "lng": 2.35326,
       "website": "http://www.essaion-theatre.com",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Le Marais"
     },
     {
       "id": "theatre-hebertot",
@@ -1898,7 +2007,8 @@
       "lng": 2.33641,
       "website": "http://www.theatrelabruyere.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Rue Bruyère - Paris IX (FR75) - 2021-06-27 - 1.jpg"
+      "photo": "Rue Bruyère - Paris IX (FR75) - 2021-06-27 - 1.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-apollo-theatre",
@@ -1908,7 +2018,8 @@
       "lat": 48.86835,
       "lng": 2.366133,
       "website": "https://www.apollotheatre.fr/",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-les-dechargeurs",
@@ -1919,7 +2030,8 @@
       "lng": 2.34586,
       "website": "http://www.lesdechargeurs.fr",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre des Déchargeurs, 3 rue des Déchargeurs, Paris 1er 2.jpg"
+      "photo": "Théâtre des Déchargeurs, 3 rue des Déchargeurs, Paris 1er 2.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "theatre-michel",
@@ -1940,7 +2052,8 @@
       "lat": 48.8686,
       "lng": 2.31367,
       "website": "http://www.theatremarigny.fr/",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "theatre-montmartre-galabru",
@@ -1951,7 +2064,8 @@
       "lng": 2.33457,
       "website": "http://www.theatregalabru.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "F1427 Paris XVIII rue Armee-Orient theatre Galabru rwk.jpg"
+      "photo": "F1427 Paris XVIII rue Armee-Orient theatre Galabru rwk.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-mouffetard",
@@ -1962,7 +2076,8 @@
       "lng": 2.35074,
       "website": "http://theatredelamarionnette.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Mouffetard.JPG"
+      "photo": "Théâtre Mouffetard.JPG",
+      "area": "Latin Quarter"
     },
     {
       "id": "theatre-montparnasse",
@@ -1973,7 +2088,8 @@
       "lng": 2.3245,
       "website": "http://www.theatremontparnasse.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1030274 Paris XIV théatre Montparnasse rue Larochelle rwk.JPG"
+      "photo": "P1030274 Paris XIV théatre Montparnasse rue Larochelle rwk.JPG",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-paris-villette",
@@ -1995,7 +2111,8 @@
       "lng": 2.3243,
       "website": "https://www.theatre-rive-gauche.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre Rive Gauche, Rue de la Gaîté, Paris 14.jpg"
+      "photo": "Théâtre Rive Gauche, Rue de la Gaîté, Paris 14.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-la-scala-paris",
@@ -2006,7 +2123,8 @@
       "lng": 2.35453,
       "website": "https://lascala-paris.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "La Scala (Paris).jpg"
+      "photo": "La Scala (Paris).jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "theatre-de-poche-montparnasse",
@@ -2017,7 +2135,8 @@
       "lng": 2.325278,
       "website": "http://www.theatredepoche-montparnasse.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâre de poche Montparnasse.JPG"
+      "photo": "Théâre de poche Montparnasse.JPG",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-de-l-aquarium",
@@ -2039,7 +2158,8 @@
       "lng": 2.34236,
       "website": "http://www.theatre-atelier.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre de l'Atelier (mars 2010).JPG"
+      "photo": "Théâtre de l'Atelier (mars 2010).JPG",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-l-etoile-du-nord",
@@ -2060,7 +2180,8 @@
       "lng": 2.3227,
       "website": "http://www.guichetmontparnasse.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Le Guichet Montparnasse, 15 rue du Maine, Paris 14e.jpg"
+      "photo": "Le Guichet Montparnasse, 15 rue du Maine, Paris 14e.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-la-reine-blanche",
@@ -2081,7 +2202,8 @@
       "lng": 2.329718,
       "website": "https://studioraspail.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Studio Raspail.jpg"
+      "photo": "Studio Raspail.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "theatre-des-beliers-parisiens",
@@ -2092,7 +2214,8 @@
       "lng": 2.344312,
       "website": "https://www.theatredesbeliersparisiens.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Facade-Beliers1.jpg"
+      "photo": "Facade-Beliers1.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-opera-comique-salle-favart",
@@ -2103,7 +2226,8 @@
       "lng": 2.337833,
       "website": "https://www.opera-comique.com/en",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Théâtre National Opéra Comique - Paris II (FR75) - 2021-06-14 - 1.jpg"
+      "photo": "Théâtre National Opéra Comique - Paris II (FR75) - 2021-06-14 - 1.jpg",
+      "area": "Opéra & the covered passages"
     },
     {
       "id": "theatre-les-rendez-vous-d-ailleurs",
@@ -2136,7 +2260,8 @@
       "lng": 2.340278,
       "website": "https://www.funambule-montmartre.com/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "P1260974 Paris XVIII rue des Saules n53 rwk.jpg"
+      "photo": "P1260974 Paris XVIII rue des Saules n53 rwk.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "theatre-de-l-opprime",
@@ -2147,7 +2272,8 @@
       "lng": 2.383058,
       "website": "http://www.theatredelopprime.com",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Façade Théâtre de l'Opprimé - Paris.jpg"
+      "photo": "Façade Théâtre de l'Opprimé - Paris.jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "theatre-de-passy",
@@ -2158,7 +2284,8 @@
       "lng": 2.27538,
       "website": "https://theatredepassy.fr/",
       "hours_note": "Show times vary: see the programme.",
-      "photo": "Paris Théâtre de Passy 2022 02.jpg"
+      "photo": "Paris Théâtre de Passy 2022 02.jpg",
+      "area": "Passy"
     },
     {
       "id": "theatre-la-scene-montparnasse",
@@ -2168,7 +2295,8 @@
       "lat": 48.843611,
       "lng": 2.322222,
       "website": "https://www.legrandpointvirgule.com",
-      "hours_note": "Show times vary: see the programme."
+      "hours_note": "Show times vary: see the programme.",
+      "area": "Montparnasse"
     },
     {
       "id": "bateaux-mouches-cruise",
@@ -2184,7 +2312,8 @@
       "price": "Paid",
       "website": "https://www.bateaux-mouches.fr",
       "hours_note": "In winter, departures run from mid-morning until about 21:30.",
-      "photo": "Bateaux Mouches Paris 2011.jpg"
+      "photo": "Bateaux Mouches Paris 2011.jpg",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "palace-of-versailles",
@@ -2201,7 +2330,8 @@
       "website": "https://en.chateauversailles.fr/",
       "hours_note": "Closed on Mondays.",
       "booking_required": true,
-      "photo": "Vue aérienne du domaine de Versailles par ToucanWings - Creative Commons By Sa 3.0 - 083.jpg"
+      "photo": "Vue aérienne du domaine de Versailles par ToucanWings - Creative Commons By Sa 3.0 - 083.jpg",
+      "area": "Around Paris"
     },
     {
       "id": "eiffel-tower",
@@ -2217,7 +2347,8 @@
       "price": "Paid to go up",
       "website": "https://www.toureiffel.paris",
       "booking_required": true,
-      "photo": "Tour Eiffel Wikimedia Commons.jpg"
+      "photo": "Tour Eiffel Wikimedia Commons.jpg",
+      "area": "Eiffel Tower & Invalides"
     },
     {
       "id": "arc-de-triomphe-rooftop",
@@ -2232,7 +2363,8 @@
       "best_time": "Sunset",
       "price": "Paid",
       "website": "https://www.paris-arc-de-triomphe.fr",
-      "photo": "Arc de Triomphe - Août 2026.jpg"
+      "photo": "Arc de Triomphe - Août 2026.jpg",
+      "area": "Champs-Élysées & Monceau"
     },
     {
       "id": "notre-dame-de-paris",
@@ -2247,7 +2379,8 @@
       "best_time": "Morning",
       "price": "Free",
       "website": "https://www.notredamedeparis.fr/",
-      "photo": "Notre-Dame de Paris 2013-07-24.jpg"
+      "photo": "Notre-Dame de Paris 2013-07-24.jpg",
+      "area": "The islands"
     },
     {
       "id": "sacre-coeur",
@@ -2280,7 +2413,8 @@
       "website": "https://www.catacombes.paris.fr",
       "hours_note": "Book a time slot online: tickets sell out.",
       "booking_required": true,
-      "photo": "Catacumbas, París, Francia, 2022-11-01, DD 117-119 HDR.jpg"
+      "photo": "Catacumbas, París, Francia, 2022-11-01, DD 117-119 HDR.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "pere-lachaise",
@@ -2295,7 +2429,8 @@
       "best_time": "Autumn afternoon",
       "price": "Free",
       "website": "https://www.paris.fr/perelachaise",
-      "photo": "Main gate of the Père-Lachaise Cemetery, Paris 13 June 2014.jpg"
+      "photo": "Main gate of the Père-Lachaise Cemetery, Paris 13 June 2014.jpg",
+      "area": "Belleville & Ménilmontant"
     },
     {
       "id": "sewer-museum",
@@ -2310,7 +2445,8 @@
       "best_time": "Rainy day",
       "price": "Paid",
       "website": "https://musee-egouts.paris.fr/en/",
-      "photo": "Exterieur du musée des égouts.jpg"
+      "photo": "Exterieur du musée des égouts.jpg",
+      "area": "Eiffel Tower & Invalides"
     },
     {
       "id": "deyrolle",
@@ -2324,7 +2460,8 @@
       "duration": "30 min",
       "best_time": "Any time",
       "price": "Free to browse",
-      "photo": "Deyrolle, 46 Rue du Bac, 75007 Paris 2013.jpg"
+      "photo": "Deyrolle, 46 Rue du Bac, 75007 Paris 2013.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "studio-28",
@@ -2355,7 +2492,8 @@
       "best_time": "Weekday",
       "price": "Paid",
       "hours_note": "Bring a swimsuit.",
-      "photo": "Immeuble Sauvage - piscine des amiraux - rue des amiraux 2.JPG"
+      "photo": "Immeuble Sauvage - piscine des amiraux - rue des amiraux 2.JPG",
+      "area": "Montmartre"
     },
     {
       "id": "le-train-bleu",
@@ -2372,7 +2510,8 @@
       "website": "http://www.le-train-bleu.com",
       "hours_note": "Book ahead for a table.",
       "booking_required": true,
-      "photo": "Train bleu 01.jpg"
+      "photo": "Train bleu 01.jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "coulee-verte",
@@ -2387,7 +2526,8 @@
       "best_time": "Morning",
       "price": "Free",
       "website": "https://www.paris.fr/lieux/coulee-verte-rene-dumont-1772",
-      "photo": "Promenade plantée, Paris August 2009 (10).jpg"
+      "photo": "Promenade plantée, Paris August 2009 (10).jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "canal-saint-martin",
@@ -2401,7 +2541,8 @@
       "duration": "1 h 30",
       "best_time": "Sunday afternoon",
       "price": "Free",
-      "photo": "Paris Canal St-Martin écluses Récollets 2013.jpg"
+      "photo": "Paris Canal St-Martin écluses Récollets 2013.jpg",
+      "area": "Canal Saint-Martin"
     },
     {
       "id": "marche-des-enfants-rouges",
@@ -2416,7 +2557,8 @@
       "best_time": "Lunch",
       "price": "€",
       "hours_note": "Closed on Mondays.",
-      "photo": "Paris III-Marché des Enfants-Rouges.jpg"
+      "photo": "Paris III-Marché des Enfants-Rouges.jpg",
+      "area": "Le Marais"
     },
     {
       "id": "puces-de-saint-ouen",
@@ -2432,7 +2574,8 @@
       "price": "Free to browse",
       "website": "https://www.pucesdeparissaintouen.com/",
       "hours_note": "Open from Saturday to Monday.",
-      "photo": "Marche Malassis4.jpg"
+      "photo": "Marche Malassis4.jpg",
+      "area": "Around Paris"
     },
     {
       "id": "shakespeare-and-company",
@@ -2447,7 +2590,8 @@
       "best_time": "Any time",
       "price": "Free to browse",
       "website": "http://www.shakespeareandcompany.com",
-      "photo": "Shakespeare and Company, Paris.jpg"
+      "photo": "Shakespeare and Company, Paris.jpg",
+      "area": "Latin Quarter"
     },
     {
       "id": "atelier-des-lumieres",
@@ -2463,7 +2607,8 @@
       "price": "Paid",
       "website": "https://www.atelier-lumieres.com/",
       "booking_required": true,
-      "photo": "Atelier des Lumières Klimt.jpg"
+      "photo": "Atelier des Lumières Klimt.jpg",
+      "area": "Bastille & Bercy"
     },
     {
       "id": "jardin-des-plantes",
@@ -2478,7 +2623,8 @@
       "best_time": "Afternoon, or evening for the lights",
       "price": "Free (galleries and lights paid)",
       "website": "https://www.jardindesplantesdeparis.fr/",
-      "photo": "Paris 75005 Grande Galerie de l'Evolution 20070804.jpg"
+      "photo": "Paris 75005 Grande Galerie de l'Evolution 20070804.jpg",
+      "area": "Latin Quarter"
     },
     {
       "id": "jardin-des-tuileries",
@@ -2492,7 +2638,8 @@
       "duration": "1 h",
       "best_time": "Afternoon",
       "price": "Free",
-      "photo": "Grande Roue de Paris - Louvre et Jardins des Tuileries.jpg"
+      "photo": "Grande Roue de Paris - Louvre et Jardins des Tuileries.jpg",
+      "area": "Louvre & Palais-Royal"
     },
     {
       "id": "jardin-du-luxembourg",
@@ -2507,7 +2654,8 @@
       "best_time": "Sunny afternoon",
       "price": "Free",
       "website": "https://jardin.senat.fr",
-      "photo": "LuxembourgMontparnasse 2.jpg"
+      "photo": "LuxembourgMontparnasse 2.jpg",
+      "area": "Saint-Germain-des-Prés"
     },
     {
       "id": "tour-montparnasse",
@@ -2522,7 +2670,8 @@
       "best_time": "Sunset",
       "price": "Paid",
       "website": "https://www.tourmontparnasse56.com",
-      "photo": "Remote view of the Tour Montparnasse & Eiffel Tower in 2005.jpg"
+      "photo": "Remote view of the Tour Montparnasse & Eiffel Tower in 2005.jpg",
+      "area": "Montparnasse"
     },
     {
       "id": "chateau-de-fontainebleau",
@@ -2537,7 +2686,8 @@
       "best_time": "Weekday",
       "price": "Paid",
       "website": "https://www.chateaudefontainebleau.fr/",
-      "photo": "Le Grand Escalier à Fer de Cheval.jpg"
+      "photo": "Le Grand Escalier à Fer de Cheval.jpg",
+      "area": "Around Paris"
     },
     {
       "id": "giverny",
@@ -2554,7 +2704,8 @@
       "website": "http://www.fondation-monet.com",
       "hours_note": "Closed in winter: reopens in spring.",
       "booking_required": true,
-      "photo": "La Maison vue du Clos Normand.jpg"
+      "photo": "La Maison vue du Clos Normand.jpg",
+      "area": "Around Paris"
     },
     {
       "id": "moulin-rouge",
@@ -2822,6 +2973,294 @@
       "lng": 2.3592,
       "address": "Place du 11-Novembre-1918, 10th",
       "summary": "The forecourt of the Gare de l'Est."
+    },
+    {
+      "id": "musee-picasso",
+      "layer": "museums",
+      "name": "Musée Picasso",
+      "wikidata": "Q743206",
+      "lat": 48.859731,
+      "lng": 2.362439,
+      "summary": "The world's largest Picasso collection, in a grand 17th-century mansion of the Marais.",
+      "photo": "Paris 3e Hôtel Salé 640.jpg",
+      "website": "https://www.museepicassoparis.fr",
+      "price": "Paid",
+      "address": "5 Rue de Thorigny, 3rd",
+      "booking_required": true,
+      "area": "Le Marais"
+    },
+    {
+      "id": "rue-des-rosiers",
+      "layer": "streets",
+      "name": "Rue des Rosiers",
+      "wikidata": "Q3176233",
+      "lat": 48.857092,
+      "lng": 2.359582,
+      "summary": "The heart of the old Jewish quarter: bakeries, delis and the famous falafel queues.",
+      "photo": "Rue des Rosiers, Paris, France 01.jpg",
+      "address": "Rue des Rosiers, 4th",
+      "tip": "Falafel at L’As du Fallafel, eaten standing in the street.",
+      "area": "Le Marais"
+    },
+    {
+      "id": "hotel-de-sens",
+      "layer": "buildings",
+      "name": "Hôtel de Sens",
+      "wikidata": "Q1374604",
+      "lat": 48.853333,
+      "lng": 2.359167,
+      "summary": "One of the last medieval mansions of Paris, with turrets and a formal garden behind.",
+      "photo": "Hôtel de Sens 1.jpg",
+      "address": "1 Rue du Figuier, 4th",
+      "price": "Free (garden)",
+      "area": "Le Marais"
+    },
+    {
+      "id": "parc-de-belleville",
+      "layer": "squares",
+      "name": "Parc de Belleville",
+      "wikidata": "Q950446",
+      "lat": 48.87083,
+      "lng": 2.38472,
+      "summary": "A park on a slope with one of the best free views over Paris, at the top of the steps.",
+      "photo": "P1010851 Paris XX Parc de Belleville reductwk.JPG",
+      "website": "https://www.paris.fr/lieux/parc-de-belleville-1777",
+      "price": "Free",
+      "address": "Rue Piat, 20th",
+      "tip": "Go at sunset.",
+      "area": "Belleville & Ménilmontant"
+    },
+    {
+      "id": "rue-denoyez",
+      "layer": "streets",
+      "name": "Rue Dénoyez",
+      "wikidata": "Q3447763",
+      "lat": 48.8715,
+      "lng": 2.3786,
+      "summary": "A short street entirely covered in graffiti, repainted all the time.",
+      "photo": "Rue Dénoyez - Paris (France).JPG",
+      "address": "Rue Dénoyez, 20th",
+      "price": "Free",
+      "area": "Belleville & Ménilmontant"
+    },
+    {
+      "id": "buttes-chaumont",
+      "layer": "squares",
+      "name": "Parc des Buttes-Chaumont",
+      "wikidata": "Q532113",
+      "lat": 48.880278,
+      "lng": 2.382778,
+      "summary": "Cliffs, a lake and a little temple on a rock: the most romantic park in Paris.",
+      "photo": "Paris Buttes-Chaumont 005.jpg",
+      "website": "https://www.paris.fr/lieux/parc-des-buttes-chaumont-1757",
+      "price": "Free",
+      "address": "1 Rue Botzaris, 19th",
+      "area": "Belleville & Ménilmontant"
+    },
+    {
+      "id": "bellevilloise",
+      "layer": "activities",
+      "name": "La Bellevilloise",
+      "wikidata": "Q3206638",
+      "lat": 48.8681,
+      "lng": 2.39194,
+      "summary": "An old workers’ cooperative turned into a bar, club and concert hall, with olive trees under a glass roof.",
+      "photo": "La Bellevilloise.jpg",
+      "category": "evening",
+      "duration": "Evening",
+      "best_time": "Evening",
+      "price": "Paid",
+      "address": "19-21 Rue Boyer, 20th",
+      "area": "Belleville & Ménilmontant"
+    },
+    {
+      "id": "bassin-de-la-villette",
+      "layer": "activities",
+      "name": "Bassin de la Villette",
+      "wikidata": "Q810526",
+      "lat": 48.886111,
+      "lng": 2.375,
+      "summary": "The wide basin where the canal opens up: cinemas on both banks, boats, and pétanque along the water.",
+      "photo": "Paris - Bassin de La Villette (22895632843).jpg",
+      "category": "outdoors",
+      "duration": "1 h",
+      "best_time": "Late afternoon",
+      "price": "Free",
+      "address": "Quai de la Loire, 19th",
+      "area": "Canal Saint-Martin"
+    },
+    {
+      "id": "rotonde-de-la-villette",
+      "layer": "buildings",
+      "name": "Rotonde de la Villette",
+      "wikidata": "Q1240015",
+      "lat": 48.883333,
+      "lng": 2.369444,
+      "summary": "A round toll house by Ledoux from the 1780s, at the end of the canal, now a café.",
+      "photo": "2012 Rotonde de la Villette.jpg",
+      "address": "Place de la Bataille-de-Stalingrad, 19th",
+      "area": "Canal Saint-Martin"
+    },
+    {
+      "id": "hotel-du-nord",
+      "layer": "activities",
+      "name": "Hôtel du Nord",
+      "wikidata": "Q105564314",
+      "lat": 48.873588,
+      "lng": 2.364112,
+      "summary": "The façade of the 1938 Carné film, on the Canal Saint-Martin. Now a bistro.",
+      "photo": "Hôtel du Nord, 12 April 2013.jpg",
+      "category": "food",
+      "duration": "1 h",
+      "best_time": "Lunch",
+      "price": "€€",
+      "website": "https://www.hoteldunord.org",
+      "address": "102 Quai de Jemmapes, 10th",
+      "area": "Canal Saint-Martin"
+    },
+    {
+      "id": "pantheon",
+      "layer": "buildings",
+      "name": "Panthéon",
+      "wikidata": "Q188856",
+      "lat": 48.846198,
+      "lng": 2.346105,
+      "summary": "The great domed temple where France buries its heroes, with Foucault’s pendulum inside.",
+      "photo": "Panthéon, Paris 25 March 2012.jpg",
+      "website": "https://www.paris-pantheon.fr",
+      "price": "Paid",
+      "address": "Place du Panthéon, 5th",
+      "area": "Latin Quarter"
+    },
+    {
+      "id": "rue-mouffetard",
+      "layer": "streets",
+      "name": "Rue Mouffetard",
+      "wikidata": "Q2112543",
+      "lat": 48.841944,
+      "lng": 2.349722,
+      "summary": "A winding medieval street going down the hill, with a morning market at the bottom.",
+      "photo": "Rue Mouffetard.JPG",
+      "address": "Rue Mouffetard, 5th",
+      "tip": "Best in the morning, for the market.",
+      "area": "Latin Quarter"
+    },
+    {
+      "id": "arenes-de-lutece",
+      "layer": "squares",
+      "name": "Arènes de Lutèce",
+      "wikidata": "Q641548",
+      "lat": 48.845,
+      "lng": 2.35306,
+      "summary": "A Roman amphitheatre hidden behind the buildings, where locals now play pétanque.",
+      "photo": "Anfiteatro de París 01.jpg",
+      "price": "Free",
+      "address": "49 Rue Monge, 5th",
+      "area": "Latin Quarter"
+    },
+    {
+      "id": "ile-saint-louis",
+      "layer": "activities",
+      "name": "Île Saint-Louis",
+      "wikidata": "Q211034",
+      "lat": 48.851667,
+      "lng": 2.356389,
+      "summary": "A quiet island of 17th-century houses: walk around the quays and have a Berthillon ice cream.",
+      "photo": "Quai d'Orléans Paris 004.JPG",
+      "category": "classic",
+      "duration": "1 h",
+      "best_time": "Any time",
+      "price": "Free",
+      "address": "Île Saint-Louis, 4th",
+      "area": "The islands"
+    },
+    {
+      "id": "pont-neuf",
+      "layer": "buildings",
+      "name": "Pont Neuf",
+      "wikidata": "Q335277",
+      "lat": 48.8575,
+      "lng": 2.341667,
+      "summary": "The oldest standing bridge in Paris, with stone benches in its little bays.",
+      "photo": "The western sides of the Île de la Cité and the Pont Neuf, 14 July 2008.jpg",
+      "address": "Pont Neuf, 1st",
+      "price": "Free",
+      "area": "The islands"
+    },
+    {
+      "id": "marche-aux-fleurs",
+      "layer": "activities",
+      "name": "Flower market",
+      "wikidata": "Q3289836",
+      "lat": 48.855556,
+      "lng": 2.347778,
+      "summary": "Iron pavilions full of plants on the Île de la Cité, open every day.",
+      "photo": "Marché aux fleurs et aux oiseaux de Paris 2010-07-29 n1.jpg",
+      "category": "offbeat",
+      "duration": "20 min",
+      "best_time": "Morning",
+      "price": "Free",
+      "address": "Place Louis-Lépine, 4th",
+      "area": "The islands"
+    },
+    {
+      "id": "cafe-de-flore",
+      "layer": "activities",
+      "name": "Café de Flore",
+      "wikidata": "Q1025686",
+      "lat": 48.853889,
+      "lng": 2.3325,
+      "summary": "The café of Sartre and Beauvoir, next to Les Deux Magots. Pricey hot chocolate, perfect people-watching.",
+      "photo": "Café de Flore, 172 boulevard Saint-Germain, Paris 6e.jpg",
+      "category": "food",
+      "duration": "45 min",
+      "best_time": "Afternoon",
+      "price": "€€",
+      "website": "https://www.cafedeflore.fr",
+      "address": "172 Boulevard Saint-Germain, 6th",
+      "area": "Saint-Germain-des-Prés"
+    },
+    {
+      "id": "saint-sulpice",
+      "layer": "buildings",
+      "name": "Église Saint-Sulpice",
+      "wikidata": "Q295844",
+      "lat": 48.851002,
+      "lng": 2.334923,
+      "summary": "A huge church with Delacroix murals and a big fountain on its square.",
+      "photo": "Paris Saint-Sulpice Fassade 4-5 A.jpg",
+      "website": "https://www.paroissesaintsulpice.paris",
+      "price": "Free",
+      "address": "2 Rue Palatine, 6th",
+      "area": "Saint-Germain-des-Prés"
+    },
+    {
+      "id": "rue-butte-aux-cailles",
+      "layer": "streets",
+      "name": "Rue de la Butte-aux-Cailles",
+      "wikidata": "Q3451353",
+      "lat": 48.8277,
+      "lng": 2.34992,
+      "summary": "A village street of low houses, street art and cheap bars on top of the little hill.",
+      "photo": "Paris 13e - Rue de la Butte-aux-Cailles - vue est 4.jpg",
+      "address": "Rue de la Butte-aux-Cailles, 13th",
+      "area": "Butte-aux-Cailles"
+    },
+    {
+      "id": "piscine-butte-aux-cailles",
+      "layer": "activities",
+      "name": "Butte-aux-Cailles swimming pool",
+      "wikidata": "Q3389226",
+      "lat": 48.8272,
+      "lng": 2.3525,
+      "summary": "A 1920s brick pool under a concrete vault, fed by a natural spring. Bring a swim cap.",
+      "photo": "Piscine de la Butte-aux-Cailles, 5 place Paul-Verlaine, Paris 13e.jpg",
+      "category": "outdoors",
+      "duration": "1 h 30",
+      "best_time": "Morning",
+      "price": "Cheap",
+      "address": "5 Place Paul-Verlaine, 13th",
+      "area": "Butte-aux-Cailles"
     }
   ],
   "photos": {
@@ -3496,6 +3935,86 @@
     "Monmartre Cemetery.JPG": [
       "Elisabetta Cipolla, Tantalas",
       "Public domain"
+    ],
+    "2012 Rotonde de la Villette.jpg": [
+      "Traktorminze",
+      "CC BY-SA 3.0"
+    ],
+    "Anfiteatro de París 01.jpg": [
+      "Rodelar",
+      "CC BY-SA 4.0"
+    ],
+    "Café de Flore, 172 boulevard Saint-Germain, Paris 6e.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Hôtel de Sens 1.jpg": [
+      "Camlamb",
+      "CC BY-SA 4.0"
+    ],
+    "Hôtel du Nord, 12 April 2013.jpg": [
+      "Inocybe-Piero d'Houin",
+      "CC BY-SA 3.0"
+    ],
+    "La Bellevilloise.jpg": [
+      "Siren-Com",
+      "CC BY-SA 3.0"
+    ],
+    "Marché aux fleurs et aux oiseaux de Paris 2010-07-29 n1.jpg": [
+      "zoetnet",
+      "CC BY 2.0"
+    ],
+    "P1010851 Paris XX Parc de Belleville reductwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Panthéon, Paris 25 March 2012.jpg": [
+      "Camille Gévaudan",
+      "CC BY-SA 3.0"
+    ],
+    "Paris - Bassin de La Villette (22895632843).jpg": [
+      "Fred Romero",
+      "CC BY 2.0"
+    ],
+    "Paris 13e - Rue de la Butte-aux-Cailles - vue est 4.jpg": [
+      "Ordifana75",
+      "CC BY-SA 3.0"
+    ],
+    "Paris 3e Hôtel Salé 640.jpg": [
+      "GFreihalter",
+      "CC BY-SA 3.0"
+    ],
+    "Paris Buttes-Chaumont 005.jpg": [
+      "M.Minderhoud",
+      "CC BY-SA 3.0"
+    ],
+    "Paris Saint-Sulpice Fassade 4-5 A.jpg": [
+      "Zairon",
+      "CC BY-SA 4.0"
+    ],
+    "Piscine de la Butte-aux-Cailles, 5 place Paul-Verlaine, Paris 13e.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Quai d'Orléans Paris 004.JPG": [
+      "Moonik",
+      "CC BY-SA 3.0"
+    ],
+    "Rue Dénoyez - Paris (France).JPG": [
+      "Wikinade",
+      "CC BY-SA 3.0"
+    ],
+    "Rue Mouffetard.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "Rue des Rosiers, Paris, France 01.jpg": [
+      "ninara",
+      "CC BY 2.0"
+    ],
+    "The western sides of the Île de la Cité and the Pont Neuf, 14 July 2008.jpg": [
+      "Rmrfstar",
+      "CC BY-SA 3.0"
     ]
   },
   "adventures": [
@@ -3704,7 +4223,248 @@
         "sacre-coeur",
         "funiculaire-montmartre",
         "halle-saint-pierre"
-      ]
+      ],
+      "sort": 1
+    },
+    {
+      "id": "marais",
+      "name": "Le Marais",
+      "summary": "Aristocratic mansions turned into museums, tiny streets, falafel and vintage shops, between the Hôtel de Ville and the Place des Vosges.",
+      "duration": "Half a day",
+      "best_time": "Sunday, when the shops are open and the streets busy",
+      "cover": "place-des-vosges",
+      "route": [
+        "hotel-de-ville",
+        "hotel-de-sens",
+        "hotel-de-sully",
+        "place-des-vosges",
+        "maison-de-victor-hugo",
+        "musee-carnavalet",
+        "rue-des-rosiers",
+        "musee-picasso",
+        "marche-des-enfants-rouges"
+      ],
+      "sort": 2
+    },
+    {
+      "id": "iles",
+      "name": "The islands",
+      "summary": "Where Paris began: the Île de la Cité with Notre-Dame and the Sainte-Chapelle, and the quiet Île Saint-Louis next door.",
+      "duration": "2 h",
+      "best_time": "Morning, before the crowds at Notre-Dame",
+      "cover": "notre-dame-de-paris",
+      "route": [
+        "square-du-vert-galant",
+        "pont-neuf",
+        "place-dauphine",
+        "sainte-chapelle",
+        "marche-aux-fleurs",
+        "notre-dame-de-paris",
+        "ile-saint-louis"
+      ],
+      "sort": 3
+    },
+    {
+      "id": "quartier-latin",
+      "name": "Latin Quarter",
+      "summary": "The students' Paris since the Middle Ages: the Sorbonne, the Panthéon, a Roman arena and the market street of Mouffetard.",
+      "duration": "Half a day",
+      "best_time": "Morning, for the Mouffetard market",
+      "cover": "pantheon",
+      "route": [
+        "shakespeare-and-company",
+        "musee-de-cluny",
+        "pantheon",
+        "bibliotheque-sainte-genevieve",
+        "rue-mouffetard",
+        "arenes-de-lutece",
+        "grande-mosquee",
+        "jardin-des-plantes"
+      ],
+      "sort": 4
+    },
+    {
+      "id": "saint-germain",
+      "name": "Saint-Germain-des-Prés",
+      "summary": "Literary cafés, art galleries, Delacroix's studio and the Luxembourg garden, on the left bank.",
+      "duration": "Half a day",
+      "best_time": "Afternoon",
+      "cover": "cafe-de-flore",
+      "route": [
+        "cour-du-commerce-saint-andre",
+        "rue-de-furstemberg",
+        "musee-delacroix",
+        "cafe-de-flore",
+        "saint-sulpice",
+        "jardin-du-luxembourg"
+      ],
+      "sort": 5
+    },
+    {
+      "id": "louvre",
+      "name": "Louvre & Palais-Royal",
+      "summary": "The royal heart of the right bank: the Louvre, the Tuileries, the arcades of the Palais-Royal and the first covered passages.",
+      "duration": "Half a day (a day with the Louvre)",
+      "best_time": "Any time",
+      "cover": "jardin-du-palais-royal",
+      "route": [
+        "jardin-des-tuileries",
+        "musee-du-louvre",
+        "jardin-du-palais-royal",
+        "galerie-vero-dodat",
+        "bourse-de-commerce",
+        "la-samaritaine"
+      ],
+      "sort": 6
+    },
+    {
+      "id": "grands-boulevards",
+      "name": "Opéra & the covered passages",
+      "summary": "Glass-roofed 19th-century passages, the Palais Garnier and the department stores of the Grands Boulevards. Perfect when it rains.",
+      "duration": "Half a day",
+      "best_time": "A rainy afternoon",
+      "cover": "galerie-vivienne",
+      "route": [
+        "galerie-vivienne",
+        "galerie-colbert",
+        "passage-choiseul",
+        "passage-des-panoramas",
+        "passage-jouffroy",
+        "passage-verdeau",
+        "palais-garnier",
+        "galeries-lafayette-rooftop"
+      ],
+      "sort": 7
+    },
+    {
+      "id": "canal-saint-martin",
+      "name": "Canal Saint-Martin",
+      "summary": "Iron footbridges, locks and plane trees along the canal, up to the wide Bassin de la Villette.",
+      "duration": "2 h",
+      "best_time": "Sunday, when the quays are closed to cars",
+      "cover": "canal-saint-martin",
+      "route": [
+        "canal-saint-martin",
+        "hotel-du-nord",
+        "rotonde-de-la-villette",
+        "bassin-de-la-villette"
+      ],
+      "sort": 8
+    },
+    {
+      "id": "belleville",
+      "name": "Belleville & Ménilmontant",
+      "summary": "The working-class hills of the east: street art, Chinatown, a view over all of Paris and the Père-Lachaise.",
+      "duration": "Half a day",
+      "best_time": "Late afternoon, for the view from the Parc de Belleville",
+      "cover": "parc-de-belleville",
+      "route": [
+        "buttes-chaumont",
+        "rue-denoyez",
+        "parc-de-belleville",
+        "bellevilloise",
+        "pere-lachaise"
+      ],
+      "sort": 9
+    },
+    {
+      "id": "bastille",
+      "name": "Bastille & Bercy",
+      "summary": "An old railway turned into a garden walk, pastel houses, a Belle Époque station restaurant and fairground museums.",
+      "duration": "Half a day",
+      "best_time": "Any time",
+      "cover": "coulee-verte",
+      "route": [
+        "atelier-des-lumieres",
+        "coulee-verte",
+        "rue-cremieux",
+        "le-train-bleu",
+        "musee-des-arts-forains"
+      ],
+      "sort": 10
+    },
+    {
+      "id": "butte-aux-cailles",
+      "name": "Butte-aux-Cailles",
+      "summary": "A little village of low houses and flowered alleys on a hill of the 13th, with an Art Deco swimming pool.",
+      "duration": "2 h",
+      "best_time": "Evening, for the bars",
+      "cover": "rue-butte-aux-cailles",
+      "route": [
+        "rue-butte-aux-cailles",
+        "piscine-butte-aux-cailles",
+        "cite-florale"
+      ],
+      "sort": 11
+    },
+    {
+      "id": "montparnasse",
+      "name": "Montparnasse",
+      "summary": "The artists' quarter of the 1920s, the Catacombs underground and the best view of the Eiffel Tower from the tower.",
+      "duration": "Half a day",
+      "best_time": "Any time",
+      "cover": "tour-montparnasse",
+      "route": [
+        "musee-zadkine",
+        "tour-montparnasse",
+        "rue-des-thermopyles",
+        "catacombs"
+      ],
+      "sort": 12
+    },
+    {
+      "id": "eiffel",
+      "name": "Eiffel Tower & Invalides",
+      "summary": "The Eiffel Tower, the Champ-de-Mars and the quiet, grand streets of the 7th, with the Rodin garden.",
+      "duration": "Half a day",
+      "best_time": "At night, for the sparkle",
+      "cover": "eiffel-tower",
+      "route": [
+        "eiffel-tower",
+        "immeuble-lavirotte",
+        "sewer-museum",
+        "musee-rodin"
+      ],
+      "sort": 13
+    },
+    {
+      "id": "champs-elysees",
+      "name": "Champs-Élysées & Monceau",
+      "summary": "The grand avenue, the Arc de Triomphe and the private mansions-turned-museums around the Parc Monceau.",
+      "duration": "Half a day",
+      "best_time": "Sunset at the Arc de Triomphe",
+      "cover": "arc-de-triomphe-rooftop",
+      "route": [
+        "petit-palais",
+        "arc-de-triomphe-rooftop",
+        "musee-jacquemart-andre",
+        "musee-nissim-de-camondo"
+      ],
+      "sort": 14
+    },
+    {
+      "id": "passy",
+      "name": "Passy",
+      "summary": "The quiet, wealthy west: Art Nouveau buildings, Monet's water lilies and a cobbled lane where Balzac lived.",
+      "duration": "2 h",
+      "best_time": "Afternoon",
+      "cover": "musee-marmottan-monet",
+      "route": [
+        "castel-beranger",
+        "rue-berton",
+        "musee-marmottan-monet"
+      ],
+      "sort": 15
+    },
+    {
+      "id": "around-paris",
+      "name": "Around Paris",
+      "summary": "Day trips by train: castles, gardens and the flea market just outside the city.",
+      "duration": "A day",
+      "best_time": "Any time",
+      "cover": "palace-of-versailles",
+      "route": [],
+      "sort": 99
     }
   ]
 }

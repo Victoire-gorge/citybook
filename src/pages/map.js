@@ -28,6 +28,8 @@ const state = {
   visible: new Set(),
   favouritesOnly: false,
   savedOnly: false,
+  area: new URLSearchParams(location.search).get('area') || '', // neighbourhood filter
+  areas: [],
   saved: new Map(), // place id -> days ('' for ideas) in the shared adventure
   adventure: null,
   pinned: null,
@@ -96,13 +98,40 @@ async function load() {
   if (data.adventure) setupGuest(data);
   state.layers = data.layers;
   state.places = data.places;
+  state.areas = data.areas || [];
   state.visible = new Set(data.layers.filter((l) => l.visible_by_default).map((l) => l.id));
   map.setView([data.city.lat, data.city.lng], data.city.zoom);
   document.querySelector('[data-count]').textContent = t('map.places', { n: data.places.length });
   renderEditionPhoto();
   renderLayers();
+  renderAreaFilter();
   drawPlaces();
+  if (state.area) fitArea();
   openFromHash();
+}
+
+// ---------- Neighbourhood filter: only its places, map centred on them ----------
+
+function renderAreaFilter() {
+  const select = document.querySelector('[data-area-filter]');
+  const used = state.areas.filter((z) => state.places.some((p) => p.area === z.name));
+  if (!used.some((z) => z.name === state.area)) state.area = '';
+  select.innerHTML = `<option value="">${esc(t('map.allParis'))}</option>` +
+    used.map((z) => `<option value="${esc(z.name)}" ${z.name === state.area ? 'selected' : ''}>${esc(tr(z, 'name'))}</option>`).join('');
+  select.addEventListener('change', () => {
+    state.area = select.value;
+    const url = new URL(location.href);
+    if (state.area) url.searchParams.set('area', state.area);
+    else url.searchParams.delete('area');
+    history.replaceState(null, '', url);
+    applyFilters();
+    if (state.area) fitArea();
+  });
+}
+
+function fitArea() {
+  const pts = state.places.filter((p) => p.area === state.area && state.visible.has(p.layer_id)).map((p) => [p.lat, p.lng]);
+  if (pts.length) map.fitBounds(pts, { padding: [60, 60], maxZoom: 16 });
 }
 
 const layerOf = (place) => state.layers.find((l) => l.id === place.layer_id);
@@ -233,7 +262,8 @@ function applyFilters() {
     const { marker, lines } = state.objects.get(place.id);
     const on = state.visible.has(place.layer_id)
       && (!state.favouritesOnly || place.favourite)
-      && (!state.savedOnly || isSaved(place));
+      && (!state.savedOnly || isSaved(place))
+      && (!state.area || place.area === state.area || place.layer_id === 'home');
     for (const obj of [marker, ...lines]) {
       if (on && !map.hasLayer(obj)) obj.addTo(map);
       if (!on && map.hasLayer(obj)) obj.remove();
@@ -283,7 +313,7 @@ function cardHtml(place) {
           : `<div class="place-card__photo place-card__photo--empty">${picto(layer.icon, layer.color, 56)}</div>`}
       </div>
       <div class="place-card__body">
-        <p class="place-card__layer">${picto(layer.icon, layer.color, 14)} ${esc(tr(layer, 'name'))}</p>
+        <p class="place-card__layer">${picto(layer.icon, layer.color, 14)} ${esc(tr(layer, 'name'))}${areaLine(place)}</p>
         ${isSaved(place) ? `<p class="place-card__saved"><span class="star" aria-hidden="true">★</span> ${esc(t('place.savedOn', { when: savedWhen(place) }))}${suggestedBy(place)}</p>` : ''}
         <div class="place-card__title-row">
           <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
@@ -302,12 +332,36 @@ function cardHtml(place) {
         ${shareToken ? starButton(place) : `<button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
         <form class="place-card__add" data-add-form hidden></form>`}
         ${place.website ? `<a class="place-card__website" href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t(place.layer_id === 'theatres' ? 'place.programme' : 'place.website'))}</a>` : ''}
+        ${place.layer_id === 'home' ? '' : `<a class="place-card__website" href="/activities${shareToken ? `?share=${encodeURIComponent(shareToken)}` : ''}#${place.layer_id === 'seasonal' ? 'limited' : esc(place.id)}">${esc(t('place.inActivities'))}</a>`}
       </div>
     </div>`;
 }
 
+/** " · Montmartre" next to the type; the owner can change it (it decides where the place is filed in Activities). */
+function areaLine(place) {
+  if (place.layer_id === 'home') return '';
+  if (shareToken) return place.area ? ` · ${esc(place.area)}` : '';
+  return ` · <select class="place-card__area" data-area aria-label="${esc(t('map.neighbourhood'))}">
+    <option value="">${esc(t('activities.elsewhere'))}</option>
+    ${state.areas.map((z) => `<option ${z.name === place.area ? 'selected' : ''}>${esc(z.name)}</option>`).join('')}
+  </select>`;
+}
+
+async function setArea(place, area, pinned) {
+  try {
+    await api(`/api/places/${encodeURIComponent(place.id)}`, { method: 'PATCH', body: { area: area || null } });
+    place.area = area || null;
+    toast(t('map.areaSaved', { area: area || t('activities.elsewhere') }));
+    applyFilters();
+    if (map.hasLayer(state.objects.get(place.id).marker)) render(place, pinned);
+  } catch {
+    toast(t('error.generic'));
+  }
+}
+
 function render(place, pinned) {
   card.innerHTML = cardHtml(place);
+  card.querySelector('[data-area]')?.addEventListener('change', (e) => setArea(place, e.target.value, pinned));
   card.hidden = false;
   card.classList.toggle('is-pinned', pinned);
   card.querySelector('[data-close]').addEventListener('click', closeCard);

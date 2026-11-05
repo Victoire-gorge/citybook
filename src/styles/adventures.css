@@ -345,3 +345,87 @@
   .area-card__main { border-right: none; border-bottom: 1px solid var(--hair); }
   .area-walk { columns: 1; }
 }
+
+/* ---------- Activities: by neighbourhood / by type ---------- */
+.views { display: inline-flex; margin: -6px 0 16px; border: 1px solid var(--ink); border-radius: var(--radius); overflow: hidden; }
+.view-btn { padding: 7px 14px; border: none; background: var(--card); font: 600 0.88rem/1.2 var(--body); color: var(--ink); cursor: pointer; }
+.view-btn + .view-btn { border-left: 1px solid var(--ink); }
+.view-btn[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.chip .picto { margin-right: 2px; }
+.hood-jump {
+  position: sticky; top: var(--mast-h, 0px); z-index: 800; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin;
+  margin: -12px calc(-1 * var(--gutter)) 24px; padding: 10px var(--gutter); background: var(--paper); border-bottom: 1px solid var(--rule);
+}
+.hood-jump a { flex: none; padding: 4px 11px; border: 1px solid var(--forest); border-radius: 999px; color: var(--forest); text-decoration: none; font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+.hood-jump a:hover { background: var(--forest-light); }
+.hood { margin-bottom: 56px; scroll-margin-top: calc(var(--mast-h, 0px) + 60px); }
+.hood > .area-card { margin-bottom: 22px; }
+.hood__title { display: flex; align-items: center; gap: 12px; font-style: italic; font-size: 2rem; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.hood__count { margin-left: auto; font-style: normal; font-weight: 400; font-size: 0.75rem; color: var(--muted); }
+.hood__more { margin: 20px auto 0; display: flex; }
+.hood__less { display: block; margin: 12px auto 0; }
+.activity__photo--blank { display: grid; place-items: center; }
+.activity__fav { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--card); color: var(--copper); font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.tag--type { display: inline-flex; align-items: center; gap: 4px; }
+.activity__tip { font-size: 0.86rem; font-style: italic; color: var(--forest-dark); }
+.activity { scroll-margin-top: calc(var(--mast-h, 0px) + 70px); }
+.area-plan { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.area-plan__walk { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 0.82rem; }
+.area-plan__walk input { min-width: 0; }
+
+/* Theatres */
+.theatre-search input { width: min(360px, 100%); }
+.theatre-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
+.theatre { display: grid; grid-template-columns: 64px 1fr auto; grid-template-areas: 'photo body links' 'photo add add'; gap: 4px 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--hair); scroll-margin-top: calc(var(--mast-h, 0px) + 70px); }
+.theatre__photo { grid-area: photo; width: 64px; height: 64px; border-radius: 6px; object-fit: cover; align-self: start; }
+.theatre__photo--blank { display: grid; place-items: center; background: var(--paper-2); }
+.theatre__body { grid-area: body; display: grid; gap: 2px; }
+.theatre__name { font-size: 1.15rem; font-style: italic; }
+.theatre__address { font-size: 0.84rem; color: var(--muted); }
+.theatre__links { grid-area: links; display: flex; align-items: center; gap: 14px; font-size: 0.86rem; }
+.theatre__add { grid-area: add; }
+.theatre__add:empty { display: none; }
+.theatre__add .activity__add, .theatre__add .activity__star, .theatre__add .activity__saved { margin-top: 4px; padding: 0; border: none; }
+.theatre.is-flash { animation: flash 1.6s ease; }
+@media (max-width: 640px) {
+  .theatre { grid-template-columns: 52px 1fr; grid-template-areas: 'photo body' 'photo links' 'add add'; }
+  .theatre__photo { width: 52px; height: 52px; }
+  .hood__title { font-size: 1.6rem; }
+}
+.activity:not(.activity--event) .activity__photo--blank { background: var(--paper-2); }
+
+/* Day map: the neighbourhood's places and Home */
+.extra-marker span, .home-marker span {
+  display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(251, 249, 244, 0.92);
+  box-shadow: 0 0 0 1px var(--hair), 0 1px 3px rgba(0,0,0,.15); opacity: 0.85;
+}
+.extra-marker span:hover { opacity: 1; box-shadow: 0 0 0 1.5px var(--ink); }
+.home-marker span { width: 28px; height: 28px; opacity: 1; box-shadow: 0 0 0 2px #c67b51; }
+.extra-pop { display: grid; gap: 6px; font-family: var(--body); }
+.extra-pop b { font-family: var(--display); font-style: italic; font-size: 1.05rem; }
+.extra-pop p { margin: 0; font-size: 0.82rem; color: var(--muted); }
+.extra-pop .btn { justify-self: start; color: var(--card); }
+.day__area { display: inline-flex; align-items: center; gap: 8px; margin: 6px 0 2px; font-size: 0.85rem; font-weight: 600; }
+.day__area select { padding: 4px 8px; font-size: 0.88rem; }
+.day-tab__area { display: block; font-size: 0.66rem; font-style: italic; font-family: var(--display); line-height: 1.1; max-width: 9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 1px auto 0; }
+.glance__area { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: var(--forest); font-weight: 600; margin-bottom: 4px; }
+.hood-picks { margin-top: 14px; }
+.hood-picks h3 { font-style: italic; font-weight: 400; font-size: 1.15rem; margin-bottom: 8px; }
+.hood-picks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.hood-pick { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 6px; border: 1px solid var(--hair); border-radius: 999px; background: var(--card); font: 500 0.82rem var(--body); color: var(--ink); cursor: pointer; }
+.hood-pick:hover { border-color: var(--forest); background: var(--forest-light); }
+.hood-pick .picto { width: 14px; height: 14px; }
+
+.trip__map-day { display: block; margin-top: 4px; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--muted); }
+.hourly__later { margin-top: 14px; font-size: 0.85rem; color: var(--muted); font-style: italic; }
+
+/* Shared page: one day at a time */
+.focus-days { display: flex; gap: 6px; overflow-x: auto; margin: 6px 0 16px; padding-bottom: 4px; }
+.focus-days .day-tab { flex: none; }
+.focus { display: grid; grid-template-columns: minmax(220px, 1fr) 2fr; gap: 20px; align-items: stretch; }
+.focus__plan { display: grid; align-content: start; gap: 8px; }
+.focus__title { font-style: italic; font-size: 1.5rem; }
+.focus__items { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 4px; font-size: 0.95rem; }
+.focus__items .is-done { text-decoration: line-through; color: var(--muted); }
+.focus__map { min-height: 320px; }
+@media (max-width: 760px) { .focus { grid-template-columns: 1fr; } }

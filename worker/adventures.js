@@ -141,25 +141,36 @@ async function items(db, adventureId) {
   }));
 }
 
-async function days(db, adventureId) {
+async function dayRows(db, adventureId) {
   const { results } = await db
-    .prepare('select day, theme from adventure_days where adventure_id = ?')
+    .prepare('select day, theme, area from adventure_days where adventure_id = ?')
     .bind(adventureId)
     .all();
-  return Object.fromEntries(results.map((d) => [d.day, d.theme]));
+  return results;
+}
+/** { days: date -> theme, day_areas: date -> neighbourhood } */
+async function dayInfo(db, adventureId) {
+  const rows = await dayRows(db, adventureId);
+  return {
+    days: Object.fromEntries(rows.filter((d) => d.theme).map((d) => [d.day, d.theme])),
+    day_areas: Object.fromEntries(rows.filter((d) => d.area).map((d) => [d.day, d.area])),
+  };
 }
 
 /** Title of one day of the adventure ("First steps in Paris"). Empty text removes it. */
 export async function setDayTheme(db, userId, adventureId, day, body) {
   const a = await own(db, userId, adventureId);
   if (!isDate(day) || day < a.starts_on || day > a.ends_on) throw new HttpError(400, 'This day is outside the adventure');
-  const { theme } = pick(body, { theme: text(120) });
-  if (theme === undefined) throw new HttpError(400, 'Nothing to update');
-  if (theme.trim()) {
+  const f = pick(body, { theme: text(120), area: optional(text(80)) });
+  if (f.theme === undefined && f.area === undefined) throw new HttpError(400, 'Nothing to update');
+  const old = (await dayRows(db, adventureId)).find((d) => d.day === day) || { theme: '', area: null };
+  const theme = f.theme !== undefined ? f.theme.trim() : old.theme || '';
+  const area = f.area !== undefined ? (f.area || '').trim() || null : old.area;
+  if (theme || area) {
     await db
-      .prepare(`insert into adventure_days (adventure_id, day, theme) values (?, ?, ?)
-                on conflict (adventure_id, day) do update set theme = excluded.theme`)
-      .bind(adventureId, day, theme.trim())
+      .prepare(`insert into adventure_days (adventure_id, day, theme, area) values (?, ?, ?, ?)
+                on conflict (adventure_id, day) do update set theme = excluded.theme, area = excluded.area`)
+      .bind(adventureId, day, theme, area)
       .run();
   } else {
     await db.prepare('delete from adventure_days where adventure_id = ? and day = ?').bind(adventureId, day).run();
@@ -183,7 +194,7 @@ export async function reorderItems(db, userId, adventureId, body) {
 
 export async function getAdventure(db, userId, id) {
   const a = await own(db, userId, id);
-  return { ...view(a), days: await days(db, id), items: await items(db, id) };
+  return { ...view(a), ...(await dayInfo(db, id)), items: await items(db, id) };
 }
 
 /**
@@ -225,7 +236,7 @@ export async function getSharedAdventure(db, token) {
     ...publicView,
     owner: owner?.name || '',
     cover: a.cover_key ? `/media/${a.cover_key}?share=${token}` : null,
-    days: await days(db, a.id),
+    ...(await dayInfo(db, a.id)),
     items: await items(db, a.id),
   };
 }

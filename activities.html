@@ -27,9 +27,15 @@
       <div class="subtabs" role="tablist" data-tabs>
         <button class="subtab" type="button" role="tab" data-tab="anytime" data-i18n="activities.anytime"></button>
         <button class="subtab" type="button" role="tab" data-tab="limited" data-i18n="activities.limited"></button>
+        <button class="subtab" type="button" role="tab" data-tab="theatres" data-i18n="activities.theatres"></button>
       </div>
-      <div class="chips" role="group" aria-label="Categories" data-chips></div>
-      <ul class="activity-grid" data-list></ul>
+      <div class="views" role="group" data-views hidden>
+        <button class="view-btn" type="button" data-view="area" data-i18n="activities.byArea"></button>
+        <button class="view-btn" type="button" data-view="type" data-i18n="activities.byType"></button>
+      </div>
+      <div class="chips" role="group" aria-label="Types" data-chips></div>
+      <nav class="hood-jump" aria-label="Neighbourhoods" data-jump hidden></nav>
+      <div data-list></div>
       <p class="shelf__empty" data-empty data-i18n="activities.empty" hidden></p>
     </main>
     <script type="module" src="/src/pages/activities.js"></script>

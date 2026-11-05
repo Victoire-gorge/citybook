@@ -186,3 +186,9 @@
 .layer-row--arr { border-top: 1px solid var(--hair); margin-top: 4px; padding-top: 9px; }
 .layer-row--arr + .layer-row--fav { border-top: none; margin-top: 0; }
 .layer-row__arr { width: 20px; height: 14px; border: 1.5px dashed var(--ink); border-radius: 2px; flex: none; }
+
+/* Neighbourhood filter and the place's neighbourhood */
+.area-filter { display: grid; gap: 4px; margin: 4px 0 10px; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.area-filter select { font-size: 0.9rem; text-transform: none; letter-spacing: 0; padding: 6px 8px; }
+.place-card__area { padding: 1px 4px; font-size: 0.78rem; border: 1px dashed var(--hair); background: transparent; max-width: 12em; }
+.place-card__area:hover { border-color: var(--ink); }
