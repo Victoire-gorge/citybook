@@ -47,6 +47,14 @@
       "shape": "point",
       "icon": "tree",
       "sort": 5
+    },
+    {
+      "id": "lively",
+      "name": "Lively spots",
+      "color": "#8C3B5E",
+      "shape": "point",
+      "icon": "note",
+      "sort": 6
     }
   ],
   "places": [
@@ -1090,6 +1098,32 @@
       "lng": 2.34,
       "summary": "The tip of the Île de la Cité, at water level. Picnic at sunset.",
       "photo": "Square du Vert-Galant 003.jpg"
+    },
+    {
+      "id": "quai-saint-bernard-dancing",
+      "layer": "lively",
+      "name": "Dancing on the Seine (Quai Saint-Bernard)",
+      "wikidata": "Q947877",
+      "lat": 48.8459,
+      "lng": 2.3646,
+      "address": "Jardin Tino-Rossi, quai Saint-Bernard, 5th — across the river from Gare de Lyon",
+      "summary": "On warm evenings, the little stone amphitheatres by the river fill with people dancing tango, salsa, rock and swing. Anyone can join or just watch.",
+      "tip": "Go in the evening, after dinner.",
+      "price": "Free",
+      "hours_note": "Mostly on fine evenings in the warmer months.",
+      "photo": "Dancing along the River Seine.jpg"
+    },
+    {
+      "id": "place-des-abbesses-musicians",
+      "layer": "lively",
+      "name": "Place des Abbesses",
+      "wikidata": "Q3390487",
+      "lat": 48.8844,
+      "lng": 2.33852,
+      "address": "Place des Abbesses, 18th — Montmartre",
+      "summary": "Street musicians play by the Art Nouveau metro entrance and the carousel, a lively stop on the way up to Montmartre.",
+      "price": "Free",
+      "photo": "Place des Abbesses.JPG"
     }
   ],
   "photos": {
@@ -1300,6 +1334,14 @@
     "Opéra Garnier vu de la terrasse des Galeries Lafayette.jpg": [
       "André Alliot",
       "CC0"
+    ],
+    "Dancing along the River Seine.jpg": [
+      "Eutouring",
+      "CC BY-SA 4.0"
+    ],
+    "Place des Abbesses.JPG": [
+      "Alex",
+      "CC BY-SA 3.0"
     ]
   },
   "adventures": [

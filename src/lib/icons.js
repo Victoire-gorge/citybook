@@ -35,6 +35,7 @@ const PICTOS = {
   museum: '<path d="M12 2.8 3 7.2v2h18v-2z"/><rect x="4" y="18" width="16" height="2.4"/><rect x="5.4" y="10.4" width="2.4" height="6.6"/><rect x="10.8" y="10.4" width="2.4" height="6.6"/><rect x="16.2" y="10.4" width="2.4" height="6.6"/>',
   facade: '<path d="M6 21V8.5L12 4l6 4.5V21h-4v-4h-4v4z"/><rect x="2.5" y="11" width="3.5" height="10"/><rect x="18" y="11" width="3.5" height="10"/>',
   wave: '<path d="M2.5 15c2.4-5 4.8-5 7.1 0s4.8 5 7.2 0 3.9-4.2 4.7-2.2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+  note: '<path d="M8 5.6 20.4 2.6v3.6L8 9.2z"/><rect x="8" y="5.8" width="2.4" height="12.6"/><rect x="18" y="3" width="2.4" height="12.8"/><ellipse cx="6.6" cy="18.6" rx="3.6" ry="2.8"/><ellipse cx="16.6" cy="16" rx="3.6" ry="2.8"/>',
   tree: '<path d="M12 2.5a6.2 6.2 0 0 0-4.6 10.4A4.6 4.6 0 0 0 10.5 18h.3v3.5h2.4V18h.3a4.6 4.6 0 0 0 3.1-5.1A6.2 6.2 0 0 0 12 2.5z"/>',
 };
 
