@@ -1,265 +1,1321 @@
 {
   "_about": "Initial import only. Once loaded, places live in the D1 database and are edited from the site. Coordinates, photos and credits come from Wikidata, Wikimedia Commons and OpenStreetMap (ODbL). Opening hours are a starting point and must be checked (hours_verified = 0).",
-  "city": { "id": "paris", "name": "Paris", "lat": 48.8625, "lng": 2.3425, "zoom": 14 },
+  "city": {
+    "id": "paris",
+    "name": "Paris",
+    "lat": 48.8625,
+    "lng": 2.3425,
+    "zoom": 14
+  },
   "layers": [
-    { "id": "passages", "name": "Covered passages", "color": "#365748", "shape": "line", "icon": "arch", "sort": 1 },
-    { "id": "museums", "name": "Museums", "color": "#C67B51", "shape": "point", "icon": "museum", "sort": 2 },
-    { "id": "buildings", "name": "Remarkable buildings", "color": "#202521", "shape": "point", "icon": "facade", "sort": 3 },
-    { "id": "streets", "name": "Pretty streets", "color": "#A58AA6", "shape": "line", "icon": "wave", "sort": 4 },
-    { "id": "squares", "name": "Squares & gardens", "color": "#5E8C4A", "shape": "point", "icon": "tree", "sort": 5 }
+    {
+      "id": "passages",
+      "name": "Covered passages",
+      "color": "#365748",
+      "shape": "line",
+      "icon": "arch",
+      "sort": 1
+    },
+    {
+      "id": "museums",
+      "name": "Museums",
+      "color": "#C67B51",
+      "shape": "point",
+      "icon": "museum",
+      "sort": 2
+    },
+    {
+      "id": "buildings",
+      "name": "Remarkable buildings",
+      "color": "#202521",
+      "shape": "point",
+      "icon": "facade",
+      "sort": 3
+    },
+    {
+      "id": "streets",
+      "name": "Pretty streets",
+      "color": "#A58AA6",
+      "shape": "line",
+      "icon": "wave",
+      "sort": 4
+    },
+    {
+      "id": "squares",
+      "name": "Squares & gardens",
+      "color": "#5E8C4A",
+      "shape": "point",
+      "icon": "tree",
+      "sort": 5
+    }
   ],
   "places": [
-    { "id": "galerie-vivienne", "layer": "passages", "name": "Galerie Vivienne", "wikidata": "Q1314020", "lat": 48.866667, "lng": 2.339722,
+    {
+      "id": "galerie-vivienne",
+      "layer": "passages",
+      "name": "Galerie Vivienne",
+      "wikidata": "Q1314020",
+      "lat": 48.866667,
+      "lng": 2.339722,
       "summary": "The most elegant of the passages: mosaic floors, a glass roof and an old bookshop.",
-      "hours_note": "Open daily, roughly 8:30 to 20:30.", "photo": "P1040471 Paris II galerie Vivienne rwk.JPG" },
-    { "id": "galerie-colbert", "layer": "passages", "name": "Galerie Colbert", "wikidata": "Q1294677", "lat": 48.866833, "lng": 2.339361,
+      "hours_note": "Open daily, roughly 8:30 to 20:30.",
+      "photo": "P1040471 Paris II galerie Vivienne rwk.JPG"
+    },
+    {
+      "id": "galerie-colbert",
+      "layer": "passages",
+      "name": "Galerie Colbert",
+      "wikidata": "Q1294677",
+      "lat": 48.866833,
+      "lng": 2.339361,
       "summary": "Vivienne's quiet neighbour, with a beautiful glass rotunda.",
-      "path": [[[48.86628,2.33909],[48.86691,2.33944],[48.86701,2.33904]]], "photo": "Galerie Colbert.jpg" },
-    { "id": "passage-des-panoramas", "layer": "passages", "name": "Passage des Panoramas", "wikidata": "Q3141829", "lat": 48.871111, "lng": 2.341667,
+      "path": [
+        [
+          [
+            48.86628,
+            2.33909
+          ],
+          [
+            48.86691,
+            2.33944
+          ],
+          [
+            48.86701,
+            2.33904
+          ]
+        ]
+      ],
+      "photo": "Galerie Colbert.jpg"
+    },
+    {
+      "id": "passage-des-panoramas",
+      "layer": "passages",
+      "name": "Passage des Panoramas",
+      "wikidata": "Q3141829",
+      "lat": 48.871111,
+      "lng": 2.341667,
       "summary": "One of the oldest covered passages, full of stamp dealers and little restaurants.",
-      "path": [[[48.87153,2.34182],[48.87137,2.34178],[48.8712,2.34173],[48.87097,2.34166],[48.87062,2.34156],[48.87037,2.3415]]],
-      "photo": "Passage Panoramas - Paris II (FR75) - 2022-05-27 - 1.jpg" },
-    { "id": "passage-jouffroy", "layer": "passages", "name": "Passage Jouffroy", "wikidata": "Q2055773", "lat": 48.872549, "lng": 2.342141,
+      "path": [
+        [
+          [
+            48.87153,
+            2.34182
+          ],
+          [
+            48.87137,
+            2.34178
+          ],
+          [
+            48.8712,
+            2.34173
+          ],
+          [
+            48.87097,
+            2.34166
+          ],
+          [
+            48.87062,
+            2.34156
+          ],
+          [
+            48.87037,
+            2.3415
+          ]
+        ]
+      ],
+      "photo": "Passage Panoramas - Paris II (FR75) - 2022-05-27 - 1.jpg"
+    },
+    {
+      "id": "passage-jouffroy",
+      "layer": "passages",
+      "name": "Passage Jouffroy",
+      "wikidata": "Q2055773",
+      "lat": 48.872549,
+      "lng": 2.342141,
       "summary": "Toy shops, a doll hospital and the back door of the Musée Grévin.",
-      "path": [[[48.87184,2.34192],[48.87261,2.34222]]], "photo": "P1020618 Paris IX Passage Jouffroy rwk.JPG" },
-    { "id": "passage-verdeau", "layer": "passages", "name": "Passage Verdeau", "wikidata": "Q2055779", "lat": 48.873532, "lng": 2.342318,
+      "path": [
+        [
+          [
+            48.87184,
+            2.34192
+          ],
+          [
+            48.87261,
+            2.34222
+          ]
+        ]
+      ],
+      "photo": "P1020618 Paris IX Passage Jouffroy rwk.JPG"
+    },
+    {
+      "id": "passage-verdeau",
+      "layer": "passages",
+      "name": "Passage Verdeau",
+      "wikidata": "Q2055779",
+      "lat": 48.873532,
+      "lng": 2.342318,
       "summary": "Old photos, prints and antique shops, in the continuation of Jouffroy.",
-      "path": [[[48.87379,2.34248],[48.87374,2.34237],[48.87311,2.34225]]], "photo": "Passage Verdeau - Paris IX (FR75) - 2022-05-27 - 3.jpg" },
-    { "id": "galerie-vero-dodat", "layer": "passages", "name": "Galerie Véro-Dodat", "wikidata": "Q1373064", "lat": 48.862816, "lng": 2.340217,
+      "path": [
+        [
+          [
+            48.87379,
+            2.34248
+          ],
+          [
+            48.87374,
+            2.34237
+          ],
+          [
+            48.87311,
+            2.34225
+          ]
+        ]
+      ],
+      "photo": "Passage Verdeau - Paris IX (FR75) - 2022-05-27 - 3.jpg"
+    },
+    {
+      "id": "galerie-vero-dodat",
+      "layer": "passages",
+      "name": "Galerie Véro-Dodat",
+      "wikidata": "Q1373064",
+      "lat": 48.862816,
+      "lng": 2.340217,
       "summary": "Black and white floor, dark wood shopfronts: the most theatrical passage.",
-      "photo": "Galerie Vero-Dodat, 16 May 2013.jpg" },
-    { "id": "passage-du-grand-cerf", "layer": "passages", "name": "Passage du Grand-Cerf", "wikidata": "Q1696160", "lat": 48.864814, "lng": 2.34925,
+      "photo": "Galerie Vero-Dodat, 16 May 2013.jpg"
+    },
+    {
+      "id": "passage-du-grand-cerf",
+      "layer": "passages",
+      "name": "Passage du Grand-Cerf",
+      "wikidata": "Q1696160",
+      "lat": 48.864814,
+      "lng": 2.34925,
       "summary": "The tallest glass roof of all the passages, with designers' workshops.",
-      "path": [[[48.86465,2.35021],[48.86467,2.35012],[48.86491,2.34877],[48.86495,2.34858]]], "photo": "Paris passage du grand cerf.jpg" },
-    { "id": "passage-choiseul", "layer": "passages", "name": "Passage Choiseul", "wikidata": "Q2055787", "lat": 48.86902, "lng": 2.335753,
+      "path": [
+        [
+          [
+            48.86465,
+            2.35021
+          ],
+          [
+            48.86467,
+            2.35012
+          ],
+          [
+            48.86491,
+            2.34877
+          ],
+          [
+            48.86495,
+            2.34858
+          ]
+        ]
+      ],
+      "photo": "Paris passage du grand cerf.jpg"
+    },
+    {
+      "id": "passage-choiseul",
+      "layer": "passages",
+      "name": "Passage Choiseul",
+      "wikidata": "Q2055787",
+      "lat": 48.86902,
+      "lng": 2.335753,
       "summary": "A long, lively passage near the Opéra, home of the Bouffes-Parisiens theatre.",
-      "path": [[[48.86883,2.33594],[48.86807,2.33556],[48.86798,2.33552],[48.86723,2.33513]]], "photo": "Passage Choiseul.JPG" },
-    { "id": "passage-des-princes", "layer": "passages", "name": "Passage des Princes", "wikidata": "Q3368127", "lat": 48.8715, "lng": 2.33938,
+      "path": [
+        [
+          [
+            48.86883,
+            2.33594
+          ],
+          [
+            48.86807,
+            2.33556
+          ],
+          [
+            48.86798,
+            2.33552
+          ],
+          [
+            48.86723,
+            2.33513
+          ]
+        ]
+      ],
+      "photo": "Passage Choiseul.JPG"
+    },
+    {
+      "id": "passage-des-princes",
+      "layer": "passages",
+      "name": "Passage des Princes",
+      "wikidata": "Q3368127",
+      "lat": 48.8715,
+      "lng": 2.33938,
       "summary": "The last passage to be built, now full of toys and model trains.",
-      "path": [[[48.87166,2.33911],[48.87136,2.33896],[48.87124,2.33951],[48.87122,2.3396]]], "photo": "Paris - Passage des Princes 01.jpg" },
-    { "id": "passage-du-caire", "layer": "passages", "name": "Passage du Caire", "wikidata": "Q2055785", "lat": 48.868333, "lng": 2.349722,
+      "path": [
+        [
+          [
+            48.87166,
+            2.33911
+          ],
+          [
+            48.87136,
+            2.33896
+          ],
+          [
+            48.87124,
+            2.33951
+          ],
+          [
+            48.87122,
+            2.3396
+          ]
+        ]
+      ],
+      "photo": "Paris - Passage des Princes 01.jpg"
+    },
+    {
+      "id": "passage-du-caire",
+      "layer": "passages",
+      "name": "Passage du Caire",
+      "wikidata": "Q2055785",
+      "lat": 48.868333,
+      "lng": 2.349722,
       "summary": "The longest passage, with Egyptian-style faces on its façade.",
-      "photo": "Paris passage du caire.jpg" },
-    { "id": "passage-brady", "layer": "passages", "name": "Passage Brady", "wikidata": "Q1567455", "lat": 48.871125, "lng": 2.355278,
+      "photo": "Paris passage du caire.jpg"
+    },
+    {
+      "id": "passage-brady",
+      "layer": "passages",
+      "name": "Passage Brady",
+      "wikidata": "Q1567455",
+      "lat": 48.871125,
+      "lng": 2.355278,
       "summary": "Little India: spices, sarees and some of the best curries in Paris.",
-      "path": [[[48.87118,2.35548],[48.87099,2.35623],[48.87091,2.35644]]], "photo": "Passage Brady.jpg" },
-    { "id": "passage-moliere", "layer": "passages", "name": "Passage Molière", "wikidata": "Q3367940", "lat": 48.8623, "lng": 2.35152,
+      "path": [
+        [
+          [
+            48.87118,
+            2.35548
+          ],
+          [
+            48.87099,
+            2.35623
+          ],
+          [
+            48.87091,
+            2.35644
+          ]
+        ]
+      ],
+      "photo": "Passage Brady.jpg"
+    },
+    {
+      "id": "passage-moliere",
+      "layer": "passages",
+      "name": "Passage Molière",
+      "wikidata": "Q3367940",
+      "lat": 48.8623,
+      "lng": 2.35152,
       "summary": "A tiny, quiet passage next to the Théâtre Molière, now a poetry house.",
-      "path": [[[48.86236,2.35137],[48.86224,2.35182]]], "photo": "Paris passage moliere.jpg" },
-
-    { "id": "musee-de-montmartre", "layer": "museums", "name": "Musée de Montmartre", "wikidata": "Q2919066", "lat": 48.8877, "lng": 2.3406, "favourite": true,
+      "path": [
+        [
+          [
+            48.86236,
+            2.35137
+          ],
+          [
+            48.86224,
+            2.35182
+          ]
+        ]
+      ],
+      "photo": "Paris passage moliere.jpg"
+    },
+    {
+      "id": "musee-de-montmartre",
+      "layer": "museums",
+      "name": "Musée de Montmartre",
+      "wikidata": "Q2919066",
+      "lat": 48.8877,
+      "lng": 2.3406,
+      "favourite": true,
       "website": "https://museedemontmartre.fr",
       "summary": "Renoir's gardens, Suzanne Valadon's studio and a view over the vineyard.",
-      "hours": "Mo-Su 10:00-18:00", "hours_note": "Until 19:00 from April to September.", "photo": "Musée de Montmartre - maison du Bel Air.jpg" },
-    { "id": "musee-de-la-vie-romantique", "layer": "museums", "name": "Musée de la Vie romantique", "wikidata": "Q2714932", "lat": 48.881119, "lng": 2.33352, "favourite": true,
-      "website": "https://museevieromantique.paris.fr", "price": "Free (permanent collection)",
+      "hours": "Mo-Su 10:00-18:00",
+      "hours_note": "Until 19:00 from April to September.",
+      "photo": "Musée de Montmartre - maison du Bel Air.jpg"
+    },
+    {
+      "id": "musee-de-la-vie-romantique",
+      "layer": "museums",
+      "name": "Musée de la Vie romantique",
+      "wikidata": "Q2714932",
+      "lat": 48.881119,
+      "lng": 2.33352,
+      "favourite": true,
+      "website": "https://museevieromantique.paris.fr",
+      "price": "Free (permanent collection)",
       "summary": "A green-shuttered house at the end of a cobbled lane, with a tea room in the garden.",
-      "hours": "Tu-Su 10:00-18:00", "photo": "Paris Musée vie romantique 2012.jpg" },
-    { "id": "musee-du-louvre", "layer": "museums", "name": "Musée du Louvre", "wikidata": "Q19675", "lat": 48.861111, "lng": 2.335833, "favourite": true,
-      "website": "https://www.louvre.fr/", "booking_required": true,
+      "hours": "Tu-Su 10:00-18:00",
+      "photo": "Paris Musée vie romantique 2012.jpg"
+    },
+    {
+      "id": "musee-du-louvre",
+      "layer": "museums",
+      "name": "Musée du Louvre",
+      "wikidata": "Q19675",
+      "lat": 48.861111,
+      "lng": 2.335833,
+      "favourite": true,
+      "website": "https://www.louvre.fr/",
+      "booking_required": true,
       "summary": "The biggest museum in the world. Pick two or three rooms rather than everything.",
-      "hours": "Mo,Th,Sa,Su 09:00-18:00; We,Fr 09:00-21:00", "hours_note": "Closed on Tuesdays. Book a time slot online.",
-      "photo": "Cour Napoléon at night - Louvre.jpg" },
-    { "id": "musee-jacquemart-andre", "layer": "museums", "name": "Musée Jacquemart-André", "wikidata": "Q1165526", "lat": 48.87543, "lng": 2.31051,
+      "hours": "Mo,Th,Sa,Su 09:00-18:00; We,Fr 09:00-21:00",
+      "hours_note": "Closed on Tuesdays. Book a time slot online.",
+      "photo": "Cour Napoléon at night - Louvre.jpg"
+    },
+    {
+      "id": "musee-jacquemart-andre",
+      "layer": "museums",
+      "name": "Musée Jacquemart-André",
+      "wikidata": "Q1165526",
+      "lat": 48.87543,
+      "lng": 2.31051,
       "website": "https://www.musee-jacquemart-andre.com",
       "summary": "A sumptuous 19th-century mansion, and one of the prettiest cafés in Paris.",
-      "hours": "Mo-Su 10:00-18:00", "photo": "Musée Jacquemart André 2007 - Recoura.jpg" },
-    { "id": "musee-nissim-de-camondo", "layer": "museums", "name": "Musée Nissim de Camondo", "wikidata": "Q1954498", "lat": 48.878889, "lng": 2.312778,
+      "hours": "Mo-Su 10:00-18:00",
+      "photo": "Musée Jacquemart André 2007 - Recoura.jpg"
+    },
+    {
+      "id": "musee-nissim-de-camondo",
+      "layer": "museums",
+      "name": "Musée Nissim de Camondo",
+      "wikidata": "Q1954498",
+      "lat": 48.878889,
+      "lng": 2.312778,
       "website": "https://madparis.fr/Musee-Nissim-de-Camondo-125",
       "summary": "A collector's home frozen in the 1930s, down to the kitchens.",
-      "hours": "We-Su 10:00-17:30", "photo": "Paris (75008) Hôtel Moïse de Camondo 05.JPG" },
-    { "id": "musee-gustave-moreau", "layer": "museums", "name": "Musée Gustave Moreau", "wikidata": "Q2296362", "lat": 48.878, "lng": 2.33436,
+      "hours": "We-Su 10:00-17:30",
+      "photo": "Paris (75008) Hôtel Moïse de Camondo 05.JPG"
+    },
+    {
+      "id": "musee-gustave-moreau",
+      "layer": "museums",
+      "name": "Musée Gustave Moreau",
+      "wikidata": "Q2296362",
+      "lat": 48.878,
+      "lng": 2.33436,
       "website": "http://www.musee-moreau.fr",
       "summary": "The painter's studio, walls covered in paintings, and a famous spiral staircase.",
-      "hours": "Mo,We,Th,Fr,Sa,Su 10:00-18:00", "photo": "Paris musée Gustave-Moreau, 19 mai 2013.jpg" },
-    { "id": "maison-de-victor-hugo", "layer": "museums", "name": "Maison de Victor Hugo", "wikidata": "Q2599177", "lat": 48.854722, "lng": 2.366111,
-      "website": "http://www.maisonsvictorhugo.paris.fr", "price": "Free (permanent collection)",
+      "hours": "Mo,We,Th,Fr,Sa,Su 10:00-18:00",
+      "photo": "Paris musée Gustave-Moreau, 19 mai 2013.jpg"
+    },
+    {
+      "id": "maison-de-victor-hugo",
+      "layer": "museums",
+      "name": "Maison de Victor Hugo",
+      "wikidata": "Q2599177",
+      "lat": 48.854722,
+      "lng": 2.366111,
+      "website": "http://www.maisonsvictorhugo.paris.fr",
+      "price": "Free (permanent collection)",
       "summary": "Victor Hugo's flat on the Place des Vosges, with his astonishing Chinese room.",
-      "hours": "Tu-Su 10:00-18:00", "photo": "PARIS Place des Vosges, Maison de Victor Hugo 2.jpg" },
-    { "id": "musee-delacroix", "layer": "museums", "name": "Musée Eugène-Delacroix", "wikidata": "Q1782606", "lat": 48.8546, "lng": 2.3354,
+      "hours": "Tu-Su 10:00-18:00",
+      "photo": "PARIS Place des Vosges, Maison de Victor Hugo 2.jpg"
+    },
+    {
+      "id": "musee-delacroix",
+      "layer": "museums",
+      "name": "Musée Eugène-Delacroix",
+      "wikidata": "Q1782606",
+      "lat": 48.8546,
+      "lng": 2.3354,
       "website": "https://www.musee-delacroix.fr",
       "summary": "Delacroix's last studio, hidden behind a small secret garden.",
-      "hours": "Mo,We,Th,Fr,Sa,Su 09:30-17:30", "photo": "Musée Delacroix, Paris 29 May 2017 001.jpg" },
-    { "id": "musee-cognacq-jay", "layer": "museums", "name": "Musée Cognacq-Jay", "wikidata": "Q1572452", "lat": 48.858194, "lng": 2.361389,
-      "website": "http://www.museecognacqjay.paris.fr", "price": "Free (permanent collection)",
+      "hours": "Mo,We,Th,Fr,Sa,Su 09:30-17:30",
+      "photo": "Musée Delacroix, Paris 29 May 2017 001.jpg"
+    },
+    {
+      "id": "musee-cognacq-jay",
+      "layer": "museums",
+      "name": "Musée Cognacq-Jay",
+      "wikidata": "Q1572452",
+      "lat": 48.858194,
+      "lng": 2.361389,
+      "website": "http://www.museecognacqjay.paris.fr",
+      "price": "Free (permanent collection)",
       "summary": "18th-century art in a Marais mansion, calm and rarely crowded.",
-      "hours": "Tu-Su 10:00-18:00", "photo": "Jardin Lazare-Rachline, Paris 9 June 2017 001.jpg" },
-    { "id": "musee-zadkine", "layer": "museums", "name": "Musée Zadkine", "wikidata": "Q2613771", "lat": 48.843056, "lng": 2.334167,
-      "website": "http://www.zadkine.paris.fr", "price": "Free (permanent collection)",
+      "hours": "Tu-Su 10:00-18:00",
+      "photo": "Jardin Lazare-Rachline, Paris 9 June 2017 001.jpg"
+    },
+    {
+      "id": "musee-zadkine",
+      "layer": "museums",
+      "name": "Musée Zadkine",
+      "wikidata": "Q2613771",
+      "lat": 48.843056,
+      "lng": 2.334167,
+      "website": "http://www.zadkine.paris.fr",
+      "price": "Free (permanent collection)",
       "summary": "A sculptor's house and garden, two minutes from the Luxembourg.",
-      "hours": "Tu-Su 10:00-18:00", "photo": "Musée Zadkine.jpg" },
-    { "id": "musee-marmottan-monet", "layer": "museums", "name": "Musée Marmottan Monet", "wikidata": "Q1327886", "lat": 48.85928, "lng": 2.267383,
+      "hours": "Tu-Su 10:00-18:00",
+      "photo": "Musée Zadkine.jpg"
+    },
+    {
+      "id": "musee-marmottan-monet",
+      "layer": "museums",
+      "name": "Musée Marmottan Monet",
+      "wikidata": "Q1327886",
+      "lat": 48.85928,
+      "lng": 2.267383,
       "website": "https://www.marmottan.fr",
       "summary": "The world's largest Monet collection, including Impression, Sunrise.",
-      "hours": "Tu,We,Fr,Sa,Su 10:00-18:00; Th 10:00-21:00", "photo": "Paris.- Musée Marmottan Monet.jpg" },
-    { "id": "musee-d-orsay", "layer": "museums", "name": "Musée d'Orsay", "wikidata": "Q23402", "lat": 48.859972, "lng": 2.326527,
-      "website": "https://www.musee-orsay.fr", "booking_required": true,
+      "hours": "Tu,We,Fr,Sa,Su 10:00-18:00; Th 10:00-21:00",
+      "photo": "Paris.- Musée Marmottan Monet.jpg"
+    },
+    {
+      "id": "musee-d-orsay",
+      "layer": "museums",
+      "name": "Musée d'Orsay",
+      "wikidata": "Q23402",
+      "lat": 48.859972,
+      "lng": 2.326527,
+      "website": "https://www.musee-orsay.fr",
+      "booking_required": true,
       "summary": "Impressionists in a former railway station. Don't miss the clock window.",
-      "hours": "Tu,We,Fr,Sa,Su 09:30-18:00; Th 09:30-21:45", "photo": "MuseeDOrsay.jpg" },
-    { "id": "musee-de-l-orangerie", "layer": "museums", "name": "Musée de l'Orangerie", "wikidata": "Q726781", "lat": 48.863845, "lng": 2.322538,
+      "hours": "Tu,We,Fr,Sa,Su 09:30-18:00; Th 09:30-21:45",
+      "photo": "MuseeDOrsay.jpg"
+    },
+    {
+      "id": "musee-de-l-orangerie",
+      "layer": "museums",
+      "name": "Musée de l'Orangerie",
+      "wikidata": "Q726781",
+      "lat": 48.863845,
+      "lng": 2.322538,
       "website": "https://www.musee-orangerie.fr",
       "summary": "Monet's Water Lilies in two oval rooms lit by daylight.",
-      "hours": "Mo,We,Th,Fr,Sa,Su 09:00-18:00", "photo": "2011-12-Musee de lorangerie.jpg" },
-    { "id": "musee-rodin", "layer": "museums", "name": "Musée Rodin", "wikidata": "Q650519", "lat": 48.855356, "lng": 2.315819,
+      "hours": "Mo,We,Th,Fr,Sa,Su 09:00-18:00",
+      "photo": "2011-12-Musee de lorangerie.jpg"
+    },
+    {
+      "id": "musee-rodin",
+      "layer": "museums",
+      "name": "Musée Rodin",
+      "wikidata": "Q650519",
+      "lat": 48.855356,
+      "lng": 2.315819,
       "website": "https://www.musee-rodin.fr",
       "summary": "The Thinker in a rose garden, and a mansion full of marble.",
-      "hours": "Tu-Su 10:00-18:30", "photo": "L'hôtel Biron (musée Rodin) à Paris, 13 juin 2021 01.jpg" },
-    { "id": "petit-palais", "layer": "museums", "name": "Petit Palais", "wikidata": "Q820892", "lat": 48.866028, "lng": 2.314556,
-      "website": "http://www.petitpalais.paris.fr", "price": "Free (permanent collection)",
+      "hours": "Tu-Su 10:00-18:30",
+      "photo": "L'hôtel Biron (musée Rodin) à Paris, 13 juin 2021 01.jpg"
+    },
+    {
+      "id": "petit-palais",
+      "layer": "museums",
+      "name": "Petit Palais",
+      "wikidata": "Q820892",
+      "lat": 48.866028,
+      "lng": 2.314556,
+      "website": "http://www.petitpalais.paris.fr",
+      "price": "Free (permanent collection)",
       "summary": "A golden palace with a hidden garden courtyard and café.",
-      "hours": "Tu-Su 10:00-18:00", "hours_note": "Late opening on some evenings for exhibitions.", "photo": "Petit Palais Paris 2.jpg" },
-    { "id": "musee-carnavalet", "layer": "museums", "name": "Musée Carnavalet", "wikidata": "Q640447", "lat": 48.857375, "lng": 2.362745,
-      "website": "http://carnavalet.paris.fr/en", "price": "Free (permanent collection)",
+      "hours": "Tu-Su 10:00-18:00",
+      "hours_note": "Late opening on some evenings for exhibitions.",
+      "photo": "Petit Palais Paris 2.jpg"
+    },
+    {
+      "id": "musee-carnavalet",
+      "layer": "museums",
+      "name": "Musée Carnavalet",
+      "wikidata": "Q640447",
+      "lat": 48.857375,
+      "lng": 2.362745,
+      "website": "http://carnavalet.paris.fr/en",
+      "price": "Free (permanent collection)",
       "summary": "The history of Paris, from old shop signs to Proust's bedroom.",
-      "hours": "Tu-Su 10:00-18:00", "photo": "Carnavalet París 10.JPG" },
-    { "id": "musee-de-cluny", "layer": "museums", "name": "Musée de Cluny", "wikidata": "Q1124095", "lat": 48.850556, "lng": 2.343333,
+      "hours": "Tu-Su 10:00-18:00",
+      "photo": "Carnavalet París 10.JPG"
+    },
+    {
+      "id": "musee-de-cluny",
+      "layer": "museums",
+      "name": "Musée de Cluny",
+      "wikidata": "Q1124095",
+      "lat": 48.850556,
+      "lng": 2.343333,
       "website": "https://www.musee-moyenage.fr/",
       "summary": "Medieval treasures and The Lady and the Unicorn tapestries.",
-      "hours": "Tu-Su 09:30-18:15", "photo": "Hôtel de Cluny, Paris 24 April 2012.jpg" },
-    { "id": "musee-des-arts-forains", "layer": "museums", "name": "Musée des Arts forains", "wikidata": "Q899223", "lat": 48.833056, "lng": 2.388889,
-      "website": "http://www.pavillons-de-bercy.com", "booking_required": true,
+      "hours": "Tu-Su 09:30-18:15",
+      "photo": "Hôtel de Cluny, Paris 24 April 2012.jpg"
+    },
+    {
+      "id": "musee-des-arts-forains",
+      "layer": "museums",
+      "name": "Musée des Arts forains",
+      "wikidata": "Q899223",
+      "lat": 48.833056,
+      "lng": 2.388889,
+      "website": "http://www.pavillons-de-bercy.com",
+      "booking_required": true,
       "summary": "Old fairground rides you can actually ride, in Bercy's wine warehouses.",
-      "hours_note": "Guided visits on booking only.", "photo": "Musée des Arts forains Paris 12e 001.jpg" },
-    { "id": "musee-de-la-chasse", "layer": "museums", "name": "Musée de la Chasse et de la Nature", "wikidata": "Q1128657", "lat": 48.861111, "lng": 2.358611,
+      "hours_note": "Guided visits on booking only.",
+      "photo": "Musée des Arts forains Paris 12e 001.jpg"
+    },
+    {
+      "id": "musee-de-la-chasse",
+      "layer": "museums",
+      "name": "Musée de la Chasse et de la Nature",
+      "wikidata": "Q1128657",
+      "lat": 48.861111,
+      "lng": 2.358611,
       "website": "https://www.chassenature.org",
       "summary": "A cabinet of curiosities mixing stuffed animals and contemporary art.",
-      "hours": "Tu,Th,Fr,Sa,Su 11:00-18:00; We 11:00-21:30", "photo": "P1000961 Paris III Rue des Archives Musée de la chasse reductwk.JPG" },
-    { "id": "bourse-de-commerce", "layer": "museums", "name": "Bourse de Commerce", "wikidata": "Q691375", "lat": 48.862819, "lng": 2.342834,
+      "hours": "Tu,Th,Fr,Sa,Su 11:00-18:00; We 11:00-21:30",
+      "photo": "P1000961 Paris III Rue des Archives Musée de la chasse reductwk.JPG"
+    },
+    {
+      "id": "bourse-de-commerce",
+      "layer": "museums",
+      "name": "Bourse de Commerce",
+      "wikidata": "Q691375",
+      "lat": 48.862819,
+      "lng": 2.342834,
       "website": "https://www.pinaultcollection.com/en/boursedecommerce",
       "summary": "Contemporary art under a painted dome, redesigned by Tadao Ando.",
-      "hours": "Mo,We,Th,Sa,Su 11:00-19:00; Fr 11:00-21:00", "photo": "Bourse Commerce - Paris I (FR75) - 2021-06-05 - 1.jpg" },
-
-    { "id": "sainte-chapelle", "layer": "buildings", "name": "Sainte-Chapelle", "wikidata": "Q193193", "lat": 48.855369, "lng": 2.345028,
-      "website": "https://www.sainte-chapelle.fr/", "booking_required": true,
+      "hours": "Mo,We,Th,Sa,Su 11:00-19:00; Fr 11:00-21:00",
+      "photo": "Bourse Commerce - Paris I (FR75) - 2021-06-05 - 1.jpg"
+    },
+    {
+      "id": "sainte-chapelle",
+      "layer": "buildings",
+      "name": "Sainte-Chapelle",
+      "wikidata": "Q193193",
+      "lat": 48.855369,
+      "lng": 2.345028,
+      "website": "https://www.sainte-chapelle.fr/",
+      "booking_required": true,
       "summary": "Walls made of stained glass. Go on a sunny day.",
-      "hours": "Mo-Su 09:00-17:00", "hours_note": "Until 19:00 from April to September.", "photo": "Szensapel.jpg" },
-    { "id": "palais-garnier", "layer": "buildings", "name": "Palais Garnier", "wikidata": "Q187840", "lat": 48.871944, "lng": 2.331667,
+      "hours": "Mo-Su 09:00-17:00",
+      "hours_note": "Until 19:00 from April to September.",
+      "photo": "Szensapel.jpg"
+    },
+    {
+      "id": "palais-garnier",
+      "layer": "buildings",
+      "name": "Palais Garnier",
+      "wikidata": "Q187840",
+      "lat": 48.871944,
+      "lng": 2.331667,
       "website": "https://www.operadeparis.fr/",
       "summary": "The opera house of The Phantom of the Opera: gold, marble and a Chagall ceiling.",
-      "hours": "Mo-Su 10:00-17:00", "hours_note": "Visits can close for rehearsals and matinées.", "photo": "Paris Opera full frontal architecture, May 2009.jpg" },
-    { "id": "castel-beranger", "layer": "buildings", "name": "Castel Béranger", "wikidata": "Q650308", "lat": 48.8524, "lng": 2.27458,
+      "hours": "Mo-Su 10:00-17:00",
+      "hours_note": "Visits can close for rehearsals and matinées.",
+      "photo": "Paris Opera full frontal architecture, May 2009.jpg"
+    },
+    {
+      "id": "castel-beranger",
+      "layer": "buildings",
+      "name": "Castel Béranger",
+      "wikidata": "Q650308",
+      "lat": 48.8524,
+      "lng": 2.27458,
       "summary": "Hector Guimard's Art Nouveau masterpiece. Look at the entrance gate.",
-      "hours_note": "Private flats: façade only.", "photo": "Paris 16 - Castel Béranger -1.JPG" },
-    { "id": "immeuble-lavirotte", "layer": "buildings", "name": "Immeuble Lavirotte", "wikidata": "Q3149058", "lat": 48.8591, "lng": 2.30094,
+      "hours_note": "Private flats: façade only.",
+      "photo": "Paris 16 - Castel Béranger -1.JPG"
+    },
+    {
+      "id": "immeuble-lavirotte",
+      "layer": "buildings",
+      "name": "Immeuble Lavirotte",
+      "wikidata": "Q3149058",
+      "lat": 48.8591,
+      "lng": 2.30094,
       "summary": "The wildest Art Nouveau door in Paris, a short walk from the Eiffel Tower.",
-      "hours_note": "Private flats: façade only.", "photo": "Immeuble Lavirotte - Paris - France - Facade.jpg" },
-    { "id": "grande-mosquee", "layer": "buildings", "name": "Grande Mosquée de Paris", "wikidata": "Q392564", "lat": 48.841944, "lng": 2.355,
+      "hours_note": "Private flats: façade only.",
+      "photo": "Immeuble Lavirotte - Paris - France - Facade.jpg"
+    },
+    {
+      "id": "grande-mosquee",
+      "layer": "buildings",
+      "name": "Grande Mosquée de Paris",
+      "wikidata": "Q392564",
+      "lat": 48.841944,
+      "lng": 2.355,
       "website": "https://www.grandemosqueedeparis.fr",
       "summary": "Moorish courtyards and gardens, and mint tea on the terrace next door.",
-      "hours": "Mo,Tu,We,Th,Sa,Su 09:00-18:00", "hours_note": "Closed to visitors on Fridays.", "photo": "Grande Mosquée de Paris.JPG" },
-    { "id": "hotel-de-sully", "layer": "buildings", "name": "Hôtel de Sully", "wikidata": "Q1643144", "lat": 48.854583, "lng": 2.363778,
+      "hours": "Mo,Tu,We,Th,Sa,Su 09:00-18:00",
+      "hours_note": "Closed to visitors on Fridays.",
+      "photo": "Grande Mosquée de Paris.JPG"
+    },
+    {
+      "id": "hotel-de-sully",
+      "layer": "buildings",
+      "name": "Hôtel de Sully",
+      "wikidata": "Q1643144",
+      "lat": 48.854583,
+      "lng": 2.363778,
       "summary": "A Renaissance courtyard and garden, and a secret shortcut to the Place des Vosges.",
-      "hours_note": "Courtyard and garden open during the day.", "photo": "Hôtel de Sully 07-2.jpg" },
-    { "id": "bibliotheque-sainte-genevieve", "layer": "buildings", "name": "Bibliothèque Sainte-Geneviève", "wikidata": "Q517249", "lat": 48.847083, "lng": 2.345833,
+      "hours_note": "Courtyard and garden open during the day.",
+      "photo": "Hôtel de Sully 07-2.jpg"
+    },
+    {
+      "id": "bibliotheque-sainte-genevieve",
+      "layer": "buildings",
+      "name": "Bibliothèque Sainte-Geneviève",
+      "wikidata": "Q517249",
+      "lat": 48.847083,
+      "lng": 2.345833,
       "summary": "A breathtaking iron-vaulted reading room, opposite the Panthéon.",
-      "hours_note": "Reading room on access card; check visit conditions.", "photo": "Salle de lecture Bibliotheque Sainte-Genevieve n11.jpg" },
-    { "id": "la-samaritaine", "layer": "buildings", "name": "La Samaritaine", "wikidata": "Q1583780", "lat": 48.85889, "lng": 2.34208,
+      "hours_note": "Reading room on access card; check visit conditions.",
+      "photo": "Salle de lecture Bibliotheque Sainte-Genevieve n11.jpg"
+    },
+    {
+      "id": "la-samaritaine",
+      "layer": "buildings",
+      "name": "La Samaritaine",
+      "wikidata": "Q1583780",
+      "lat": 48.85889,
+      "lng": 2.34208,
       "summary": "An Art Nouveau department store with a peacock fresco under its glass roof.",
-      "hours": "Mo-Su 10:00-20:00", "photo": "La Samaritaine and Statue of Henri IV.jpg" },
-    { "id": "hotel-de-ville", "layer": "buildings", "name": "Hôtel de Ville", "wikidata": "Q640968", "lat": 48.856389, "lng": 2.352222,
+      "hours": "Mo-Su 10:00-20:00",
+      "photo": "La Samaritaine and Statue of Henri IV.jpg"
+    },
+    {
+      "id": "hotel-de-ville",
+      "layer": "buildings",
+      "name": "Hôtel de Ville",
+      "wikidata": "Q640968",
+      "lat": 48.856389,
+      "lng": 2.352222,
       "website": "https://www.paris.fr/dossiers/tout-savoir-sur-l-hotel-de-ville-de-paris-63",
       "summary": "The city hall, a neo-Renaissance wedding cake with free exhibitions.",
-      "photo": "Paris, Hôtel de Ville -- 2014 -- 1714.jpg" },
-
-    { "id": "rue-cremieux", "layer": "streets", "name": "Rue Crémieux", "wikidata": "Q3447571", "lat": 48.847, "lng": 2.37109,
+      "photo": "Paris, Hôtel de Ville -- 2014 -- 1714.jpg"
+    },
+    {
+      "id": "galeries-lafayette-rooftop",
+      "layer": "buildings",
+      "name": "Galeries Lafayette rooftop",
+      "wikidata": "Q218613",
+      "lat": 48.87363,
+      "lng": 2.33215,
+      "website": "https://haussmann.galerieslafayette.com",
+      "price": "Free",
+      "address": "40 boulevard Haussmann, 9th",
+      "summary": "A free rooftop terrace on top of the department store, facing the Opéra Garnier, with Paris all around. Don't miss the stained-glass dome inside on the way up.",
+      "tip": "Free. Lovely by day or at night.",
+      "hours_note": "Open with the store: check the closing time before going at night.",
+      "photo": "Opéra Garnier vu de la terrasse des Galeries Lafayette.jpg"
+    },
+    {
+      "id": "rue-cremieux",
+      "layer": "streets",
+      "name": "Rue Crémieux",
+      "wikidata": "Q3447571",
+      "lat": 48.847,
+      "lng": 2.37109,
       "summary": "Pastel houses and painted shutters. Residents ask for quiet: no posing on doorsteps.",
-      "path": [[[48.84638,2.37005],[48.84644,2.37014],[48.84731,2.37157],[48.84738,2.37168]]], "photo": "Rue Crémieux, Paris 12.jpg" },
-    { "id": "rue-de-l-abreuvoir", "layer": "streets", "name": "Rue de l'Abreuvoir", "wikidata": "Q3451167", "lat": 48.8882, "lng": 2.33892,
+      "path": [
+        [
+          [
+            48.84638,
+            2.37005
+          ],
+          [
+            48.84644,
+            2.37014
+          ],
+          [
+            48.84731,
+            2.37157
+          ],
+          [
+            48.84738,
+            2.37168
+          ]
+        ]
+      ],
+      "photo": "Rue Crémieux, Paris 12.jpg"
+    },
+    {
+      "id": "rue-de-l-abreuvoir",
+      "layer": "streets",
+      "name": "Rue de l'Abreuvoir",
+      "wikidata": "Q3451167",
+      "lat": 48.8882,
+      "lng": 2.33892,
       "summary": "The Montmartre postcard: the pink house, cobbles and a view of the Sacré-Cœur.",
-      "path": [[[48.88785,2.33975],[48.88788,2.33968],[48.88814,2.3392],[48.88829,2.33876],[48.8884,2.33839],[48.8885,2.33825],[48.88852,2.33814],[48.88851,2.3381]]],
-      "photo": "Rue de l'Abreuvoir.jpg" },
-    { "id": "rue-saint-rustique", "layer": "streets", "name": "Rue Saint-Rustique", "wikidata": "Q3449962", "lat": 48.887, "lng": 2.34053,
+      "path": [
+        [
+          [
+            48.88785,
+            2.33975
+          ],
+          [
+            48.88788,
+            2.33968
+          ],
+          [
+            48.88814,
+            2.3392
+          ],
+          [
+            48.88829,
+            2.33876
+          ],
+          [
+            48.8884,
+            2.33839
+          ],
+          [
+            48.8885,
+            2.33825
+          ],
+          [
+            48.88852,
+            2.33814
+          ],
+          [
+            48.88851,
+            2.3381
+          ]
+        ]
+      ],
+      "photo": "Rue de l'Abreuvoir.jpg"
+    },
+    {
+      "id": "rue-saint-rustique",
+      "layer": "streets",
+      "name": "Rue Saint-Rustique",
+      "wikidata": "Q3449962",
+      "lat": 48.887,
+      "lng": 2.34053,
       "summary": "One of the oldest streets in Montmartre, narrow and still cobbled.",
-      "path": [[[48.8869,2.34132],[48.88702,2.34071],[48.88706,2.3404],[48.88711,2.33979],[48.88712,2.3397]]], "photo": "Rue Saint-Rustique, Paris 11 October 2016.jpg" },
-    { "id": "rue-des-thermopyles", "layer": "streets", "name": "Rue des Thermopyles", "wikidata": "Q3452057", "lat": 48.8328, "lng": 2.31863,
+      "path": [
+        [
+          [
+            48.8869,
+            2.34132
+          ],
+          [
+            48.88702,
+            2.34071
+          ],
+          [
+            48.88706,
+            2.3404
+          ],
+          [
+            48.88711,
+            2.33979
+          ],
+          [
+            48.88712,
+            2.3397
+          ]
+        ]
+      ],
+      "photo": "Rue Saint-Rustique, Paris 11 October 2016.jpg"
+    },
+    {
+      "id": "rue-des-thermopyles",
+      "layer": "streets",
+      "name": "Rue des Thermopyles",
+      "wikidata": "Q3452057",
+      "lat": 48.8328,
+      "lng": 2.31863,
       "summary": "A village lane in the 14th, under wisteria and climbing plants.",
-      "path": [[[48.83239,2.31926],[48.83245,2.31925],[48.83357,2.31751],[48.8336,2.31747]]], "photo": "Rue des Thermopyles, Paris 14 June 2017 003.jpg" },
-    { "id": "rue-berton", "layer": "streets", "name": "Rue Berton", "wikidata": "Q743650", "lat": 48.8552, "lng": 2.28114,
+      "path": [
+        [
+          [
+            48.83239,
+            2.31926
+          ],
+          [
+            48.83245,
+            2.31925
+          ],
+          [
+            48.83357,
+            2.31751
+          ],
+          [
+            48.8336,
+            2.31747
+          ]
+        ]
+      ],
+      "photo": "Rue des Thermopyles, Paris 14 June 2017 003.jpg"
+    },
+    {
+      "id": "rue-berton",
+      "layer": "streets",
+      "name": "Rue Berton",
+      "wikidata": "Q743650",
+      "lat": 48.8552,
+      "lng": 2.28114,
       "summary": "A countryside lane behind Balzac's house, with gas lamps and old walls.",
-      "path": [[[48.85449,2.27912],[48.85459,2.27918],[48.85476,2.27967],[48.8548,2.27988],[48.85495,2.28061],[48.85501,2.28078]]], "photo": "Rue Berton.JPG" },
-    { "id": "cour-du-commerce-saint-andre", "layer": "streets", "name": "Cour du Commerce-Saint-André", "wikidata": "Q3001058", "lat": 48.853, "lng": 2.33908,
+      "path": [
+        [
+          [
+            48.85449,
+            2.27912
+          ],
+          [
+            48.85459,
+            2.27918
+          ],
+          [
+            48.85476,
+            2.27967
+          ],
+          [
+            48.8548,
+            2.27988
+          ],
+          [
+            48.85495,
+            2.28061
+          ],
+          [
+            48.85501,
+            2.28078
+          ]
+        ]
+      ],
+      "photo": "Rue Berton.JPG"
+    },
+    {
+      "id": "cour-du-commerce-saint-andre",
+      "layer": "streets",
+      "name": "Cour du Commerce-Saint-André",
+      "wikidata": "Q3001058",
+      "lat": 48.853,
+      "lng": 2.33908,
       "summary": "A cobbled passage with Le Procope, the oldest café in Paris.",
-      "path": [[[48.85326,2.33902],[48.85307,2.33909],[48.85275,2.33921],[48.85258,2.33928]]], "photo": "P1020083 Paris VI Cour du Commerce-Saint-André reductwk.JPG" },
-    { "id": "rue-de-furstemberg", "layer": "streets", "name": "Rue de Furstemberg", "wikidata": "Q3450738", "lat": 48.8543, "lng": 2.33575,
+      "path": [
+        [
+          [
+            48.85326,
+            2.33902
+          ],
+          [
+            48.85307,
+            2.33909
+          ],
+          [
+            48.85275,
+            2.33921
+          ],
+          [
+            48.85258,
+            2.33928
+          ]
+        ]
+      ],
+      "photo": "P1020083 Paris VI Cour du Commerce-Saint-André reductwk.JPG"
+    },
+    {
+      "id": "rue-de-furstemberg",
+      "layer": "streets",
+      "name": "Rue de Furstemberg",
+      "wikidata": "Q3450738",
+      "lat": 48.8543,
+      "lng": 2.33575,
       "summary": "A tiny square with paulownia trees and a five-globe lamp, beside Delacroix's studio.",
-      "path": [[[48.85438,2.33579],[48.85448,2.33587],[48.85473,2.33607],[48.85477,2.3361]]], "photo": "Rue de Furstemberg, Paris 6e 1.jpg" },
-    { "id": "cite-florale", "layer": "streets", "name": "Cité florale", "wikidata": "Q2974809", "lat": 48.822707, "lng": 2.345375,
+      "path": [
+        [
+          [
+            48.85438,
+            2.33579
+          ],
+          [
+            48.85448,
+            2.33587
+          ],
+          [
+            48.85473,
+            2.33607
+          ],
+          [
+            48.85477,
+            2.3361
+          ]
+        ]
+      ],
+      "photo": "Rue de Furstemberg, Paris 6e 1.jpg"
+    },
+    {
+      "id": "cite-florale",
+      "layer": "streets",
+      "name": "Cité florale",
+      "wikidata": "Q2974809",
+      "lat": 48.822707,
+      "lng": 2.345375,
       "summary": "Little houses on streets named after flowers: Wisteria, Iris, Orchids...",
       "path": [
-        [[48.82297,2.34449],[48.82294,2.34455],[48.82287,2.34469]],
-        [[48.82236,2.34516],[48.82244,2.34514],[48.82277,2.34507]],
-        [[48.8224,2.34493],[48.82252,2.3449],[48.82272,2.34487],[48.82278,2.34486]],
-        [[48.82252,2.3449],[48.82259,2.3445],[48.82263,2.34444],[48.82266,2.34446],[48.82287,2.34469]],
-        [[48.8228,2.34525],[48.82276,2.34541],[48.8227,2.34553],[48.82244,2.34584],[48.8224,2.34587],[48.82231,2.34588]]
-      ] },
-
-    { "id": "place-dauphine", "layer": "squares", "name": "Place Dauphine", "wikidata": "Q1810430", "lat": 48.856539, "lng": 2.342428,
-      "summary": "A secret triangle on the Île de la Cité, with chestnut trees and pétanque." },
-    { "id": "place-des-vosges", "layer": "squares", "name": "Place des Vosges", "wikidata": "Q898629", "lat": 48.855556, "lng": 2.365556,
+        [
+          [
+            48.82297,
+            2.34449
+          ],
+          [
+            48.82294,
+            2.34455
+          ],
+          [
+            48.82287,
+            2.34469
+          ]
+        ],
+        [
+          [
+            48.82236,
+            2.34516
+          ],
+          [
+            48.82244,
+            2.34514
+          ],
+          [
+            48.82277,
+            2.34507
+          ]
+        ],
+        [
+          [
+            48.8224,
+            2.34493
+          ],
+          [
+            48.82252,
+            2.3449
+          ],
+          [
+            48.82272,
+            2.34487
+          ],
+          [
+            48.82278,
+            2.34486
+          ]
+        ],
+        [
+          [
+            48.82252,
+            2.3449
+          ],
+          [
+            48.82259,
+            2.3445
+          ],
+          [
+            48.82263,
+            2.34444
+          ],
+          [
+            48.82266,
+            2.34446
+          ],
+          [
+            48.82287,
+            2.34469
+          ]
+        ],
+        [
+          [
+            48.8228,
+            2.34525
+          ],
+          [
+            48.82276,
+            2.34541
+          ],
+          [
+            48.8227,
+            2.34553
+          ],
+          [
+            48.82244,
+            2.34584
+          ],
+          [
+            48.8224,
+            2.34587
+          ],
+          [
+            48.82231,
+            2.34588
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "place-dauphine",
+      "layer": "squares",
+      "name": "Place Dauphine",
+      "wikidata": "Q1810430",
+      "lat": 48.856539,
+      "lng": 2.342428,
+      "summary": "A secret triangle on the Île de la Cité, with chestnut trees and pétanque."
+    },
+    {
+      "id": "place-des-vosges",
+      "layer": "squares",
+      "name": "Place des Vosges",
+      "wikidata": "Q898629",
+      "lat": 48.855556,
+      "lng": 2.365556,
       "summary": "The oldest planned square in Paris: red brick arcades and lawns to sit on.",
-      "photo": "Place des Vosges vue aérienne.png" },
-    { "id": "jardin-du-palais-royal", "layer": "squares", "name": "Jardin du Palais-Royal", "wikidata": "Q3162586", "lat": 48.865, "lng": 2.33775,
+      "photo": "Place des Vosges vue aérienne.png"
+    },
+    {
+      "id": "jardin-du-palais-royal",
+      "layer": "squares",
+      "name": "Jardin du Palais-Royal",
+      "wikidata": "Q3162586",
+      "lat": 48.865,
+      "lng": 2.33775,
       "summary": "Lime tree alleys, arcades and the striped Buren columns.",
-      "hours": "Mo-Su 08:30-20:30", "hours_note": "Until 22:30 in summer.", "photo": "Jardins du Palais Royal.JPG" },
-    { "id": "square-du-vert-galant", "layer": "squares", "name": "Square du Vert-Galant", "wikidata": "Q3495079", "lat": 48.8575, "lng": 2.34,
+      "hours": "Mo-Su 08:30-20:30",
+      "hours_note": "Until 22:30 in summer.",
+      "photo": "Jardins du Palais Royal.JPG"
+    },
+    {
+      "id": "square-du-vert-galant",
+      "layer": "squares",
+      "name": "Square du Vert-Galant",
+      "wikidata": "Q3495079",
+      "lat": 48.8575,
+      "lng": 2.34,
       "summary": "The tip of the Île de la Cité, at water level. Picnic at sunset.",
-      "photo": "Square du Vert-Galant 003.jpg" }
+      "photo": "Square du Vert-Galant 003.jpg"
+    }
   ],
   "photos": {
-    "P1040471 Paris II galerie Vivienne rwk.JPG": ["Mbzt", "CC BY 3.0"],
-    "Galerie Colbert.jpg": ["Benh LIEU SONG", "CC BY 3.0"],
-    "Passage Panoramas - Paris II (FR75) - 2022-05-27 - 1.jpg": ["Chabe01", "CC BY-SA 4.0"],
-    "P1020618 Paris IX Passage Jouffroy rwk.JPG": ["Mbzt", "CC BY 3.0"],
-    "Passage Verdeau - Paris IX (FR75) - 2022-05-27 - 3.jpg": ["Chabe01", "CC BY-SA 4.0"],
-    "Galerie Vero-Dodat, 16 May 2013.jpg": ["Jean-François Gornet", "CC BY-SA 2.0"],
-    "Paris passage du grand cerf.jpg": ["Ralf.treinen", "CC BY-SA 3.0"],
-    "Passage Choiseul.JPG": ["LPLT", "CC BY-SA 3.0"],
-    "Paris - Passage des Princes 01.jpg": ["Clicsouris", "CC BY-SA 2.5"],
-    "Paris passage du caire.jpg": ["Ralf.treinen", "CC BY-SA 3.0"],
-    "Passage Brady.jpg": ["Ratozamanana Andriankoto", "CC BY 2.0"],
-    "Paris passage moliere.jpg": ["Ralf.treinen", "CC BY-SA 3.0"],
-    "Musée de Montmartre - maison du Bel Air.jpg": ["Musée de Montmartre", "CC BY-SA 3.0"],
-    "Paris Musée vie romantique 2012.jpg": ["JLPC", "CC BY-SA 3.0"],
-    "Cour Napoléon at night - Louvre.jpg": ["Benh LIEU SONG", "CC BY 2.5"],
-    "Musée Jacquemart André 2007 - Recoura.jpg": ["Christophe Recoura", "CC BY-SA 3.0"],
-    "Paris (75008) Hôtel Moïse de Camondo 05.JPG": ["GO69", "CC BY-SA 4.0"],
-    "Paris musée Gustave-Moreau, 19 mai 2013.jpg": ["Velvet", "CC BY-SA 3.0"],
-    "PARIS Place des Vosges, Maison de Victor Hugo 2.jpg": ["Frédérique Panassac", "CC BY-SA 2.0"],
-    "Musée Delacroix, Paris 29 May 2017 001.jpg": ["xiquinhosilva", "CC BY 2.0"],
-    "Jardin Lazare-Rachline, Paris 9 June 2017 001.jpg": ["Guilhem Vellut", "CC BY 2.0"],
-    "Musée Zadkine.jpg": ["Serein", "CC BY-SA 3.0"],
-    "Paris.- Musée Marmottan Monet.jpg": ["Pierre André Leclercq", "CC BY-SA 4.0"],
-    "MuseeDOrsay.jpg": ["Sanchezn", "CC BY-SA 3.0"],
-    "2011-12-Musee de lorangerie.jpg": ["Traktorminze", "CC BY-SA 3.0"],
-    "L'hôtel Biron (musée Rodin) à Paris, 13 juin 2021 01.jpg": ["Jean-Pierre Dalbéra", "CC BY 2.0"],
-    "Petit Palais Paris 2.jpg": ["Chabe01", "CC BY-SA 4.0"],
-    "Carnavalet París 10.JPG": ["Miguel Hermoso Cuesta", "CC BY-SA 4.0"],
-    "Hôtel de Cluny, Paris 24 April 2012.jpg": ["ctj71081", "CC BY-SA 2.0"],
-    "Musée des Arts forains Paris 12e 001.jpg": ["Moonik", "CC BY-SA 3.0"],
-    "P1000961 Paris III Rue des Archives Musée de la chasse reductwk.JPG": ["Mbzt", "CC BY-SA 3.0"],
-    "Bourse Commerce - Paris I (FR75) - 2021-06-05 - 1.jpg": ["Chabe01", "CC BY-SA 4.0"],
-    "Szensapel.jpg": ["Mathae", "CC BY 2.5"],
-    "Paris Opera full frontal architecture, May 2009.jpg": ["Peter Rivera", "CC BY 2.0"],
-    "Paris 16 - Castel Béranger -1.JPG": ["Mossot", "CC BY 1.0"],
-    "Immeuble Lavirotte - Paris - France - Facade.jpg": ["Binche", "CC BY-SA 3.0"],
-    "Grande Mosquée de Paris.JPG": ["LPLT", "CC BY-SA 4.0"],
-    "Hôtel de Sully 07-2.jpg": ["Jean-Louis Zimmermann", "CC BY 2.0"],
-    "Salle de lecture Bibliotheque Sainte-Genevieve n11.jpg": ["Marie-Lan Nguyen", "CC BY 2.0 fr"],
-    "La Samaritaine and Statue of Henri IV.jpg": ["Adrian Scottow", "CC BY-SA 2.0"],
-    "Paris, Hôtel de Ville -- 2014 -- 1714.jpg": ["Dietmar Rabich", "CC BY-SA 4.0"],
-    "Rue Crémieux, Paris 12.jpg": ["Mu", "CC BY-SA 3.0"],
-    "Rue de l'Abreuvoir.jpg": ["Chris Waits", "CC BY 2.0"],
-    "Rue Saint-Rustique, Paris 11 October 2016.jpg": ["Visions of Domino", "CC BY 2.0"],
-    "Rue des Thermopyles, Paris 14 June 2017 003.jpg": ["Guilhem Vellut", "CC BY 2.0"],
-    "Rue Berton.JPG": ["CVB", "CC BY-SA 3.0"],
-    "P1020083 Paris VI Cour du Commerce-Saint-André reductwk.JPG": ["Mbzt", "CC BY 3.0"],
-    "Rue de Furstemberg, Paris 6e 1.jpg": ["Celette", "CC BY-SA 4.0"],
-    "Place des Vosges vue aérienne.png": ["Des Racines et des Ailes", "CC BY 3.0"],
-    "Jardins du Palais Royal.JPG": ["LPLT", "CC BY-SA 3.0"],
-    "Square du Vert-Galant 003.jpg": ["Rafael Garcia-Suarez", "CC BY-SA 2.0"]
+    "P1040471 Paris II galerie Vivienne rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Galerie Colbert.jpg": [
+      "Benh LIEU SONG",
+      "CC BY 3.0"
+    ],
+    "Passage Panoramas - Paris II (FR75) - 2022-05-27 - 1.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "P1020618 Paris IX Passage Jouffroy rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Passage Verdeau - Paris IX (FR75) - 2022-05-27 - 3.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "Galerie Vero-Dodat, 16 May 2013.jpg": [
+      "Jean-François Gornet",
+      "CC BY-SA 2.0"
+    ],
+    "Paris passage du grand cerf.jpg": [
+      "Ralf.treinen",
+      "CC BY-SA 3.0"
+    ],
+    "Passage Choiseul.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "Paris - Passage des Princes 01.jpg": [
+      "Clicsouris",
+      "CC BY-SA 2.5"
+    ],
+    "Paris passage du caire.jpg": [
+      "Ralf.treinen",
+      "CC BY-SA 3.0"
+    ],
+    "Passage Brady.jpg": [
+      "Ratozamanana Andriankoto",
+      "CC BY 2.0"
+    ],
+    "Paris passage moliere.jpg": [
+      "Ralf.treinen",
+      "CC BY-SA 3.0"
+    ],
+    "Musée de Montmartre - maison du Bel Air.jpg": [
+      "Musée de Montmartre",
+      "CC BY-SA 3.0"
+    ],
+    "Paris Musée vie romantique 2012.jpg": [
+      "JLPC",
+      "CC BY-SA 3.0"
+    ],
+    "Cour Napoléon at night - Louvre.jpg": [
+      "Benh LIEU SONG",
+      "CC BY 2.5"
+    ],
+    "Musée Jacquemart André 2007 - Recoura.jpg": [
+      "Christophe Recoura",
+      "CC BY-SA 3.0"
+    ],
+    "Paris (75008) Hôtel Moïse de Camondo 05.JPG": [
+      "GO69",
+      "CC BY-SA 4.0"
+    ],
+    "Paris musée Gustave-Moreau, 19 mai 2013.jpg": [
+      "Velvet",
+      "CC BY-SA 3.0"
+    ],
+    "PARIS Place des Vosges, Maison de Victor Hugo 2.jpg": [
+      "Frédérique Panassac",
+      "CC BY-SA 2.0"
+    ],
+    "Musée Delacroix, Paris 29 May 2017 001.jpg": [
+      "xiquinhosilva",
+      "CC BY 2.0"
+    ],
+    "Jardin Lazare-Rachline, Paris 9 June 2017 001.jpg": [
+      "Guilhem Vellut",
+      "CC BY 2.0"
+    ],
+    "Musée Zadkine.jpg": [
+      "Serein",
+      "CC BY-SA 3.0"
+    ],
+    "Paris.- Musée Marmottan Monet.jpg": [
+      "Pierre André Leclercq",
+      "CC BY-SA 4.0"
+    ],
+    "MuseeDOrsay.jpg": [
+      "Sanchezn",
+      "CC BY-SA 3.0"
+    ],
+    "2011-12-Musee de lorangerie.jpg": [
+      "Traktorminze",
+      "CC BY-SA 3.0"
+    ],
+    "L'hôtel Biron (musée Rodin) à Paris, 13 juin 2021 01.jpg": [
+      "Jean-Pierre Dalbéra",
+      "CC BY 2.0"
+    ],
+    "Petit Palais Paris 2.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "Carnavalet París 10.JPG": [
+      "Miguel Hermoso Cuesta",
+      "CC BY-SA 4.0"
+    ],
+    "Hôtel de Cluny, Paris 24 April 2012.jpg": [
+      "ctj71081",
+      "CC BY-SA 2.0"
+    ],
+    "Musée des Arts forains Paris 12e 001.jpg": [
+      "Moonik",
+      "CC BY-SA 3.0"
+    ],
+    "P1000961 Paris III Rue des Archives Musée de la chasse reductwk.JPG": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Bourse Commerce - Paris I (FR75) - 2021-06-05 - 1.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "Szensapel.jpg": [
+      "Mathae",
+      "CC BY 2.5"
+    ],
+    "Paris Opera full frontal architecture, May 2009.jpg": [
+      "Peter Rivera",
+      "CC BY 2.0"
+    ],
+    "Paris 16 - Castel Béranger -1.JPG": [
+      "Mossot",
+      "CC BY 1.0"
+    ],
+    "Immeuble Lavirotte - Paris - France - Facade.jpg": [
+      "Binche",
+      "CC BY-SA 3.0"
+    ],
+    "Grande Mosquée de Paris.JPG": [
+      "LPLT",
+      "CC BY-SA 4.0"
+    ],
+    "Hôtel de Sully 07-2.jpg": [
+      "Jean-Louis Zimmermann",
+      "CC BY 2.0"
+    ],
+    "Salle de lecture Bibliotheque Sainte-Genevieve n11.jpg": [
+      "Marie-Lan Nguyen",
+      "CC BY 2.0 fr"
+    ],
+    "La Samaritaine and Statue of Henri IV.jpg": [
+      "Adrian Scottow",
+      "CC BY-SA 2.0"
+    ],
+    "Paris, Hôtel de Ville -- 2014 -- 1714.jpg": [
+      "Dietmar Rabich",
+      "CC BY-SA 4.0"
+    ],
+    "Rue Crémieux, Paris 12.jpg": [
+      "Mu",
+      "CC BY-SA 3.0"
+    ],
+    "Rue de l'Abreuvoir.jpg": [
+      "Chris Waits",
+      "CC BY 2.0"
+    ],
+    "Rue Saint-Rustique, Paris 11 October 2016.jpg": [
+      "Visions of Domino",
+      "CC BY 2.0"
+    ],
+    "Rue des Thermopyles, Paris 14 June 2017 003.jpg": [
+      "Guilhem Vellut",
+      "CC BY 2.0"
+    ],
+    "Rue Berton.JPG": [
+      "CVB",
+      "CC BY-SA 3.0"
+    ],
+    "P1020083 Paris VI Cour du Commerce-Saint-André reductwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Rue de Furstemberg, Paris 6e 1.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Place des Vosges vue aérienne.png": [
+      "Des Racines et des Ailes",
+      "CC BY 3.0"
+    ],
+    "Jardins du Palais Royal.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "Square du Vert-Galant 003.jpg": [
+      "Rafael Garcia-Suarez",
+      "CC BY-SA 2.0"
+    ],
+    "Opéra Garnier vu de la terrasse des Galeries Lafayette.jpg": [
+      "André Alliot",
+      "CC0"
+    ]
   },
   "adventures": [
-    { "id": "chilly-in-paris", "title": "Chilly in Paris", "subtitle": "Our Parisian adventure", "starts_on": "2026-11-15", "ends_on": "2026-11-22",
-      "party_size": 2, "guests": ["Chilly", "Vic"], "language": "en", "palette": "blue-yellow" }
+    {
+      "id": "chilly-in-paris",
+      "title": "Chilly in Paris",
+      "subtitle": "Our Parisian adventure",
+      "starts_on": "2026-11-15",
+      "ends_on": "2026-11-22",
+      "party_size": 2,
+      "guests": [
+        "Chilly",
+        "Vic"
+      ],
+      "language": "en",
+      "palette": "blue-yellow"
+    }
   ]
 }

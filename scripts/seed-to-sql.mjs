@@ -41,6 +41,7 @@ for (const p of data.places) {
     layer_id: p.layer,
     name: p.name,
     summary: p.summary ?? '',
+    tip: p.tip ?? '',
     address: p.address ?? '',
     lat: p.lat,
     lng: p.lng,
