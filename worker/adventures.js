@@ -203,8 +203,8 @@ export async function getSharedMap(db, token, today) {
   const [map, saved] = await Promise.all([
     getMap(db, a.city_id, today),
     db.prepare(
-      `select id, place_id, day, added_by from adventure_items
-       where adventure_id = ? and place_id is not null order by day is null, day, sort`,
+      `select id, place_id, event_id, day, added_by from adventure_items
+       where adventure_id = ? and (place_id is not null or event_id is not null) order by day is null, day, sort`,
     ).bind(a.id).all(),
   ]);
   return {
@@ -327,6 +327,7 @@ export async function canSeeCover(db, key, user, shareToken) {
 const MAX_GUEST_ITEMS = 200;
 const GUEST_RULES = {
   place_id: optional(text(80)),
+  event_id: optional(text(80)),
   title: text(200),
   day: optional(isDate),
   by: text(40),
@@ -348,9 +349,21 @@ export async function addGuestItem(db, token, body) {
   const f = pick(body, GUEST_RULES);
   const by = (f.by || '').trim() || 'Guest';
   const title = (f.title || '').trim();
-  if (!f.place_id && !title) throw new HttpError(400, 'Write an idea or pick a place');
+  if (!f.place_id && !f.event_id && !title) throw new HttpError(400, 'Write an idea or pick a place');
   if (f.day && (f.day < a.starts_on || f.day > a.ends_on)) throw new HttpError(400, 'This day is outside the adventure');
-  if (f.place_id) {
+  let eventTitle = '';
+  if (f.event_id) {
+    // A dated event (Christmas market...): saved with its own title, linked to its place if it has one.
+    const ev = await db.prepare('select title, place_id from events where id = ?').bind(f.event_id).first();
+    if (!ev) throw new HttpError(404, 'Unknown event');
+    eventTitle = ev.title;
+    f.place_id = ev.place_id || null;
+    const existing = await db
+      .prepare('select id, added_by from adventure_items where adventure_id = ? and event_id = ? limit 1')
+      .bind(a.id, f.event_id)
+      .first();
+    if (existing) return { id: existing.id, added_by: existing.added_by, existed: true };
+  } else if (f.place_id) {
     const place = await db.prepare('select 1 from places where id = ?').bind(f.place_id).first();
     if (!place) throw new HttpError(404, 'Unknown place');
     const existing = await db
@@ -367,10 +380,10 @@ export async function addGuestItem(db, token, body) {
   const id = randomToken(9);
   await db
     .prepare(
-      `insert into adventure_items (id, adventure_id, day, place_id, title, added_by, sort)
-       values (?, ?, ?, ?, ?, ?, (select coalesce(max(sort), 0) + 1 from adventure_items where adventure_id = ?))`,
+      `insert into adventure_items (id, adventure_id, day, place_id, event_id, title, added_by, sort)
+       values (?, ?, ?, ?, ?, ?, ?, (select coalesce(max(sort), 0) + 1 from adventure_items where adventure_id = ?))`,
     )
-    .bind(id, a.id, f.day ?? null, f.place_id ?? null, f.place_id ? '' : title, by, a.id)
+    .bind(id, a.id, f.day ?? null, f.place_id ?? null, f.event_id ?? null, eventTitle || (f.place_id ? '' : title), by, a.id)
     .run();
   return { id, added_by: by, existed: false };
 }

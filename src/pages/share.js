@@ -4,8 +4,10 @@ import '../styles/adventures.css';
 import { t, setLanguage, formatRange, formatTab } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { guestName, setGuestName, guestPicker } from '../lib/guest.js';
-import { forecast, weatherLine, weatherCredit } from '../lib/weather.js';
+import { forecast, hourlyForecast, hourlyStrip, weatherLine, weatherCredit } from '../lib/weather.js';
 let weather = new Map();
+let hourly = new Map();
+let hourlyDay = null; // the day shown hour by hour
 import { icon } from '../lib/icons.js';
 import { daysBetween, itemsOf, miniMap } from '../lib/trip.js';
 
@@ -95,8 +97,20 @@ function render(a) {
     <section class="shared__map">
       <h2>${esc(t('adventure.mapTitle'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}">${esc(t('share.openMap'))}</a></h2>
       <div class="mini-map mini-map--wide" data-mini-map></div>
+      ${hourlyHtml(days)}
     </section>`;
   miniMap(root.querySelector('[data-mini-map]'))(a.items.filter((x) => x.day));
+}
+
+/** Hour by hour for one day of the trip, with buttons to switch days. */
+function hourlyHtml(days) {
+  const open = days.filter((d) => hourly.has(d));
+  if (!open.length) return '';
+  if (!open.includes(hourlyDay)) hourlyDay = open.includes(new Date().toISOString().slice(0, 10)) ? new Date().toISOString().slice(0, 10) : open[0];
+  return `<div class="hourly-days" role="group" aria-label="${esc(t('adventure.itinerary'))}">${open
+    .map((d) => `<button class="chip" type="button" data-hourly-day="${d}" aria-pressed="${d === hourlyDay}">${esc(formatTab(d))}</button>`)
+    .join('')}</div>
+    ${hourlyStrip(hourly.get(hourlyDay), t('weather.hourly', { day: formatTab(hourlyDay) }))}`;
 }
 
 async function reload(focusDay) {
@@ -122,6 +136,14 @@ root.addEventListener('submit', async (e) => {
 });
 
 root.addEventListener('click', async (e) => {
+  const hd = e.target.closest('[data-hourly-day]');
+  if (hd) {
+    hourlyDay = hd.dataset.hourlyDay;
+    const y = scrollY;
+    render(adventure);
+    scrollTo(0, y);
+    return root.querySelector(`[data-hourly-day="${hourlyDay}"]`)?.focus();
+  }
   const el = e.target.closest('[data-unsuggest]');
   if (!el) return;
   const res = await fetch(`${shareApi}/items/${encodeURIComponent(el.dataset.unsuggest)}`, { method: 'DELETE' });
@@ -135,8 +157,9 @@ root.addEventListener('change', (e) => {
   render(adventure);
 });
 
-forecast().then((w) => {
+Promise.all([forecast(), hourlyForecast()]).then(([w, h]) => {
   weather = w;
+  hourly = h;
   if (adventure) {
     const y = scrollY;
     render(adventure);

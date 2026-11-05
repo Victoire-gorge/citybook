@@ -8,7 +8,7 @@ import { icon } from '../lib/icons.js';
 import { daysBetween, itemsOf, dayTab, miniMap } from '../lib/trip.js';
 import { openAdventureForm } from '../lib/adventure-form.js';
 import { downloadIcs } from '../lib/ics.js';
-import { forecast, weatherMini, weatherLine, weatherCredit } from '../lib/weather.js';
+import { forecast, hourlyForecast, hourlyStrip, weatherMini, weatherLine, weatherCredit } from '../lib/weather.js';
 
 startPage();
 mountMasthead('adventures');
@@ -23,6 +23,7 @@ let updateMap;
 let editing = null; // id of the step whose editor is open
 let shareOpen = false;
 let weather = new Map(); // date -> forecast, filled in when it arrives
+let hourly = new Map(); // date -> hour-by-hour forecast
 
 async function load() {
   adventure = await api(`/api/adventures/${encodeURIComponent(id)}`);
@@ -176,6 +177,7 @@ function render() {
     <section class="trip__map" aria-labelledby="map-title">
       <h2 id="map-title" class="trip__map-title">${esc(t('adventure.mapTitle'))}</h2>
       <div class="mini-map" data-mini-map></div>
+      ${current ? hourlyStrip(hourly.get(current), t('weather.hourly', { day: formatDay(current) })) : ''}
     </section>`;
   updateMap = miniMap(root.querySelector('[data-mini-map]'));
   updateMap(itemsOf(adventure, current === '' ? null : current));
@@ -293,8 +295,9 @@ root.addEventListener('submit', async (e) => {
 });
 
 // The forecast arrives after the page: redraw once, keeping the scroll position.
-forecast().then((w) => {
+Promise.all([forecast(), hourlyForecast()]).then(([w, h]) => {
   weather = w;
+  hourly = h;
   if (adventure && days.some((d) => w.has(d))) {
     const y = scrollY;
     render();

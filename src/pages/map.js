@@ -82,6 +82,7 @@ function setupGuest(data) {
   state.adventure = a;
   state.me = guestName(a, a.owner);
   for (const item of data.saved) {
+    if (!item.place_id) continue; // a dated event with no place: shown in Activities only
     if (!state.saved.has(item.place_id)) state.saved.set(item.place_id, []);
     state.saved.get(item.place_id).push(item);
   }

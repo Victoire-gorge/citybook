@@ -6,14 +6,21 @@ import { t, tr, formatTab, formatShort } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { icon } from '../lib/icons.js';
 import { daysBetween } from '../lib/trip.js';
-import { starsHtml } from '../lib/stars.js';
+import { starsHtml, GLYPH } from '../lib/stars.js';
+import { guestName } from '../lib/guest.js';
 import { eventDates, overlapDays, isOnDuring } from '../lib/events.js';
 
 // Two tabs:
 // - Anytime: places of the 'activities' layer, also shown on the map;
 // - Limited time: dated events (Christmas markets, exhibitions...), most linked to a place.
+// Guests arrive with ?share=<token>: no rating, but they can star activities for the shared trip.
 startPage();
-mountMasthead('activities');
+const shareToken = new URLSearchParams(location.search).get('share');
+const shareQs = shareToken ? `?share=${encodeURIComponent(shareToken)}` : '';
+mountMasthead('activities', shareToken ? { signedIn: false, readOnly: true, issue: '', shareToken } : {});
+let shared = null; // the shared adventure, for guests
+let me = '';
+let saved = []; // items of the shared adventure that point to a place or an event
 
 const CATEGORIES = ['classic', 'offbeat', 'outdoors', 'food', 'evening', 'daytrip'];
 const list = document.querySelector('[data-list]');
@@ -41,20 +48,69 @@ function card(a) {
       ${photo ? `<figcaption>${photo.source_url ? `<a href="${esc(photo.source_url)}" target="_blank" rel="noopener">` : ''}${esc(t('place.photoCredit', { author: photo.author || '?', license: photo.license || '' }))}${photo.source_url ? '</a>' : ''}</figcaption>` : ''}
     </figure>
     <div class="activity__body">
-      <span class="tag">${esc(t(`cat.${a.category}`))}</span>
+      <div class="activity__tags"><span class="tag">${esc(t(`cat.${a.category}`))}</span>
+        ${a.area ? `<span class="tag tag--area">${icon('pin', { size: 12 })} ${esc(a.area)}</span>` : ''}</div>
       <h2 class="activity__title">${esc(tr(a, 'name'))}</h2>
-      ${starsHtml(a.rating, { editable: true, name: tr(a, 'name') })}
+      ${starsHtml(a.rating, { editable: !shareToken, name: tr(a, 'name') })}
       <p class="activity__summary">${esc(tr(a, 'summary'))}</p>
       ${facts.length ? `<ul class="facts activity__facts">${facts.map(([ic, label]) => `<li>${icon(ic, { size: 16 })}<span>${esc(label)}</span></li>`).join('')}</ul>` : ''}
       ${a.hours_note ? `<p class="activity__note">${esc(tr(a, 'hours_note'))}${a.booking_required ? ` · ${esc(t('place.booking'))}` : ''}</p>` : a.booking_required ? `<p class="activity__note">${esc(t('place.booking'))}</p>` : ''}
       ${events ? `<div class="place-card__events"><h3>${esc(t('place.onNow'))}</h3><ul>${events}</ul></div>` : ''}
       <div class="activity__links">
-        <a href="/#${esc(a.id)}">${icon('pin', { size: 15 })} ${esc(t('activities.onMap'))}</a>
+        <a href="/${shareQs}#${esc(a.id)}">${icon('pin', { size: 15 })} ${esc(t('activities.onMap'))}</a>
         ${a.website ? `<a href="${esc(a.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
       </div>
-      ${adventures.length ? addForm(a) : ''}
+      ${shareToken ? guestStar({ place_id: a.id }) : adventures.length ? addForm(a) : ''}
     </div>
   </li>`;
+}
+
+// ---------- Guests: ★ = in the shared trip ----------
+
+const savedFor = ({ place_id, event_id }) =>
+  saved.filter((i) => (event_id ? i.event_id === event_id : i.place_id === place_id && !i.event_id));
+
+function guestStar(target) {
+  const items = savedFor(target);
+  const mine = items.filter((i) => i.added_by === me);
+  const key = target.event_id ? `data-star-event="${esc(target.event_id)}"` : `data-star-place="${esc(target.place_id)}"`;
+  if (items.length && !mine.length) {
+    const by = [...new Set(items.map((i) => i.added_by).filter(Boolean))];
+    return `<p class="activity__saved"><span class="star" aria-hidden="true">★</span> ${esc(t('activities.inPlan', { title: shared.title }))}${by.length ? ` · ${esc(t('share.suggestedBy', { name: by.join(', ') }))}` : ''}</p>`;
+  }
+  const on = mine.length > 0;
+  return `<button class="btn btn--small ${on ? 'btn--line' : ''} activity__star" type="button" ${key} aria-pressed="${on}">
+    <span class="star" aria-hidden="true">★</span> ${esc(t(on ? 'map.unstar' : 'map.star'))}</button>`;
+}
+
+async function toggleGuestStar(target, button) {
+  const base = `/api/share/${encodeURIComponent(shareToken)}/items`;
+  const mine = savedFor(target).filter((i) => i.added_by === me);
+  button.disabled = true;
+  try {
+    if (mine.length) {
+      for (const item of mine) {
+        const res = await fetch(`${base}/${encodeURIComponent(item.id)}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error();
+      }
+      saved = saved.filter((i) => !mine.includes(i));
+      toast(t('map.unstarred'));
+    } else {
+      const res = await fetch(base, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...target, by: me }),
+      });
+      if (!res.ok) throw new Error();
+      const item = await res.json();
+      if (!item.existed) saved.push({ id: item.id, place_id: target.place_id ?? null, event_id: target.event_id ?? null, day: null, added_by: item.added_by });
+      toast(t('map.starred'));
+    }
+    render();
+    list.querySelector(target.event_id ? `[data-star-event="${target.event_id}"]` : `[data-star-place="${target.place_id}"]`)?.focus();
+  } catch {
+    toast(t('error.generic'));
+    button.disabled = false;
+  }
 }
 
 function addForm(a, ev = null) {
@@ -81,7 +137,7 @@ function dayOptions(adv, ev = null) {
       .join('');
 }
 
-const nextTrip = () => adventures.find((a) => a.ends_on >= new Date().toISOString().slice(0, 10));
+const nextTrip = () => shared || adventures.find((a) => a.ends_on >= new Date().toISOString().slice(0, 10));
 
 function eventCard(e) {
   const place = e.place_id ? places.get(e.place_id) : null;
@@ -103,10 +159,10 @@ function eventCard(e) {
       ${e.summary ? `<p class="activity__summary">${esc(tr(e, 'summary'))}</p>` : ''}
       ${place ? `<p class="activity__note">${icon('pin', { size: 14 })} ${esc(tr(place, 'name'))}</p>` : ''}
       <div class="activity__links">
-        ${place ? `<a href="/#${esc(place.id)}">${icon('pin', { size: 15 })} ${esc(t('activities.onMap'))}</a>` : ''}
+        ${place ? `<a href="/${shareQs}#${esc(place.id)}">${icon('pin', { size: 15 })} ${esc(t('activities.onMap'))}</a>` : ''}
         ${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
       </div>
-      ${adventures.length ? addForm({ id: e.id }, e) : ''}
+      ${shareToken ? guestStar({ event_id: e.id }) : adventures.length ? addForm({ id: e.id }, e) : ''}
     </div>
   </li>`;
 }
@@ -127,11 +183,16 @@ function render() {
   document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   document.querySelector('[data-subtitle]').textContent = t(tab === 'limited' ? 'activities.limitedSubtitle' : 'activities.subtitle');
   if (tab === 'limited') return renderLimited();
-  const shown = (filter === 'all' ? [...activities] : activities.filter((a) => a.category === filter));
+  const areas = [...new Set(activities.map((a) => a.area).filter(Boolean))].sort();
+  const shown = filter === 'all' ? [...activities]
+    : filter.startsWith('area:') ? activities.filter((a) => a.area === filter.slice(5))
+    : activities.filter((a) => a.category === filter);
   if (bestFirst) shown.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   chips.innerHTML = ['all', ...CATEGORIES]
     .map((c) => `<button class="chip" type="button" data-cat="${c}" aria-pressed="${c === filter}">${esc(c === 'all' ? t('activities.all') : t(`cat.${c}`))}</button>`)
-    .join('') + `<button class="chip chip--sort" type="button" data-sort aria-pressed="${bestFirst}">★ ${esc(t('activities.sortBest'))}</button>`;
+    .join('') + areas
+    .map((z) => `<button class="chip chip--area" type="button" data-cat="area:${esc(z)}" aria-pressed="${filter === `area:${z}`}">${icon('pin', { size: 13 })} ${esc(z)}</button>`)
+    .join('') + `<button class="chip chip--sort" type="button" data-sort aria-pressed="${bestFirst}">${GLYPH} ${esc(t('activities.sortBest'))}</button>`;
   list.innerHTML = shown.map(card).join('');
   document.querySelector('[data-empty]').hidden = shown.length > 0;
   document.querySelector('[data-count]').textContent = t('activities.count', { n: shown.length });
@@ -163,6 +224,10 @@ chips.addEventListener('click', (e) => {
 
 // Rate an activity: clicking the current rating again clears it.
 list.addEventListener('click', async (e) => {
+  const guest = e.target.closest('[data-star-place], [data-star-event]');
+  if (guest) {
+    return toggleGuestStar(guest.dataset.starEvent ? { event_id: guest.dataset.starEvent } : { place_id: guest.dataset.starPlace }, guest);
+  }
   const star = e.target.closest('[data-rate]');
   if (!star) return;
   const item = star.closest('[data-id]');
@@ -210,7 +275,21 @@ list.addEventListener('submit', async (e) => {
 });
 
 async function load() {
-  const [map, advs] = await Promise.all([api('/api/map/paris'), api('/api/adventures').catch(() => [])]);
+  let map;
+  let advs = [];
+  if (shareToken) {
+    const res = await fetch(`/api/share/${encodeURIComponent(shareToken)}/map`);
+    if (!res.ok) throw new Error('Unknown link');
+    map = await res.json();
+    shared = map.adventure;
+    me = guestName(shared, shared.owner);
+    saved = map.saved;
+    const help = document.querySelector('[data-guest-help]');
+    help.textContent = t('activities.guestHelp', { title: shared.title });
+    help.hidden = false;
+  } else {
+    [map, advs] = await Promise.all([api('/api/map/paris'), api('/api/adventures').catch(() => [])]);
+  }
   const order = Object.fromEntries(CATEGORIES.map((c, i) => [c, i]));
   places = new Map(map.places.map((p) => [p.id, p]));
   events = map.events || [];

@@ -217,7 +217,7 @@
   .shared-day__badge { justify-self: start; grid-auto-flow: column; gap: 10px; padding: 6px 10px; }
   .shared-day__photo { width: 70%; }
   .day-jump {
-    display: flex; gap: 6px; overflow-x: auto; position: sticky; top: 0; z-index: 900;
+    display: flex; gap: 6px; overflow-x: auto; position: sticky; top: var(--mast-h, 0px); z-index: 900;
     margin: 0 calc(-1 * var(--gutter)) 16px; padding: 10px var(--gutter); background: var(--paper); border-bottom: 1px solid var(--rule);
   }
   .day-jump a { flex: none; padding: 5px 12px; border: 1px solid var(--forest); border-radius: 4px; color: var(--forest); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
@@ -295,3 +295,22 @@
 .activity__photo--blank { display: grid; place-items: center; background: var(--forest); }
 .activity__date-big { font: italic 700 1.6rem var(--display); color: var(--card); padding: 0 20px; text-align: center; }
 .activity--event .tag--now { text-transform: none; letter-spacing: 0; }
+
+/* Hour-by-hour weather under the map */
+.hourly { margin-top: 18px; }
+.hourly__title { font-style: italic; font-weight: 400; font-size: 1.3rem; margin-bottom: 10px; }
+.hourly__title::first-letter { text-transform: uppercase; }
+.hourly__hours {
+  list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(58px, 1fr);
+  overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); scrollbar-width: thin;
+}
+.hourly__hour { display: grid; justify-items: center; gap: 4px; padding: 10px 4px; border-right: 1px solid var(--hair); }
+.hourly__hour:last-child { border-right: none; }
+.hourly__hour .icon { color: var(--forest); }
+.hourly__hour.is-wet { background: #eef2f6; }
+.hourly__hour.is-wet .icon { color: #3d6b94; }
+.hourly__time { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+.hourly__temp { font-weight: 600; font-size: 0.95rem; }
+.hourly__rain { font-family: var(--mono); font-size: 0.66rem; color: #3d6b94; min-height: 1em; }
+.hourly-days { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.hourly-days + .hourly { margin-top: 10px; }

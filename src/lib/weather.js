@@ -56,3 +56,48 @@ export function weatherLine(w) {
 
 export const weatherCredit = () =>
   `<p class="wx-credit">${esc(t('weather.credit'))} <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>`;
+
+let hourlyCache = null;
+
+/** Map of 'YYYY-MM-DD' -> [{ hour: 'HH:00', temp, code, rain }] for the next 16 days in Paris. */
+export async function hourlyForecast({ lat, lng } = PARIS) {
+  if (hourlyCache) return hourlyCache;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
+    + '&hourly=temperature_2m,weather_code,precipitation_probability'
+    + '&timezone=Europe%2FParis&forecast_days=16';
+  hourlyCache = fetch(url)
+    .then((r) => (r.ok ? r.json() : Promise.reject(r)))
+    .then(({ hourly }) => {
+      const byDay = new Map();
+      hourly.time.forEach((stamp, i) => {
+        const [day, time] = stamp.split('T');
+        if (!byDay.has(day)) byDay.set(day, []);
+        byDay.get(day).push({
+          hour: time.slice(0, 5),
+          temp: Math.round(hourly.temperature_2m[i]),
+          code: hourly.weather_code[i],
+          rain: hourly.precipitation_probability[i],
+        });
+      });
+      return byDay;
+    })
+    .catch(() => new Map());
+  return hourlyCache;
+}
+
+/** Hour-by-hour strip for one day, from 7:00 to 23:00. */
+export function hourlyStrip(hours, title) {
+  if (!hours?.length) return '';
+  const shown = hours.filter((h) => h.hour >= '07:00');
+  return `<section class="hourly" aria-label="${esc(title)}">
+    <h2 class="hourly__title">${esc(title)}</h2>
+    <ol class="hourly__hours">${shown.map((h) => {
+      const [ic, label] = describe(h.code);
+      return `<li class="hourly__hour ${h.rain >= 50 ? 'is-wet' : ''}" title="${esc(t(label))}">
+        <span class="hourly__time">${esc(h.hour)}</span>${icon(ic, { size: 22 })}
+        <span class="hourly__temp">${h.temp}°</span>
+        <span class="hourly__rain">${h.rain != null ? `${h.rain}%` : ''}</span></li>`;
+    }).join('')}</ol>
+    ${weatherCredit()}
+  </section>`;
+}

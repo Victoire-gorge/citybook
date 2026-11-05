@@ -112,7 +112,7 @@ create table adventures (
   id text primary key,
   owner_id text not null references users(id),
   city_id text not null references cities(id),
-  title text not null,                 -- 'Chilly in Paris'
+  title text not null,                 -- 'Chilli in Paris'
   subtitle text not null default '',
   starts_on text not null,
   ends_on text not null,

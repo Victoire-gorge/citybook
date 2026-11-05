@@ -26,7 +26,7 @@ export function setGuestName(adventure, name) {
   } catch { /* not remembered, still used for this page */ }
 }
 
-/** "You are Chilly" line, with a picker when several friends share the link. */
+/** "You are Chilli" line, with a picker when several friends share the link. */
 export function guestPicker(adventure, owner, current) {
   const choices = guestChoices(adventure, owner);
   if (choices.length < 2) return `<p class="guest-id">${esc(t('guest.youAre', { name: current }))}</p>`;

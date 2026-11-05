@@ -55,6 +55,7 @@ for (const p of data.places) {
     category: p.category ?? null,
     duration: p.duration ?? null,
     best_time: p.best_time ?? null,
+    area: p.area ?? null,
   };
   lines.push(
     `insert or ignore into places (${Object.keys(cols).join(', ')}) values (${Object.values(cols).map(sql).join(', ')});`,

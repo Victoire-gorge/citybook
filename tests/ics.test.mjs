@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { adventureToIcs } from '../src/lib/ics.js';
 
 const adventure = {
-  title: 'Chilly in Paris',
+  title: 'Chilli in Paris',
   items: [
     { id: 'a', day: '2026-11-16', start_time: '10:00', end_time: null, title: 'Louvre, Denon wing', note: '', lat: 48.86, lng: 2.33, place_id: 'musee-du-louvre' },
     { id: 'b', day: '2026-11-17', start_time: null, title: 'Passages; walk', note: 'line one\nline two' },

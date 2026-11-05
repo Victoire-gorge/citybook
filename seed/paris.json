@@ -384,7 +384,8 @@
       "summary": "Renoir's gardens, Suzanne Valadon's studio and a view over the vineyard.",
       "hours": "Mo-Su 10:00-18:00",
       "hours_note": "Until 19:00 from April to September.",
-      "photo": "Musée de Montmartre - maison du Bel Air.jpg"
+      "photo": "Musée de Montmartre - maison du Bel Air.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "musee-de-la-vie-romantique",
@@ -822,7 +823,8 @@
           ]
         ]
       ],
-      "photo": "Rue de l'Abreuvoir.jpg"
+      "photo": "Rue de l'Abreuvoir.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "rue-saint-rustique",
@@ -856,7 +858,8 @@
           ]
         ]
       ],
-      "photo": "Rue Saint-Rustique, Paris 11 October 2016.jpg"
+      "photo": "Rue Saint-Rustique, Paris 11 October 2016.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "rue-des-thermopyles",
@@ -1156,7 +1159,8 @@
       "address": "Place des Abbesses, 18th — Montmartre",
       "summary": "Street musicians play by the Art Nouveau metro entrance and the carousel, a lively stop on the way up to Montmartre.",
       "price": "Free",
-      "photo": "Place des Abbesses.JPG"
+      "photo": "Place des Abbesses.JPG",
+      "area": "Montmartre"
     },
     {
       "id": "home-bois-colombes",
@@ -2255,7 +2259,8 @@
       "best_time": "Late afternoon",
       "price": "Free (dome paid)",
       "website": "https://www.sacre-coeur-montmartre.com",
-      "photo": "Le sacre coeur.jpg"
+      "photo": "Le sacre coeur.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "catacombs",
@@ -2331,7 +2336,8 @@
       "best_time": "Evening",
       "price": "Paid",
       "website": "https://www.cinema-studio28.fr",
-      "photo": "Studio 28 nuit.jpg"
+      "photo": "Studio 28 nuit.jpg",
+      "area": "Montmartre"
     },
     {
       "id": "piscine-des-amiraux",
@@ -2562,7 +2568,221 @@
       "website": "https://www.moulinrouge.fr/",
       "hours_note": "Book ahead.",
       "booking_required": true,
-      "photo": "Moulin Rouge, 17 April 2011.jpg"
+      "photo": "Moulin Rouge, 17 April 2011.jpg",
+      "area": "Montmartre"
+    },
+    {
+      "id": "place-des-abbesses",
+      "name": "Place des Abbesses and its metro",
+      "wikidata": "Q306256",
+      "lat": 48.884444,
+      "lng": 2.338611,
+      "address": "Place des Abbesses, 18th",
+      "summary": "The village square of Montmartre, with one of the last glass-roofed Art Nouveau metro entrances by Guimard. Take the spiral stairs down: the station is one of the deepest in Paris.",
+      "category": "classic",
+      "duration": "30 min",
+      "best_time": "Any time",
+      "price": "Free",
+      "photo": "Station Métro Abbesses Ligne 12 - Paris XVIII (FR75) - 2022-06-01 - 5.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "mur-des-je-t-aime",
+      "name": "The Wall of I Love Yous",
+      "wikidata": "Q10860702",
+      "lat": 48.884625,
+      "lng": 2.338431,
+      "address": "Square Jehan-Rictus, Place des Abbesses, 18th",
+      "summary": "“I love you” written 311 times in 250 languages on blue enamel tiles, in a little garden just off the Abbesses square.",
+      "category": "offbeat",
+      "duration": "15 min",
+      "best_time": "Morning, before the crowds",
+      "price": "Free",
+      "hours_note": "Open with the garden, daytime only",
+      "photo": "2022-04-12-Le mur des je t'aime-8493.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "bateau-lavoir",
+      "name": "Bateau-Lavoir",
+      "wikidata": "Q426974",
+      "lat": 48.886111,
+      "lng": 2.337611,
+      "address": "13 Place Émile-Goudeau, 18th",
+      "summary": "Where Picasso painted Les Demoiselles d’Avignon. The studios are private, but the little sloping square with its Wallace fountain is lovely.",
+      "category": "offbeat",
+      "duration": "15 min",
+      "best_time": "Any time",
+      "price": "Free (outside only)",
+      "photo": "Bateau-Lavoir face avant.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "place-du-tertre",
+      "name": "Place du Tertre",
+      "wikidata": "Q526595",
+      "lat": 48.886667,
+      "lng": 2.340833,
+      "address": "Place du Tertre, 18th",
+      "summary": "The painters’ square at the top of the hill, with easels under the trees. Touristy, but a must the first time.",
+      "category": "classic",
+      "duration": "30 min",
+      "best_time": "Morning",
+      "price": "Free",
+      "photo": "Place Tertre - Paris XVIII (FR75) - 2026-04-10 - 1.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "vignes-de-montmartre",
+      "name": "Montmartre vineyard",
+      "wikidata": "Q3501962",
+      "lat": 48.8883,
+      "lng": 2.34,
+      "address": "Rue des Saules / Rue Saint-Vincent, 18th",
+      "summary": "The last working vineyard of Paris, on the north slope of the hill, facing the Lapin Agile. You see it through the railings.",
+      "category": "outdoors",
+      "duration": "15 min",
+      "best_time": "Any time",
+      "price": "Free",
+      "hours_note": "Seen from the street; open to visits for the harvest festival in October",
+      "photo": "Montmartre vineyard.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "maison-rose",
+      "name": "La Maison Rose",
+      "wikidata": "Q103456427",
+      "lat": 48.887987,
+      "lng": 2.339667,
+      "address": "2 Rue de l'Abreuvoir, 18th",
+      "summary": "The little pink house with green shutters painted by Utrillo, at the corner of Rue de l’Abreuvoir. Now a restaurant: lunch on the terrace or just the photo.",
+      "category": "food",
+      "duration": "1 h",
+      "best_time": "Lunch",
+      "price": "€€",
+      "photo": "Montmartre Maison Rose 002.JPG",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "lapin-agile",
+      "name": "Au Lapin Agile",
+      "wikidata": "Q1423353",
+      "lat": 48.8886,
+      "lng": 2.33998,
+      "address": "22 Rue des Saules, 18th",
+      "summary": "A cabaret in a little house where Picasso and Apollinaire drank. Evenings of old French songs, sung around the tables.",
+      "category": "evening",
+      "duration": "2 h",
+      "best_time": "Evening",
+      "price": "Paid",
+      "website": "https://au-lapin-agile.com",
+      "booking_required": true,
+      "photo": "Au Lapin Agile, Paris 20 May 2014.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "allee-des-brouillards",
+      "name": "Allée des Brouillards and Place Dalida",
+      "wikidata": "Q2367972",
+      "lat": 48.888607,
+      "lng": 2.337561,
+      "address": "Allée des Brouillards, 18th",
+      "summary": "A quiet lane of villas with gardens where Renoir lived, ending at the little square with the bust of Dalida.",
+      "category": "offbeat",
+      "duration": "20 min",
+      "best_time": "Late afternoon",
+      "price": "Free",
+      "photo": "P1260926 Paris XVIII allee des Brouillards rwk.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "passe-muraille",
+      "name": "The Man who Walked through Walls",
+      "lat": 48.88765,
+      "lng": 2.33735,
+      "address": "Place Marcel-Aymé, 18th",
+      "summary": "A man half-stuck in a stone wall: Jean Marais’s statue for Marcel Aymé’s short story. Shake his hand, it is polished by everyone who did.",
+      "category": "offbeat",
+      "duration": "10 min",
+      "best_time": "Any time",
+      "price": "Free",
+      "photo": "Le Passe-Muraille @ Montmartre @ Paris 18 (32146228024).jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "moulin-de-la-galette",
+      "name": "Moulin de la Galette",
+      "wikidata": "Q924480",
+      "lat": 48.887361,
+      "lng": 2.337083,
+      "address": "83 Rue Lepic, 18th",
+      "summary": "One of the two windmills left on the hill, the one Renoir painted at the dance hall below. Walk up Rue Lepic to see it.",
+      "category": "classic",
+      "duration": "15 min",
+      "best_time": "Any time",
+      "price": "Free (outside)",
+      "photo": "Paris 18e Moulin Radet 220.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "halle-saint-pierre",
+      "name": "Halle Saint-Pierre",
+      "wikidata": "Q3126070",
+      "lat": 48.884722,
+      "lng": 2.344444,
+      "address": "2 Rue Ronsard, 18th",
+      "summary": "An iron market hall at the foot of the Sacré-Cœur, now a museum of naive and outsider art, with a bookshop and a café.",
+      "category": "offbeat",
+      "duration": "1 h",
+      "best_time": "Afternoon",
+      "price": "Paid",
+      "website": "https://www.hallesaintpierre.org",
+      "photo": "Halle Saint Pierre In Montmartre - Paris 2013.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "funiculaire-montmartre",
+      "name": "Montmartre funicular",
+      "wikidata": "Q99562",
+      "lat": 48.885278,
+      "lng": 2.3425,
+      "address": "Rue Tardieu to Rue du Cardinal-Dubois, 18th",
+      "summary": "A one-minute ride up the hill to the Sacré-Cœur, with a metro ticket. Handy for the way up, nicer to walk down the stairs.",
+      "category": "classic",
+      "duration": "5 min",
+      "best_time": "Any time",
+      "price": "Metro ticket",
+      "photo": "Montmartre Funicular, Paris 22 June 2014 001.jpg",
+      "layer": "activities",
+      "area": "Montmartre"
+    },
+    {
+      "id": "cimetiere-de-montmartre",
+      "name": "Montmartre Cemetery",
+      "wikidata": "Q746647",
+      "lat": 48.887778,
+      "lng": 2.330278,
+      "address": "20 Avenue Rachel, 18th",
+      "summary": "A romantic cemetery under a road bridge, with the graves of Dalida, Degas, Stendhal and Truffaut, and many cats.",
+      "category": "outdoors",
+      "duration": "1 h",
+      "best_time": "Morning",
+      "price": "Free",
+      "hours_note": "Open every day, closes around 5:30 pm in winter",
+      "photo": "Monmartre Cemetery.JPG",
+      "layer": "activities",
+      "area": "Montmartre"
     },
     {
       "id": "parvis-la-defense",
@@ -3221,18 +3441,70 @@
     "Moulin Rouge, 17 April 2011.jpg": [
       "Juanedc",
       "CC BY 2.0"
+    ],
+    "Station Métro Abbesses Ligne 12 - Paris XVIII (FR75) - 2022-06-01 - 5.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "2022-04-12-Le mur des je t'aime-8493.jpg": [
+      "Superbass",
+      "CC BY-SA 4.0"
+    ],
+    "Bateau-Lavoir face avant.jpg": [
+      "Kalashni",
+      "CC BY-SA 4.0"
+    ],
+    "Place Tertre - Paris XVIII (FR75) - 2026-04-10 - 1.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "Montmartre vineyard.jpg": [
+      "Tangopaso",
+      "Public domain"
+    ],
+    "Montmartre Maison Rose 002.JPG": [
+      "Moonik",
+      "CC BY-SA 3.0"
+    ],
+    "Au Lapin Agile, Paris 20 May 2014.jpg": [
+      "David McSpadden",
+      "CC BY 2.0"
+    ],
+    "P1260926 Paris XVIII allee des Brouillards rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 4.0"
+    ],
+    "Le Passe-Muraille @ Montmartre @ Paris 18 (32146228024).jpg": [
+      "Guilhem Vellut",
+      "CC BY 2.0"
+    ],
+    "Paris 18e Moulin Radet 220.jpg": [
+      "GFreihalter",
+      "CC BY-SA 3.0"
+    ],
+    "Halle Saint Pierre In Montmartre - Paris 2013.jpg": [
+      "Jim Linwood",
+      "CC BY 2.0"
+    ],
+    "Montmartre Funicular, Paris 22 June 2014 001.jpg": [
+      "Dennis G. Jarvis",
+      "CC BY-SA 2.0"
+    ],
+    "Monmartre Cemetery.JPG": [
+      "Elisabetta Cipolla, Tantalas",
+      "Public domain"
     ]
   },
   "adventures": [
     {
-      "id": "chilly-in-paris",
-      "title": "Chilly in Paris",
+      "id": "chilli-in-paris",
+      "title": "Chilli in Paris",
       "subtitle": "Our Parisian adventure",
       "starts_on": "2026-11-15",
       "ends_on": "2026-11-22",
       "party_size": 2,
       "guests": [
-        "Chilly",
+        "Chilli",
         "Vic"
       ],
       "language": "en",
