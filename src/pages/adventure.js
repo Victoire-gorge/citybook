@@ -42,16 +42,67 @@ async function load() {
   render();
 }
 
-const areaOf = (day) => adventure.day_areas?.[day] || '';
+const dayHoods = (day) => adventure.day_areas?.[day] || [];
+const areaOf = (day) => dayHoods(day).map((h) => h.area).join(' · ');
 const home = () => city.places.find((p) => p.layer_id === 'home');
-/** Places of the day's neighbourhood not yet in that day, best rated first. */
+const byRating = (a, b) => (b.rating || 0) - (a.rating || 0) || Number(b.favourite) - Number(a.favourite) || a.name.localeCompare(b.name);
+const membersOf = (area) => city.places.filter((p) => p.area === area && !HIDDEN.has(p.layer_id)).sort(byRating);
+const openHoods = new Set(); // neighbourhood blocks unfolded in the day panel
+/** Places of the day's neighbourhoods shown on its map: not hidden, not already a step. */
 function hoodPlaces(day) {
-  const area = areaOf(day);
-  if (!area) return [];
   const planned = new Set(itemsOf(adventure, day).map((i) => i.place_id));
-  return city.places
-    .filter((p) => p.area === area && !HIDDEN.has(p.layer_id) && !planned.has(p.id))
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0) || Number(b.favourite) - Number(a.favourite));
+  const seen = new Set();
+  return dayHoods(day).flatMap((h) => membersOf(h.area).filter((p) => !h.hidden.includes(p.id)))
+    .filter((p) => !planned.has(p.id) && !seen.has(p.id) && seen.add(p.id));
+}
+
+/** A neighbourhood in the day: all its places, each one can be hidden from the day's map. */
+function hoodBlock(h) {
+  const members = membersOf(h.area);
+  const shown = members.filter((p) => !h.hidden.includes(p.id)).length;
+  const z = city.areas.find((x) => x.name === h.area);
+  const planned = new Set(itemsOf(adventure, current).map((i) => i.place_id));
+  return `<details class="hood-block" data-hood="${esc(h.area)}" ${openHoods.has(h.area) ? 'open' : ''}>
+    <summary>
+      <span class="hood-block__name">${icon('pin', { size: 15 })} ${esc(h.area)}</span>
+      <span class="hood-block__count">${esc(t('adventure.hoodShown', { shown, n: members.length }))}</span>
+      <button class="icon-button hood-block__remove" type="button" data-remove-hood="${esc(h.area)}" aria-label="${esc(t('adventure.removeHood', { area: h.area }))}" title="${esc(t('adventure.removeHood', { area: h.area }))}">${icon('close', { size: 15 })}</button>
+    </summary>
+    <div class="hood-block__body">
+      <p class="hood-block__tools">
+        <button class="link-button" type="button" data-hood-all="show">${esc(t('adventure.showAll'))}</button>
+        <button class="link-button" type="button" data-hood-all="hide">${esc(t('adventure.hideAll'))}</button>
+        ${z ? `<a href="/activities#hood=${esc(z.id)}">${esc(t('adventure.hoodSheet'))}</a>` : ''}
+      </p>
+      <ul class="hood-block__list">${members.map((p) => {
+        const on = !h.hidden.includes(p.id);
+        const l = layerOf(p);
+        return `<li class="${on ? '' : 'is-hidden'}">
+          <label><input type="checkbox" data-hood-toggle="${esc(p.id)}" ${on ? 'checked' : ''} />
+            ${picto(l.icon, l.color, 14)} <span>${esc(p.name)}</span></label>
+          ${planned.has(p.id) ? `<span class="hood-block__planned">${esc(t('adventure.inSteps'))}</span>`
+            : `<button class="link-button" type="button" data-add-place="${esc(p.id)}">${icon('plus', { size: 13 })} ${esc(t('adventure.asStep'))}</button>`}
+        </li>`;
+      }).join('')}</ul>
+    </div>
+  </details>`;
+}
+
+function dayHoodsHtml() {
+  const used = new Set(dayHoods(current).map((h) => h.area));
+  return `<div class="day-hoods">
+    ${dayHoods(current).map(hoodBlock).join('')}
+    <label class="day-hoods__add">${icon('plus', { size: 15 })}
+      <select data-add-hood aria-label="${esc(t('adventure.addHood'))}">
+        <option value="">${esc(t('adventure.addHood'))}</option>
+        ${city.areas.filter((z) => !used.has(z.name)).map((z) => `<option>${esc(z.name)}</option>`).join('')}
+      </select></label>
+  </div>`;
+}
+
+async function saveHidden(area, hidden) {
+  await api(`/api/adventures/${adventure.id}/days/${current}/areas/${encodeURIComponent(area)}`, { method: 'PUT', body: { hidden } });
+  dayHoods(current).find((h) => h.area === area).hidden = hidden;
 }
 const layerOf = (p) => city.layers.find((l) => l.id === p.layer_id) || {};
 
@@ -109,12 +160,8 @@ function dayPanel() {
     ? `<h3 class="day__title">${esc(t('adventure.ideasTitle'))}</h3>`
     : `<h3 class="day__title">${esc(t('adventure.day', { n }))} — <input class="day__theme" value="${esc(adventure.days?.[current] || '')}" maxlength="120" placeholder="${esc(t('adventure.themePlaceholder'))}" aria-label="${esc(t('adventure.themePlaceholder'))}" data-theme /></h3>
        <p class="day__date mono">${esc(formatDay(current))}</p>
-       <label class="day__area">${icon('pin', { size: 15 })} ${esc(t('adventure.neighbourhood'))}
-         <select data-day-area>
-           <option value="">${esc(t('adventure.noNeighbourhood'))}</option>
-           ${city.areas.map((z) => `<option ${z.name === areaOf(current) ? 'selected' : ''}>${esc(z.name)}</option>`).join('')}
-         </select></label>
-       ${weatherLine(weather.get(current))}`;
+       ${weatherLine(weather.get(current))}
+       ${dayHoodsHtml()}`;
   return `<div class="day">
     <div class="day__list">
       ${heading}
@@ -125,7 +172,7 @@ function dayPanel() {
         <input name="title" maxlength="200" placeholder="${esc(t('adventure.addPlaceholder'))}" aria-label="${esc(t('adventure.addLabel'))}" />
         <button class="btn btn--line" type="submit">${icon('plus', { size: 16 })} ${esc(t('adventure.add'))}</button>
       </form>
-      <a class="day__map-link" href="/${!isIdeas && areaOf(current) ? `?area=${encodeURIComponent(areaOf(current))}` : ''}">${icon('pin', { size: 16 })} ${esc(t('adventure.openMap'))}</a>
+      <a class="day__map-link" href="/${!isIdeas && dayHoods(current).length ? `?area=${encodeURIComponent(dayHoods(current)[0].area)}` : ''}">${icon('pin', { size: 16 })} ${esc(t('adventure.openMap'))}</a>
     </div>
     <aside class="day__aside">
       ${photo ? `<figure class="print taped day__photo"><img src="${esc(photo.src)}" alt="" /></figure>` : ''}
@@ -204,7 +251,6 @@ function render() {
       <h2 id="map-title" class="trip__map-title">${esc(t('adventure.mapTitle'))}
         <span class="trip__map-day">${esc(current ? `${t('adventure.day', { n: days.indexOf(current) + 1 })} · ${formatDay(current)}${areaOf(current) ? ` · ${areaOf(current)}` : ''}` : t('adventure.ideas'))}</span></h2>
       <div class="mini-map" data-mini-map></div>
-      ${current ? hoodPicks() : ''}
       ${current ? hourlyStrip(hourly.get(current), t('weather.hourly', { day: formatDay(current) })) || `<p class="hourly__later">${esc(t('weather.later'))}</p>` : ''}
     </section>`;
   updateMap = dayMap(root.querySelector('[data-mini-map]'));
@@ -214,19 +260,24 @@ function render() {
     home: home(),
     layers: city.layers,
     addLabel: current ? t('adventure.addToThisDay') : '',
+    hideLabel: current ? t('adventure.hideFromDay') : '',
   });
 }
 
-/** The day's neighbourhood: its places not planned yet, one tap to add them to the day. */
-function hoodPicks() {
-  const picks = hoodPlaces(current);
-  if (!picks.length) return '';
-  return `<div class="hood-picks">
-    <h3>${esc(t('adventure.inArea', { area: areaOf(current) }))}</h3>
-    <ul>${picks.map((p) => `<li><button class="hood-pick" type="button" data-add-place="${esc(p.id)}" title="${esc(t('adventure.addToThisDay'))}">
-      ${picto(layerOf(p).icon, layerOf(p).color, 14)} ${esc(p.name)} ${icon('plus', { size: 13 })}</button></li>`).join('')}</ul>
-  </div>`;
+
+function keepScroll(fn) {
+  const y = scrollY;
+  fn();
+  scrollTo(0, y);
 }
+
+// Remember which neighbourhood blocks are unfolded.
+root.addEventListener('toggle', (e) => {
+  const d = e.target.closest?.('[data-hood]');
+  if (!d || d.tagName !== 'DETAILS') return;
+  if (d.open) openHoods.add(d.dataset.hood);
+  else openHoods.delete(d.dataset.hood);
+}, true);
 
 const reload = async () => {
   try {
@@ -247,6 +298,27 @@ root.addEventListener('click', async (e) => {
       return;
     }
     root.querySelectorAll('.menu__list').forEach((m) => (m.hidden = true));
+    if (el.matches('[data-remove-hood]')) {
+      e.preventDefault(); // inside <summary>: do not fold
+      const area = el.dataset.removeHood;
+      await api(`/api/adventures/${adventure.id}/days/${current}/areas/${encodeURIComponent(area)}`, { method: 'DELETE' });
+      adventure.day_areas = { ...adventure.day_areas, [current]: dayHoods(current).filter((h) => h.area !== area) };
+      keepScroll(render);
+      return;
+    }
+    if (el.matches('[data-hood-all]')) {
+      const area = el.closest('[data-hood]').dataset.hood;
+      await saveHidden(area, el.dataset.hoodAll === 'hide' ? membersOf(area).map((p) => p.id) : []);
+      keepScroll(render);
+      return;
+    }
+    if (el.matches('[data-hide-place]')) {
+      const id = el.dataset.hidePlace;
+      const h = dayHoods(current).find((x) => membersOf(x.area).some((p) => p.id === id) && !x.hidden.includes(id));
+      if (h) await saveHidden(h.area, [...h.hidden, id]);
+      keepScroll(render);
+      return;
+    }
     if (el.matches('[data-add-place]')) {
       await api(`/api/adventures/${adventure.id}/items`, { method: 'POST', body: { place_id: el.dataset.addPlace, day: current } });
       const y = scrollY;
@@ -316,12 +388,22 @@ root.addEventListener('keydown', (e) => {
 
 root.addEventListener('change', async (e) => {
   try {
-    if (e.target.matches('[data-day-area]')) {
-      await api(`/api/adventures/${adventure.id}/days/${current}`, { method: 'PUT', body: { area: e.target.value } });
-      adventure.day_areas = { ...adventure.day_areas, [current]: e.target.value };
-      if (!e.target.value) delete adventure.day_areas[current];
-      render();
-      toast(t('form.saved'));
+    if (e.target.matches('[data-add-hood]')) {
+      const area = e.target.value;
+      if (!area) return;
+      await api(`/api/adventures/${adventure.id}/days/${current}/areas/${encodeURIComponent(area)}`, { method: 'PUT', body: {} });
+      adventure.day_areas = { ...adventure.day_areas, [current]: [...dayHoods(current), { area, hidden: [] }] };
+      openHoods.add(area);
+      keepScroll(render);
+      toast(t('adventure.hoodAdded', { area }));
+      return;
+    }
+    if (e.target.matches('[data-hood-toggle]')) {
+      const area = e.target.closest('[data-hood]').dataset.hood;
+      const h = dayHoods(current).find((x) => x.area === area);
+      const id = e.target.dataset.hoodToggle;
+      await saveHidden(area, e.target.checked ? h.hidden.filter((x) => x !== id) : [...h.hidden, id]);
+      keepScroll(render);
       return;
     }
     if (e.target.matches('[data-theme]')) {

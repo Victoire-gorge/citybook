@@ -8,7 +8,7 @@ import { getMap, updatePlace } from './places.js';
 import {
   listAdventures, createAdventure, getAdventure, updateAdventure, deleteAdventure,
   addItem, updateItem, deleteItem, setShare, setDayTheme, reorderItems, setCover, getSharedAdventure, getSharedMap, canSeeCover,
-  addGuestItem, deleteGuestItem,
+  addGuestItem, deleteGuestItem, putDayArea, deleteDayArea,
 } from './adventures.js';
 import { commonsPhoto, imageResponse } from './photos.js';
 
@@ -54,6 +54,14 @@ const routes = [
   }, true],
   ['PUT', /^\/api\/adventures\/([\w-]+)\/days\/(\d{4}-\d{2}-\d{2})$/, async ({ env, user, m, request }) => {
     await setDayTheme(env.DB, user.id, m[1], m[2], await readJson(request));
+    return json({ ok: true });
+  }, true],
+  ['PUT', /^\/api\/adventures\/([\w-]+)\/days\/(\d{4}-\d{2}-\d{2})\/areas\/([^/]+)$/, async ({ env, user, m, request }) => {
+    await putDayArea(env.DB, user.id, m[1], m[2], decodeURIComponent(m[3]), await readJson(request));
+    return json({ ok: true });
+  }, true],
+  ['DELETE', /^\/api\/adventures\/([\w-]+)\/days\/(\d{4}-\d{2}-\d{2})\/areas\/([^/]+)$/, async ({ env, user, m }) => {
+    await deleteDayArea(env.DB, user.id, m[1], m[2], decodeURIComponent(m[3]));
     return json({ ok: true });
   }, true],
   ['PUT', /^\/api\/adventures\/([\w-]+)\/order$/, async ({ env, user, m, request }) => {

@@ -66,7 +66,7 @@ export function dayMap(el) {
   }).addTo(map);
   L.control.zoom({ position: 'bottomright' }).addTo(map);
   const group = L.layerGroup().addTo(map);
-  return ({ items = [], extras = [], home = null, layers = [], addLabel = '' }) => {
+  return ({ items = [], extras = [], home = null, layers = [], addLabel = '', hideLabel = '' }) => {
     group.clearLayers();
     const located = items.filter((i) => i.lat != null);
     const points = located.map((i) => [i.lat, i.lng]);
@@ -78,7 +78,8 @@ export function dayMap(el) {
         title: p.name,
         zIndexOffset: -100,
       }).bindPopup(`<div class="extra-pop"><b>${esc(p.name)}</b>${p.summary ? `<p>${esc(p.summary)}</p>` : ''}
-        ${addLabel ? `<button class="btn btn--small" type="button" data-add-place="${esc(p.id)}">+ ${esc(addLabel)}</button>` : ''}</div>`, { maxWidth: 240 })
+        <div class="extra-pop__actions">${addLabel ? `<button class="btn btn--small" type="button" data-add-place="${esc(p.id)}">+ ${esc(addLabel)}</button>` : ''}
+        ${hideLabel ? `<button class="link-button" type="button" data-hide-place="${esc(p.id)}">${esc(hideLabel)}</button>` : ''}</div></div>`, { maxWidth: 240 })
         .addTo(group);
     }
     if (home) {

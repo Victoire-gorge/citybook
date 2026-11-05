@@ -3261,6 +3261,60 @@
       "price": "Cheap",
       "address": "5 Place Paul-Verlaine, 13th",
       "area": "Butte-aux-Cailles"
+    },
+    {
+      "id": "musee-albert-kahn",
+      "layer": "museums",
+      "name": "Musée Albert-Kahn and its gardens",
+      "lat": 48.8414,
+      "lng": 2.2295,
+      "address": "2 Rue du Port, Boulogne-Billancourt",
+      "summary": "A banker’s world gardens (Japanese village, English cottage, Vosges forest) and his early colour photographs of the whole planet, just past the edge of Paris.",
+      "website": "https://albert-kahn.hauts-de-seine.fr",
+      "price": "Paid",
+      "booking_required": false,
+      "area": "Passy",
+      "tip": "The Japanese garden is lovely in autumn colours."
+    },
+    {
+      "id": "grand-palais",
+      "layer": "buildings",
+      "name": "Grand Palais",
+      "lat": 48.8661,
+      "lng": 2.3125,
+      "address": "Avenue Winston-Churchill, 8th",
+      "summary": "The great glass and iron nave of 1900, newly restored. Big exhibitions, and a huge ice rink under the glass roof at Christmas.",
+      "website": "https://www.grandpalais.fr",
+      "price": "Depends on the event",
+      "area": "Champs-Élysées & Monceau"
+    },
+    {
+      "id": "hammam-grande-mosquee",
+      "layer": "activities",
+      "name": "Hammam of the Grande Mosquée",
+      "lat": 48.8418,
+      "lng": 2.3553,
+      "address": "39 Rue Geoffroy-Saint-Hilaire, 5th",
+      "summary": "Turkish baths under Moorish tiles, then mint tea and pastries in the courtyard of the mosque.",
+      "category": "offbeat",
+      "duration": "2 h",
+      "best_time": "Afternoon",
+      "price": "About €30",
+      "area": "Latin Quarter",
+      "hours_note": "Women: Mon, Wed, Thu, Sat 10:00–21:00 and Fri 14:00–21:00. Men: Tue 14:00–21:00 and Sun 10:00–21:00. Call before going.",
+      "tip": "Separate entrance, to the left of the pastry shop.",
+      "photo": "Grande Mosquée de Paris.JPG"
+    },
+    {
+      "id": "anciens-bains-turcs",
+      "layer": "buildings",
+      "name": "The old Turkish baths",
+      "lat": 48.873,
+      "lng": 2.329,
+      "address": "18 Rue des Mathurins, 9th",
+      "summary": "A 19th-century Moorish façade, left from a Turkish bathhouse near the Opéra. Outside only: the building has been converted.",
+      "price": "Free (outside)",
+      "area": "Opéra & the covered passages"
     }
   ],
   "photos": {
@@ -4199,6 +4253,18 @@
       "date_note": "",
       "url": "https://www.cinematheque.fr",
       "summary": "An exhibition on Jean-Paul Belmondo, with screenings."
+    },
+    {
+      "id": "grand-palais-des-glaces-2026",
+      "place": "grand-palais",
+      "title": "Grand Palais des Glaces (ice rink)",
+      "kind": "other",
+      "category": "christmas",
+      "starts_on": "2026-12-13",
+      "ends_on": "2027-01-06",
+      "date_note": "Sessions 10:00–13:00, 14:00–19:00, and DJ evenings 20:00–01:00 (approximate).",
+      "url": "https://www.legrandpalaisdeglace.fr",
+      "summary": "The biggest indoor ice rink, under the glass roof of the Grand Palais. From about €27 (morning) to €39 (evening)."
     }
   ],
   "areas": [

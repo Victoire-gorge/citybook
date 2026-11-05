@@ -148,24 +148,53 @@ async function dayRows(db, adventureId) {
     .all();
   return results;
 }
-/** { days: date -> theme, day_areas: date -> neighbourhood } */
+/** { days: date -> theme, day_areas: date -> [{ area, hidden: [place ids] }] } */
 async function dayInfo(db, adventureId) {
-  const rows = await dayRows(db, adventureId);
+  const [rows, { results: areas }] = await Promise.all([
+    dayRows(db, adventureId),
+    db.prepare('select day, area, hidden from day_areas where adventure_id = ? order by day, sort, rowid').bind(adventureId).all(),
+  ]);
+  const dayAreas = {};
+  for (const r of areas) {
+    let hidden = [];
+    try { hidden = JSON.parse(r.hidden); } catch { /* keep none hidden */ }
+    (dayAreas[r.day] ||= []).push({ area: r.area, hidden });
+  }
   return {
     days: Object.fromEntries(rows.filter((d) => d.theme).map((d) => [d.day, d.theme])),
-    day_areas: Object.fromEntries(rows.filter((d) => d.area).map((d) => [d.day, d.area])),
+    day_areas: dayAreas,
   };
+}
+
+/** Add a neighbourhood to a day, or update the places hidden that day. */
+export async function putDayArea(db, userId, adventureId, day, area, body) {
+  const a = await own(db, userId, adventureId);
+  if (!isDate(day) || day < a.starts_on || day > a.ends_on) throw new HttpError(400, 'This day is outside the adventure');
+  const known = await db.prepare('select 1 from areas where city_id = ? and name = ?').bind(a.city_id, area).first();
+  if (!known) throw new HttpError(404, 'Unknown neighbourhood');
+  const hidden = Array.isArray(body?.hidden) ? body.hidden.filter((x) => typeof x === 'string' && x.length <= 80).slice(0, 300) : null;
+  await db
+    .prepare(`insert into day_areas (adventure_id, day, area, hidden, sort)
+              values (?, ?, ?, ?, (select coalesce(max(sort), 0) + 1 from day_areas where adventure_id = ? and day = ?))
+              on conflict (adventure_id, day, area) do update set hidden = coalesce(?, hidden)`)
+    .bind(adventureId, day, area, JSON.stringify(hidden || []), adventureId, day, hidden ? JSON.stringify(hidden) : null)
+    .run();
+}
+
+export async function deleteDayArea(db, userId, adventureId, day, area) {
+  await own(db, userId, adventureId);
+  await db.prepare('delete from day_areas where adventure_id = ? and day = ? and area = ?').bind(adventureId, day, area).run();
 }
 
 /** Title of one day of the adventure ("First steps in Paris"). Empty text removes it. */
 export async function setDayTheme(db, userId, adventureId, day, body) {
   const a = await own(db, userId, adventureId);
   if (!isDate(day) || day < a.starts_on || day > a.ends_on) throw new HttpError(400, 'This day is outside the adventure');
-  const f = pick(body, { theme: text(120), area: optional(text(80)) });
-  if (f.theme === undefined && f.area === undefined) throw new HttpError(400, 'Nothing to update');
+  const f = pick(body, { theme: text(120) });
+  if (f.theme === undefined) throw new HttpError(400, 'Nothing to update');
   const old = (await dayRows(db, adventureId)).find((d) => d.day === day) || { theme: '', area: null };
-  const theme = f.theme !== undefined ? f.theme.trim() : old.theme || '';
-  const area = f.area !== undefined ? (f.area || '').trim() || null : old.area;
+  const theme = f.theme.trim();
+  const area = old.area; // legacy column, neighbourhoods now live in day_areas
   if (theme || area) {
     await db
       .prepare(`insert into adventure_days (adventure_id, day, theme, area) values (?, ?, ?, ?)

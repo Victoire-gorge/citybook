@@ -107,12 +107,15 @@ function render(a) {
   });
 }
 
-const areaOf = (day) => adventure.day_areas?.[day] || '';
+const dayHoods = (day) => adventure.day_areas?.[day] || [];
+const areaOf = (day) => dayHoods(day).map((h) => h.area).join(' · ');
+/** Places of the day's neighbourhoods that Vic kept for that day, not already a step. */
 function hoodPlaces(day) {
-  const area = areaOf(day);
-  if (!area) return [];
   const planned = new Set(itemsOf(adventure, day).map((i) => i.place_id));
-  return city.places.filter((p) => p.area === area && !HIDDEN.has(p.layer_id) && !planned.has(p.id))
+  const seen = new Set();
+  return dayHoods(day)
+    .flatMap((h) => city.places.filter((p) => p.area === h.area && !HIDDEN.has(p.layer_id) && !h.hidden.includes(p.id)))
+    .filter((p) => !planned.has(p.id) && !seen.has(p.id) && seen.add(p.id))
     .sort((a, b) => (b.rating || 0) - (a.rating || 0));
 }
 
@@ -127,7 +130,7 @@ function focusHtml(days) {
   const picks = hoodPlaces(focusDay);
   const layerOf = (p) => city.layers.find((l) => l.id === p.layer_id) || {};
   return `<section class="shared__map" id="day-by-day">
-    <h2>${esc(t('share.dayByDay'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}${areaOf(focusDay) ? `&area=${encodeURIComponent(areaOf(focusDay))}` : ''}">${esc(t('share.openMap'))}</a></h2>
+    <h2>${esc(t('share.dayByDay'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}${dayHoods(focusDay).length ? `&area=${encodeURIComponent(dayHoods(focusDay)[0].area)}` : ''}">${esc(t('share.openMap'))}</a></h2>
     <div class="focus-days" role="tablist">${days.map((d, i) => `<button class="day-tab" role="tab" type="button" data-focus-day="${d}" aria-selected="${d === focusDay}">
       <b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(formatTab(d))}</span>${areaOf(d) ? `<i class="day-tab__area">${esc(areaOf(d))}</i>` : ''}</button>`).join('')}</div>
     <div class="focus">
