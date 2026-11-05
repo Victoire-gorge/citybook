@@ -8,6 +8,7 @@ import { icon, picto } from '../lib/icons.js';
 import { openStatus, parisClock, hoursForDay } from '../lib/hours.js';
 import { daysBetween } from '../lib/trip.js';
 import { guestName } from '../lib/guest.js';
+import { starsHtml } from '../lib/stars.js';
 
 // Guests arrive with ?share=<token> from a shared adventure: read-only map, no sign-in.
 const shareToken = new URLSearchParams(location.search).get('share');
@@ -255,6 +256,7 @@ function cardHtml(place) {
             ? (place.favourite ? `<span class="like like--static" title="${esc(t('place.favourite'))}">${HEART}</span>` : '')
             : `<button class="like" type="button" data-like aria-pressed="${place.favourite}" aria-label="${esc(t(place.favourite ? 'place.unlike' : 'place.like'))}" title="${esc(t(place.favourite ? 'place.unlike' : 'place.like'))}">${HEART}</button>`}
         </div>
+        ${starsHtml(place.rating, { editable: !shareToken, name: tr(place, 'name') })}
         <p class="place-card__summary">${esc(tr(place, 'summary'))}</p>
         <ul class="facts">${facts.map(([ic, label, cls]) => `<li class="${cls || ''}">${icon(ic)}<span>${esc(label)}</span></li>`).join('')}</ul>
         ${note ? `<p class="place-card__note">${esc(note)}</p>` : ''}
@@ -276,6 +278,7 @@ function render(place, pinned) {
   card.querySelector('[data-close]').addEventListener('click', closeCard);
   card.querySelector('[data-like]')?.addEventListener('click', () => toggleLike(place, pinned));
   card.querySelector('[data-star]')?.addEventListener('click', () => toggleStar(place, pinned));
+  card.querySelectorAll('[data-rate]').forEach((b) => b.addEventListener('click', () => rate(place, Number(b.dataset.rate), pinned)));
   card.querySelector('[data-add-open]')?.addEventListener('click', () => openAddForm(place));
 }
 
@@ -325,6 +328,20 @@ async function toggleStar(place, pinned) {
     render(place, pinned);
     card.querySelector('[data-star]')?.focus();
     applyFilters();
+  } catch {
+    toast(t('error.generic'));
+  }
+}
+
+/** Vic's 1–5 star rating; clicking the current rating clears it. */
+async function rate(place, n, pinned) {
+  const rating = place.rating === n ? 0 : n;
+  try {
+    await api(`/api/places/${encodeURIComponent(place.id)}`, { method: 'PATCH', body: { rating } });
+    place.rating = rating;
+    render(place, pinned);
+    card.querySelector(`[data-rate="${rating || n}"]`)?.focus();
+    toast(t('rating.saved'));
   } catch {
     toast(t('error.generic'));
   }

@@ -87,6 +87,7 @@ const PLACE_RULES = {
   website: optional(text(300)),
   favourite: (v) => typeof v === 'boolean',
   hours_verified: (v) => typeof v === 'boolean',
+  rating: (v) => Number.isInteger(v) && v >= 0 && v <= 5,
 };
 
 /** Edit the parts of a place that are meant to be changed from the site. */

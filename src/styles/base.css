@@ -168,3 +168,19 @@ textarea { resize: vertical; }
   .adventure-form__grid { grid-template-columns: 1fr; }
   .span-2 { grid-column: auto; }
 }
+
+/* ---------- Star rating ---------- */
+.stars { display: inline-flex; gap: 1px; color: #c99a1e; line-height: 1; }
+.stars__star {
+  padding: 2px 1px; border: none; background: none; cursor: pointer; font-size: 1.25rem; line-height: 1;
+  color: #d8d2c2; transition: transform 0.1s, color 0.1s;
+}
+.stars__star.is-on { color: #c99a1e; }
+.stars:hover .stars__star { color: #c99a1e; }
+.stars .stars__star:hover ~ .stars__star { color: #d8d2c2; }
+.stars__star:hover { transform: scale(1.15); }
+.stars__star:focus-visible { outline: 2px solid var(--copper); outline-offset: 1px; border-radius: 2px; }
+.stars--read { font-size: 1rem; letter-spacing: 1px; }
+.stars__off { color: #d8d2c2; }
+.chip--sort { margin-left: auto; }
+.chip--sort[aria-pressed='true'] { background: #c99a1e; border-color: #c99a1e; color: #fff; }

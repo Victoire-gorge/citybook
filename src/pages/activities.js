@@ -6,6 +6,7 @@ import { t, tr, formatTab, formatShort } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { icon } from '../lib/icons.js';
 import { daysBetween } from '../lib/trip.js';
+import { starsHtml } from '../lib/stars.js';
 
 // Activities are places of the 'activities' layer: shown here as a catalogue,
 // and on the map like any other place.
@@ -18,6 +19,7 @@ const chips = document.querySelector('[data-chips]');
 let activities = [];
 let adventures = [];
 let filter = 'all';
+let bestFirst = false;
 
 function card(a) {
   const photo = a.photos[0];
@@ -35,6 +37,7 @@ function card(a) {
     <div class="activity__body">
       <span class="tag">${esc(t(`cat.${a.category}`))}</span>
       <h2 class="activity__title">${esc(tr(a, 'name'))}</h2>
+      ${starsHtml(a.rating, { editable: true, name: tr(a, 'name') })}
       <p class="activity__summary">${esc(tr(a, 'summary'))}</p>
       ${facts.length ? `<ul class="facts activity__facts">${facts.map(([ic, label]) => `<li>${icon(ic, { size: 16 })}<span>${esc(label)}</span></li>`).join('')}</ul>` : ''}
       ${a.hours_note ? `<p class="activity__note">${esc(tr(a, 'hours_note'))}${a.booking_required ? ` · ${esc(t('place.booking'))}` : ''}</p>` : a.booking_required ? `<p class="activity__note">${esc(t('place.booking'))}</p>` : ''}
@@ -69,20 +72,44 @@ function dayOptions(adv) {
 }
 
 function render() {
-  const shown = filter === 'all' ? activities : activities.filter((a) => a.category === filter);
+  const shown = (filter === 'all' ? [...activities] : activities.filter((a) => a.category === filter));
+  if (bestFirst) shown.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   chips.innerHTML = ['all', ...CATEGORIES]
     .map((c) => `<button class="chip" type="button" data-cat="${c}" aria-pressed="${c === filter}">${esc(c === 'all' ? t('activities.all') : t(`cat.${c}`))}</button>`)
-    .join('');
+    .join('') + `<button class="chip chip--sort" type="button" data-sort aria-pressed="${bestFirst}">★ ${esc(t('activities.sortBest'))}</button>`;
   list.innerHTML = shown.map(card).join('');
   document.querySelector('[data-empty]').hidden = shown.length > 0;
   document.querySelector('[data-count]').textContent = t('activities.count', { n: shown.length });
 }
 
 chips.addEventListener('click', (e) => {
+  if (e.target.closest('[data-sort]')) {
+    bestFirst = !bestFirst;
+    return render();
+  }
   const chip = e.target.closest('[data-cat]');
   if (!chip) return;
   filter = chip.dataset.cat;
   render();
+});
+
+// Rate an activity: clicking the current rating again clears it.
+list.addEventListener('click', async (e) => {
+  const star = e.target.closest('[data-rate]');
+  if (!star) return;
+  const item = star.closest('[data-id]');
+  const a = activities.find((x) => x.id === item.dataset.id);
+  const n = Number(star.dataset.rate);
+  const rating = a.rating === n ? 0 : n;
+  try {
+    await api(`/api/places/${encodeURIComponent(a.id)}`, { method: 'PATCH', body: { rating } });
+    a.rating = rating;
+    item.querySelector('.stars').outerHTML = starsHtml(rating, { editable: true, name: tr(a, 'name') });
+    item.querySelector(`[data-rate="${rating || n}"]`)?.focus();
+    toast(t('rating.saved'));
+  } catch {
+    toast(t('error.generic'));
+  }
 });
 
 list.addEventListener('change', (e) => {
