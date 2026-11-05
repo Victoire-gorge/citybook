@@ -136,3 +136,24 @@
   .place-card__close { top: 10px; right: 10px; }
   .place-card__actions { grid-column: 1 / -1; }
 }
+
+/* ---------- Saved places (guest view of a shared adventure) ---------- */
+.star { color: #c99a1e; }
+.marker__star {
+  position: absolute; top: -9px; left: -8px; width: 17px; height: 17px; display: grid; place-items: center;
+  border-radius: 50%; background: #fff6cf; color: #b0820f; font-size: 12px; line-height: 1;
+  box-shadow: 0 0 0 1.5px #b0820f, 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.saved-key { border-top: 1px solid var(--hair); margin-top: 4px; padding-top: 2px; }
+.saved-key[hidden] { display: none; }
+.layer-row--saved .star { width: 20px; text-align: center; font-size: 1rem; }
+.layer-row--saved input:not(:checked) ~ :not(.check) { opacity: 1; }
+.saved-key__help { font-size: 0.76rem; line-height: 1.4; color: var(--muted); padding: 2px 2px 4px; }
+.place-card__saved {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; padding: 3px 8px; border-radius: 3px;
+  background: var(--tag); border: 1px solid #b49a3c; font-family: var(--mono); font-size: 0.72rem;
+}
+.edition__back { align-self: flex-start; margin-top: auto; }
+@media (max-width: 900px) { .edition__back { display: none; } }
+/* Guests have no issue line under the masthead: give the map that space back. */
+.page-map:not(:has(.issue)) .map-page { height: calc(100dvh - 2 * var(--frame) - 2px - 58px); }

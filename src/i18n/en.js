@@ -6,6 +6,7 @@ export default {
   'nav.label': 'Sections',
   'nav.map': 'Map',
   'nav.adventures': 'Adventures',
+  'nav.plan': 'Our plan',
   'nav.signout': 'Sign out',
 
   'login.title': 'Welcome back',
@@ -23,6 +24,11 @@ export default {
   'map.loading': 'Loading the map…',
   'map.error': 'The map could not load. Check your connection and reload the page.',
   'map.places': '{n} places',
+  'map.saved': 'Saved for {title}',
+  'map.savedHelp': 'The star marks places already in our plan.',
+  'map.onlySaved': 'Only saved places',
+  'map.ownerFavourites': 'Only {name}’s favourites',
+  'map.backToPlan': 'Back to our plan',
 
   'place.open': 'Open until {time}',
   'place.closed': 'Closed now',
@@ -42,6 +48,8 @@ export default {
   'place.noAdventure': 'Create an adventure first.',
   'place.photoCredit': 'Photo: {author}, {license}',
   'place.close': 'Close',
+  'place.savedOn': 'In our plan · {when}',
+  'share.openMap': 'Explore the whole map',
 
   'adventures.title': 'Adventures',
   'adventures.subtitle': 'Trips I’m planning for friends coming to Paris.',

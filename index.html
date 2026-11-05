@@ -16,6 +16,7 @@
         <p class="edition__lead" data-i18n="map.lead"></p>
         <div class="transit" aria-hidden="true"></div>
         <p class="edition__count mono" data-count></p>
+        <a class="btn btn--line edition__back" data-back-to-plan hidden></a>
       </aside>
 
       <section class="map-frame">
@@ -31,8 +32,17 @@
             <input type="checkbox" data-favourites />
             <span class="check" aria-hidden="true"></span>
             <span class="layer-row__fav" aria-hidden="true">♥</span>
-            <span data-i18n="map.favourites"></span>
+            <span data-favourites-label data-i18n="map.favourites"></span>
           </label>
+          <div class="saved-key" data-saved-key hidden>
+            <label class="layer-row layer-row--saved">
+              <input type="checkbox" data-only-saved />
+              <span class="check" aria-hidden="true"></span>
+              <span class="star" aria-hidden="true">★</span>
+              <span data-i18n="map.onlySaved"></span>
+            </label>
+            <p class="saved-key__help"><span class="star" aria-hidden="true">★</span> <span data-saved-help></span></p>
+          </div>
         </fieldset>
 
         <article class="place-card" data-card hidden aria-live="polite"></article>

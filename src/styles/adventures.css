@@ -175,6 +175,10 @@
 .todo--read { grid-template-columns: 22px 1fr; }
 .todo__box { cursor: default; }
 .shared__map { margin-top: 34px; }
+.shared__map-link { margin: 0 0 24px 4%; }
+.shared__map h2 { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.shared__map-more { font-family: var(--body); font-style: normal; font-weight: 500; font-size: 0.9rem; color: var(--forest); }
+@media (max-width: 820px) { .shared__map-link { margin-left: 0; } }
 
 /* ---------- Login & 404 ---------- */
 .login { min-height: calc(100vh - 120px); display: grid; place-items: center; padding: 30px var(--gutter); }

@@ -7,7 +7,7 @@ import {
 import { getMap, updatePlace } from './places.js';
 import {
   listAdventures, createAdventure, getAdventure, updateAdventure, deleteAdventure,
-  addItem, updateItem, deleteItem, setShare, setDayTheme, reorderItems, setCover, getSharedAdventure, canSeeCover,
+  addItem, updateItem, deleteItem, setShare, setDayTheme, reorderItems, setCover, getSharedAdventure, getSharedMap, canSeeCover,
 } from './adventures.js';
 import { commonsPhoto, imageResponse } from './photos.js';
 
@@ -59,6 +59,7 @@ const routes = [
     await reorderItems(env.DB, user.id, m[1], await readJson(request));
     return json({ ok: true });
   }, true],
+  ['GET', /^\/api\/share\/([\w-]+)\/map$/, async ({ env, m }) => json(await getSharedMap(env.DB, m[1], parisToday())), false],
   ['GET', /^\/api\/share\/([\w-]+)$/, async ({ env, m }) => json(await getSharedAdventure(env.DB, m[1])), false],
   ['GET', /^\/photos\/commons\/(.+)$/, async ({ env, m, ctx }) =>
     commonsPhoto(env.DB, env.PHOTOS, decodeURIComponent(m[1]), ctx), false],

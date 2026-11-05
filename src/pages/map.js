@@ -2,14 +2,17 @@ import L from 'leaflet';
 import '../styles/base.css';
 import '../styles/map.css';
 import { api } from '../lib/api.js';
-import { t, tr, formatShort, formatTab } from '../lib/i18n.js';
+import { t, tr, formatShort, formatTab, setLanguage } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { icon, picto } from '../lib/icons.js';
 import { openStatus, parisClock, hoursForDay } from '../lib/hours.js';
 import { daysBetween } from '../lib/trip.js';
 
+// Guests arrive with ?share=<token> from a shared adventure: read-only map, no sign-in.
+const shareToken = new URLSearchParams(location.search).get('share');
+
 startPage();
-mountMasthead('map');
+mountMasthead('map', shareToken ? { signedIn: false, readOnly: true, issue: '', shareToken } : {});
 
 const statusEl = document.querySelector('[data-status]');
 const card = document.querySelector('[data-card]');
@@ -21,6 +24,9 @@ const state = {
   places: [],
   visible: new Set(),
   favouritesOnly: false,
+  savedOnly: false,
+  saved: new Map(), // place id -> days ('' for ideas) in the shared adventure
+  adventure: null,
   pinned: null,
   adventures: null,
   objects: new Map(), // place id -> { marker, lines }
@@ -41,9 +47,17 @@ load().catch((err) => {
   statusEl.textContent = t('map.error');
 });
 
+async function fetchMap() {
+  if (!shareToken) return api('/api/map/paris');
+  const res = await fetch(`/api/share/${encodeURIComponent(shareToken)}/map`);
+  if (!res.ok) throw new Error('Unknown link');
+  return res.json();
+}
+
 async function load() {
-  const data = await api('/api/map/paris');
+  const data = await fetchMap();
   statusEl.hidden = true;
+  if (data.adventure) setupGuest(data);
   state.layers = data.layers;
   state.places = data.places;
   state.visible = new Set(data.layers.filter((l) => l.visible_by_default).map((l) => l.id));
@@ -56,6 +70,39 @@ async function load() {
 }
 
 const layerOf = (place) => state.layers.find((l) => l.id === place.layer_id);
+const isSaved = (place) => state.saved.has(place.id);
+
+/** Guest view: stars on the places of the shared adventure, and a key that explains them. */
+function setupGuest(data) {
+  const a = data.adventure;
+  setLanguage(a.language);
+  state.adventure = a;
+  for (const { place_id, day } of data.saved) {
+    if (!state.saved.has(place_id)) state.saved.set(place_id, []);
+    state.saved.get(place_id).push(day || '');
+  }
+  document.title = `${a.title} · Map · citybook`;
+  document.querySelector('[data-favourites-label]').textContent = t('map.ownerFavourites', { name: a.owner });
+  document.querySelector('[data-saved-help]').textContent = `${t('map.saved', { title: a.title })}. ${t('map.savedHelp')}`;
+  document.querySelector('[data-saved-key]').hidden = false;
+  document.querySelector('[data-only-saved]').addEventListener('change', (e) => {
+    state.savedOnly = e.target.checked;
+    applyFilters();
+  });
+  const back = document.querySelector('[data-back-to-plan]');
+  back.href = `/share?t=${encodeURIComponent(shareToken)}`;
+  back.innerHTML = `${icon('arrowLeft', { size: 16 })} ${esc(t('map.backToPlan'))}`;
+  back.hidden = false;
+}
+
+/** "Day 2, Mon 16 Nov" or "Ideas" for a saved place. */
+function savedWhen(place) {
+  const days = daysBetween(state.adventure.starts_on, state.adventure.ends_on);
+  return state.saved.get(place.id)
+    .map((d) => (days.includes(d) ? `${t('adventure.day', { n: days.indexOf(d) + 1 })}, ${formatTab(d)}` : t('adventure.ideas')))
+    .filter((v, i, all) => all.indexOf(v) === i)
+    .join(' · ');
+}
 
 /** A black-and-white photo of one of my favourite places, like a magazine cover. */
 function renderEditionPhoto() {
@@ -106,12 +153,15 @@ function drawPlaces() {
     const marker = L.marker([place.lat, place.lng], {
       icon: L.divIcon({
         className: 'marker',
-        html: picto(layer.icon, layer.color, 26) + (place.favourite ? '<span class="marker__fav"></span>' : ''),
+        html: picto(layer.icon, layer.color, 26)
+          + (place.favourite ? '<span class="marker__fav"></span>' : '')
+          + (isSaved(place) ? '<span class="marker__star" aria-hidden="true">★</span>' : ''),
         iconSize: [26, 26],
         iconAnchor: [13, 13],
       }),
-      title: tr(place, 'name'),
+      title: tr(place, 'name') + (isSaved(place) ? ` — ${t('map.saved', { title: state.adventure.title })}` : ''),
       alt: tr(place, 'name'),
+      zIndexOffset: isSaved(place) ? 500 : 0,
       keyboard: true,
       riseOnHover: true,
     });
@@ -135,7 +185,9 @@ function drawPlaces() {
 function applyFilters() {
   for (const place of state.places) {
     const { marker, lines } = state.objects.get(place.id);
-    const on = state.visible.has(place.layer_id) && (!state.favouritesOnly || place.favourite);
+    const on = state.visible.has(place.layer_id)
+      && (!state.favouritesOnly || place.favourite)
+      && (!state.savedOnly || isSaved(place));
     for (const obj of [marker, ...lines]) {
       if (on && !map.hasLayer(obj)) obj.addTo(map);
       if (!on && map.hasLayer(obj)) obj.remove();
@@ -185,6 +237,7 @@ function cardHtml(place) {
       </div>
       <div class="place-card__body">
         <p class="place-card__layer">${picto(layer.icon, layer.color, 14)} ${esc(tr(layer, 'name'))}</p>
+        ${isSaved(place) ? `<p class="place-card__saved"><span class="star" aria-hidden="true">★</span> ${esc(t('place.savedOn', { when: savedWhen(place) }))}</p>` : ''}
         <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
         <p class="place-card__summary">${esc(tr(place, 'summary'))}</p>
         <ul class="facts">${facts.map(([ic, label, cls]) => `<li class="${cls || ''}">${icon(ic)}<span>${esc(label)}</span></li>`).join('')}</ul>
@@ -193,8 +246,8 @@ function cardHtml(place) {
         ${events}
       </div>
       <div class="place-card__actions">
-        <button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
-        <form class="place-card__add" data-add-form hidden></form>
+        ${shareToken ? '' : `<button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
+        <form class="place-card__add" data-add-form hidden></form>`}
         ${place.website ? `<a class="place-card__website" href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
       </div>
     </div>`;
@@ -205,7 +258,7 @@ function render(place, pinned) {
   card.hidden = false;
   card.classList.toggle('is-pinned', pinned);
   card.querySelector('[data-close]').addEventListener('click', closeCard);
-  card.querySelector('[data-add-open]').addEventListener('click', () => openAddForm(place));
+  card.querySelector('[data-add-open]')?.addEventListener('click', () => openAddForm(place));
 }
 
 function preview(place) {
@@ -222,7 +275,7 @@ function pin(place) {
   for (const { marker } of state.objects.values()) marker.getElement()?.classList.remove('is-active');
   state.objects.get(place.id).marker.getElement()?.classList.add('is-active');
   render(place, true);
-  history.replaceState(null, '', `#${place.id}`);
+  history.replaceState(null, '', `${location.search}#${place.id}`);
 }
 
 function closeCard() {
@@ -230,7 +283,7 @@ function closeCard() {
   state.pinned = null;
   card.hidden = true;
   if (id) state.objects.get(id)?.marker.getElement()?.classList.remove('is-active');
-  history.replaceState(null, '', location.pathname);
+  history.replaceState(null, '', location.pathname + location.search);
 }
 
 function openFromHash() {

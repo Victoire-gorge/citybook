@@ -1,6 +1,6 @@
 import { HttpError, pick, text, isDate, isTime, optional } from './http.js';
 import { randomToken } from './auth.js';
-import { photoView } from './places.js';
+import { photoView, getMap } from './places.js';
 
 const PALETTES = ['blue-yellow', 'green-yellow', 'red-green', 'blue-orange'];
 const LANGUAGES = ['en', 'fr'];
@@ -183,6 +183,34 @@ export async function reorderItems(db, userId, adventureId, body) {
 export async function getAdventure(db, userId, id) {
   const a = await own(db, userId, id);
   return { ...view(a), days: await days(db, id), items: await items(db, id) };
+}
+
+/**
+ * The owner's whole city map, for people holding an adventure's share link,
+ * with the places already saved in that adventure (and on which day).
+ */
+export async function getSharedMap(db, token, today) {
+  if (!token || token.length < 16) throw new HttpError(404, 'Unknown link');
+  const a = await db
+    .prepare(
+      `select a.id, a.title, a.city_id, a.starts_on, a.ends_on, a.language, u.name as owner_name
+       from adventures a join users u on u.id = a.owner_id where a.share_token = ?`,
+    )
+    .bind(token)
+    .first();
+  if (!a) throw new HttpError(404, 'Unknown link');
+  const [map, saved] = await Promise.all([
+    getMap(db, a.city_id, today),
+    db.prepare(
+      `select place_id, day from adventure_items
+       where adventure_id = ? and place_id is not null order by day is null, day, sort`,
+    ).bind(a.id).all(),
+  ]);
+  return {
+    ...map,
+    adventure: { title: a.title, starts_on: a.starts_on, ends_on: a.ends_on, language: a.language, owner: a.owner_name },
+    saved: saved.results,
+  };
 }
 
 /** Read-only view for people with the share link. No owner data, no token echo. */

@@ -29,7 +29,7 @@ function stopHtml(item) {
 function render(a) {
   setLanguage(a.language);
   document.title = `${a.title} · citybook`;
-  mountMasthead(null, { signedIn: false, readOnly: true, issue: '' });
+  mountMasthead('plan', { signedIn: false, readOnly: true, issue: '', shareToken: token });
   const days = daysBetween(a.starts_on, a.ends_on);
   const nights = days.length - 1;
   const ideas = itemsOf(a, null);
@@ -47,6 +47,7 @@ function render(a) {
       <li>${icon('people', { size: 22 })}<span>${esc(t('share.people', { n: a.party_size }))}</span></li>
       <li>${icon('pin', { size: 22 })}<span>Paris</span></li>
     </ul>
+    <a class="btn shared__map-link" href="/?share=${encodeURIComponent(token)}">${icon('pin', { size: 16 })} ${esc(t('share.openMap'))}</a>
     <nav class="day-jump" aria-label="${esc(t('adventure.itinerary'))}">
       ${days.map((d, i) => `<a href="#d-${d}">${esc(t('adventure.day', { n: i + 1 }))}</a>`).join('')}
     </nav>
@@ -68,7 +69,7 @@ function render(a) {
         <div class="shared-day__body"><ul class="todos">${ideas.map(stopHtml).join('')}</ul></div><span></span></section>` : ''}
     </div>
     <section class="shared__map">
-      <h2>${esc(t('adventure.mapTitle'))}</h2>
+      <h2>${esc(t('adventure.mapTitle'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}">${esc(t('share.openMap'))}</a></h2>
       <div class="mini-map mini-map--wide" data-mini-map></div>
     </section>`;
   miniMap(root.querySelector('[data-mini-map]'))(a.items.filter((x) => x.day));

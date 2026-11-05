@@ -8,7 +8,8 @@ export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 /** Masthead: wordmark, sections, sign out, and the issue line. `current` is 'map' or 'adventures'. */
-export function mountMasthead(current, { issue = t('issue.paris'), signedIn = true, readOnly = false } = {}) {
+export function mountMasthead(current, { issue = t('issue.paris'), signedIn = true, readOnly = false, shareToken = null } = {}) {
+  const tok = shareToken ? encodeURIComponent(shareToken) : '';
   const el = document.querySelector('[data-masthead]');
   if (!el) return;
   el.className = 'masthead';
@@ -18,6 +19,10 @@ export function mountMasthead(current, { issue = t('issue.paris'), signedIn = tr
       ${signedIn ? `<nav class="sections" aria-label="${esc(t('nav.label'))}">
         <a href="/" ${current === 'map' ? 'aria-current="page"' : ''}>${esc(t('nav.map'))}</a>
         <a href="/adventures" ${current === 'adventures' ? 'aria-current="page"' : ''}>${esc(t('nav.adventures'))}</a>
+      </nav>` : ''}
+      ${shareToken ? `<nav class="sections" aria-label="${esc(t('nav.label'))}">
+        <a href="/share?t=${tok}" ${current === 'plan' ? 'aria-current="page"' : ''}>${esc(t('nav.plan'))}</a>
+        <a href="/?share=${tok}" ${current === 'map' ? 'aria-current="page"' : ''}>${esc(t('nav.map'))}</a>
       </nav>` : ''}
       <div class="masthead__tools" data-tools>
         ${signedIn ? `<button class="icon-button" type="button" data-signout title="${esc(t('nav.signout'))}" aria-label="${esc(t('nav.signout'))}">${icon('user', { size: 22 })}</button>` : ''}
