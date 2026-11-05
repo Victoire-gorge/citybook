@@ -42,7 +42,9 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-html { background: #e9e5da; }
+/* The scrollbar belongs to the page. Without this, `overflow: clip` on body
+   would be passed on to the window and block scrolling. */
+html { background: #e9e5da; overflow-y: auto; }
 body {
   margin: var(--frame);
   min-height: calc(100vh - 2 * var(--frame));
