@@ -55,6 +55,23 @@
       "shape": "point",
       "icon": "note",
       "sort": 6
+    },
+    {
+      "id": "theatres",
+      "name": "Theatres",
+      "color": "#2D4E7E",
+      "shape": "point",
+      "icon": "curtain",
+      "sort": 7,
+      "visible_by_default": false
+    },
+    {
+      "id": "home",
+      "name": "Home",
+      "color": "#C67B51",
+      "shape": "point",
+      "icon": "house",
+      "sort": 0
     }
   ],
   "places": [
@@ -1124,6 +1141,1011 @@
       "summary": "Street musicians play by the Art Nouveau metro entrance and the carousel, a lively stop on the way up to Montmartre.",
       "price": "Free",
       "photo": "Place des Abbesses.JPG"
+    },
+    {
+      "id": "home-bois-colombes",
+      "layer": "home",
+      "name": "Home — Bois-Colombes station",
+      "wikidata": "Q2519406",
+      "lat": 48.913778,
+      "lng": 2.272217,
+      "address": "Gare de Bois-Colombes",
+      "summary": "Where the day starts and ends. Direct trains to Paris Saint-Lazare."
+    },
+    {
+      "id": "theatre-folies-bergere",
+      "layer": "theatres",
+      "name": "Folies Bergère",
+      "wikidata": "Q330375",
+      "lat": 48.874167,
+      "lng": 2.345,
+      "website": "http://www.foliesbergere.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Folies Bergère, Paris 6 February 2016.jpg"
+    },
+    {
+      "id": "theatre-des-champs-elysees",
+      "layer": "theatres",
+      "name": "Théâtre des Champs-Élysées",
+      "wikidata": "Q726531",
+      "lat": 48.865833,
+      "lng": 2.303056,
+      "website": "https://www.theatrechampselysees.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Le théâtre des Champs-Élysées à Paris, 2022.jpg"
+    },
+    {
+      "id": "theatre-des-bouffes-du-nord",
+      "layer": "theatres",
+      "name": "Théâtre des Bouffes du Nord",
+      "wikidata": "Q744459",
+      "lat": 48.884,
+      "lng": 2.3588,
+      "website": "http://www.bouffesdunord.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris Bouffes du Nord 01.JPG"
+    },
+    {
+      "id": "theatre-international-visual-theatre",
+      "layer": "theatres",
+      "name": "International Visual Theatre",
+      "wikidata": "Q948449",
+      "lat": 48.8811,
+      "lng": 2.33333,
+      "website": "https://www.ivt.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "International Visual Theater Paris P1050914.JPG"
+    },
+    {
+      "id": "theatre-bobino",
+      "layer": "theatres",
+      "name": "Bobino",
+      "wikidata": "Q888776",
+      "lat": 48.839689,
+      "lng": 2.323589,
+      "website": "https://bobino.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Bobino.JPG"
+    },
+    {
+      "id": "theatre-national-de-chaillot",
+      "layer": "theatres",
+      "name": "Théâtre national de Chaillot",
+      "wikidata": "Q1342159",
+      "lat": 48.862292,
+      "lng": 2.288156,
+      "website": "http://www.theatre-chaillot.fr",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-du-chatelet",
+      "layer": "theatres",
+      "name": "Théâtre du Châtelet",
+      "wikidata": "Q1469315",
+      "lat": 48.857778,
+      "lng": 2.346389,
+      "website": "https://www.chatelet.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre du Châtelet Façade (cropped).jpg"
+    },
+    {
+      "id": "theatre-comedie-italienne",
+      "layer": "theatres",
+      "name": "Comédie-Italienne",
+      "wikidata": "Q1581237",
+      "lat": 48.84016,
+      "lng": 2.323882,
+      "website": "http://www.comedie-italienne.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Comédie Italienne.JPG"
+    },
+    {
+      "id": "theatre-comedie-francaise-salle-richelieu",
+      "layer": "theatres",
+      "name": "Comédie-Française (Salle Richelieu)",
+      "wikidata": "Q836007",
+      "lat": 48.863611,
+      "lng": 2.335833,
+      "website": "http://www.comedie-francaise.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris Comedie-Francaise.jpg"
+    },
+    {
+      "id": "theatre-de-paris",
+      "layer": "theatres",
+      "name": "Théâtre de Paris",
+      "wikidata": "Q366980",
+      "lat": 48.878611,
+      "lng": 2.331389,
+      "website": "http://www.theatredeparis.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de Paris, 15 rue Blanche, Paris 9.jpg"
+    },
+    {
+      "id": "theatre-des-varietes",
+      "layer": "theatres",
+      "name": "Théâtre des Variétés",
+      "wikidata": "Q373890",
+      "lat": 48.871111,
+      "lng": 2.341944,
+      "website": "http://www.theatre-des-varietes.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris Theatre des Varietes.jpg"
+    },
+    {
+      "id": "theatre-du-marais",
+      "layer": "theatres",
+      "name": "Théâtre du Marais",
+      "wikidata": "Q376490",
+      "lat": 48.866389,
+      "lng": 2.357778,
+      "website": "https://theatredumarais.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1200707 Paris III rue Volta n37 rwk.jpg"
+    },
+    {
+      "id": "theatre-de-la-madeleine",
+      "layer": "theatres",
+      "name": "Théâtre de la Madeleine",
+      "wikidata": "Q386604",
+      "lat": 48.8709,
+      "lng": 2.32038,
+      "website": "https://www.theatre-madeleine.com/",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-opera-bastille",
+      "layer": "theatres",
+      "name": "Opéra Bastille",
+      "wikidata": "Q638423",
+      "lat": 48.851944,
+      "lng": 2.370556,
+      "website": "https://www.operadeparis.fr",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-des-nouveautes",
+      "layer": "theatres",
+      "name": "Théâtre des Nouveautés",
+      "wikidata": "Q2430641",
+      "lat": 48.871389,
+      "lng": 2.345,
+      "website": "http://theatredesnouveautes.efilprod.net",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre des Nouveautés.JPG"
+    },
+    {
+      "id": "theatre-du-vieux-colombier",
+      "layer": "theatres",
+      "name": "Théâtre du Vieux-Colombier",
+      "wikidata": "Q2711343",
+      "lat": 48.851797,
+      "lng": 2.330294,
+      "website": "https://www.comedie-francaise.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre du Vieux-Colombier, 21 rue du Vieux-Colombier, Paris 6e.jpg"
+    },
+    {
+      "id": "theatre-de-l-odeon",
+      "layer": "theatres",
+      "name": "Théâtre de l'Odéon",
+      "wikidata": "Q1133501",
+      "lat": 48.8495,
+      "lng": 2.33875,
+      "website": "https://www.theatre-odeon.eu",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de l'Odéon - facade - photo Thierry Depagne.jpg"
+    },
+    {
+      "id": "theatre-cafe-de-la-gare",
+      "layer": "theatres",
+      "name": "Café de la Gare",
+      "wikidata": "Q2382361",
+      "lat": 48.857372,
+      "lng": 2.352466,
+      "website": "http://www.cdlg.org/w/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Café de la Gare Paris.jpg"
+    },
+    {
+      "id": "theatre-le-ranelagh",
+      "layer": "theatres",
+      "name": "Théâtre Le Ranelagh",
+      "wikidata": "Q2383183",
+      "lat": 48.85447,
+      "lng": 2.27786,
+      "website": "http://www.theatre-ranelagh.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Le Ranelagh, Paris 16e 1-3.jpg"
+    },
+    {
+      "id": "theatre-artistic-theatre",
+      "layer": "theatres",
+      "name": "Artistic Théâtre",
+      "wikidata": "Q2865828",
+      "lat": 48.8567,
+      "lng": 2.38098,
+      "website": "http://artistictheatre.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1100792 Paris XI rue Richard Lenoir Théâtre Artistic Athevains rwk.JPG"
+    },
+    {
+      "id": "theatre-ateliers-berthier-odeon",
+      "layer": "theatres",
+      "name": "Ateliers Berthier (Odéon)",
+      "wikidata": "Q2868890",
+      "lat": 48.89339,
+      "lng": 2.310078,
+      "website": "http://www.theatre-odeon.eu/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Ateliers Berthier 1.JPG"
+    },
+    {
+      "id": "theatre-des-bouffes-parisiens",
+      "layer": "theatres",
+      "name": "Théâtre des Bouffes-Parisiens",
+      "wikidata": "Q1934495",
+      "lat": 48.868361,
+      "lng": 2.335444,
+      "website": "http://www.bouffesparisiens.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1090591 Paris II rue Monsigny theatre des Bouffes-Parisiens rwk.JPG"
+    },
+    {
+      "id": "theatre-de-l-oeuvre",
+      "layer": "theatres",
+      "name": "Théâtre de l'Œuvre",
+      "wikidata": "Q2292251",
+      "lat": 48.881,
+      "lng": 2.3285,
+      "website": "https://www.theatredeloeuvre.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de l'Œuvre, Paris.jpg"
+    },
+    {
+      "id": "theatre-de-la-ville",
+      "layer": "theatres",
+      "name": "Théâtre de la Ville",
+      "wikidata": "Q2352779",
+      "lat": 48.857222,
+      "lng": 2.348056,
+      "website": "https://www.theatredelaville-paris.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Sarah-Bernhardt 1.jpg"
+    },
+    {
+      "id": "theatre-don-camilo",
+      "layer": "theatres",
+      "name": "Don Camilo",
+      "wikidata": "Q3035746",
+      "lat": 48.857018,
+      "lng": 2.332084,
+      "website": "https://doncamilo.net",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Café-théâtre Don Camillo, 10 rue des Saints-Pères, Paris 7e.jpg"
+    },
+    {
+      "id": "theatre-lepic",
+      "layer": "theatres",
+      "name": "Théâtre Lepic",
+      "wikidata": "Q2973066",
+      "lat": 48.8875,
+      "lng": 2.33723,
+      "website": "https://theatrelepic.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Lepic.jpg"
+    },
+    {
+      "id": "theatre-libre",
+      "layer": "theatres",
+      "name": "Théâtre libre",
+      "wikidata": "Q2991522",
+      "lat": 48.8697,
+      "lng": 2.35489,
+      "website": "https://le-theatrelibre.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Theatrecomedia.jpg"
+    },
+    {
+      "id": "theatre-comedie-bastille",
+      "layer": "theatres",
+      "name": "Comédie Bastille",
+      "wikidata": "Q2991531",
+      "lat": 48.8589,
+      "lng": 2.3703,
+      "website": "http://www.comedie-bastille.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Comédie Bastille.JPG"
+    },
+    {
+      "id": "theatre-comedie-caumartin",
+      "layer": "theatres",
+      "name": "Comédie-Caumartin",
+      "wikidata": "Q2991532",
+      "lat": 48.871628,
+      "lng": 2.32816,
+      "website": "http://www.comedie-caumartin.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-comedie-de-paris",
+      "layer": "theatres",
+      "name": "Comédie de Paris",
+      "wikidata": "Q2991545",
+      "lat": 48.882944,
+      "lng": 2.333194,
+      "website": "https://www.comediedeparis.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris Comédie de Paris 2022 01.jpg"
+    },
+    {
+      "id": "theatre-antoine-simone-berriau",
+      "layer": "theatres",
+      "name": "Théâtre Antoine - Simone-Berriau",
+      "wikidata": "Q3097818",
+      "lat": 48.8706,
+      "lng": 2.35537,
+      "website": "http://www.theatre-antoine.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris Théâtre Antoine 112.JPG"
+    },
+    {
+      "id": "theatre-la-cartoucherie",
+      "layer": "theatres",
+      "name": "La Cartoucherie",
+      "wikidata": "Q3207069",
+      "lat": 48.835556,
+      "lng": 2.449444,
+      "website": "https://cartoucherie.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Le portail d'entrée.jpg"
+    },
+    {
+      "id": "theatre-palais-des-glaces",
+      "layer": "theatres",
+      "name": "Palais des glaces",
+      "wikidata": "Q3361114",
+      "lat": 48.8692,
+      "lng": 2.36825,
+      "website": "http://www.palaisdesglaces.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris FaubTemple-PalaisDesGlaces.JPG"
+    },
+    {
+      "id": "theatre-lucernaire",
+      "layer": "theatres",
+      "name": "Lucernaire",
+      "wikidata": "Q3265122",
+      "lat": 48.8443,
+      "lng": 2.33045,
+      "website": "http://www.lucernaire.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Le Lucernaire.JPG"
+    },
+    {
+      "id": "theatre-la-pepiniere-theatre",
+      "layer": "theatres",
+      "name": "La Pépinière-Théâtre",
+      "wikidata": "Q3212072",
+      "lat": 48.8686,
+      "lng": 2.33237,
+      "website": "http://www.theatrelapepiniere.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1040998 Paris II rue Louis-le-Grand théâtre La Pépinière rwk.JPG"
+    },
+    {
+      "id": "theatre-laurette-theatre",
+      "layer": "theatres",
+      "name": "Laurette Théâtre",
+      "wikidata": "Q3219625",
+      "lat": 48.8715,
+      "lng": 2.36817,
+      "website": "http://www.laurette-theatre.fr",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-silvia-monfort",
+      "layer": "theatres",
+      "name": "Théâtre Silvia-Monfort",
+      "wikidata": "Q3320631",
+      "lat": 48.8308,
+      "lng": 2.302,
+      "website": "https://theatresilviamonfort.eu",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Monfort-Jeanne.jpg"
+    },
+    {
+      "id": "theatre-le-palace",
+      "layer": "theatres",
+      "name": "Le Palace",
+      "wikidata": "Q3225157",
+      "lat": 48.871944,
+      "lng": 2.343333,
+      "website": "http://www.theatrelepalace.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Le Palace façade.jpg"
+    },
+    {
+      "id": "theatre-le-zebre",
+      "layer": "theatres",
+      "name": "Le Zèbre",
+      "wikidata": "Q3228364",
+      "lat": 48.870176,
+      "lng": 2.378693,
+      "website": "http://www.lezebre.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris - Le Zèbre - 5 December 2015.jpg"
+    },
+    {
+      "id": "theatre-les-cinq-diamants",
+      "layer": "theatres",
+      "name": "Les Cinq Diamants",
+      "wikidata": "Q3231553",
+      "lat": 48.829444,
+      "lng": 2.351667,
+      "website": "http://www.theatre-5-diamants.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1010768 Paris XIII rue des cinq diamants théâtre des 5 diamants reductwk.JPG"
+    },
+    {
+      "id": "theatre-du-rond-point",
+      "layer": "theatres",
+      "name": "Théâtre du Rond-Point",
+      "wikidata": "Q3434524",
+      "lat": 48.8678,
+      "lng": 2.311,
+      "website": "http://www.theatredurondpoint.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris theatre du rond point batiment entier.jpg"
+    },
+    {
+      "id": "theatre-des-abbesses",
+      "layer": "theatres",
+      "name": "Théâtre des Abbesses",
+      "wikidata": "Q3496252",
+      "lat": 48.8845,
+      "lng": 2.33717,
+      "website": "http://theatredelaville-paris.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de la Ville - Les Abbesses.JPG"
+    },
+    {
+      "id": "theatre-de-la-bastille",
+      "layer": "theatres",
+      "name": "Théâtre de la Bastille",
+      "wikidata": "Q3527685",
+      "lat": 48.8558,
+      "lng": 2.37562,
+      "website": "http://www.theatre-bastille.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de la Bastille.JPG"
+    },
+    {
+      "id": "theatre-de-la-gaite-montparnasse",
+      "layer": "theatres",
+      "name": "Théâtre de la Gaîté-Montparnasse",
+      "wikidata": "Q3527699",
+      "lat": 48.8393,
+      "lng": 2.32306,
+      "website": "http://www.gaite.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de la Gaîté-Montparnasse 01.jpg"
+    },
+    {
+      "id": "theatre-de-la-huchette",
+      "layer": "theatres",
+      "name": "Théâtre de la Huchette",
+      "wikidata": "Q3527701",
+      "lat": 48.853,
+      "lng": 2.3453,
+      "website": "http://www.theatre-huchette.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Theatre Huchette.jpg"
+    },
+    {
+      "id": "theatre-de-la-manufacture-des-abbesses",
+      "layer": "theatres",
+      "name": "Théâtre de la Manufacture des Abbesses",
+      "wikidata": "Q3527704",
+      "lat": 48.8844,
+      "lng": 2.33664,
+      "website": "http://manufacturedesabbesses.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-de-la-michodiere",
+      "layer": "theatres",
+      "name": "Théâtre de la Michodière",
+      "wikidata": "Q3527708",
+      "lat": 48.869167,
+      "lng": 2.334722,
+      "website": "http://www.michodiere.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1190900 Paris II theatre de la Michodiere rwk.jpg"
+    },
+    {
+      "id": "theatre-de-la-renaissance",
+      "layer": "theatres",
+      "name": "Théâtre de la Renaissance",
+      "wikidata": "Q3527713",
+      "lat": 48.869028,
+      "lng": 2.356389,
+      "website": "http://www.theatredelarenaissance.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris theatre de la Renaissance.jpg"
+    },
+    {
+      "id": "theatre-de-la-tempete",
+      "layer": "theatres",
+      "name": "Théâtre de la Tempête",
+      "wikidata": "Q3527715",
+      "lat": 48.836389,
+      "lng": 2.449167,
+      "website": "https://www.la-tempete.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de la Tempête.jpg"
+    },
+    {
+      "id": "theatre-de-la-vieille-grille",
+      "layer": "theatres",
+      "name": "Théâtre de la Vieille-Grille",
+      "wikidata": "Q3527718",
+      "lat": 48.8421,
+      "lng": 2.3535,
+      "website": "http://www.vieillegrille.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de la Vieille-Grille.jpg"
+    },
+    {
+      "id": "theatre-des-artisans",
+      "layer": "theatres",
+      "name": "Théâtre des Artisans",
+      "wikidata": "Q3527735",
+      "lat": 48.8885,
+      "lng": 2.38233,
+      "website": "http://www.theatre-des-artisans.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-des-blancs-manteaux",
+      "layer": "theatres",
+      "name": "Théâtre des Blancs-Manteaux",
+      "wikidata": "Q3527741",
+      "lat": 48.8587,
+      "lng": 2.35738,
+      "website": "http://www.blancsmanteaux.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris theatre des blancs manteaux.jpg"
+    },
+    {
+      "id": "theatre-des-deux-anes",
+      "layer": "theatres",
+      "name": "Théâtre des Deux Ânes",
+      "wikidata": "Q3527751",
+      "lat": 48.8842,
+      "lng": 2.33167,
+      "website": "http://www.2anes.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1060367 Paris XVIII théâtre des deux ânes rwk.JPG"
+    },
+    {
+      "id": "theatre-des-mathurins",
+      "layer": "theatres",
+      "name": "Théâtre des Mathurins",
+      "wikidata": "Q3527758",
+      "lat": 48.8731,
+      "lng": 2.32586,
+      "website": "https://www.theatredesmathurins.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre des Mathurins, 36 rue des Mathurins, Paris 8e 3.jpg"
+    },
+    {
+      "id": "theatre-du-chaudron",
+      "layer": "theatres",
+      "name": "Théâtre du Chaudron",
+      "wikidata": "Q3527780",
+      "lat": 48.83514,
+      "lng": 2.45026,
+      "website": "http://theatreduchaudron.fr/",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-du-nord-ouest",
+      "layer": "theatres",
+      "name": "Théâtre du Nord-Ouest",
+      "wikidata": "Q3527805",
+      "lat": 48.8723,
+      "lng": 2.34299,
+      "website": "http://theatredunordouest.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Facade-theatre-nord- ouest-paris.JPG"
+    },
+    {
+      "id": "theatre-du-petit-saint-martin",
+      "layer": "theatres",
+      "name": "Théâtre du Petit-Saint-Martin",
+      "wikidata": "Q3527811",
+      "lat": 48.869167,
+      "lng": 2.356944,
+      "website": "https://www.petitstmartin.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1220772 Paris X rue Rene-Boulanger theatre petit st-Martin rwk.jpg"
+    },
+    {
+      "id": "theatre-du-point-virgule",
+      "layer": "theatres",
+      "name": "Théâtre du Point-Virgule",
+      "wikidata": "Q3527813",
+      "lat": 48.857917,
+      "lng": 2.356861,
+      "website": "https://www.lepointvirgule.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Point virgule.jpg"
+    },
+    {
+      "id": "theatre-du-temps",
+      "layer": "theatres",
+      "name": "Théâtre du Temps",
+      "wikidata": "Q3527818",
+      "lat": 48.860055,
+      "lng": 2.381641,
+      "website": "http://www.theatredutemps.net",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Le Théâtre du Temps.jpg"
+    },
+    {
+      "id": "theatre-edouard-vii",
+      "layer": "theatres",
+      "name": "Théâtre Édouard-VII",
+      "wikidata": "Q3527938",
+      "lat": 48.8713,
+      "lng": 2.3294,
+      "website": "https://www.theatreedouard7.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1190871 Paris IX theatre Edouard VII rwk.jpg"
+    },
+    {
+      "id": "theatre-trevise",
+      "layer": "theatres",
+      "name": "Théâtre Trévise",
+      "wikidata": "Q3527571",
+      "lat": 48.873477,
+      "lng": 2.345335,
+      "website": "https://theatre-trevise.com/",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-de-dix-heures",
+      "layer": "theatres",
+      "name": "Théâtre de Dix heures",
+      "wikidata": "Q3527625",
+      "lat": 48.8829,
+      "lng": 2.33648,
+      "website": "http://www.theatrededixheures.fr",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-13",
+      "layer": "theatres",
+      "name": "Théâtre 13",
+      "wikidata": "Q3527414",
+      "lat": 48.8287,
+      "lng": 2.34469,
+      "website": "http://www.theatre13.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-dejazet",
+      "layer": "theatres",
+      "name": "Théâtre Déjazet",
+      "wikidata": "Q3527454",
+      "lat": 48.8661,
+      "lng": 2.36444,
+      "website": "http://www.dejazet.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Plafond Théâtre Dejazet.jpg"
+    },
+    {
+      "id": "theatre-essaion",
+      "layer": "theatres",
+      "name": "Théâtre Essaïon",
+      "wikidata": "Q3527457",
+      "lat": 48.8597,
+      "lng": 2.35326,
+      "website": "http://www.essaion-theatre.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-hebertot",
+      "layer": "theatres",
+      "name": "Théâtre Hébertot",
+      "wikidata": "Q3527480",
+      "lat": 48.882083,
+      "lng": 2.318889,
+      "website": "http://www.theatrehebertot.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Hébertot - Paris XVII (FR75) - 2021-08-22 - 2.jpg"
+    },
+    {
+      "id": "theatre-la-bruyere",
+      "layer": "theatres",
+      "name": "Théâtre La Bruyère",
+      "wikidata": "Q3527488",
+      "lat": 48.879,
+      "lng": 2.33641,
+      "website": "http://www.theatrelabruyere.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Rue Bruyère - Paris IX (FR75) - 2021-06-27 - 1.jpg"
+    },
+    {
+      "id": "theatre-apollo-theatre",
+      "layer": "theatres",
+      "name": "Apollo Théâtre",
+      "wikidata": "Q3527501",
+      "lat": 48.86835,
+      "lng": 2.366133,
+      "website": "https://www.apollotheatre.fr/",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-les-dechargeurs",
+      "layer": "theatres",
+      "name": "Théâtre Les Déchargeurs",
+      "wikidata": "Q3527504",
+      "lat": 48.8597,
+      "lng": 2.34586,
+      "website": "http://www.lesdechargeurs.fr",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre des Déchargeurs, 3 rue des Déchargeurs, Paris 1er 2.jpg"
+    },
+    {
+      "id": "theatre-michel",
+      "layer": "theatres",
+      "name": "Théâtre Michel",
+      "wikidata": "Q3527514",
+      "lat": 48.873327,
+      "lng": 2.325466,
+      "website": "https://www.theatre-michel.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Michel, 38 rue des Mathurins, Paris 8e 3-2.jpg"
+    },
+    {
+      "id": "theatre-marigny",
+      "layer": "theatres",
+      "name": "Théâtre Marigny",
+      "wikidata": "Q3527516",
+      "lat": 48.8686,
+      "lng": 2.31367,
+      "website": "http://www.theatremarigny.fr/",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-montmartre-galabru",
+      "layer": "theatres",
+      "name": "Théâtre Montmartre-Galabru",
+      "wikidata": "Q3527520",
+      "lat": 48.8875,
+      "lng": 2.33457,
+      "website": "http://www.theatregalabru.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "F1427 Paris XVIII rue Armee-Orient theatre Galabru rwk.jpg"
+    },
+    {
+      "id": "theatre-mouffetard",
+      "layer": "theatres",
+      "name": "Théâtre Mouffetard",
+      "wikidata": "Q3527523",
+      "lat": 48.8423,
+      "lng": 2.35074,
+      "website": "http://theatredelamarionnette.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Mouffetard.JPG"
+    },
+    {
+      "id": "theatre-montparnasse",
+      "layer": "theatres",
+      "name": "Théâtre Montparnasse",
+      "wikidata": "Q3527526",
+      "lat": 48.8409,
+      "lng": 2.3245,
+      "website": "http://www.theatremontparnasse.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1030274 Paris XIV théatre Montparnasse rue Larochelle rwk.JPG"
+    },
+    {
+      "id": "theatre-paris-villette",
+      "layer": "theatres",
+      "name": "Théâtre Paris-Villette",
+      "wikidata": "Q3527530",
+      "lat": 48.8896,
+      "lng": 2.39095,
+      "website": "http://www.theatre-paris-villette.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1080901 Paris XIX theatre Paris-Villette rwk.JPG"
+    },
+    {
+      "id": "theatre-rive-gauche",
+      "layer": "theatres",
+      "name": "Théâtre Rive gauche",
+      "wikidata": "Q3527547",
+      "lat": 48.8408,
+      "lng": 2.3243,
+      "website": "https://www.theatre-rive-gauche.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Rive Gauche, Rue de la Gaîté, Paris 14.jpg"
+    },
+    {
+      "id": "theatre-la-scala-paris",
+      "layer": "theatres",
+      "name": "La Scala Paris",
+      "wikidata": "Q3474920",
+      "lat": 48.8703,
+      "lng": 2.35453,
+      "website": "https://lascala-paris.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "La Scala (Paris).jpg"
+    },
+    {
+      "id": "theatre-de-poche-montparnasse",
+      "layer": "theatres",
+      "name": "Théâtre de Poche-Montparnasse",
+      "wikidata": "Q3527645",
+      "lat": 48.843889,
+      "lng": 2.325278,
+      "website": "http://www.theatredepoche-montparnasse.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâre de poche Montparnasse.JPG"
+    },
+    {
+      "id": "theatre-de-l-aquarium",
+      "layer": "theatres",
+      "name": "Théâtre de l'Aquarium",
+      "wikidata": "Q3527655",
+      "lat": 48.8351,
+      "lng": 2.4508,
+      "website": "http://www.theatredelaquarium.net",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de l'aquarium - façade.jpg"
+    },
+    {
+      "id": "theatre-de-l-atelier",
+      "layer": "theatres",
+      "name": "Théâtre de l'Atelier",
+      "wikidata": "Q3527666",
+      "lat": 48.8834,
+      "lng": 2.34236,
+      "website": "http://www.theatre-atelier.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre de l'Atelier (mars 2010).JPG"
+    },
+    {
+      "id": "theatre-l-etoile-du-nord",
+      "layer": "theatres",
+      "name": "L'Étoile du Nord",
+      "wikidata": "Q16508490",
+      "lat": 48.8955,
+      "lng": 2.3329,
+      "website": "http://www.etoiledunord-theatre.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-le-guichet-montparnasse",
+      "layer": "theatres",
+      "name": "Le Guichet Montparnasse",
+      "wikidata": "Q16653845",
+      "lat": 48.8406,
+      "lng": 2.3227,
+      "website": "http://www.guichetmontparnasse.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Le Guichet Montparnasse, 15 rue du Maine, Paris 14e.jpg"
+    },
+    {
+      "id": "theatre-la-reine-blanche",
+      "layer": "theatres",
+      "name": "Théâtre La Reine blanche",
+      "wikidata": "Q22666628",
+      "lat": 48.886774,
+      "lng": 2.358988,
+      "website": "http://www.reineblanche.com",
+      "hours_note": "Show times vary: see the programme."
+    },
+    {
+      "id": "theatre-studio-raspail",
+      "layer": "theatres",
+      "name": "Studio Raspail",
+      "wikidata": "Q22922112",
+      "lat": 48.840689,
+      "lng": 2.329718,
+      "website": "https://studioraspail.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Studio Raspail.jpg"
+    },
+    {
+      "id": "theatre-des-beliers-parisiens",
+      "layer": "theatres",
+      "name": "Théâtre des Béliers parisiens",
+      "wikidata": "Q24935519",
+      "lat": 48.893702,
+      "lng": 2.344312,
+      "website": "https://www.theatredesbeliersparisiens.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Facade-Beliers1.jpg"
+    },
+    {
+      "id": "theatre-opera-comique-salle-favart",
+      "layer": "theatres",
+      "name": "Opéra-Comique (Salle Favart)",
+      "wikidata": "Q47419907",
+      "lat": 48.871083,
+      "lng": 2.337833,
+      "website": "https://www.opera-comique.com/en",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre National Opéra Comique - Paris II (FR75) - 2021-06-14 - 1.jpg"
+    },
+    {
+      "id": "theatre-les-rendez-vous-d-ailleurs",
+      "layer": "theatres",
+      "name": "Les Rendez-Vous d'ailleurs",
+      "wikidata": "Q57403107",
+      "lat": 48.855955,
+      "lng": 2.404286,
+      "website": "https://www.lesrdvdailleurs.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1230675 Paris XX rue des Haies n109 theatre RDV d'ailleurs rwk.jpg"
+    },
+    {
+      "id": "theatre-dunois",
+      "layer": "theatres",
+      "name": "Théâtre Dunois",
+      "wikidata": "Q57403670",
+      "lat": 48.833146,
+      "lng": 2.370552,
+      "website": "https://www.theatredunois.org",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Théâtre Dunois, 7 rue Louise-Weiss, Paris 13e.jpg"
+    },
+    {
+      "id": "theatre-funambule-montmartre",
+      "layer": "theatres",
+      "name": "Funambule Montmartre",
+      "wikidata": "Q60850005",
+      "lat": 48.890833,
+      "lng": 2.340278,
+      "website": "https://www.funambule-montmartre.com/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "P1260974 Paris XVIII rue des Saules n53 rwk.jpg"
+    },
+    {
+      "id": "theatre-de-l-opprime",
+      "layer": "theatres",
+      "name": "Théâtre de l'Opprimé",
+      "wikidata": "Q105771884",
+      "lat": 48.843112,
+      "lng": 2.383058,
+      "website": "http://www.theatredelopprime.com",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Façade Théâtre de l'Opprimé - Paris.jpg"
+    },
+    {
+      "id": "theatre-de-passy",
+      "layer": "theatres",
+      "name": "Théâtre de Passy",
+      "wikidata": "Q115255744",
+      "lat": 48.858,
+      "lng": 2.27538,
+      "website": "https://theatredepassy.fr/",
+      "hours_note": "Show times vary: see the programme.",
+      "photo": "Paris Théâtre de Passy 2022 02.jpg"
+    },
+    {
+      "id": "theatre-la-scene-montparnasse",
+      "layer": "theatres",
+      "name": "La Scène Montparnasse",
+      "wikidata": "Q140797103",
+      "lat": 48.843611,
+      "lng": 2.322222,
+      "website": "https://www.legrandpointvirgule.com",
+      "hours_note": "Show times vary: see the programme."
     }
   ],
   "photos": {
@@ -1342,6 +2364,306 @@
     "Place des Abbesses.JPG": [
       "Alex",
       "CC BY-SA 3.0"
+    ],
+    "Folies Bergère, Paris 6 February 2016.jpg": [
+      "Guilhem Vellut",
+      "CC BY 2.0"
+    ],
+    "Le théâtre des Champs-Élysées à Paris, 2022.jpg": [
+      "Jean-Pierre Dalbéra",
+      "CC BY 2.0"
+    ],
+    "Paris Bouffes du Nord 01.JPG": [
+      "GFreihalter",
+      "CC BY-SA 3.0"
+    ],
+    "International Visual Theater Paris P1050914.JPG": [
+      "Pline",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre Bobino.JPG": [
+      "Papagon",
+      "CC BY 4.0"
+    ],
+    "Théâtre du Châtelet Façade (cropped).jpg": [
+      "Arthur Weidmann",
+      "CC BY-SA 4.0"
+    ],
+    "Comédie Italienne.JPG": [
+      "Papagon",
+      "CC BY 4.0"
+    ],
+    "Paris Comedie-Francaise.jpg": [
+      "Antoine Meunier",
+      "Public domain"
+    ],
+    "Théâtre de Paris, 15 rue Blanche, Paris 9.jpg": [
+      "Mu",
+      "CC BY-SA 3.0"
+    ],
+    "Paris Theatre des Varietes.jpg": [
+      "Andreas Praefcke",
+      "CC BY 3.0"
+    ],
+    "P1200707 Paris III rue Volta n37 rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre des Nouveautés.JPG": [
+      "Trissotin",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre du Vieux-Colombier, 21 rue du Vieux-Colombier, Paris 6e.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre de l'Odéon - facade - photo Thierry Depagne.jpg": [
+      "Jcmorgane",
+      "CC BY-SA 4.0"
+    ],
+    "Café de la Gare Paris.jpg": [
+      "Styx",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre Le Ranelagh, Paris 16e 1-3.jpg": [
+      "Polymagou",
+      "CC BY-SA 4.0"
+    ],
+    "P1100792 Paris XI rue Richard Lenoir Théâtre Artistic Athevains rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Ateliers Berthier 1.JPG": [
+      "Therealalzoo",
+      "CC BY-SA 3.0"
+    ],
+    "P1090591 Paris II rue Monsigny theatre des Bouffes-Parisiens rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Théâtre de l'Œuvre, Paris.jpg": [
+      "Borgil",
+      "CC BY 4.0"
+    ],
+    "Théâtre Sarah-Bernhardt 1.jpg": [
+      "ZeusUpsistos",
+      "CC BY-SA 4.0"
+    ],
+    "Café-théâtre Don Camillo, 10 rue des Saints-Pères, Paris 7e.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre Lepic.jpg": [
+      "Kalashni",
+      "CC BY-SA 4.0"
+    ],
+    "Theatrecomedia.jpg": [
+      "theatre comedia",
+      "CC BY-SA 4.0"
+    ],
+    "Comédie Bastille.JPG": [
+      "Gind2005",
+      "CC BY-SA 3.0"
+    ],
+    "Paris Comédie de Paris 2022 01.jpg": [
+      "Anvilaquarius",
+      "CC0"
+    ],
+    "Paris Théâtre Antoine 112.JPG": [
+      "GFreihalter",
+      "CC BY-SA 3.0"
+    ],
+    "Le portail d'entrée.jpg": [
+      "Carol Dumousseau",
+      "CC BY-SA 4.0"
+    ],
+    "Paris FaubTemple-PalaisDesGlaces.JPG": [
+      "Lalupa",
+      "Public domain"
+    ],
+    "Le Lucernaire.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "P1040998 Paris II rue Louis-le-Grand théâtre La Pépinière rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Monfort-Jeanne.jpg": [
+      "Jeanne Roualet",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre Le Palace façade.jpg": [
+      "ManoSolo13241324",
+      "CC BY-SA 4.0"
+    ],
+    "Paris - Le Zèbre - 5 December 2015.jpg": [
+      "Fred Romero",
+      "CC BY 2.0"
+    ],
+    "P1010768 Paris XIII rue des cinq diamants théâtre des 5 diamants reductwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Paris theatre du rond point batiment entier.jpg": [
+      "Ralf.treinen",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre de la Ville - Les Abbesses.JPG": [
+      "LPLT",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre de la Bastille.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre de la Gaîté-Montparnasse 01.jpg": [
+      "Coyau",
+      "CC BY-SA 3.0"
+    ],
+    "Theatre Huchette.jpg": [
+      "Tournachon",
+      "CC BY-SA 3.0"
+    ],
+    "P1190900 Paris II theatre de la Michodiere rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Paris theatre de la Renaissance.jpg": [
+      "Myrabella",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre de la Tempête.jpg": [
+      "Théâtre de la Tempête",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre de la Vieille-Grille.jpg": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "Paris theatre des blancs manteaux.jpg": [
+      "Ralf.treinen",
+      "CC BY-SA 3.0"
+    ],
+    "P1060367 Paris XVIII théâtre des deux ânes rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "Théâtre des Mathurins, 36 rue des Mathurins, Paris 8e 3.jpg": [
+      "Polymagou",
+      "CC BY-SA 4.0"
+    ],
+    "Facade-theatre-nord- ouest-paris.JPG": [
+      "Frédéric Raspail",
+      "CC BY 3.0"
+    ],
+    "P1220772 Paris X rue Rene-Boulanger theatre petit st-Martin rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Point virgule.jpg": [
+      "Kuxu",
+      "CC BY 2.5"
+    ],
+    "Le Théâtre du Temps.jpg": [
+      "TTemps11",
+      "CC BY-SA 4.0"
+    ],
+    "P1190871 Paris IX theatre Edouard VII rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Plafond Théâtre Dejazet.jpg": [
+      "Atelierbpi",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre Hébertot - Paris XVII (FR75) - 2021-08-22 - 2.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "Rue Bruyère - Paris IX (FR75) - 2021-06-27 - 1.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre des Déchargeurs, 3 rue des Déchargeurs, Paris 1er 2.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre Michel, 38 rue des Mathurins, Paris 8e 3-2.jpg": [
+      "Polymagou",
+      "CC BY-SA 4.0"
+    ],
+    "F1427 Paris XVIII rue Armee-Orient theatre Galabru rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre Mouffetard.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "P1030274 Paris XIV théatre Montparnasse rue Larochelle rwk.JPG": [
+      "Mbzt",
+      "CC BY 3.0"
+    ],
+    "P1080901 Paris XIX theatre Paris-Villette rwk.JPG": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre Rive Gauche, Rue de la Gaîté, Paris 14.jpg": [
+      "Mu",
+      "CC BY-SA 3.0"
+    ],
+    "La Scala (Paris).jpg": [
+      "Artvill",
+      "CC BY-SA 4.0"
+    ],
+    "Théâre de poche Montparnasse.JPG": [
+      "LPLT",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre de l'aquarium - façade.jpg": [
+      "Laviebreve-Theatredelaquarium",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre de l'Atelier (mars 2010).JPG": [
+      "Benchaum",
+      "CC BY-SA 3.0"
+    ],
+    "Le Guichet Montparnasse, 15 rue du Maine, Paris 14e.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "Studio Raspail.jpg": [
+      "Jonathan Alescio",
+      "CC BY-SA 3.0"
+    ],
+    "Facade-Beliers1.jpg": [
+      "Théâtre des Béliers Parisiens",
+      "CC BY-SA 4.0"
+    ],
+    "Théâtre National Opéra Comique - Paris II (FR75) - 2021-06-14 - 1.jpg": [
+      "Chabe01",
+      "CC BY-SA 4.0"
+    ],
+    "P1230675 Paris XX rue des Haies n109 theatre RDV d'ailleurs rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 3.0"
+    ],
+    "Théâtre Dunois, 7 rue Louise-Weiss, Paris 13e.jpg": [
+      "Celette",
+      "CC BY-SA 4.0"
+    ],
+    "P1260974 Paris XVIII rue des Saules n53 rwk.jpg": [
+      "Mbzt",
+      "CC BY-SA 4.0"
+    ],
+    "Façade Théâtre de l'Opprimé - Paris.jpg": [
+      "Wisi eu",
+      "CC0"
+    ],
+    "Paris Théâtre de Passy 2022 02.jpg": [
+      "Anvilaquarius",
+      "CC0"
     ]
   },
   "adventures": [

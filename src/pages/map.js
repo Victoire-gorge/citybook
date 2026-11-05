@@ -216,6 +216,7 @@ function hoursFacts(place) {
     const today = hoursForDay(place.hours, clock.weekday);
     return [['clock', today.length ? t('place.opensToday', { hours: today.join(', ') }) : t('place.closedToday')]];
   }
+  if (place.layer_id === 'home') return [];
   return [['clock', place.hours_note ? tr(place, 'hours_note') : t('place.hoursUnknown')]];
 }
 
@@ -263,7 +264,7 @@ function cardHtml(place) {
       <div class="place-card__actions">
         ${shareToken ? starButton(place) : `<button class="btn btn--cta" type="button" data-add-open>${esc(t('place.addTo'))} ${icon('plus')}</button>
         <form class="place-card__add" data-add-form hidden></form>`}
-        ${place.website ? `<a class="place-card__website" href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t('place.website'))}</a>` : ''}
+        ${place.website ? `<a class="place-card__website" href="${esc(place.website)}" target="_blank" rel="noopener">${esc(t(place.layer_id === 'theatres' ? 'place.programme' : 'place.website'))}</a>` : ''}
       </div>
     </div>`;
 }

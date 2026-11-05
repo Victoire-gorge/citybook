@@ -26,7 +26,7 @@ lines.push(
 
 for (const l of data.layers) {
   lines.push(
-    `insert or ignore into layers (id, city_id, name, color, shape, icon, sort) values (${[l.id, c.id, l.name, l.color, l.shape, l.icon, l.sort].map(sql).join(', ')});`,
+    `insert or ignore into layers (id, city_id, name, color, shape, icon, sort, visible_by_default) values (${[l.id, c.id, l.name, l.color, l.shape, l.icon, l.sort, l.visible_by_default ?? true].map(sql).join(', ')});`,
   );
 }
 

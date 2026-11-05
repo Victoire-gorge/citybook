@@ -38,6 +38,7 @@ export default {
   'place.hoursUnchecked': 'Hours to double-check before going.',
   'place.booking': 'Booking needed',
   'place.website': 'Official website',
+  'place.programme': 'See what’s on',
   'place.onNow': 'On now',
   'place.until': 'until {date}',
   'place.addTo': 'Add to an adventure',
