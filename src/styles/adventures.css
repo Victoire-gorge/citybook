@@ -273,3 +273,12 @@
 .activity__add select { flex: 1; min-width: 130px; font-size: 0.82rem; padding: 6px 8px; }
 .activity__add select[hidden] { display: none; }
 @media (max-width: 820px) { .page-activities .shelf__head { grid-template-columns: 1fr; } .activity-grid { grid-template-columns: 1fr; } }
+
+/* weather on day tabs and badges */
+.day-tab .wx--mini { justify-content: center; margin-top: 2px; }
+.day-tab[aria-selected='true'] .wx--mini, .day-tab[aria-selected='true'] .wx--mini .icon { color: var(--card); }
+.glance__badge .wx--mini { justify-content: center; margin-top: 3px; color: var(--card); }
+.glance__badge .wx--mini .icon { color: var(--forest-light); }
+.day__list .wx { margin: -8px 0 14px; }
+.shared-day__body .wx { margin-bottom: 8px; }
+.shared > .wx-credit { margin: 10px 0 0; }

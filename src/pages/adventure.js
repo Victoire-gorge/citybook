@@ -8,6 +8,7 @@ import { icon } from '../lib/icons.js';
 import { daysBetween, itemsOf, dayTab, miniMap } from '../lib/trip.js';
 import { openAdventureForm } from '../lib/adventure-form.js';
 import { downloadIcs } from '../lib/ics.js';
+import { forecast, weatherMini, weatherLine, weatherCredit } from '../lib/weather.js';
 
 startPage();
 mountMasthead('adventures');
@@ -21,6 +22,7 @@ let current = null; // selected day, or '' for ideas
 let updateMap;
 let editing = null; // id of the step whose editor is open
 let shareOpen = false;
+let weather = new Map(); // date -> forecast, filled in when it arrives
 
 async function load() {
   adventure = await api(`/api/adventures/${encodeURIComponent(id)}`);
@@ -85,7 +87,8 @@ function dayPanel() {
   const heading = isIdeas
     ? `<h3 class="day__title">${esc(t('adventure.ideasTitle'))}</h3>`
     : `<h3 class="day__title">${esc(t('adventure.day', { n }))} — <input class="day__theme" value="${esc(adventure.days?.[current] || '')}" maxlength="120" placeholder="${esc(t('adventure.themePlaceholder'))}" aria-label="${esc(t('adventure.themePlaceholder'))}" data-theme /></h3>
-       <p class="day__date mono">${esc(formatDay(current))}</p>`;
+       <p class="day__date mono">${esc(formatDay(current))}</p>
+       ${weatherLine(weather.get(current))}`;
   return `<div class="day">
     <div class="day__list">
       ${heading}
@@ -111,18 +114,20 @@ function overview() {
       <span class="glance__time">${esc(item.start_time || '')}</span><span>${esc(item.title)}${item.added_by ? ' <span class="star" title="' + esc(t('share.suggestedBy', { name: item.added_by })) + '">★</span>' : ''}</span></li>`;
   const block = (key, badge, date, theme, items) => `<article class="glance__day ${key === current ? 'is-current' : ''}">
       <button class="glance__badge" type="button" data-pick="${key}" aria-label="${esc(t('adventure.openDay', { day: badge }))}">
-        <b>${esc(badge)}</b>${date ? `<span>${esc(date)}</span>` : ''}</button>
+        <b>${esc(badge)}</b>${date ? `<span>${esc(date)}</span>` : ''}${key ? weatherMini(weather.get(key)) : ''}</button>
       <div class="glance__body">
         ${theme ? `<h3 class="glance__theme">${esc(theme)}</h3>` : ''}
         ${items.length ? `<ul class="glance__items">${items.map(line).join('')}</ul>` : `<p class="glance__empty">${esc(t('adventure.nothingYet'))}</p>`}
       </div>
     </article>`;
+  const credit = days.some((d) => weather.has(d)) ? weatherCredit() : '';
   return `<section class="glance" aria-labelledby="glance-title">
       <h2 id="glance-title" class="glance__title">${esc(t('adventure.overview'))}</h2>
       <div class="glance__days">
         ${days.map((d, i) => block(d, t('adventure.day', { n: i + 1 }), dayTab(d), adventure.days?.[d], itemsOf(adventure, d))).join('')}
         ${ideas.length ? block('', t('adventure.ideas'), '', '', ideas) : ''}
       </div>
+      ${credit}
     </section>`;
 }
 
@@ -160,7 +165,7 @@ function render() {
         <h2 id="itinerary-title" class="itinerary__title">${esc(t('adventure.itinerary'))}</h2>
         <div class="day-tabs" role="tablist">
           ${days.map((d, i) => `<button class="day-tab" role="tab" type="button" data-day="${d}" aria-selected="${d === current}">
-              <b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(dayTab(d))}</span></button>`).join('')}
+              <b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(dayTab(d))}</span>${weatherMini(weather.get(d))}</button>`).join('')}
           <button class="day-tab day-tab--ideas" role="tab" type="button" data-day="" aria-selected="${current === ''}">
             <b>${esc(t('adventure.ideas'))}</b><span>${itemsOf(a, null).length}</span></button>
         </div>
@@ -284,6 +289,16 @@ root.addEventListener('submit', async (e) => {
     await reload();
   } catch (err) {
     toast(err.message || t('error.generic'));
+  }
+});
+
+// The forecast arrives after the page: redraw once, keeping the scroll position.
+forecast().then((w) => {
+  weather = w;
+  if (adventure && days.some((d) => w.has(d))) {
+    const y = scrollY;
+    render();
+    scrollTo(0, y);
   }
 });
 

@@ -185,3 +185,12 @@ textarea { resize: vertical; }
 .stars__off { color: #d8d2c2; }
 .chip--sort { margin-left: auto; }
 .chip--sort[aria-pressed='true'] { background: #c99a1e; border-color: #c99a1e; color: #fff; }
+
+/* ---------- Weather ---------- */
+.wx { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 0.88rem; color: var(--ink); }
+.wx .icon { color: var(--forest); }
+.wx__temp { font-family: var(--mono); font-size: 0.8rem; }
+.wx__rain { font-size: 0.8rem; color: var(--muted); }
+.wx--mini { display: inline-flex; align-items: center; gap: 3px; font-family: var(--mono); font-size: 0.68rem; }
+.wx-credit { font-size: 0.72rem; color: var(--muted); margin-top: 10px; }
+.wx-credit a { color: inherit; }

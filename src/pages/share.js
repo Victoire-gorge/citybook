@@ -4,6 +4,8 @@ import '../styles/adventures.css';
 import { t, setLanguage, formatRange, formatTab } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { guestName, setGuestName, guestPicker } from '../lib/guest.js';
+import { forecast, weatherLine, weatherCredit } from '../lib/weather.js';
+let weather = new Map();
 import { icon } from '../lib/icons.js';
 import { daysBetween, itemsOf, miniMap } from '../lib/trip.js';
 
@@ -79,6 +81,7 @@ function render(a) {
           <div class="shared-day__badge"><b>${esc(t('adventure.day', { n: i + 1 }))}</b><span>${esc(formatTab(d))}</span></div>
           <div class="shared-day__body">
             ${a.days?.[d] ? `<h2 class="shared-day__theme">${esc(a.days[d])}</h2>` : ''}
+            ${weatherLine(weather.get(d))}
             ${items.length ? `<ul class="todos">${items.map(stopHtml).join('')}</ul>` : ''}
             ${suggestForm(d)}
           </div>
@@ -88,6 +91,7 @@ function render(a) {
       <section class="shared-day" id="d-ideas"><div class="shared-day__badge shared-day__badge--ideas"><b>${esc(t('adventure.ideas'))}</b></div>
         <div class="shared-day__body">${ideas.length ? `<ul class="todos">${ideas.map(stopHtml).join('')}</ul>` : ''}${suggestForm('')}</div><span></span></section>
     </div>
+    ${days.some((d) => weather.has(d)) ? weatherCredit() : ''}
     <section class="shared__map">
       <h2>${esc(t('adventure.mapTitle'))} <a class="shared__map-more" href="/?share=${encodeURIComponent(token)}">${esc(t('share.openMap'))}</a></h2>
       <div class="mini-map mini-map--wide" data-mini-map></div>
@@ -129,6 +133,15 @@ root.addEventListener('change', (e) => {
   if (!e.target.matches('[data-guest]')) return;
   setGuestName(adventure, e.target.value);
   render(adventure);
+});
+
+forecast().then((w) => {
+  weather = w;
+  if (adventure) {
+    const y = scrollY;
+    render(adventure);
+    scrollTo(0, y);
+  }
 });
 
 fetch(shareApi)
