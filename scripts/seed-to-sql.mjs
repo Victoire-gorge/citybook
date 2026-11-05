@@ -81,6 +81,12 @@ for (const e of data.events ?? []) {
   );
 }
 
+for (const z of data.areas ?? []) {
+  lines.push(
+    `insert or ignore into areas (id, city_id, name, summary, duration, best_time, cover_place_id, route, sort) values (${[z.id, c.id, z.name, z.summary, z.duration, z.best_time, z.cover, JSON.stringify(z.route), z.sort ?? 0].map(sql).join(', ')});`,
+  );
+}
+
 // Adventures belong to the first user: create your account (scripts/create-user.mjs) before seeding.
 for (const a of data.adventures ?? []) {
   lines.push(

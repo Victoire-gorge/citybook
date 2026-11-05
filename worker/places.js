@@ -13,7 +13,7 @@ export async function getMap(db, cityId, today) {
   const city = await db.prepare('select * from cities where id = ?').bind(cityId).first();
   if (!city) throw new HttpError(404, 'Unknown city');
 
-  const [layers, places, hours, photos, events] = await db.batch([
+  const [layers, places, hours, photos, events, areas] = await db.batch([
     db.prepare('select * from layers where city_id = ? order by sort').bind(cityId),
     db
       .prepare('select p.* from places p join layers l on l.id = p.layer_id where l.city_id = ? order by p.name')
@@ -37,6 +37,7 @@ export async function getMap(db, cityId, today) {
          order by e.starts_on is null, e.starts_on, e.ends_on`,
       )
       .bind(cityId, today),
+    db.prepare('select * from areas where city_id = ? order by sort, name').bind(cityId),
   ]);
 
   const byPlace = (rows) => {
@@ -62,6 +63,7 @@ export async function getMap(db, cityId, today) {
   return {
     city: { ...city, translations: parseJson(city.translations, {}) },
     events: events.results.map(eventView),
+    areas: areas.results.map((z) => ({ ...z, route: parseJson(z.route, []), translations: parseJson(z.translations, {}) })),
     layers: layers.results.map((l) => ({ ...l, translations: parseJson(l.translations, {}) })),
     places: places.results.filter(keep).map((p) => ({
       ...p,

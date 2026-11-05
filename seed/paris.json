@@ -736,7 +736,7 @@
     },
     {
       "id": "galeries-lafayette-rooftop",
-      "layer": "buildings",
+      "layer": "activities",
       "name": "Galeries Lafayette rooftop",
       "wikidata": "Q218613",
       "lat": 48.87363,
@@ -747,7 +747,10 @@
       "summary": "A free rooftop terrace on top of the department store, facing the Opéra Garnier, with Paris all around. Don't miss the stained-glass dome inside on the way up.",
       "tip": "Free. Lovely by day or at night.",
       "hours_note": "Open with the store: check the closing time before going at night.",
-      "photo": "Opéra Garnier vu de la terrasse des Galeries Lafayette.jpg"
+      "photo": "Opéra Garnier vu de la terrasse des Galeries Lafayette.jpg",
+      "category": "classic",
+      "duration": "30 min",
+      "best_time": "Sunset or after dark"
     },
     {
       "id": "rue-cremieux",
@@ -3677,6 +3680,31 @@
       "date_note": "",
       "url": "https://www.cinematheque.fr",
       "summary": "An exhibition on Jean-Paul Belmondo, with screenings."
+    }
+  ],
+  "areas": [
+    {
+      "id": "montmartre",
+      "name": "Montmartre",
+      "summary": "The village on the hill: steep lanes, stairs, windmills, a vineyard and painters' squares. Best done on foot, from the Abbesses up to the Sacré-Cœur, then down the stairs.",
+      "duration": "Half a day",
+      "best_time": "Morning, or late afternoon for the sunset from the Sacré-Cœur",
+      "cover": "sacre-coeur",
+      "route": [
+        "place-des-abbesses",
+        "mur-des-je-t-aime",
+        "bateau-lavoir",
+        "moulin-de-la-galette",
+        "passe-muraille",
+        "allee-des-brouillards",
+        "maison-rose",
+        "vignes-de-montmartre",
+        "lapin-agile",
+        "place-du-tertre",
+        "sacre-coeur",
+        "funiculaire-montmartre",
+        "halle-saint-pierre"
+      ]
     }
   ]
 }

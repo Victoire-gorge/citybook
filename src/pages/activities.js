@@ -5,7 +5,7 @@ import { api } from '../lib/api.js';
 import { t, tr, formatTab, formatShort } from '../lib/i18n.js';
 import { esc, mountMasthead, startPage, toast } from '../lib/ui.js';
 import { icon } from '../lib/icons.js';
-import { daysBetween } from '../lib/trip.js';
+import { daysBetween, miniMap } from '../lib/trip.js';
 import { starsHtml, GLYPH } from '../lib/stars.js';
 import { guestName } from '../lib/guest.js';
 import { eventDates, overlapDays, isOnDuring } from '../lib/events.js';
@@ -32,6 +32,7 @@ let bestFirst = true; // best rated first by default
 let tab = location.hash === '#limited' ? 'limited' : 'anytime';
 let events = [];
 let places = new Map();
+let areas = []; // neighbourhoods grouping activities, with a suggested walk
 let eventFilter = 'all'; // 'all', 'trip' or a category
 
 function card(a) {
@@ -137,6 +138,68 @@ function dayOptions(adv, ev = null) {
       .join('');
 }
 
+// ---------- Neighbourhoods: one card for all of Montmartre, with its walk ----------
+
+const membersOf = (z) => {
+  const inArea = activities.filter((a) => a.area === z.name);
+  const rank = (a) => (z.route.includes(a.id) ? z.route.indexOf(a.id) : 999);
+  return inArea.sort((a, b) => rank(a) - rank(b) || (b.rating || 0) - (a.rating || 0));
+};
+const walkOf = (z) => z.route.map((id) => places.get(id)).filter(Boolean);
+
+function areaCard(z) {
+  const members = membersOf(z);
+  const walk = walkOf(z);
+  const cover = places.get(z.cover_place_id)?.photos[0] || members.find((a) => a.photos[0])?.photos[0];
+  const extra = members.filter((a) => !z.route.includes(a.id));
+  return `<li class="area-card" data-area="${esc(z.name)}">
+    <div class="area-card__main">
+      <figure class="area-card__photo">${cover ? `<img src="${esc(cover.src)}" alt="" loading="lazy" />
+        <figcaption>${esc(t('place.photoCredit', { author: cover.author || '?', license: cover.license || '' }))}</figcaption>` : ''}</figure>
+      <div class="area-card__body">
+        <span class="tag tag--area">${icon('pin', { size: 12 })} ${esc(t('activities.neighbourhood'))}</span>
+        <h2 class="area-card__title">${esc(tr(z, 'name'))}</h2>
+        <p class="activity__summary">${esc(tr(z, 'summary'))}</p>
+        <ul class="facts activity__facts">
+          ${z.duration ? `<li>${icon('clock', { size: 16 })}<span>${esc(z.duration)}</span></li>` : ''}
+          ${z.best_time ? `<li>${icon('calendar', { size: 16 })}<span>${esc(z.best_time)}</span></li>` : ''}
+          <li>${icon('sparkle', { size: 16 })}<span>${esc(t('activities.thingsToDo', { n: members.length }))}</span></li>
+        </ul>
+        <div class="area-card__actions">
+          <button class="btn" type="button" data-area-open="${esc(z.name)}">${esc(t('activities.seeAll', { n: members.length }))} ${icon('arrowRight', { size: 16 })}</button>
+          ${!shareToken && adventures.length && walk.length ? walkForm(z) : ''}
+        </div>
+      </div>
+    </div>
+    <div class="area-card__walk">
+      <div>
+        <h3 class="area-card__subtitle">${esc(t('activities.walk'))}</h3>
+        <ol class="area-walk">${walk.map((p) => `<li><a href="#${esc(p.id)}" data-area-jump="${esc(p.id)}">${esc(tr(p, 'name'))}</a>${starsHtml(p.rating)}</li>`).join('')}</ol>
+        ${extra.length ? `<p class="area-card__also"><b>${esc(t('activities.alsoNearby'))}</b> ${extra.map((a) => esc(tr(a, 'name'))).join(' · ')}</p>` : ''}
+      </div>
+      <div class="mini-map area-card__map" data-area-map="${esc(z.name)}"></div>
+    </div>
+  </li>`;
+}
+
+function walkForm(z) {
+  const first = adventures[0];
+  return `<form class="activity__add" data-add-walk="${esc(z.name)}">
+    <select name="adventure" aria-label="${esc(t('place.chooseAdventure'))}" ${adventures.length === 1 ? 'hidden' : ''}>
+      ${adventures.map((x) => `<option value="${esc(x.id)}">${esc(x.title)}</option>`).join('')}
+    </select>
+    <select name="day" aria-label="${esc(t('place.chooseDay'))}">${dayOptions(first)}</select>
+    <button class="btn btn--line btn--small" type="submit">${icon('plus', { size: 15 })} ${esc(t('activities.addWalk'))}</button>
+  </form>`;
+}
+
+function drawAreaMaps() {
+  list.querySelectorAll('[data-area-map]').forEach((el) => {
+    const z = areas.find((x) => x.name === el.dataset.areaMap);
+    miniMap(el)(walkOf(z).map((p) => ({ lat: p.lat, lng: p.lng, title: tr(p, 'name') })));
+  });
+}
+
 const nextTrip = () => shared || adventures.find((a) => a.ends_on >= new Date().toISOString().slice(0, 10));
 
 function eventCard(e) {
@@ -183,19 +246,24 @@ function render() {
   document.querySelectorAll('[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   document.querySelector('[data-subtitle]').textContent = t(tab === 'limited' ? 'activities.limitedSubtitle' : 'activities.subtitle');
   if (tab === 'limited') return renderLimited();
-  const areas = [...new Set(activities.map((a) => a.area).filter(Boolean))].sort();
-  const shown = filter === 'all' ? [...activities]
-    : filter.startsWith('area:') ? activities.filter((a) => a.area === filter.slice(5))
+  const areaNames = [...new Set(activities.map((a) => a.area).filter(Boolean))].sort();
+  // "All": each neighbourhood is one card, its activities are inside it.
+  const grouped = filter === 'all' ? areas.filter((z) => activities.some((a) => a.area === z.name)) : [];
+  const inGroup = new Set(grouped.map((z) => z.name));
+  const zone = filter.startsWith('area:') ? areas.find((z) => z.name === filter.slice(5)) : null;
+  const shown = filter === 'all' ? activities.filter((a) => !inGroup.has(a.area))
+    : filter.startsWith('area:') ? (zone ? membersOf(zone) : activities.filter((a) => a.area === filter.slice(5)))
     : activities.filter((a) => a.category === filter);
-  if (bestFirst) shown.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  if (bestFirst && !zone) shown.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   chips.innerHTML = ['all', ...CATEGORIES]
     .map((c) => `<button class="chip" type="button" data-cat="${c}" aria-pressed="${c === filter}">${esc(c === 'all' ? t('activities.all') : t(`cat.${c}`))}</button>`)
-    .join('') + areas
+    .join('') + areaNames
     .map((z) => `<button class="chip chip--area" type="button" data-cat="area:${esc(z)}" aria-pressed="${filter === `area:${z}`}">${icon('pin', { size: 13 })} ${esc(z)}</button>`)
     .join('') + `<button class="chip chip--sort" type="button" data-sort aria-pressed="${bestFirst}">${GLYPH} ${esc(t('activities.sortBest'))}</button>`;
-  list.innerHTML = shown.map(card).join('');
-  document.querySelector('[data-empty]').hidden = shown.length > 0;
-  document.querySelector('[data-count]').textContent = t('activities.count', { n: shown.length });
+  list.innerHTML = grouped.map(areaCard).join('') + shown.map(card).join('');
+  drawAreaMaps();
+  document.querySelector('[data-empty]').hidden = shown.length + grouped.length > 0;
+  document.querySelector('[data-count]').textContent = t('activities.count', { n: activities.filter((a) => filter === 'all' || a.area === filter.slice(5) || a.category === filter).length });
 }
 
 document.querySelector('[data-tabs]').addEventListener('click', (e) => {
@@ -224,6 +292,22 @@ chips.addEventListener('click', (e) => {
 
 // Rate an activity: clicking the current rating again clears it.
 list.addEventListener('click', async (e) => {
+  const open = e.target.closest('[data-area-open]');
+  if (open) {
+    filter = `area:${open.dataset.areaOpen}`;
+    render();
+    return chips.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  const jump = e.target.closest('[data-area-jump]');
+  if (jump) {
+    e.preventDefault();
+    filter = `area:${jump.closest('[data-area]').dataset.area}`;
+    render();
+    const target = list.querySelector(`[data-id="${CSS.escape(jump.dataset.areaJump)}"]`);
+    target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target?.classList.add('is-flash');
+    return;
+  }
   const guest = e.target.closest('[data-star-place], [data-star-event]');
   if (guest) {
     return toggleGuestStar(guest.dataset.starEvent ? { event_id: guest.dataset.starEvent } : { place_id: guest.dataset.starPlace }, guest);
@@ -250,6 +334,27 @@ list.addEventListener('change', (e) => {
   const adv = adventures.find((x) => x.id === e.target.value);
   const ev = events.find((x) => x.id === e.target.form.dataset.event);
   e.target.form.elements.day.innerHTML = dayOptions(adv, ev);
+});
+
+// Add the whole suggested walk to a day, in walking order.
+list.addEventListener('submit', async (e) => {
+  const form = e.target.closest('[data-add-walk]');
+  if (!form) return;
+  e.preventDefault();
+  const z = areas.find((x) => x.name === form.dataset.addWalk);
+  const adv = adventures.find((x) => x.id === form.elements.adventure.value);
+  const button = form.querySelector('button');
+  button.disabled = true;
+  try {
+    for (const p of walkOf(z)) {
+      await api(`/api/adventures/${adv.id}/items`, { method: 'POST', body: { day: form.elements.day.value || null, place_id: p.id } });
+    }
+    toast(t('activities.walkAdded', { area: z.name, title: adv.title }));
+  } catch {
+    toast(t('error.generic'));
+  } finally {
+    button.disabled = false;
+  }
 });
 
 list.addEventListener('submit', async (e) => {
@@ -293,6 +398,7 @@ async function load() {
   const order = Object.fromEntries(CATEGORIES.map((c, i) => [c, i]));
   places = new Map(map.places.map((p) => [p.id, p]));
   events = map.events || [];
+  areas = map.areas || [];
   activities = map.places
     .filter((p) => p.layer_id === 'activities')
     .sort((a, b) => (order[a.category] ?? 9) - (order[b.category] ?? 9) || a.name.localeCompare(b.name));
