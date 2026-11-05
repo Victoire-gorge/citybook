@@ -42,7 +42,11 @@
   transition: transform 0.12s;
 }
 .marker:hover .picto, .marker.is-active .picto { transform: scale(1.3); }
-.marker__fav { position: absolute; top: -5px; right: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--copper); box-shadow: 0 0 0 1.5px #fff; }
+.marker__fav {
+  position: absolute; top: -8px; right: -8px; width: 16px; height: 16px; display: grid; place-items: center;
+  border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(198, 123, 81, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.marker__fav svg { width: 11px; height: 11px; fill: var(--copper); }
 
 /* ---------- Layers panel ---------- */
 .layers {
@@ -157,3 +161,17 @@
 @media (max-width: 900px) { .edition__back { display: none; } }
 /* Guests have no issue line under the masthead: give the map that space back. */
 .page-map:not(:has(.issue)) .map-page { height: calc(100dvh - 2 * var(--frame) - 2px - 58px); }
+
+/* ---------- Like button on the place card ---------- */
+.place-card__title-row { display: flex; align-items: flex-start; gap: 10px; }
+.place-card__title-row .place-card__name { flex: 1; }
+.like {
+  flex: none; width: 38px; height: 38px; margin-top: 6px; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid var(--rule); border-radius: 50%; background: var(--card); color: var(--copper);
+}
+.like svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; transition: transform 0.12s; }
+.like:hover svg { transform: scale(1.12); }
+.like[aria-pressed='true'] { background: #fbeee6; border-color: var(--copper); }
+.like[aria-pressed='true'] svg, .like--static svg { fill: currentColor; }
+.like--static { border: none; background: none; cursor: default; }
+.layer-row__fav { color: var(--copper); }

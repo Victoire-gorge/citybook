@@ -48,6 +48,11 @@ export default {
   'place.noAdventure': 'Create an adventure first.',
   'place.photoCredit': 'Photo: {author}, {license}',
   'place.close': 'Close',
+  'place.like': 'Add to my favourites',
+  'place.unlike': 'Remove from my favourites',
+  'place.liked': 'Added to your favourites',
+  'place.unliked': 'Removed from your favourites',
+  'place.favourite': 'One of my favourites',
   'place.savedOn': 'In our plan · {when}',
   'share.openMap': 'Explore the whole map',
 

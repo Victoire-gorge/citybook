@@ -147,18 +147,26 @@ function renderLayers() {
   });
 }
 
+const HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.4A4.3 4.3 0 0 1 12 7.4a4.3 4.3 0 0 1 7.5 2.7c0 5.8-7.5 10.4-7.5 10.4z"/></svg>';
+
+/** Layer pictogram, with a heart (top right) on favourites and a star (top left) on saved places. */
+function markerIcon(place) {
+  const layer = layerOf(place);
+  return L.divIcon({
+    className: 'marker',
+    html: picto(layer.icon, layer.color, 26)
+      + (place.favourite ? `<span class="marker__fav">${HEART}</span>` : '')
+      + (isSaved(place) ? '<span class="marker__star" aria-hidden="true">★</span>' : ''),
+    iconSize: [26, 26],
+    iconAnchor: [13, 13],
+  });
+}
+
 function drawPlaces() {
   for (const place of state.places) {
     const layer = layerOf(place);
     const marker = L.marker([place.lat, place.lng], {
-      icon: L.divIcon({
-        className: 'marker',
-        html: picto(layer.icon, layer.color, 26)
-          + (place.favourite ? '<span class="marker__fav"></span>' : '')
-          + (isSaved(place) ? '<span class="marker__star" aria-hidden="true">★</span>' : ''),
-        iconSize: [26, 26],
-        iconAnchor: [13, 13],
-      }),
+      icon: markerIcon(place),
       title: tr(place, 'name') + (isSaved(place) ? ` — ${t('map.saved', { title: state.adventure.title })}` : ''),
       alt: tr(place, 'name'),
       zIndexOffset: isSaved(place) ? 500 : 0,
@@ -238,7 +246,12 @@ function cardHtml(place) {
       <div class="place-card__body">
         <p class="place-card__layer">${picto(layer.icon, layer.color, 14)} ${esc(tr(layer, 'name'))}</p>
         ${isSaved(place) ? `<p class="place-card__saved"><span class="star" aria-hidden="true">★</span> ${esc(t('place.savedOn', { when: savedWhen(place) }))}</p>` : ''}
-        <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
+        <div class="place-card__title-row">
+          <h2 class="place-card__name">${esc(tr(place, 'name'))}</h2>
+          ${shareToken
+            ? (place.favourite ? `<span class="like like--static" title="${esc(t('place.favourite'))}">${HEART}</span>` : '')
+            : `<button class="like" type="button" data-like aria-pressed="${place.favourite}" aria-label="${esc(t(place.favourite ? 'place.unlike' : 'place.like'))}" title="${esc(t(place.favourite ? 'place.unlike' : 'place.like'))}">${HEART}</button>`}
+        </div>
         <p class="place-card__summary">${esc(tr(place, 'summary'))}</p>
         <ul class="facts">${facts.map(([ic, label, cls]) => `<li class="${cls || ''}">${icon(ic)}<span>${esc(label)}</span></li>`).join('')}</ul>
         ${note ? `<p class="place-card__note">${esc(note)}</p>` : ''}
@@ -258,7 +271,26 @@ function render(place, pinned) {
   card.hidden = false;
   card.classList.toggle('is-pinned', pinned);
   card.querySelector('[data-close]').addEventListener('click', closeCard);
+  card.querySelector('[data-like]')?.addEventListener('click', () => toggleLike(place, pinned));
   card.querySelector('[data-add-open]')?.addEventListener('click', () => openAddForm(place));
+}
+
+/** Like or unlike a place: saved in the database, heart updated on the map and the card. */
+async function toggleLike(place, pinned) {
+  const favourite = !place.favourite;
+  try {
+    await api(`/api/places/${encodeURIComponent(place.id)}`, { method: 'PATCH', body: { favourite } });
+    place.favourite = favourite;
+    const { marker } = state.objects.get(place.id);
+    marker.setIcon(markerIcon(place));
+    if (state.pinned === place.id) marker.getElement()?.classList.add('is-active');
+    render(place, pinned);
+    card.querySelector('[data-like]')?.focus();
+    applyFilters();
+    toast(t(favourite ? 'place.liked' : 'place.unliked'));
+  } catch {
+    toast(t('error.generic'));
+  }
 }
 
 function preview(place) {
